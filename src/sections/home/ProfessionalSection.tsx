@@ -4,10 +4,10 @@ import Link from "next/link";
 export default function ProfessionalSection() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center my-[150px]">
-      {/* 1. الجزء الأيسر: المحتوى (Left Side: Content) */}
-      {/* نستخدم order-2 لجعل النص يظهر بعد الصورة في الجوال، و order-1 في الشاشات الكبيرة */}
+      {/* 1. Left side: Content (Left Side: Content) */}
+      {/* We use order-2 to make the text appear after the image on mobile, and order-1 on large screens */}
       <div className="flex flex-col items-start order-2 lg:order-1">
-        {/* العنوان - خط Playfair ولون Primary */}
+        {/* Title - Playfair font and Primary color */}
         <h2
           className="
           font-poppins
@@ -25,7 +25,7 @@ export default function ProfessionalSection() {
           professional archival
         </h2>
 
-        {/* الوصف - خط Poppins ولون أسود مع تباعد أسطر مريح */}
+        {/* Description - Poppins font and black color with comfortable line spacing */}
         <div className="mt-8 space-y-6 font-poppins text-black text-[16px] md:text-lg leading-relaxed opacity-90">
           <p>
             Grade to guarantee the highest possible quality during digitization.
@@ -55,7 +55,7 @@ export default function ProfessionalSection() {
         </Link>
       </div>
       <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[20px] order-1 lg:order-2 flex">
-        {/* الجزء الأول: Compressed (اليسار) */}
+        {/* First section: Compressed (Left) */}
         <div className="relative flex-1 overflow-hidden h-full">
           <Image
             src="/images/before.jpg"
@@ -63,7 +63,7 @@ export default function ProfessionalSection() {
             fill
             className="object-cover"
           />
-          {/* نص توضيحي للجهة اليسرى */}
+          {/* Explanatory text for the left side */}
           <div className="absolute top-6 left-6 z-20">
             <span className="text-white font-poppins font-bold text-sm md:text-lg tracking-widest uppercase bg-black/30 px-3 py-1 rounded">
               Compressed
@@ -71,10 +71,10 @@ export default function ProfessionalSection() {
           </div>
         </div>
 
-        {/* خط فاصل رفيع جداً بالمنتصف */}
+        {/* Very thin dividing line in the middle */}
         <div className="w-[1px] h-full bg-white/30 z-30 shadow-sm" />
 
-        {/* الجزء الثاني: RAW (اليمين) */}
+        {/* Second section: RAW (Right) */}
         <div className="relative flex-1 overflow-hidden h-full">
           <Image
             src="/images/after.jpg"
@@ -82,7 +82,7 @@ export default function ProfessionalSection() {
             fill
             className="object-cover"
           />
-          {/* نص توضيحي للجهة اليمنى */}
+          {/* Explanatory text for the right side */}
           <div className="absolute top-6 right-6 z-20">
             <span className="text-white font-poppins font-bold text-sm md:text-lg tracking-widest uppercase bg-black/30 px-3 py-1 rounded">
               RAW

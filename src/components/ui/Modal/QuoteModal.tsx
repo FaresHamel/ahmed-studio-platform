@@ -8,7 +8,7 @@ interface QuoteModalProps {
 }
 
 export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
-  // منع التمرير في الخلفية عند فتح الـ Modal (Scroll Lock)
+  // Prevent background scrolling when Modal is open (Scroll Lock)
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -24,15 +24,15 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-12 md:pt-24 overflow-y-auto">
-      {/* 1. الخلفية الشفافة (Overlay Background) مع تأثير البلور */}
+      {/* 1. Transparent overlay background with blur effect */}
       <div
         className="fixed inset-0 py-[30px] bg-black/40 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       />
 
-      {/* 2. جسم الـ Modal (Modal Body Container) */}
+      {/* 2. Modal body container */}
       <div className="relative bg-white w-full max-w-xl md:max-w-2xl rounded-xl shadow-2xl p-6 sm:p-8 z-10 my-8 transition-all transform animate-in fade-in zoom-in-95 duration-200">
-        {/* زر الإغلاق العلوي (X Button) */}
+        {/* Top close button (X Button) */}
         <button
           onClick={onClose}
           className="absolute top-5 right-5 text-gray-400 hover:text-black transition-colors"
@@ -53,17 +53,17 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
           </svg>
         </button>
 
-        {/* العنوان الرئيسي للنموذج */}
+        {/* Main form title */}
         <h2 className="font-poppins text-[#84634B] text-[24px] sm:text-[28px] font-[500] pb-4 border-b border-gray-200 mb-6 text-left">
           Request a Quote
         </h2>
 
-        {/* حقول الإدخال المتطابقة تماماً مع التصميم المرفق */}
+        {/* Input fields matching the attached design exactly */}
         <form
           className="w-full flex flex-col gap-4 text-left"
           onSubmit={(e) => e.preventDefault()}
         >
-          {/* حقول الاسم الثلاثي الموزعة في سطر واحد على الويب وتحت بعض في الجوال */}
+          {/* Full name fields laid out in one row on desktop and stacked on mobile */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="flex flex-col gap-1.5">
               <label className="text-[13px] font-[500] text-black font-poppins">
@@ -97,7 +97,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
             </div>
           </div>
 
-          {/* حقل البريد الإلكتروني */}
+          {/* Email field */}
           <div className="flex flex-col gap-1.5">
             <label className="text-[13px] font-[500] text-black font-poppins">
               Email
@@ -109,7 +109,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
             />
           </div>
 
-          {/* حقل رقم الهاتف ونوع الخدمة بجانب بعضهما */}
+          {/* Phone number and service type fields side by side */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
               <label className="text-[13px] font-[500] text-black font-poppins">
@@ -134,7 +134,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
             </div>
           </div>
 
-          {/* حقل المدينة والعنوان */}
+          {/* City and address fields */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
               <label className="text-[13px] font-[500] text-black font-poppins">
@@ -158,7 +158,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
             </div>
           </div>
 
-          {/* حقل تفاصيل المشروع والرسالة */}
+          {/* Message / project details field */}
           <div className="flex flex-col gap-1.5">
             <label className="text-[13px] font-[500] text-black font-poppins">
               Message / Project Details
@@ -170,7 +170,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
             />
           </div>
 
-          {/* خانة الموافقة على الشروط والخصوصية */}
+          {/* Terms and privacy policy checkbox */}
           <div className="flex items-center gap-2 mt-2">
             <input
               type="checkbox"
@@ -187,7 +187,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
             </label>
           </div>
 
-          {/* زر الإرسال النهائي المحاذي لليمين */}
+          {/* Submit button aligned to the right */}
           <div className="w-full flex justify-end mt-4">
             <button
               type="submit"

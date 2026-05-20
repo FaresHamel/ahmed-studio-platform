@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  /* ألوانك الخاصة التي طلبتها */
+  /* Your custom colors */
   --primary-gold: #77510A;
   --unselected-gray: #3C3C3C80;
   --section-brown: #937052;
@@ -14,17 +14,17 @@
 }
 
 @theme inline {
-  /* تعريف الخطوط باستخدام المتغيرات التي مررناها في الـ Layout */
+  /* Font definitions using variables passed in the Layout */
   --font-playfair: var(--font-playfair);
   --font-poppins: var(--font-poppins);
 
-  /* تعريف الألوان ككلاسات Tailwind */
+  /* Color definitions as Tailwind classes */
   --color-primary: var(--primary-gold);
   --color-unselected: var(--unselected-gray);
   --color-section-title: var(--section-brown);
   --color-description: var(--pure-black);
   
-  /* إعدادات الخلفية الأصلية */
+  /* Default background settings */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-bg-soft: var(--bg-secondary);
@@ -35,13 +35,13 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  /* جعل الخط الافتراضي للموقع هو Poppins */
+  /* Set Poppins as the default site font */
   font-family: var(--font-poppins), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* كلاس مساعد للعناوين الكبيرة لسهولة الاستخدام */
+/* Helper class for large headings */
 /* h1, h2, h3 {
   font-family: var(--font-playfair), serif;
 } */

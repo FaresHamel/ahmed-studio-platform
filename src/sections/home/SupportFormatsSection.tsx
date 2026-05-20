@@ -1,9 +1,9 @@
 export default function SupportFormatsSection() {
   return (
-    /* استخدام اللون الجديد bg-bg-soft */
+    /* Using the new color bg-bg-soft */
     <section className="bg-bg-soft p-12  mb-[50px]">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-        {/* الجزء الأيسر: العنوان والوصف */}
+        {/* Left section: Title and description */}
         <div className="lg:col-span-4 flex flex-col items-start">
           <h2
             className="
@@ -39,7 +39,7 @@ export default function SupportFormatsSection() {
           </button>
         </div>
 
-        {/* الجزء الأيمن: القوائم (Audio, Video, Film) */}
+        {/* Right section: Lists (Audio, Video, Film) */}
         <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-8">
           {/* Audio */}
           <div>

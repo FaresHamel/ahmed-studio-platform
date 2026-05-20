@@ -4,13 +4,13 @@ const steps = [
     title: "Full Refurbished",
     description:
       "We make sure each device are fully component replaced to meet manifacture specifications.",
-    icon: "1" // أيقونة سلة تسوق
+    icon: "1" // Shopping cart icon
   },
   {
     title: "Calibrated",
     description:
       "Aligned head drum and sound tracking to match manifacture reading.",
-    icon: "2" // أيقونة شاحنة
+    icon: "2" // Truck icon
   },
   {
     title: "Low Hours",
@@ -23,7 +23,7 @@ const steps = [
 export default function OurEquipmentSection() {
   return (
     <div className="flex flex-col items-center my-[100px]">
-      {/* الجزء الأول: العنوان الرئيسي */}
+      {/* First section: Main title */}
       <div className="mb-16 text-center">
         <h2
           className="
@@ -45,19 +45,19 @@ export default function OurEquipmentSection() {
             key={index}
             className="bg-[#FFEDDE] rounded-[20px] p-8 flex flex-col items-center text-center w-full sm:w-auto lg:w-[220px] xl:w-[220px] min-h-[260px]"
           >
-            {/* صندوق الأيقونة الصغير بحدود دائرية 10 ولون أساسي */}
+            {/* Small icon box with circular borders and primary color */}
             <div className="bg-[#FFD7D3] rounded-[30px] w-10 h-10 flex items-center justify-center mb-6-shrink-0">
               <span className="font-poppins text-[#EB2725] font-semibold text-[20px]">
                 {step.icon}
               </span>
             </div>
 
-            {/* عنوان الخطوة ولون أساسي */}
+            {/* Step title and primary color */}
             <h3 className="font-poppins text-[black] font-[500] text-lg mb-3 mt-[10px]">
               {step.title}
             </h3>
 
-            {/* وصف الخطوة ولون أسود */}
+            {/* Step description and black color */}
             <p className="font-poppins text-black text-[10px] leading-relaxed">
               {step.description}
             </p>

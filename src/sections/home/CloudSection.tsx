@@ -3,19 +3,19 @@ import Image from "next/image";
 export default function CloudSection() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-      {/* الجزء الأيسر: الصورة (Left Side: Image) */}
+      {/* Left side: Image (Left Side: Image) */}
       <div className="relative aspect-square w-full overflow-hidden rounded-[10px]">
         <Image
-          src="/images/setUpDesktop.jpg" // تأكد من إضافة الصورة الخاصة بالتطبيق هنا
+          src="/images/setUpDesktop.jpg" // Make sure to add the app image here
           alt="From your attic to our app"
           fill
           className="object-cover"
         />
       </div>
 
-      {/* الجزء الأيمن: المحتوى (Right Side: Content) */}
+      {/* Right side: Content (Right Side: Content) */}
       <div className="flex flex-col items-start">
-        {/* العنوان - بخط Playfair ولون Primary */}
+        {/* Title - Playfair font and Primary color */}
         <h2
           className="
   font-poppins
@@ -33,7 +33,7 @@ export default function CloudSection() {
           attic to our app
         </h2>
 
-        {/* الوصف - بخط Poppins ولون أسود */}
+        {/* Description - Poppins font and black color */}
         <p className="mt-8 font-poppins text-black text-[400] text-[16px]  leading-relaxed opacity-90">
           Immerse yourself in the world of your memories from any screen, at any
           time. The AS Cloud makes it easy to stream and share thousands of
@@ -43,7 +43,7 @@ export default function CloudSection() {
           memories any where, any time
         </p>
 
-        {/* الزر - بخلفية Primary ونصوص بيضاء */}
+        {/* Button - with Primary background and white text */}
         <button className="mt-10 bg-primary text-white px-12 py-4 font-poppins font-bold rounded-lg hover:bg-primary/90 transition-all shadow-md">
           Find Out More
         </button>
