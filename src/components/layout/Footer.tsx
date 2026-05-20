@@ -35,21 +35,19 @@ export default function Footer({
       title: "Quick Links",
       links: [
         { label: "Home", href: "/" },
-        { label: "How To Order", href: "/how-to-order" },
+        { label: "How To Order", href: "/order" },
         { label: "Consultant", href: "/consultant" },
-        { label: "Cloud Storage", href: "/cloud-storage" },
-        { label: "Differences", href: "/differences" },
+        { label: "Cloud Storage", href: "/cloudStorage" },
         { label: "About Us", href: "/about" }
       ]
     },
     {
       title: "Resources",
       links: [
-        { label: "AI Tools", href: "/ai-tools" },
-        { label: "Our LAB", href: "/lab" },
-        { label: "Subscription", href: "/subscription" },
-        { label: "Privacy Policy", href: "/privacy" },
-        { label: "Terms of Service", href: "/terms" }
+        { label: "Services", href: "/services" },
+        { label: "Enhancement", href: "/enhancement" },
+        { label: "Our LAB", href: "/ourlab" },
+        { label: "Subscription", href: "/subscription" }
       ]
     }
   ];
