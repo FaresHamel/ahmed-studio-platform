@@ -1,0 +1,195 @@
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { Icon } from "@iconify/react";
+
+const navLinks = [
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Order", href: "/order" },
+  { label: "Consultant", href: "/consultant" },
+  { label: "Cloud Storage", href: "/cloudStorage" },
+  { label: "Subscription", href: "/subscription" },
+  { label: "Our Lab", href: "/ourlab" }
+];
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const pathname = usePathname();
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white">
+      <div className="w-full h-20 flex items-center justify-between px-6 md:px-16">
+        {/* Logo */}
+        <Link href="/" className="flex items-center shrink-0">
+          <Image
+            src="/images/logo.png"
+            alt="Ahmed Studio"
+            width={140}
+            height={35}
+            priority
+          />
+        </Link>
+
+        {/* Navigation Desktop */}
+        <nav className="hidden md:flex items-center gap-10">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`
+                  relative
+                  font-body
+                  text-sm
+                  transition-all
+                  duration-300
+                  ${
+                    isActive
+                      ? "text-primary font-semibold"
+                      : "text-zinc-600 hover:text-primary"
+                  }
+                `}
+              >
+                {link.label}
+
+                {/* Active Underline */}
+                {isActive && (
+                  <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-primary rounded-full" />
+                )}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Right Actions */}
+        <div className="flex items-center gap-8">
+          {/* Desktop Actions */}
+          <div className="hidden md:flex items-center gap-6">
+            <Link
+              href="/signup"
+              className="
+                font-body
+                text-sm
+                text-zinc-600
+                px-5
+                py-2.5
+                hover:bg-primary
+                hover:text-white
+                transition-all
+                duration-300
+              "
+              style={{ borderRadius: "10px" }}>
+              Sign Up
+            </Link>
+            <Link
+              href="/login"
+              className="
+                font-body
+                text-sm
+                text-navbarInactive
+                hover:text-primary
+                transition-colors
+                duration-300
+                text-zinc-600
+              ">
+              Login
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-primary"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <Icon
+              icon={
+                isOpen
+                  ? "material-symbols-light:close"
+                  : "material-symbols-light:menu"
+              }
+              fontSize={32}
+            />
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-white border-t border-borderColor px-6 py-8">
+          <div className="flex flex-col gap-6">
+            {/* Mobile Navigation */}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`
+                    font-body
+                    text-lg
+                    transition-colors
+                    duration-300
+                    ${
+                      isActive
+                        ? "text-primary font-semibold"
+                        : "text-navbarInactive hover:text-primary"
+                    }
+                  `}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+
+            {/* Mobile Actions */}
+            <div className="flex flex-col gap-4 pt-4 border-t border-borderColor">
+              <Link
+                href="/login"
+                className="
+                  font-body
+                  text-lg
+                  font-medium
+                  text-navbarInactive
+                  hover:text-primary
+                  transition-colors
+                  duration-300
+                "
+              >
+                Login
+              </Link>
+
+              <Link
+                href="/signup"
+                className="
+                  font-body
+                  text-lg
+                  font-medium
+                  text-primary
+                  border
+                  border-primary
+                  rounded-full
+                  py-3
+                  text-center
+                  hover:bg-primary
+                  hover:text-white
+                  transition-all
+                  duration-300
+                "
+              >
+                Sign Up
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
