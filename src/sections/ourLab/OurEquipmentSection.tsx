@@ -1,18 +1,29 @@
-import { Icon } from "@iconify/react";
-const steps = [
+import CardGrid, { CardItem } from "@/src/components/sections/CardGrid";
+
+interface EquipmentStep extends CardItem {
+  id: number;
+  title: string;
+  description: string;
+  icon: string;
+}
+
+const steps: EquipmentStep[] = [
   {
+    id: 1,
     title: "Full Refurbished",
     description:
       "We make sure each device are fully component replaced to meet manifacture specifications.",
-    icon: "1" // Shopping cart icon
+    icon: "1"
   },
   {
+    id: 2,
     title: "Calibrated",
     description:
       "Aligned head drum and sound tracking to match manifacture reading.",
-    icon: "2" // Truck icon
+    icon: "2"
   },
   {
+    id: 3,
     title: "Low Hours",
     description:
       "Replace device by low hours drum is one of most important thing to reach highest quality for the data stored in tapes.",
@@ -21,48 +32,40 @@ const steps = [
 ];
 
 export default function OurEquipmentSection() {
+  const renderEquipmentCard = (step: EquipmentStep) => (
+    <div className="bg-[#FFEDDE] rounded-[20px] p-8 flex flex-col items-center text-center w-full min-h-[260px]">
+      <div className="bg-[#FFD7D3] rounded-[30px] w-10 h-10 flex items-center justify-center mb-6 shrink-0">
+        <span className="font-poppins text-[#EB2725] font-semibold text-[20px]">
+          {step.icon}
+        </span>
+      </div>
+
+      <h3 className="font-poppins text-black font-[500] text-lg mb-3 mt-[10px]">
+        {step.title}
+      </h3>
+
+      <p className="font-poppins text-black text-[10px] leading-relaxed">
+        {step.description}
+      </p>
+    </div>
+  );
+
   return (
     <div className="flex flex-col items-center my-[100px]">
-      {/* First section: Main title */}
       <div className="mb-16 text-center">
-        <h2
-          className="
-              font-poppins
-              text-black
-              text-[26px]
-              sm:text-[32px]
-              md:text-5xl
-              font-[500]
-            "
-        >
+        <h2 className="font-poppins text-black text-[26px] sm:text-[32px] md:text-5xl font-[500]">
           Our Equipment
         </h2>
       </div>
 
-      <div className="w-full flex flex-col sm:grid sm:grid-cols-2 lg:flex lg:flex-row lg:flex-wrap lg:justify-center gap-6 justify-items-center justify-center items-center">
-        {steps.map((step, index) => (
-          <div
-            key={index}
-            className="bg-[#FFEDDE] rounded-[20px] p-8 flex flex-col items-center text-center w-full sm:w-auto lg:w-[220px] xl:w-[220px] min-h-[260px]"
-          >
-            {/* Small icon box with circular borders and primary color */}
-            <div className="bg-[#FFD7D3] rounded-[30px] w-10 h-10 flex items-center justify-center mb-6-shrink-0">
-              <span className="font-poppins text-[#EB2725] font-semibold text-[20px]">
-                {step.icon}
-              </span>
-            </div>
-
-            {/* Step title and primary color */}
-            <h3 className="font-poppins text-[black] font-[500] text-lg mb-3 mt-[10px]">
-              {step.title}
-            </h3>
-
-            {/* Step description and black color */}
-            <p className="font-poppins text-black text-[10px] leading-relaxed">
-              {step.description}
-            </p>
-          </div>
-        ))}
+      <div className="w-full max-w-5xl">
+        <CardGrid
+          items={steps}
+          renderCard={renderEquipmentCard}
+          columns={{ mobile: 1, tablet: 2, desktop: 3 }}
+          gap="medium"
+          containerClassName="justify-items-center justify-center items-stretch"
+        />
       </div>
     </div>
   );
