@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function HowItsWorkSection() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center my-[10px]">
-      {/* الجزء الأيسر: الصورة (Left Side: Image) */}
+      {/* Left side: Image */}
       <div className="relative aspect-square w-full overflow-hidden">
         <Image
           src="/images/howItWorkOrder.png"
@@ -13,9 +13,9 @@ export default function HowItsWorkSection() {
         />
       </div>
 
-      {/* الجزء الأيمن: المحتوى (Right Side: Content) */}
+      {/* Right side: Content */}
       <div className="flex flex-col items-start">
-        {/* العنوان - باللون الـ Primary وخط Playfair */}
+        {/* Title - primary color, Playfair font */}
         <h2
           className="
           font-poppins

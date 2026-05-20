@@ -39,7 +39,7 @@ const filmReelsData: FilmReel[] = [
 export default function MovieFilmsSection() {
   return (
       <section className="max-w-7xl mx-auto bg-white md:my-[10px] w-full overflow-visible">
-        {/* هذه الحاوية الآن تأخذ w-full (100% من عرض max-w-7xl) بشكل كامل وتطابق الأب تماماً */}
+        {/* This container now takes w-full (100% of max-w-7xl width) fully and matches the parent exactly */}
         <div className="w-full py-12 max-w-7xl flex flex-col bg-[#DFBFA4] lg:flex-row items-center justify-between gap-14 lg:gap-30 overflow-visible px-20">
           {/* Left Content */}
           <div className="w-full lg:w-1/2 z-10">

@@ -3,10 +3,10 @@ import Image from "next/image";
 export default function StepsSection() {
   return (
     <div className="flex flex-col w-full">
-      {/* الخطوة الثانية: Shipment Pick */}
+      {/* Step 2: Shipment Pick */}
       <section className="py-16 md:py-24 px-6 md:px-20 lg:px-32 bg-white">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-          {/* النصوص على اليسار */}
+          {/* Text on the left */}
           <div className="flex flex-col items-start lg:w-1/2">
             <div className="flex items-start gap-4">
               <span
@@ -43,16 +43,16 @@ export default function StepsSection() {
         </div>
       </section>
 
-      {/* الخطوة الثالثة: Digitization Your Memory */}
-      {/* نستخدم لون الخلفية الكريمي المعتمد في التصميم #F7F1EC */}
+      {/* Step 3: Digitization Your Memory */}
+      {/* Using the approved cream background color #F7F1EC from the design */}
       <section className="py-16 md:py-24 px-6 md:px-20 lg:px-32 bg-[#F7F1EC]">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-          {/* الصورة على اليسار في هذا القسم */}
-          {/* الجزء الأيمن: الصندوق وداخله الشعار فقط */}
+          {/* Image on the left in this section */}
+          {/* Right side: the box with only the logo inside */}
           <div className="w-full lg:w-1/2 flex justify-center items-center">
-            {/* حاوية نسبية لضبط تداخل الشعار فوق الصندوق */}
+            {/* Relative container to control logo overlap over the box */}
             <div className="relative w-full max-w-[550px] aspect-[4/3]">
-              {/* صورة الصندوق (الخلفية) */}
+              {/* Box image (background) */}
               <Image
                 src="/images/cardboard-box.png"
                 alt="Shipping Box"
@@ -60,7 +60,7 @@ export default function StepsSection() {
                 className="object-contain z-10"
               />
 
-              {/* الشعار - متموضع في منتصف الصندوق تماماً */}
+              {/* Logo - centered exactly within the box */}
               <div className="absolute inset-0 flex items-center justify-center z-20">
                 <div className="w-[40%] h-auto opacity-90">
                   <Image
@@ -75,7 +75,7 @@ export default function StepsSection() {
             </div>
           </div>
 
-          {/* النصوص على اليمين */}
+          {/* Text on the right */}
           <div className="flex flex-col items-start lg:w-1/2 order-1 lg:order-2">
             <div className="flex items-start gap-4">
               <span

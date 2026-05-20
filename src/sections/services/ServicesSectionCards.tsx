@@ -95,7 +95,7 @@ export default function ServicesSectionCards() {
     <>
       <section className="w-full bg-white py-12 md:py-20 px-4 sm:px-8 lg:px-16 overflow-visible flex flex-col items-center">
         <div className="max-w-7xl mx-auto w-full flex flex-col items-center text-center">
-          {/* العنوان الرئيسي للسكشن والوصف العلوي */}
+          {/* Main title of the section and upper description */}
           <h2 className="font-serif text-[#84634B] text-[28px] sm:text-[36px] md:text-[44px] font-[600] leading-tight mb-2">
             Services
           </h2>
@@ -103,17 +103,17 @@ export default function ServicesSectionCards() {
             Comprehensive solutions for every format in your collection.
           </p>
 
-          {/* شبكة عرض الكروت (Grid Container) */}
-          {/* في الجوال تم ضبطها لتعرض كارتين بجانب بعضهما grid-cols-2 مع gap-2 صغير جداً لمنع التكدس الطولي */}
+          {/* Cards display grid (Grid Container) */}
+          {/* On mobile, adjusted to display two cards side by side with grid-cols-2 and very small gap-2 to prevent vertical overflow */}
           <div className="w-full grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-6 lg:gap-8 justify-items-center items-stretch mb-12">
             {servicesData.map((service, index) => (
               <div
                 key={service.id}
                 className="w-full bg-white border border-[#EBE5DF] rounded-[10px] sm:rounded-[16px] p-2.5 sm:p-5 md:p-6 flex flex-col items-start text-left justify-between transition-all duration-300 hover:shadow-[0_10px_25px_rgba(132,99,75,0.08)] hover:-translate-y-1"
               >
-                {/* الجزء العلوي الملموم للمحتويات */}
+                {/* Upper packed section for content */}
                 <div className="w-full flex flex-col items-start">
-                  {/* حاوية الصورة مع الـ Tag العائم فوقها داخلياً */}
+                  {/* Image container with Tag floating inside it */}
                   <div className="inline-block self-start mb-4">
                     <span
                       className={`text-xs font-[500] px-4 py-1 rounded-md tracking-widest ${
@@ -135,17 +135,17 @@ export default function ServicesSectionCards() {
                     />
                   </div>
 
-                  {/* عنوان الخدمة المتقلص ذكياً في الموبايل */}
+                  {/* Service title that intelligently shrinks on mobile */}
                   <h3 className="font-serif text-[#1A1A1A] text-[12px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-[600] leading-snug mb-1 sm:mb-2 min-h-[32px] sm:min-h-[auto]">
                     {service.title}
                   </h3>
 
-                  {/* الوصف القصير المتقلص */}
+                  {/* Short contracted description */}
                   <p className="font-poppins text-[#555555] text-[9px] sm:text-[12px] md:text-[13px] leading-relaxed mb-3 opacity-90 line-clamp-3 sm:line-clamp-none">
                     {service.description}
                   </p>
 
-                  {/* قائمة المميزات الصغيرة النقطية */}
+                  {/* Small bulleted features list */}
                   <ul className="w-full flex flex-col gap-0.5 sm:gap-1.5 mb-4 pl-2 sm:pl-4 list-disc text-[#444444]">
                     {service.features.map((feature, i) => (
                       <li
@@ -157,7 +157,7 @@ export default function ServicesSectionCards() {
                     ))}
                   </ul>
                 </div>
-                {/* زر LEARN MORE السفلي  //href={`/services/${service.id}`} */}
+                {/* Bottom LEARN MORE button */}
 
                 <button className="flex items-center gap-2 text-primary font-[500] text-sm group">
                   LEARN MORE
@@ -170,7 +170,7 @@ export default function ServicesSectionCards() {
             ))}
           </div>
 
-          {/* زر الطلب السفلي العريض (Request A Quote) */}
+          {/* Bottom wide request button (Request A Quote) */}
           <button
             onClick={() => setIsModalOpen(true)}
             className="bg-[#84634B] hover:bg-[#6F503A] text-white font-poppins font-[500] text-[13px] sm:text-[16px] px-8 py-3 sm:px-12 sm:py-4 rounded-md sm:rounded-lg transition-all duration-300 shadow-md hover:-translate-y-0.5"

@@ -5,7 +5,7 @@ export default function PlaceOrderSection() {
   return (
     <section className=" md:py-24 px-6 md:px-20 lg:px-32 bg-[#F7F1EC]">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-        {/* الجزء الأيسر: النصوص والأزرار */}
+        {/* Left side: text and buttons */}
         <div className="flex flex-col items-start lg:w-1/2 order-2 lg:order-1">
           <div className="flex items-start gap-4">
             <span
@@ -67,10 +67,10 @@ export default function PlaceOrderSection() {
           </div>
         </div>
 
-        {/* الجزء الأيمن: حاوية الصور الثلاث المتداخلة */}
+        {/* Right side: container for the three overlapping images */}
         <div className="w-full lg:w-1/2 order-1 lg:order-2 flex justify-center items-center">
           <div className="relative w-full max-w-[500px] h-[300px] md:h-[400px]">
-            {/* الصورة الخلفية (الشريط الأصفر الكبير) */}
+            {/* Background image (large yellow strip) */}
             <div className="absolute top-0 right-0 w-[70%] h-auto z-10">
               <Image
                 src="/images/orderPlaceImg01.png"
@@ -81,7 +81,7 @@ export default function PlaceOrderSection() {
               />
             </div>
 
-            {/* الصورة الوسطى (بكرة الفيلم الحمراء) */}
+            {/* Middle image (red film reel) */}
             <div className="absolute bottom-0 left-0 w-[50%] h-auto z-30 transform -translate-y-4">
               <Image
                 src="/images/orderPlaceImg02.png"
@@ -92,7 +92,7 @@ export default function PlaceOrderSection() {
               />
             </div>
 
-            {/* الصورة الأمامية (الشريط البرتقالي) */}
+            {/* Foreground image (orange strip) */}
             <div className="absolute bottom-4 right-0 w-[55%] h-auto z-20">
               <Image
                 src="/images/orderPlaceImg03.png"

@@ -6,7 +6,7 @@ interface VideoTapeImage {
   alt: string;
 }
 
-// قائمة بأسماء ومسارات أشرطة الفيديو الظاهرة في التصميم
+// List of names and paths of video tapes shown in the design
 const videoTapesData: VideoTapeImage[] = [
   { id: 1, src: "/images/video-betacam.png", alt: "Hi8 Video Tape" },
   { id: 2, src: "/images/video-camcorder.png", alt: "Sony Betacam Tape" },
@@ -31,14 +31,14 @@ export default function VideoTapesSection() {
   return (
     <section className="w-full bg-white py-6 md:py-14 px-6 md:px-12 lg:px-20 overflow-visible">
       <div className="max-w-7xl mx-auto flex flex-col items-start overflow-visible">
-        {/* 1. العنوان الرئيسي العلوي للقسم */}
+        {/* 1. Main upper title for the section */}
         <h2 className="font-poppins text-primary text-[32px] sm:text-[40px] lg:text-[48px] font-[600] leading-tight mb-10 md:mb-12">
           Video Tapes
         </h2>
 
         {/* الحاوية الكبرى التي تنقسم إلى حاويتين (يسار ويمين) */}
         <div className="w-full flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-16 overflow-visible">
-          {/* 2. الحاوية اليسرى: تحتوي على النص والوصف التفصيلي */}
+          {/* 2. Left container: Contains text and detailed description */}
           <div className="w-full lg:w-[40%] flex flex-col items-start z-10">
             <p className="font-poppins text-black text-[15px] sm:text-[16px] lg:text-[18px] leading-relaxed opacity-85 max-w-xl">
               Our old VHS, MiniDV, Hi8, and camcorder tapes won&apos;t last
@@ -48,7 +48,7 @@ export default function VideoTapesSection() {
             </p>
           </div>
 
-          {/* 3. الحاوية اليمنى: تحتوي على شبكة صور الأشرطة (Responsive Grid) */}
+          {/* 3. Right container: Contains grid of tape images (Responsive Grid) */}
           <div className="w-full lg:w-[60%] overflow-visible">
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-4 xl:grid-cols-4 gap-4 md:gap-6 items-center justify-center">
               {videoTapesData.map((tape) => (

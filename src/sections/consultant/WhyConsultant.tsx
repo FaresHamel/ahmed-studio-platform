@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function WhyConsultant() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center my-[100px]">
-      {/* الجزء الأيسر: الصورة (Left Side: Image) */}
+      {/* Left side: Image */}
       <div className="relative aspect-square w-full overflow-hidden rounded-[20px]">
         <Image
           src="/images/consultantImg.jpg"
@@ -13,7 +13,7 @@ export default function WhyConsultant() {
         />
       </div>
       <div className="flex flex-col items-start">
-        {/* العنوان - باللون الـ Primary وخط Playfair */}
+        {/* Title - primary color, Playfair font */}
         <h2
           className="
                 font-poppins
