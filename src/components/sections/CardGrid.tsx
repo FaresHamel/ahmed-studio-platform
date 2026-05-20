@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 export interface CardItem {
@@ -7,9 +5,9 @@ export interface CardItem {
   [key: string]: any;
 }
 
-interface CardGridProps {
-  items: CardItem[];
-  renderCard: (item: CardItem, index: number) => React.ReactNode;
+interface CardGridProps<T extends CardItem = CardItem> {
+  items: T[];
+  renderCard: (item: T, index: number) => React.ReactNode;
   columns?: {
     mobile?: number;
     tablet?: number;
@@ -21,7 +19,7 @@ interface CardGridProps {
   containerClassName?: string;
 }
 
-export default function CardGrid({
+export default function CardGrid<T extends CardItem = CardItem>({
   items,
   renderCard,
   columns = { mobile: 2, tablet: 2, desktop: 3 },
@@ -29,7 +27,7 @@ export default function CardGrid({
   variant = "default",
   className = "",
   containerClassName = ""
-}: CardGridProps) {
+}: CardGridProps<T>) {
   const gapMap = {
     small: "gap-2 sm:gap-3 md:gap-4",
     medium: "gap-4 sm:gap-5 md:gap-6 lg:gap-8",
