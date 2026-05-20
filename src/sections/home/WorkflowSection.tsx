@@ -3,12 +3,12 @@ const steps = [
   {
     title: "Place an Order",
     description: "Place an order from our store/whatsapp.",
-    icon: "solar:cart-large-minimalistic-bold-duotone" // أيقونة سلة تسوق
+    icon: "solar:cart-large-minimalistic-bold-duotone" // Shopping cart icon
   },
   {
     title: "Shipment",
     description: "Your shipment will be picked up by our trusted logistic Co.",
-    icon: "solar:delivery-bold-duotone" // أيقونة شاحنة
+    icon: "solar:delivery-bold-duotone" // Delivery truck icon
   },
   {
     title: "Digitization",
@@ -31,7 +31,7 @@ const steps = [
 export default function WorkflowSection() {
   return (
     <div className="flex flex-col items-center">
-      {/* الجزء الأول: العنوان الرئيسي */}
+      {/* Section 1: Main title */}
       <div className="mb-16 text-center">
         <h2
           className="
@@ -47,24 +47,24 @@ export default function WorkflowSection() {
         </h2>
       </div>
 
-      {/* الجزء الثاني: حاوية البطاقات الخمس */}
+      {/* Section 2: Five cards container */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 w-full">
         {steps.map((step, index) => (
           <div
             key={index}
             className="bg-[#F7F1EC] rounded-[20px] p-8 flex flex-col items-center text-center"
           >
-            {/* صندوق الأيقونة الصغير بحدود دائرية 10 ولون أساسي */}
+            {/* Small icon box with rounded-[10px] and primary color */}
             <div className="bg-[#B39174] rounded-[10px] w-20 h-20 flex items-center justify-center mb-6">
               <Icon icon={step.icon} className="text-white text-3xl" />
             </div>
 
-            {/* عنوان الخطوة ولون أساسي */}
+            {/* Step title in primary color */}
             <h3 className="font-poppins text-primary font-[400] text-lg mb-3">
               {step.title}
             </h3>
 
-            {/* وصف الخطوة ولون أسود */}
+            {/* Step description in black */}
             <p className="font-poppins text-black text-[10px] leading-relaxed">
               {step.description}
             </p>

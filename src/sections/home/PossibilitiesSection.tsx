@@ -3,19 +3,19 @@ import Image from "next/image";
 export default function PossibilitiesSection() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-      {/* الجزء الأيسر: الصورة (Left Side: Image) */}
+      {/* Left side: Image (Left Side: Image) */}
       <div className="relative aspect-square w-full overflow-hidden rounded-[20px]">
         <Image
-          src="/images/PossibilitiesImg.jpg" // تأكد من مطابقة مسار الصورة في مجلد public
+          src="/images/PossibilitiesImg.jpg" // Make sure the image path matches in the public folder
           alt="The Possibilities Are Endless"
           fill
           className="object-cover"
         />
       </div>
 
-      {/* الجزء الأيمن: المحتوى (Right Side: Content) */}
+      {/* Right side: Content (Right Side: Content) */}
       <div className="flex flex-col items-start">
-        {/* العنوان - خط Playfair ولون Primary ومقسم لسطرين */}
+        {/* Title - Playfair font and Primary color divided into two lines */}
         <h2
           className="
           font-poppins
@@ -32,7 +32,7 @@ export default function PossibilitiesSection() {
           Are Endless
         </h2>
 
-        {/* الوصف - خط Poppins ولون أسود مع مسافات بين الفقرات */}
+        {/* Description - Poppins font and black color with spaces between paragraphs */}
         <div className="mt-8 space-y-6 font-poppins text-black text-[16px] md:text-lg leading-relaxed opacity-90">
           <p>
             When the moment calls for memories, open iMemories Cloud to
@@ -47,7 +47,7 @@ export default function PossibilitiesSection() {
           </p>
         </div>
 
-        {/* الزر الموحد للمشروع */}
+        {/* Unified button for the project */}
         <button className="mt-10 bg-primary text-white px-12 py-4 font-poppins font-[400] rounded-lg hover:bg-primary/90 transition-all shadow-md">
           Read More
         </button>

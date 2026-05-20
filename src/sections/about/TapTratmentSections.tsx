@@ -35,9 +35,9 @@ export default function TapTratmentSections() {
 
   return (
     <section className="max-w-7xl mx-auto bg-[#F7F1EC] my-10 sm:my-16 md:my-[100px] w-full overflow-visible">
-      {/* هذه الحاوية الآن تأخذ w-full (100% من عرض max-w-7xl) بشكل كامل وتطابق الأب تماماً */}
+      {/* This container now takes w-full (100% of max-w-7xl width) fully and matches the parent exactly */}
       <div className="w-full py-12 max-w-7xl flex flex-row lg:flex-row items-center justify-between gap-4 md:gap-14 px-5 lg:gap-30 overflow-visible  lg:px-20">
-        {/* أضفنا space-y-4 أو space-y-6 للشاشات الكبيرة لخلق مسافة رأسية متناسقة بين البكرات */}
+        {/* We added space-y-4 or space-y-6 for large screens to create uniform vertical spacing between reels */}
         <div className="w-full lg:w-1/2 flex flex-col lg:items-start relative space-y-24 md:space-y-26 lg:space-y-28">
           {filmReelsData.map((reel) => (
             <div

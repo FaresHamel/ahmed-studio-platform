@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export default function HeroOurLabSection() {
   return (
-    /* 1. أضفنا mt-24 لترك مساحة للـ Navbar الثابت */
-    /* 2. أضفنا rounded-[20px] و overflow-hidden لقص الصورة عند الحواف */
+    /* 1. Added mt-24 to leave space for the fixed Navbar */
+    /* 2. Added rounded-[20px] and overflow-hidden to clip the image at the edges */
     <div className="relative w-full h-[55vh] sm:h-[55vh] md:h-[80vh] mt-4 overflow-hidden rounded-[10px]">
       {/* Background Image */}
       <div className="absolute inset-0">

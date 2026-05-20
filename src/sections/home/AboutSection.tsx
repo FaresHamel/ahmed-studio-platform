@@ -3,19 +3,19 @@ import Image from "next/image";
 export default function AboutSection() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center my-[100px]">
-      {/* الجزء الأيسر: الصورة (Left Side: Image) */}
+      {/* Left side: Image (Left Side: Image) */}
       <div className="relative aspect-square w-full overflow-hidden rounded-[20px]">
         <Image
-          src="/images/aboutImagePre.jpg" // تأكد من إضافة الصورة في مجلد images
+          src="/images/aboutImagePre.jpg" // Make sure to add the image in the images folder
           alt="VHS Digitization"
           fill
           className="object-cover"
         />
       </div>
 
-      {/* الجزء الأيمن: المحتوى (Right Side: Content) */}
+      {/* Right side: Content (Right Side: Content) */}
       <div className="flex flex-col items-start">
-        {/* العنوان - باللون الـ Primary وخط Playfair */}
+        {/* Title - Primary color and Playfair font */}
         <h2
           className="
   font-poppins

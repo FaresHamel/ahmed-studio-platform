@@ -45,7 +45,7 @@ export default function FAQSection() {
   return (
     <section className="py-16 md:py-24 px-6 md:px-20 lg:px-32 bg-white">
       <div className="max-w-4xl mx-auto">
-        {/* العنوان الرئيسي للقسم */}
+        {/* Section main title */}
         <h2
           className="font-poppins
           text-primary
@@ -60,7 +60,7 @@ export default function FAQSection() {
           Frequently Asked Question
         </h2>
 
-        {/* قائمة الأسئلة */}
+        {/* Questions list */}
         <div className="space-y-0 border-t border-black/10">
           {faqData.map((item) => {
             const isOpen = openId === item.id;
@@ -69,7 +69,7 @@ export default function FAQSection() {
                 key={item.id}
                 className="border-b border-black/10 transition-colors duration-200"
               >
-                {/* زر السؤال الضغاط */}
+                {/* Clickable question button */}
                 <button
                   onClick={() => toggleFaq(item.id)}
                   className="w-full py-6 flex items-center justify-between text-left group gap-4"
@@ -78,7 +78,7 @@ export default function FAQSection() {
                     {item.id}. {item.question}
                   </h3>
 
-                  {/* أيقونة السهم التفاعلية للتكبير/التصغير */}
+                  {/* Interactive arrow icon for expand/collapse */}
                   <Icon
                     icon="hugeicons:arrow-down-01"
                     className={`text-primary text-2xl flex-shrink-0 transition-transform duration-300 ${
@@ -87,7 +87,7 @@ export default function FAQSection() {
                   />
                 </button>
 
-                {/* جزء الإجابة - يفتح وينغلق بسلاسة */}
+                {/* Answer section - opens and closes smoothly */}
                 <div
                   className={`grid transition-all duration-300 ease-in-out overflow-hidden ${
                     isOpen

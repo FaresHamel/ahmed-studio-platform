@@ -8,7 +8,7 @@ const features = [
     desc: "Over 8+ years of global expertise in preserving audiovisual heritage to the highest international standards."
   },
   {
-    icon: "clarity:world-line", // أو أي أيقونة مناسبة للـ Best Practices
+    icon: "clarity:world-line", // Or any suitable icon for Best Practices
     title: "Best practices",
     desc: "Every project we supervise aligns with international standards, including high end legacy machines and professional grade equipments."
   },

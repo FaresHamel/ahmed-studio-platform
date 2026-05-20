@@ -4,12 +4,12 @@ export default function MoreServicesPricesSection() {
   return (
     <section className="w-full bg-white py-16 md:py-24 px-6 md:px-12 lg:px-20 flex items-center justify-center overflow-visible">
       <div className="max-w-4xl mx-auto w-full flex flex-col items-center text-center">
-        {/* 1. العنوان الرئيسي الموحد والمتناسق */}
+        {/* 1. Unified and harmonious main title */}
         <h2 className="font-poppins text-black text-[28px] sm:text-[34px] md:text-[40px] font-[600] leading-tight mb-6 md:mb-8">
           For More Services And Prices
         </h2>
 
-        {/* 2. حاوية النصوص الوصفية (الفقرات) */}
+        {/* 2. Descriptive text container (paragraphs) */}
         <div className="w-full flex flex-col gap-6 mb-10 md:mb-12">
           <p className="font-poppins text-black text-[14px] sm:text-[15px] md:text-[16px] leading-relaxed opacity-80 max-w-3xl mx-auto">
             We offer a wide range of professional digitization and media
@@ -27,9 +27,9 @@ export default function MoreServicesPricesSection() {
           </p>
         </div>
 
-        {/* 3. زر الانتقال إلى المتجر (Button) بالتصميم واللون المطابق تماماً */}
+        {/* 3. Button to go to the store (Button) with exact matching design and color */}
         <Link
-          href="/store" // وجه المسار إلى الصفحة المطلوبة في مشروعك
+          href="/store" // Direct the path to the required page in your project
           className="
             inline-flex 
             items-center 

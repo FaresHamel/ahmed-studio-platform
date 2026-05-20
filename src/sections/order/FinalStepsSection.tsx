@@ -4,11 +4,11 @@ export default function FinalStepsSection() {
   return (
     <section className="py-16 md:py-24 px-6 md:px-20 lg:px-32 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
-        {/* الجزء الأيسر: صورة اللابتوب المصغرة والمركزة */}
+        {/* Left side: small centered laptop image */}
         <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
           <div className="relative w-[80%] sm:w-[60%] lg:w-full max-w-[500px] aspect-video">
             <Image
-              src="/images/howItWorkOrder.png" // تأكد من مسار الصورة الصحيح
+              src="/images/howItWorkOrder.png" // Make sure the image path is correct
               alt="Instant Access Preview"
               fill
               className="object-contain"
@@ -17,9 +17,9 @@ export default function FinalStepsSection() {
           </div>
         </div>
 
-        {/* الجزء الأيمن: يحتوي على القسمين 4 و 5 عمودياً */}
+        {/* Right side: contains sections 4 and 5 stacked vertically */}
         <div className="flex flex-col lg:w-1/2 space-y-16">
-          {/* الخطوة الرابعة: Instant Access */}
+          {/* Step 4: Instant Access */}
           <div className="flex flex-col items-start">
             <div className="flex items-start gap-4">
               <span
@@ -55,7 +55,7 @@ export default function FinalStepsSection() {
             </p>
           </div>
 
-          {/* الخطوة الخامسة: Safely Returned */}
+          {/* Step 5: Safely Returned */}
           <div className="flex flex-col items-start">
             <div className="flex items-start gap-4">
               <span

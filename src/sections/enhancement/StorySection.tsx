@@ -3,19 +3,19 @@ import Image from "next/image";
 export default function StorySection() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-      {/* الجزء الأيسر: الصورة (Left Side: Image) */}
+      {/* Left side: Image (Left Side: Image) */}
       <div className="relative aspect-square w-full overflow-hidden rounded-[20px]">
         <Image
-          src="/images/storySection.png" // تأكد من مطابقة مسار الصورة في مجلد public
+          src="/images/storySection.png" // Make sure the image path matches in the public folder
           alt="The Possibilities Are Endless"
           fill
           className="object-cover"
         />
       </div>
 
-      {/* الجزء الأيمن: المحتوى (Right Side: Content) */}
+      {/* Right side: Content (Right Side: Content) */}
       <div className="flex flex-col items-start text-left">
-        {/* العنوان الرئيسي - مطبق عليه نفس إعداداتك الفخمة */}
+        {/* Main title - applied with the same luxurious settings */}
         <h2
           className="
     font-poppins
@@ -32,9 +32,9 @@ export default function StorySection() {
           captured your stories
         </h2>
 
-        {/* حاوية النصوص - تم تقليل الـ opacity العام وضبط الخطوط والنقاط بدقة بناءً على التصميم */}
+        {/* Text container - general opacity reduced and lines and dots adjusted precisely based on design */}
         <div className="mt-8 space-y-6 font-poppins text-black text-[15px] md:text-[16px] leading-relaxed">
-          {/* الفقرة الوصفية الأولى العادية */}
+          {/* First normal descriptive paragraph */}
           <p className="opacity-80">
             McKenzie AI brings them to life. As the most innovative solution in
             memory preservation, McKenzie resolves the limitations of
@@ -42,7 +42,7 @@ export default function StorySection() {
             happened.
           </p>
 
-          {/* النقطة الأولى: 3X Visual Clarity */}
+          {/* First point: 3X Visual Clarity */}
           <p className="text-gray-700">
             <strong className="text-black font-[700] block sm:inline">
               3X Visual Clarity:
@@ -53,7 +53,7 @@ export default function StorySection() {
             </span>
           </p>
 
-          {/* النقطة الثانية: Custom Training */}
+          {/* Second point: Custom Training */}
           <p className="text-gray-700">
             <strong className="text-black font-[700] block sm:inline">
               Custom Training:
@@ -64,7 +64,7 @@ export default function StorySection() {
             </span>
           </p>
 
-          {/* النقطة الثالثة: Intelligent Assessment */}
+          {/* Third point: Intelligent Assessment */}
           <p className="text-gray-700">
             <strong className="text-black font-[700] block sm:inline">
               Intelligent Assessment:

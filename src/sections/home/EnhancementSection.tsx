@@ -5,7 +5,7 @@ const items = [
     title: "Spectacular AI Enhancement",
     desc: "Transform blurry, aged footage into crisp, high-definition memories using our advanced AI-driven upscaling technology.",
     img: "/images/camera.jpg",
-    span: "lg:col-span-3" // لجعل الصورة الأولى أكبر في الصف الأول
+    span: "lg:col-span-3" // To make the first image larger in the first row
   },
   {
     title: "Pro-Grade Accuracy",
