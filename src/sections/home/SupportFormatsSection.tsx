@@ -7,29 +7,29 @@ export default function SupportFormatsSection() {
         <div className="lg:col-span-4 flex flex-col items-start">
           <h2
             className="
-  font-poppins
-  text-[#242E42]
-  text-[24px]
-  sm:text-[30px]
-  md:text-[36px]
-  font-[500]
-  mb-4 md:mb-6
-"
+            font-poppins
+            text-[#242E42]
+            text-[24px]
+            sm:text-[30px]
+            md:text-[36px]
+            font-[500]
+            mb-4 md:mb-6
+          "
           >
             Supported Formats
           </h2>
 
           <p
             className="
-  font-poppins
-  text-[#444647]
-  text-[13px]
-  sm:text-[14px]
-  md:text-[16px]
-  font-[400]
-  mb-8 md:mb-10
-  leading-relaxed
-"
+            font-poppins
+            text-[#444647]
+            text-[13px]
+            sm:text-[14px]
+            md:text-[16px]
+            font-[400]
+            mb-8 md:mb-10
+            leading-relaxed
+          "
           >
             We support a wide range of legacy formats. If you don't see your
             format listed, please contact us for a custom assessment.

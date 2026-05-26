@@ -48,8 +48,10 @@ const items: EnhancementItem[] = [
 ];
 
 export default function EnhancementSection() {
-  const renderEnhancementItem = (item: EnhancementItem) => (
-    <div className={`relative group overflow-hidden rounded-[16px] md:rounded-[20px] aspect-[4/3] ${item.colSpan || ""}`}>
+  const renderEnhancementItem = (item: EnhancementItem,index:number) => (
+    <div
+      key={index.toString()}
+      className={`relative group overflow-hidden rounded-[16px] md:rounded-[20px] aspect-[4/3] ${item.colSpan || ""}`}>
       <Image
         src={item.img}
         alt={item.title}

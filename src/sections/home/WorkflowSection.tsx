@@ -12,7 +12,8 @@ const steps = [
   },
   {
     title: "Digitization",
-    description:"Professional-grade media conversion with private content handled by trained female staff.",
+    description:
+      "Professional-grade media conversion with private content handled by trained female staff.",
     icon: "solar:scanner-bold-duotone"
   },
   {
@@ -35,13 +36,13 @@ export default function WorkflowSection() {
       <div className="mb-16 text-center">
         <h2
           className="
-  font-poppins
-  text-primary
-  text-[26px]
-  sm:text-[32px]
-  md:text-5xl
-  font-[500]
-"
+          font-poppins
+          text-primary
+          text-[26px]
+          sm:text-[32px]
+          md:text-5xl
+          font-[500]
+        "
         >
           How It Works
         </h2>

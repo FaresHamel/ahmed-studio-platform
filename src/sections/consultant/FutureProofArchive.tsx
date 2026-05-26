@@ -79,9 +79,9 @@ export default function FutureProofArchive({
               {points.map((point, index) => (
                 <div key={index} className="flex gap-3 md:gap-4">
                   <div className="flex-shrink-0">
-                    <span className="inline-block w-6 h-6 md:w-7 md:h-7 rounded-full bg-primary text-white text-xs md:text-sm font-bold flex items-center justify-center flex-shrink-0">
+                    <div className="text-xs md:text-sm w-6 h-6 md:w-7 md:h-7 rounded-full bg-primary text-white font-[400] flex items-center justify-center text-lg">
                       {index + 1}
-                    </span>
+                    </div>
                   </div>
                   <div>
                     <h3 className="font-bold text-black text-sm md:text-base mb-1">
