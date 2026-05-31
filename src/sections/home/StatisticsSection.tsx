@@ -26,7 +26,7 @@ export default function StatisticsSection() {
           flex flex-col items-center justify-center text-center
           px-1 sm:px-3 md:px-6
           py-4 md:py-12
-          ${index !== 2 ? "border-r border-zinc-200" : ""}
+          ${index % 3 !== 2 ? "border-r border-zinc-200" : ""}
         `}
           >
             {/* VALUE */}
