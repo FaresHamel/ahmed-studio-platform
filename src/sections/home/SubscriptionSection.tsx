@@ -45,7 +45,7 @@ const plans = [
 export default function SubscriptionSection() {
   return (
     <section className="py-5 md:mb-15 px-4 bg-white overflow-hidden">
-      <h2 className="font-poppins text-primary text-[28px] md:text-[40px] font-[500] text-center mb-10 md:mb-16">
+      <h2 className="text-primary text-[28px] md:text-[40px] font-[500] text-center mb-10 md:mb-16">
         Subscription Plan
       </h2>
 
@@ -64,21 +64,21 @@ export default function SubscriptionSection() {
             flex flex-col
           `}
             >
-              <h3 className="font-poppins text-primary text-[18px] font-[600] mb-3">
+              <h3 className="text-primary text-[18px] font-[600] mb-3">
                 {plan.name}
               </h3>
 
               <div className="flex items-baseline mb-3">
-                <span className="font-poppins text-black text-[36px] font-[500]">
+                <span className="text-black text-[36px] font-[500]">
                   £{plan.price}
                 </span>
 
-                <span className="font-poppins text-black/60 text-[14px] ml-2">
+                <span className="text-black/60 text-[14px] ml-2">
                   /Month
                 </span>
               </div>
 
-              <p className="font-poppins text-primary text-[14px] mb-6 leading-relaxed">
+              <p className="text-primary text-[14px] mb-6 leading-relaxed">
                 {plan.desc}
               </p>
 
@@ -92,7 +92,7 @@ export default function SubscriptionSection() {
                       />
                     </div>
 
-                    <span className="font-poppins text-black/80 text-[14px]">
+                    <span className="text-black/80 text-[14px]">
                       {feature}
                     </span>
                   </li>
@@ -102,7 +102,7 @@ export default function SubscriptionSection() {
               <button
                 className={`
               w-full py-3 rounded-xl
-              font-poppins font-[400]
+              font-[400]
               text-[16px] transition-all
               ${
                 plan.isMain
@@ -134,21 +134,21 @@ export default function SubscriptionSection() {
           flex flex-col
         `}
           >
-            <h3 className="font-poppins text-primary text-[20px] font-[600] mb-4">
+            <h3 className="text-primary text-[20px] font-[600] mb-4">
               {plan.name}
             </h3>
 
             <div className="flex items-baseline mb-4">
-              <span className="font-poppins text-black text-[42px] lg:text-[48px] font-[500]">
+              <span className="text-black text-[42px] lg:text-[48px] font-[500]">
                 £{plan.price}
               </span>
 
-              <span className="font-poppins text-black/60 text-[16px] ml-2">
+              <span className="text-black/60 text-[16px] ml-2">
                 /Month
               </span>
             </div>
 
-            <p className="font-poppins text-primary text-[16px] lg:text-[18px] mb-8 leading-snug">
+            <p className="text-primary text-[16px] lg:text-[18px] mb-8 leading-snug">
               {plan.desc}
             </p>
 
@@ -162,7 +162,7 @@ export default function SubscriptionSection() {
                     />
                   </div>
 
-                  <span className="font-poppins text-black/80 text-[15px] lg:text-[16px]">
+                  <span className="text-black/80 text-[15px] lg:text-[16px]">
                     {feature}
                   </span>
                 </li>
@@ -172,7 +172,7 @@ export default function SubscriptionSection() {
             <button
               className={`
             w-full py-4 rounded-xl
-            font-poppins font-[400]
+            font-[400]
             text-[18px] transition-all
             ${
               plan.isMain

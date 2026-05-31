@@ -120,7 +120,7 @@ export default function ServicesSectionCards() {
           {service.title}
         </h3>
 
-        <p className="font-poppins text-[#555555] text-[9px] sm:text-[12px] md:text-[13px] leading-relaxed mb-3 opacity-90 line-clamp-3 sm:line-clamp-none">
+        <p className="text-[#555555] text-[9px] sm:text-[12px] md:text-[13px] leading-relaxed mb-3 opacity-90 line-clamp-3 sm:line-clamp-none">
           {service.description}
         </p>
 
@@ -128,7 +128,7 @@ export default function ServicesSectionCards() {
           {service.features.map((feature, i) => (
             <li
               key={i}
-              className="font-poppins text-[8px] sm:text-[11px] md:text-[12px] leading-tight opacity-80"
+              className="text-[8px] sm:text-[11px] md:text-[12px] leading-tight opacity-80"
             >
               {feature}
             </li>
@@ -153,7 +153,7 @@ export default function ServicesSectionCards() {
           <h2 className="font-serif text-[#84634B] text-[28px] sm:text-[36px] md:text-[44px] font-[600] leading-tight mb-2">
             Services
           </h2>
-          <p className="font-poppins text-[#666666] text-[12px] sm:text-[14px] md:text-[16px] tracking-wide mb-10 md:mb-14">
+          <p className="text-[#666666] text-[12px] sm:text-[14px] md:text-[16px] tracking-wide mb-10 md:mb-14">
             Comprehensive solutions for every format in your collection.
           </p>
 
@@ -167,7 +167,7 @@ export default function ServicesSectionCards() {
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-[#84634B] hover:bg-[#6F503A] text-white font-poppins font-[500] text-[13px] sm:text-[16px] px-8 py-3 sm:px-12 sm:py-4 rounded-md sm:rounded-lg transition-all duration-300 shadow-md hover:-translate-y-0.5"
+            className="bg-[#84634B] hover:bg-[#6F503A] text-white font-[500] text-[13px] sm:text-[16px] px-8 py-3 sm:px-12 sm:py-4 rounded-md sm:rounded-lg transition-all duration-300 shadow-md hover:-translate-y-0.5"
           >
             Request A Quote
           </button>

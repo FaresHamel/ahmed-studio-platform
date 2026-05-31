@@ -18,7 +18,7 @@ export default function StorySection() {
         {/* Main title - applied with the same luxurious settings */}
         <h2
           className="
-    font-poppins
+   
     text-primary
     text-[28px]
     sm:text-[38px]
@@ -33,7 +33,7 @@ export default function StorySection() {
         </h2>
 
         {/* Text container - general opacity reduced and lines and dots adjusted precisely based on design */}
-        <div className="mt-8 space-y-6 font-poppins text-black text-[15px] md:text-[16px] leading-relaxed">
+        <div className="mt-8 space-y-6 text-black text-[15px] md:text-[16px] leading-relaxed">
           {/* First normal descriptive paragraph */}
           <p className="opacity-80">
             McKenzie AI brings them to life. As the most innovative solution in

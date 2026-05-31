@@ -58,7 +58,7 @@ export default function BenefitsGrid({
         {/* Optional Header */}
         {title && (
           <div className="mb-12 md:mb-16">
-            <h2 className="font-poppins text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500] text-center mb-4">
+            <h2 className="text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500] text-center mb-4">
               {title}
             </h2>
             {subtitle && (

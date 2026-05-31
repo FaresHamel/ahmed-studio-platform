@@ -60,7 +60,7 @@ export default function FutureProofArchive({
 
           {/* Right Content */}
           <div className="flex flex-col justify-start">
-            <h2 className="font-poppins text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-5xl leading-tight font-[500] mb-6 md:mb-8">
+            <h2 className="text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-5xl leading-tight font-[500] mb-6 md:mb-8">
               {title}
             </h2>
 

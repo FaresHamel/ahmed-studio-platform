@@ -118,7 +118,7 @@ export default function ConsultingServicesEnhanced({
             : "opacity-0 translate-y-10"
         }`}
       >
-        <h2 className="font-poppins text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500] text-center mb-4">
+        <h2 className="text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500] text-center mb-4">
           {title}
         </h2>
         {subtitle && (
@@ -165,7 +165,7 @@ export default function ConsultingServicesEnhanced({
                 </div>
               ))}
             </div>
-            <p className="text-gray-300 text-xs text-center mt-4 font-poppins">
+            <p className="text-gray-300 text-xs text-center mt-4">
               ← Swipe to see more →
             </p>
           </div>

@@ -42,7 +42,7 @@ export default function GenericHeroSection({
       <div className="relative z-10 h-full flex items-center justify-center px-4 sm:px-8 md:px-16 text-center">
         <div className="flex flex-col items-center max-w-4xl">
           {/* Title */}
-          <h1 className="font-playfair text-white leading-tight text-[26px] sm:text-4xl md:text-6xl lg:text-7xl max-w-3xl">
+          <h1 className="text-white leading-tight text-[26px] sm:text-4xl md:text-6xl lg:text-7xl max-w-3xl">
             {title}
             {titleHighlight && (
               <>
@@ -53,7 +53,7 @@ export default function GenericHeroSection({
           </h1>
 
           {/* Description */}
-          <p className="mt-4 sm:mt-6 font-poppins text-white/90 leading-relaxed max-w-2xl text-[13px] sm:text-base md:text-xl">
+          <p className="mt-4 sm:mt-6 text-white/90 leading-relaxed max-w-2xl text-[13px] sm:text-base md:text-xl">
             {description}
           </p>
         </div>

@@ -58,10 +58,10 @@ export default function PhotosSlidesSection() {
 
         {/* 2. Right section: Text and titles container */}
         <div className="w-full lg:w-1/2 flex flex-col items-start z-10 lg:pl-6">
-          <h2 className="font-poppins text-primary text-[32px] sm:text-[40px] md:text-[48px] font-[600] leading-tight mb-4 md:mb-6">
+          <h2 className="text-primary text-[32px] sm:text-[40px] md:text-[48px] font-[600] leading-tight mb-4 md:mb-6">
             Photos Slides
           </h2>
-          <p className="font-poppins text-black text-[14px] sm:text-[15px] lg:text-[16px] leading-relaxed opacity-85 max-w-xl">
+          <p className="text-black text-[14px] sm:text-[15px] lg:text-[16px] leading-relaxed opacity-85 max-w-xl">
             No projector? No problem. We convert your old photo slides into
             modern digital images, making it easy to enjoy your favorite moments
             on any device.

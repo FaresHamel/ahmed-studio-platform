@@ -65,7 +65,7 @@ export default function OurEquipmentSection() {
       <div className="w-full md:w-[38%] relative z-10 pt-12 pb-12 px-6 lg:px-8 flex flex-col justify-between border-r border-white/5">
         <div>
           {/* 1. Section title centered on a single line */}
-          <h2 className="font-poppins text-xl md:text-2xl lg:text-3xl font-[550] text-center whitespace-nowrap px-2 mb-8 tracking-wide">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-[550] text-center whitespace-nowrap px-2 mb-8 tracking-wide">
             Our Equipment
           </h2>
 
