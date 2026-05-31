@@ -1,4 +1,25 @@
 {
+  "modal": {
+    "appointment": {
+      "title": "Make An Appointment",
+      "namePlaceholder": "Enter your Name",
+      "emailPlaceholder": "Enter your Email",
+      "phonePlaceholder": "Enter your Phone Number",
+      "selectTime": "Select Time",
+      "timezone": "All times are in central time (Saudi Arabia)",
+      "selected": "Selected:",
+      "submit": "Get Appointment",
+      "calendarDays": ["S", "M", "T", "W", "T", "F", "S"],
+      "errors": {
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Invalid email format",
+        "phoneRequired": "Phone number is required",
+        "dateRequired": "Please select a date",
+        "timeRequired": "Please select a time"
+      }
+    }
+  },
   "nav": {
     "home": "Home",
     "aboutUs": "About Us",

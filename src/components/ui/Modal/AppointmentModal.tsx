@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Clock } from "lucide-react";
+import { useI18n } from "@/src/i18n/context";
 
 interface AppointmentFormData {
   name: string;
   email: string;
   phone: string;
   date: Date | null;
-  time: string;
+  time: Date | null; // store as Date so Intl handles formatting
 }
 
 interface AppointmentModalProps {
@@ -17,121 +18,57 @@ interface AppointmentModalProps {
   onSubmit: (data: AppointmentFormData) => void;
 }
 
-export default function AppointmentModal({
-  isOpen,
-  onClose,
-  onSubmit
-}: AppointmentModalProps) {
-  const [currentMonth, setCurrentMonth] = useState(new Date(2026, 0)); // January 2026
-  const [formData, setFormData] = useState<AppointmentFormData>({
-    name: "",
-    email: "",
-    phone: "",
-    date: null,
-    time: ""
-  });
+// Raw time slots as Date objects (date part is irrelevant, only time matters)
+const TIME_SLOTS: Date[] = [9, 10, 11, 12, 13, 14, 15, 16, 17].map((h) => {
+  const d = new Date(2000, 0, 1, h, 0, 0);
+  return d;
+});
 
-  const [errors, setErrors] = useState<Partial<AppointmentFormData>>({});
+export default function AppointmentModal({ isOpen, onClose, onSubmit }: AppointmentModalProps) {
+  const [currentMonth, setCurrentMonth] = useState(new Date(2026, 0));
+  const [formData, setFormData] = useState<AppointmentFormData>({ name: "", email: "", phone: "", date: null, time: null });
+  const [errors, setErrors] = useState<Partial<Record<keyof AppointmentFormData, string>>>({});
+  const { t, language } = useI18n();
+  const m = t.modal.appointment;
 
-  // Get days in month
-  const getDaysInMonth = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-  };
+  const locale = language === "ar" ? "ar-SA" : "en-US";
 
-  // Get first day of month (0 = Sunday, 1 = Monday, etc.)
-  const getFirstDayOfMonth = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-  };
+  const formatTime = (d: Date) => d.toLocaleTimeString(locale, { hour: "numeric", minute: "2-digit", hour12: true });
+  const formatDate = (d: Date) => d.toLocaleDateString(locale);
+  const monthName = currentMonth.toLocaleString(locale, { month: "long", year: "numeric" });
 
-  const daysInMonth = getDaysInMonth(currentMonth);
-  const firstDay = getFirstDayOfMonth(currentMonth);
-  const monthName = currentMonth.toLocaleString("default", {
-    month: "long",
-    year: "numeric"
-  });
+  const getDaysInMonth = (d: Date) => new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+  const getFirstDayOfMonth = (d: Date) => new Date(d.getFullYear(), d.getMonth(), 1).getDay();
 
-  // Generate calendar days
-  const calendarDays = [];
-  for (let i = 0; i < firstDay; i++) {
-    calendarDays.push(null);
-  }
-  for (let i = 1; i <= daysInMonth; i++) {
-    calendarDays.push(
-      new Date(currentMonth.getFullYear(), currentMonth.getMonth(), i)
-    );
-  }
+  const calendarDays: (Date | null)[] = [];
+  for (let i = 0; i < getFirstDayOfMonth(currentMonth); i++) calendarDays.push(null);
+  for (let i = 1; i <= getDaysInMonth(currentMonth); i++) calendarDays.push(new Date(currentMonth.getFullYear(), currentMonth.getMonth(), i));
 
-  // Time slots
-  const timeSlots = [
-    "09:00 am",
-    "10:00 am",
-    "11:00 am",
-    "12:00 pm",
-    "01:00 pm",
-    "02:00 pm",
-    "03:00 pm",
-    "04:00 pm",
-    "05:00 pm"
-  ];
+  const isDateSelected = (day: Date) =>
+    formData.date &&
+    day.getDate() === formData.date.getDate() &&
+    day.getMonth() === formData.date.getMonth() &&
+    day.getFullYear() === formData.date.getFullYear();
 
   const validateForm = () => {
-    const newErrors: Partial<AppointmentFormData> = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required" as any;
-    }
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required" as any;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Invalid email format" as any;
-    }
-    if (!formData.phone.trim()) {
-      newErrors.phone = "Phone number is required" as any;
-    }
-    if (!formData.date) {
-      newErrors.date = "Please select a date" as any;
-    }
-    if (!formData.time) {
-      newErrors.time = "Please select a time" as any;
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    const e: Partial<Record<keyof AppointmentFormData, string>> = {};
+    if (!formData.name.trim()) e.name = m.errors.nameRequired;
+    if (!formData.email.trim()) e.email = m.errors.emailRequired;
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) e.email = m.errors.emailInvalid;
+    if (!formData.phone.trim()) e.phone = m.errors.phoneRequired;
+    if (!formData.date) e.date = m.errors.dateRequired;
+    if (!formData.time) e.time = m.errors.timeRequired;
+    setErrors(e);
+    return Object.keys(e).length === 0;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
       onSubmit(formData);
-      // Reset form
-      setFormData({ name: "", email: "", phone: "", date: null, time: "" });
+      setFormData({ name: "", email: "", phone: "", date: null, time: null });
       onClose();
     }
-  };
-
-  const handlePrevMonth = () => {
-    setCurrentMonth(
-      new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1)
-    );
-  };
-
-  const handleNextMonth = () => {
-    setCurrentMonth(
-      new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1)
-    );
-  };
-
-  const handleDateSelect = (day: Date) => {
-    setFormData({ ...formData, date: day });
-  };
-
-  const isDateSelected = (day: Date) => {
-    return (
-      formData.date &&
-      day.getDate() === formData.date.getDate() &&
-      day.getMonth() === formData.date.getMonth() &&
-      day.getFullYear() === formData.date.getFullYear()
-    );
   };
 
   if (!isOpen) return null;
@@ -141,189 +78,84 @@ export default function AppointmentModal({
       <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-8">
           <div className="flex justify-between items-center mb-8">
-            <h1 className="text-3xl font-semibold text-amber-800">
-              Make An Appointment
-            </h1>
-            <button
-              onClick={onClose}
-              className="text-gray-500 hover:text-gray-700 text-2xl"
-            >
-              ×
-            </button>
+            <h1 className="text-3xl font-semibold text-amber-800">{m.title}</h1>
+            <button onClick={onClose} className="text-gray-500 hover:text-gray-700 text-2xl">×</button>
           </div>
 
-          <form
-            onSubmit={handleSubmit}
-            className="grid grid-cols-1 lg:grid-cols-3 gap-8"
-          >
-            {/* Calendar Section */}
+          <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Calendar */}
             <div className="lg:col-span-1">
               <div className="bg-amber-50 rounded-lg p-6">
-                {/* Month Navigation */}
                 <div className="flex items-center justify-between mb-6">
-                  <button
-                    type="button"
-                    onClick={handlePrevMonth}
-                    className="text-amber-700 hover:bg-amber-200 p-2 rounded"
-                  >
+                  <button type="button" onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1))} className="text-amber-700 hover:bg-amber-200 p-2 rounded">
                     <ChevronLeft size={20} />
                   </button>
                   <h2 className="text-amber-800 font-semibold">{monthName}</h2>
-                  <button
-                    type="button"
-                    onClick={handleNextMonth}
-                    className="text-amber-700 hover:bg-amber-200 p-2 rounded"
-                  >
+                  <button type="button" onClick={() => setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1))} className="text-amber-700 hover:bg-amber-200 p-2 rounded">
                     <ChevronRight size={20} />
                   </button>
                 </div>
-
-                {/* Calendar Grid */}
                 <div className="grid grid-cols-7 gap-1 text-center">
-                  {["S", "M", "T", "W", "T", "F", "S"].map((day,index) => (
-                    <div
-                      key={index}
-                      className="text-amber-700 font-semibold text-sm py-2"
-                    >
-                      {day}
-                    </div>
+                  {m.calendarDays.map((day, i) => (
+                    <div key={i} className="text-amber-700 font-semibold text-sm py-2">{day}</div>
                   ))}
-
-                  {calendarDays.map((day, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      onClick={() => day && handleDateSelect(day)}
-                      disabled={!day}
-                      className={`py-2 text-sm rounded ${
-                        !day
-                          ? "text-gray-300"
-                          : isDateSelected(day)
-                          ? "bg-amber-700 text-white font-semibold"
-                          : "text-amber-900 hover:bg-amber-100"
-                      }`}
-                    >
-                      {day?.getDate()}
+                  {calendarDays.map((day, i) => (
+                    <button key={i} type="button" onClick={() => day && setFormData({ ...formData, date: day })} disabled={!day}
+                      className={`py-2 text-sm rounded ${!day ? "text-gray-300" : isDateSelected(day) ? "bg-amber-700 text-white font-semibold" : "text-amber-900 hover:bg-amber-100"}`}>
+                      {day ? day.getDate().toLocaleString(locale) : ""}
                     </button>
                   ))}
                 </div>
               </div>
             </div>
 
-            {/* Form Section */}
+            {/* Form */}
             <div className="lg:col-span-2 space-y-6">
-              {/* Name Field */}
               <div>
-                <input
-                  type="text"
-                  placeholder="Enter your Name"
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-700 ${
-                    errors.name ? "border-red-500" : "border-gray-300"
-                  }`}
-                />
-                {errors.name && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {String(errors.name)}
-                  </p>
-                )}
+                <input type="text" placeholder={m.namePlaceholder} value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-700 ${errors.name ? "border-red-500" : "border-gray-300"}`} />
+                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+              </div>
+              <div>
+                <input type="email" placeholder={m.emailPlaceholder} value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-700 ${errors.email ? "border-red-500" : "border-gray-300"}`} />
+                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+              </div>
+              <div>
+                <input type="tel" placeholder={m.phonePlaceholder} value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-700 ${errors.phone ? "border-red-500" : "border-gray-300"}`} />
+                {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
               </div>
 
-              {/* Email Field */}
+              {/* Time slots — formatted by Intl, no hardcoded strings */}
               <div>
-                <input
-                  type="email"
-                  placeholder="Enter your Email"
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-700 ${
-                    errors.email ? "border-red-500" : "border-gray-300"
-                  }`}
-                />
-                {errors.email && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {String(errors.email)}
-                  </p>
-                )}
-              </div>
-
-              {/* Phone Field */}
-              <div>
-                <input
-                  type="tel"
-                  placeholder="Enter your Phone Number"
-                  value={formData.phone}
-                  onChange={(e) =>
-                    setFormData({ ...formData, phone: e.target.value })
-                  }
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-700 ${
-                    errors.phone ? "border-red-500" : "border-gray-300"
-                  }`}
-                />
-                {errors.phone && (
-                  <p className="text-red-500 text-sm mt-1">
-                    {String(errors.phone)}
-                  </p>
-                )}
-              </div>
-
-              {/* Time Selection */}
-              <div>
-                <label className="block text-gray-700 font-semibold mb-3">
-                  Select Time
-                </label>
+                <label className="block text-gray-700 font-semibold mb-3">{m.selectTime}</label>
                 <div className="grid grid-cols-3 gap-3">
-                  {timeSlots.map((time) => (
-                    <button
-                      key={time}
-                      type="button"
-                      onClick={() => setFormData({ ...formData, time })}
-                      className={`py-2 px-3 rounded font-medium transition-colors ${
-                        formData.time === time
-                          ? "bg-amber-700 text-white"
-                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                      }`}
-                    >
-                      {time}
+                  {TIME_SLOTS.map((slot, i) => (
+                    <button key={i} type="button" onClick={() => setFormData({ ...formData, time: slot })}
+                      className={`py-2 px-3 rounded font-medium transition-colors ${formData.time === slot ? "bg-amber-700 text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}>
+                      {formatTime(slot)}
                     </button>
                   ))}
                 </div>
-                {errors.time && (
-                  <p className="text-red-500 text-sm mt-2">
-                    {String(errors.time)}
-                  </p>
-                )}
+                {errors.time && <p className="text-red-500 text-sm mt-2">{errors.time}</p>}
               </div>
 
-              {/* Timezone Info */}
               <div className="flex items-center text-gray-600 text-sm">
                 <Clock size={16} className="mr-2" />
-                <span>All times are in central time (Saudi Arabia)</span>
+                <span>{m.timezone}</span>
               </div>
 
-              {/* Selected Date Display */}
-              {formData.date && (
+              {formData.date && formData.time && (
                 <div className="bg-blue-50 border border-blue-200 rounded p-3">
                   <p className="text-blue-900">
-                    Selected:{" "}
-                    <span className="font-semibold">
-                      {formData.date.toLocaleDateString()} at {formData.time}
-                    </span>
+                    {m.selected} <span className="font-semibold">{formatDate(formData.date)} — {formatTime(formData.time)}</span>
                   </p>
                 </div>
               )}
 
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-full bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors mt-8"
-              >
-                Get Appointment
+              <button type="submit" className="w-full bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors mt-8">
+                {m.submit}
               </button>
             </div>
           </form>
