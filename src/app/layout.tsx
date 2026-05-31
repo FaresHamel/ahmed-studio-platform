@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { poppins, playfair } from "@/src/lib/fonts";
+import { poppins, playfair, amiri } from "@/src/lib/fonts";
+import { I18nProvider } from "@/src/i18n/context";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 
@@ -15,17 +16,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" dir="ltr">
       <body
         className={`
           ${poppins.variable}
           ${playfair.variable}
+          ${amiri.variable}
           antialiased
         `}
       >
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <I18nProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </I18nProvider>
       </body>
     </html>
   );

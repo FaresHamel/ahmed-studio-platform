@@ -1,11 +1,14 @@
+"use client";
 import TapeGridSection from "@/src/components/sections/TapeGridSection";
 import { movieFilmsData } from "@/src/data/tapes";
+import { useI18n } from "@/src/i18n/context";
 
 export default function MovieFilmsSection() {
+  const { t } = useI18n();
   return (
     <TapeGridSection
-      title="Movie Films"
-      description="Old reels, new memories. Convert your 8mm, Super 8, and 16mm films into high-quality digital videos perfect for reliving every moment."
+      title={t.about.movieFilms.title}
+      description={t.about.movieFilms.description}
       items={movieFilmsData}
       backgroundColor="bg-[#DFBFA4]"
       contentPosition="left"

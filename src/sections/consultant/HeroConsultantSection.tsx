@@ -1,13 +1,17 @@
+"use client";
 import GenericHeroSection from "@/src/components/sections/GenericHeroSection";
+import { useI18n } from "@/src/i18n/context";
 
 export default function HeroConsultantSection() {
+  const { t } = useI18n();
+  const h = t.consultant.hero;
   return (
     <GenericHeroSection
       imageSrc="/images/consultantImg.jpg"
       imageAlt="Consultant"
-      title="Protect Your Archive"
-      titleHighlight="Secure Your Legacy."
-      description="From individual memories to national heritage—we ensure your digitization project is done right the first time."
+      title={h.title}
+      titleHighlight={h.titleHighlight}
+      description={h.description}
       height="large"
     />
   );
