@@ -1,11 +1,14 @@
+"use client";
 import TapeGridSection from "@/src/components/sections/TapeGridSection";
 import { videoTapesData } from "@/src/data/tapes";
+import { useI18n } from "@/src/i18n/context";
 
 export default function VideoTapesSection() {
+  const { t } = useI18n();
   return (
     <TapeGridSection
-      title="Video Tapes"
-      description="Our old VHS, MiniDV, Hi8, and camcorder tapes won't last forever but your memories can. We carefully digitize your video tapes into high-quality digital files, preserving every moment with clarity, safety and care."
+      title={t.about.videoTapes.title}
+      description={t.about.videoTapes.description}
       items={videoTapesData}
       backgroundColor="bg-white"
       contentPosition="left"

@@ -1,13 +1,17 @@
+"use client";
 import GenericHeroSection from "@/src/components/sections/GenericHeroSection";
+import { useI18n } from "@/src/i18n/context";
 
 export default function HeroOurLabSection() {
+  const { t } = useI18n();
+  const h = t.ourLab.hero;
   return (
     <GenericHeroSection
       imageSrc="/images/ourLabHero.jpg"
       imageAlt="Our Lab"
-      title="Where Technology"
-      titleHighlight="Meets Preservation"
-      description="Inside our state-of-the-art lab, your media is digitized using advanced equipment and calibrated systems that deliver exceptional clarity and detail."
+      title={h.title}
+      titleHighlight={h.titleHighlight}
+      description={h.description}
       height="medium"
     />
   );
