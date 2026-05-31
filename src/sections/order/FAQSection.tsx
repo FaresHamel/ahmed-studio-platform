@@ -47,7 +47,7 @@ export default function FAQSection() {
       <div className="max-w-4xl mx-auto">
         {/* Section main title */}
         <h2
-          className="font-poppins
+          className="
           text-primary
           text-[26px]
           sm:text-[30px]
@@ -74,7 +74,7 @@ export default function FAQSection() {
                   onClick={() => toggleFaq(item.id)}
                   className="w-full py-6 flex items-center justify-between text-left group gap-4"
                 >
-                  <h3 className="font-poppins text-primary text-[18px] sm:text-[22px] lg:text-[24px] font-[400] leading-snug transition-colors group-hover:opacity-80">
+                  <h3 className="text-primary text-[18px] sm:text-[22px] lg:text-[24px] font-[400] leading-snug transition-colors group-hover:opacity-80">
                     {item.id}. {item.question}
                   </h3>
 
@@ -96,7 +96,7 @@ export default function FAQSection() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="font-poppins text-black text-[14px] sm:text-[15px] md:text-[16px] leading-relaxed opacity-90 max-w-3xl">
+                    <p className="text-black text-[14px] sm:text-[15px] md:text-[16px] leading-relaxed opacity-90 max-w-3xl">
                       {item.answer}
                     </p>
                   </div>

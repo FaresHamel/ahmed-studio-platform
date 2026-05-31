@@ -68,7 +68,7 @@ export default function WhyTrustedSection() {
       <div className="w-full md:w-[38%] bg-[#ebdcd0] pt-12 pb-10 flex flex-col justify-between text-[#112438]">
         <div>
           {/* 1. Title on a single line with precise spacing */}
-          <h2 className="font-poppins text-primary text-xl md:text-2xl lg:text-3xl font-[550] text-center whitespace-nowrap px-4 mb-8">
+          <h2 className="text-primary text-xl md:text-2xl lg:text-3xl font-[550] text-center whitespace-nowrap px-4 mb-8">
             Why We Are Trusted
           </h2>
 

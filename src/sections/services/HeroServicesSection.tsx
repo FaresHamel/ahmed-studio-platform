@@ -19,7 +19,7 @@ export default function HeroServicesSection() {
       <div className="relative z-10 h-full flex items-center justify-start px-4 sm:px-8 md:px-16">
         <div className="flex flex-col items-center max-w-4xl">
           {/* TITLE */}
-          <h1 className="font-playfair text-white leading-tight text-[26px] sm:text-4xl md:text-6xl lg:text-7xl max-w-3xl">
+          <h1 className="text-white leading-tight text-[26px] sm:text-4xl md:text-6xl lg:text-7xl max-w-3xl">
             Preserving Memories
             <br />
             <span className="text-white text-[26px] sm:text-4xl md:text-6xl lg:text-7xl">
@@ -28,7 +28,7 @@ export default function HeroServicesSection() {
           </h1>
 
           {/* DESCRIPTION */}
-          <p className="mt-4 px-[5px] sm:mt-6 font-poppins text-white/90 leading-relaxed max-w-2xl text-[13px] sm:text-base md:text-xl">
+          <p className="mt-4 px-[5px] sm:mt-6 text-white/90 leading-relaxed max-w-2xl text-[13px] sm:text-base md:text-xl">
             Ahmed Studio offers professional digitization and consulting
             services for audio, <br className="hidden md:block" />
             video, photos, and film designed to protect your archives and ensure

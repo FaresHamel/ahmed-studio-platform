@@ -33,10 +33,10 @@ export default function DvdSection() {
     <div className="w-full py-12 max-w-7xl flex flex-col bg-white lg:flex-row items-center justify-between gap-14 lg:gap-30 overflow-visible px-20">
       {/* Left Content */}
       <div className="w-full lg:w-1/2 z-10">
-        <h2 className="font-poppins text-primary text-[34px] sm:text-[42px] md:text-[52px] font-semibold leading-tight mb-5">
+        <h2 className="text-primary text-[34px] sm:text-[42px] md:text-[52px] font-semibold leading-tight mb-5">
           DVDs & Mini DVDs
         </h2>
-        <p className="font-poppins text-black/70 text-[15px] md:text-[17px] leading-relaxed max-w-xl">
+        <p className="text-black/70 text-[15px] md:text-[17px] leading-relaxed max-w-xl">
           No more broken discs or outdated players. We convert your DVDs and
           Mini DVDs into modern digital video files that are easy to save,
           share, and enjoy on any device.
@@ -65,7 +65,7 @@ export default function DvdSection() {
             </div>
 
             {/* Label */}
-            <span className="font-poppins text-black font-500 text-[10px] md:text-[14px] whitespace-nowrap">
+            <span className="text-black font-500 text-[10px] md:text-[14px] whitespace-nowrap">
               {reel.sizeLabel}
             </span>
           </div>

@@ -53,7 +53,7 @@ export default function StreamlinedJourney({
       <div className="py-12 md:py-20 lg:py-24">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           {/* Title */}
-          <h2 className="font-poppins text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500] text-center mb-12 md:mb-16">
+          <h2 className="text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500] text-center mb-12 md:mb-16">
             {title}
           </h2>
 
@@ -125,7 +125,7 @@ export default function StreamlinedJourney({
             <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-8 md:p-12 lg:p-16 z-10">
               {/* Title */}
               <div>
-                <h2 className="font-playfair text-white text-2xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight font-bold mb-4 md:mb-6">
+                <h2 className="text-white text-2xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight font-bold mb-4 md:mb-6">
                   {ctaTitle}
                 </h2>
               </div>

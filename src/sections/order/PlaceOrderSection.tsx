@@ -42,11 +42,11 @@ export default function PlaceOrderSection() {
   const textContent = (
     <div>
       <div className="mt-10 flex flex-wrap gap-4">
-        <button className="bg-primary text-white px-8 md:px-10 py-3 md:py-4 font-poppins font-[500] text-[14px] md:text-base rounded-lg hover:bg-primary/90 transition-all shadow-md">
+        <button className="bg-primary text-white px-8 md:px-10 py-3 md:py-4 font-[500] text-[14px] md:text-base rounded-lg hover:bg-primary/90 transition-all shadow-md">
           Visit Our Store
         </button>
 
-        <button className="bg-[#128C7E] text-white px-8 md:px-10 py-3 md:py-4 font-poppins font-[500] text-[14px] md:text-base rounded-lg flex items-center gap-3 hover:bg-[#075E54] transition-all shadow-md">
+        <button className="bg-[#128C7E] text-white px-8 md:px-10 py-3 md:py-4 font-[500] text-[14px] md:text-base rounded-lg flex items-center gap-3 hover:bg-[#075E54] transition-all shadow-md">
           <Icon
             icon="logos:whatsapp-icon"
             className="text-xl md:text-2xl"

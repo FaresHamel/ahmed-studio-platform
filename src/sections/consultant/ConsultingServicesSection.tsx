@@ -73,7 +73,7 @@ export default function ConsultingServicesSection() {
         <Icon icon={service.icon} />
       </div>
 
-      <h3 className="font-poppins font-[500] text-white text-[16px] sm:text-[18px] lg:text-[19px] leading-snug mb-4 min-h-[48px] lg:min-h-[60px]">
+      <h3 className="font-[500] text-white text-[16px] sm:text-[18px] lg:text-[19px] leading-snug mb-4 min-h-[48px] lg:min-h-[60px]">
         {service.title}
       </h3>
 
@@ -81,7 +81,7 @@ export default function ConsultingServicesSection() {
         {service.features.map((feature, idx) => (
           <li
             key={idx}
-            className="font-poppins text-white/70 text-[12px] md:text-[14px] leading-relaxed relative pl-4 before:content-['•'] before:text-primary before:absolute before:left-0 before:font-bold"
+            className="text-white/70 text-[12px] md:text-[14px] leading-relaxed relative pl-4 before:content-['•'] before:text-primary before:absolute before:left-0 before:font-bold"
           >
             {feature}
           </li>
@@ -93,7 +93,7 @@ export default function ConsultingServicesSection() {
   return (
     <section className="py-16 md:py-24 px-4 sm:px-6 md:px-12 lg:px-20 bg-[#111111] text-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <h2 className="font-poppins text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500] text-center mb-12 md:mb-20">
+        <h2 className="text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500] text-center mb-12 md:mb-20">
           Our Consulting Services
         </h2>
 

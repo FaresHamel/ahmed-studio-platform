@@ -47,7 +47,7 @@ export default function CloudFeatures({
     <section className="w-full py-12 md:py-20 lg:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         {/* Title */}
-        <h2 className="font-poppins text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500] text-center mb-12 md:mb-16">
+        <h2 className="text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500] text-center mb-12 md:mb-16">
           {title}
         </h2>
 

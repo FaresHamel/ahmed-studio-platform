@@ -60,11 +60,11 @@ export default function EnhancementSection() {
       />
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-3 md:p-8 text-center">
-        <h3 className="font-poppins text-white text-[14px] md:text-[20px] font-semibold mb-1 md:mb-2">
+        <h3 className="text-white text-[14px] md:text-[20px] font-semibold mb-1 md:mb-2">
           {item.title}
         </h3>
 
-        <p className="hidden md:block font-poppins text-white/90 text-[12px] leading-tight max-w-[80%] mx-auto">
+        <p className="hidden md:block text-white/90 text-[12px] leading-tight max-w-[80%] mx-auto">
           {item.desc}
         </p>
       </div>
@@ -74,7 +74,7 @@ export default function EnhancementSection() {
   return (
     <section className="py-10 px-4">
       <div className="text-center mb-10 md:mb-16">
-        <h2 className="font-poppins text-primary text-[26px] md:text-[40px] font-[500] capitalize">
+        <h2 className="text-primary text-[26px] md:text-[40px] font-[500] capitalize">
           Enhancement & Restoration
         </h2>
       </div>

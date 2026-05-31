@@ -22,7 +22,7 @@
   --color-unselected: var(--unselected-gray);
   --color-section-title: var(--section-brown);
   --color-description: var(--pure-black);
-  
+
   /* Default background settings */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -30,11 +30,19 @@
   --color-dark-brown: var(--dark-brown);
 }
 
+/*
+  Font system:
+  - Poppins  → default for everything (body text, titles, labels, buttons)
+  - Playfair → h1 headings only → use class font-playfair for explicit overrides
+*/
 body {
   background: var(--background);
   color: var(--foreground);
-  /* Set Poppins as the default site font */
   font-family: var(--font-poppins), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-family: var(--font-playfair), serif;
 }

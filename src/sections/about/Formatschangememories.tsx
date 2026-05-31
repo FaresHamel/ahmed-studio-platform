@@ -30,7 +30,7 @@ export default function FormatsChangeMemories({
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 flex flex-col items-center justify-center h-full">
         <div className="text-center">
-          <h1 className="font-playfair text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight font-bold mb-6 md:mb-8">
+          <h1 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight font-bold mb-6 md:mb-8">
             {title}
           </h1>
           <p className="text-white/90 text-sm md:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto">

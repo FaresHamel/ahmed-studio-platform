@@ -26,14 +26,14 @@ export default function NumberedSection({
   const numberAndTitle = (
     <div className="flex flex-col items-start">
       <div className="flex items-start gap-4">
-        <span className="font-poppins text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500]">
+        <span className="text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500]">
           {number}.
         </span>
-        <h2 className="font-poppins text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500]">
+        <h2 className="text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500]">
           {title}
         </h2>
       </div>
-      <p className="mt-6 md:mt-8 font-poppins text-black text-[13px] sm:text-[15px] md:text-lg leading-relaxed opacity-80">
+      <p className="mt-6 md:mt-8 text-black text-[13px] sm:text-[15px] md:text-lg leading-relaxed opacity-80">
         {description}
       </p>
     </div>

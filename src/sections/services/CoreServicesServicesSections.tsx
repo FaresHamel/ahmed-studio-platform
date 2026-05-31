@@ -5,7 +5,7 @@ export default function CoreServicesServicesSections() {
       <div className="text-center mb-16">
         <h2
           className="
-                    font-poppins
+                   
                     text-primary
                     text-[26px]
                     sm:text-[30px]
@@ -21,7 +21,7 @@ export default function CoreServicesServicesSections() {
 
         <p
           className="
-          font-poppins text-black text-[14px] sm:text-[15px] md:text-[16px] text-left leading-relaxed opacity-90 max-w-3xl
+          text-black text-[14px] sm:text-[15px] md:text-[16px] text-left leading-relaxed opacity-90 max-w-3xl
          "
         >
           Your memories are irreplaceable. At Ahmed Studio, we specialize in

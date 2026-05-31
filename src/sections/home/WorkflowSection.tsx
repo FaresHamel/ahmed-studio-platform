@@ -36,7 +36,7 @@ export default function WorkflowSection() {
     <div className="flex flex-col items-center px-4 py-12 max-w-7xl mx-auto w-full">
       {/* Main Title */}
       <div className="mb-16 text-center">
-        <h2 className="font-poppins text-primary text-[26px] sm:text-[32px] md:text-5xl font-[500]">
+        <h2 className="text-primary text-[26px] sm:text-[32px] md:text-5xl font-[500]">
           How It Works
         </h2>
       </div>
@@ -67,10 +67,10 @@ export default function WorkflowSection() {
               >
                 {isEven && (
                   <div className="bg-[#F7F1EC] rounded-[16px] p-4 shadow-sm border border-[#B39174]/10 w-full">
-                    <h3 className="font-poppins text-primary font-medium text-sm mb-1">
+                    <h3 className="text-primary font-medium text-sm mb-1">
                       {step.title}
                     </h3>
-                    <p className="font-poppins text-black text-[10px] leading-tight">
+                    <p className="text-black text-[10px] leading-tight">
                       {step.description}
                     </p>
                   </div>
@@ -111,10 +111,10 @@ export default function WorkflowSection() {
                     <Icon icon={step.icon} className="text-white text-lg" />
                   </div>
                   <div>
-                    <h3 className="font-poppins text-primary font-medium text-sm mb-1">
+                    <h3 className="text-primary font-medium text-sm mb-1">
                       {step.title}
                     </h3>
-                    <p className="font-poppins text-black text-[10px] leading-tight">
+                    <p className="text-black text-[10px] leading-tight">
                       {step.description}
                     </p>
                   </div>
@@ -141,12 +141,12 @@ export default function WorkflowSection() {
             </div>
 
             {/* Step title */}
-            <h3 className="font-poppins text-primary font-[400] text-base xl:text-lg mb-3">
+            <h3 className="text-primary font-[400] text-base xl:text-lg mb-3">
               {step.title}
             </h3>
 
             {/* Step description */}
-            <p className="font-poppins text-black text-[10px] leading-relaxed">
+            <p className="text-black text-[10px] leading-relaxed">
               {step.description}
             </p>
           </div>

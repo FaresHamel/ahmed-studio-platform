@@ -19,12 +19,12 @@ export default function PossibilitiesSection() {
       }
       rightContent={
         <div className="flex flex-col items-start">
-          <h2 className="font-poppins text-primary text-[28px] sm:text-[38px] md:text-5xl lg:text-6xl leading-tight font-[500]">
+          <h2 className="text-primary text-[28px] sm:text-[38px] md:text-5xl lg:text-6xl leading-tight font-[500]">
             The Possibilities <br />
             Are Endless
           </h2>
 
-          <div className="mt-8 space-y-6 font-poppins text-black text-[16px] md:text-lg leading-relaxed opacity-90">
+          <div className="mt-8 space-y-6 text-black text-[16px] md:text-lg leading-relaxed opacity-90">
             <p>
               When the moment calls for memories, open iMemories Cloud to
               effortlessly experience your family's digital library on your Apple
@@ -38,7 +38,7 @@ export default function PossibilitiesSection() {
             </p>
           </div>
 
-          <button className="mt-10 bg-primary text-white px-12 py-4 font-poppins font-[400] rounded-lg hover:bg-primary/90 transition-all shadow-md">
+          <button className="mt-10 bg-primary text-white px-12 py-4 font-[400] rounded-lg hover:bg-primary/90 transition-all shadow-md">
             Read More
           </button>
         </div>

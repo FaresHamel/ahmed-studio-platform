@@ -10,12 +10,12 @@ export default function ProfessionalSection() {
       margin="large"
       leftContent={
         <div className="flex flex-col items-start">
-          <h2 className="font-poppins text-primary text-[26px] sm:text-[36px] md:text-5xl lg:text-6xl leading-tight font-[500]">
+          <h2 className="text-primary text-[26px] sm:text-[36px] md:text-5xl lg:text-6xl leading-tight font-[500]">
             We operate at a <br />
             professional archival
           </h2>
 
-          <div className="mt-8 space-y-6 font-poppins text-black text-[16px] md:text-lg leading-relaxed opacity-90">
+          <div className="mt-8 space-y-6 text-black text-[16px] md:text-lg leading-relaxed opacity-90">
             <p>
               Grade to guarantee the highest possible quality during digitization.
               Our workflows are designed to capture every single bit of
@@ -37,7 +37,7 @@ export default function ProfessionalSection() {
             </p>
           </div>
 
-          <button className="mt-10 bg-primary text-white px-12 py-4 font-poppins font-[400] rounded-lg hover:bg-primary/90 transition-all shadow-md">
+          <button className="mt-10 bg-primary text-white px-12 py-4 font-[400] rounded-lg hover:bg-primary/90 transition-all shadow-md">
             Read More
           </button>
         </div>
@@ -53,7 +53,7 @@ export default function ProfessionalSection() {
               className="object-cover"
             />
             <div className="absolute top-6 left-6 z-20">
-              <span className="text-white font-poppins font-bold text-sm md:text-lg tracking-widest uppercase bg-black/30 px-3 py-1 rounded">
+              <span className="text-white font-bold text-sm md:text-lg tracking-widest uppercase bg-black/30 px-3 py-1 rounded">
                 Compressed
               </span>
             </div>
@@ -71,7 +71,7 @@ export default function ProfessionalSection() {
               className="object-cover"
             />
             <div className="absolute top-6 right-6 z-20">
-              <span className="text-white font-poppins font-bold text-sm md:text-lg tracking-widest uppercase bg-black/30 px-3 py-1 rounded">
+              <span className="text-white font-bold text-sm md:text-lg tracking-widest uppercase bg-black/30 px-3 py-1 rounded">
                 RAW
               </span>
             </div>
