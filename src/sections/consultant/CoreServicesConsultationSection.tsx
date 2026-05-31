@@ -1,10 +1,13 @@
+"use client";
 import SimpleInfoSection from "@/src/components/sections/SimpleInfoSection";
+import { useI18n } from "@/src/i18n/context";
 
 export default function CoreServicesConsultationSection() {
+  const { t } = useI18n();
   return (
     <SimpleInfoSection
-      title="At Ahmed Studio"
-      description="Our consulting services are built on over 20 years of combined experience through Ahmed Studio and our trusted international partners. We help individuals, companies, and government entities plan, execute, and supervise digitization and preservation projects to the highest international standards. Digitization is not just a technical process—it is a strategic decision that affects the future accessibility, authenticity, and safety of your archive. Our role as consultants is to protect your project, your investment, and your archive."
+      title={t.consultant.coreServices.title}
+      description={t.consultant.coreServices.description}
     />
   );
 }

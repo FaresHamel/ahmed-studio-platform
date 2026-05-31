@@ -4,21 +4,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Icon } from "@iconify/react";
-
-const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Order", href: "/order" },
-  { label: "Consultant", href: "/consultant" },
-  { label: "Cloud Storage", href: "/cloudStorage" },
-  { label: "Subscription", href: "/subscription" },
-  { label: "Our Lab", href: "/ourlab" }
-];
+import { useI18n } from "@/src/i18n/context";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { language, setLanguage, t } = useI18n();
   const pathname = usePathname();
+
+  const navLinks = [
+    { label: t.nav.home, href: "/" },
+    { label: t.nav.aboutUs, href: "/about" },
+    { label: t.nav.order, href: "/order" },
+    { label: t.nav.consultant, href: "/consultant" },
+    { label: t.nav.cloudStorage, href: "/cloudStorage" },
+    { label: t.nav.subscription, href: "/subscription" },
+    { label: t.nav.ourLab, href: "/ourlab" }
+  ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white">
@@ -68,7 +69,27 @@ export default function Navbar() {
         </nav>
 
         {/* Right Actions */}
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-4 md:gap-8">
+          {/* Language Switcher */}
+          <button
+            onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
+            className="
+              text-sm font-medium
+              px-3 py-2
+              text-primary
+              hover:bg-primary/10
+              rounded-lg
+              transition-all duration-300
+              border border-primary/20
+              hover:border-primary/40
+              flex items-center gap-1
+            "
+            title={language === 'en' ? 'Switch to Arabic' : 'Switch to English'}
+          >
+            <Icon icon="mdi:earth" className="text-lg" />
+            <span className="hidden sm:inline text-xs">{t.nav.switchLang}</span>
+          </button>
+
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-6">
             <Link
@@ -85,7 +106,7 @@ export default function Navbar() {
                 duration-300
               "
               style={{ borderRadius: "10px" }}>
-              Sign Up
+              {t.nav.signUp}
             </Link>
             <Link
               href="/login"
@@ -98,7 +119,7 @@ export default function Navbar() {
                 duration-300
                 text-zinc-600
               ">
-              Login
+              {t.nav.login}
             </Link>
           </div>
 
@@ -163,7 +184,7 @@ export default function Navbar() {
                   duration-300
                 "
               >
-                Login
+                {t.nav.login}
               </Link>
 
               <Link
@@ -184,7 +205,7 @@ export default function Navbar() {
                   duration-300
                 "
               >
-                Sign Up
+                {t.nav.signUp}
               </Link>
             </div>
           </div>

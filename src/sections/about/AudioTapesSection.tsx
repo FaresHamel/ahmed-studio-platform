@@ -1,11 +1,14 @@
+"use client";
 import TapeGridSection from "@/src/components/sections/TapeGridSection";
 import { audioTapesData } from "@/src/data/tapes";
+import { useI18n } from "@/src/i18n/context";
 
 export default function AudioTapesSection() {
+  const { t } = useI18n();
   return (
     <TapeGridSection
-      title="Audio Tapes"
-      description="Our audio tapes include cassettes, vinyl, reel-to-reel recordings, and more. We digitize them with precision, preserving the original sound quality and detail for future generations."
+      title={t.about.audioTapes.title}
+      description={t.about.audioTapes.description}
       items={audioTapesData}
       backgroundColor="bg-[#F7F1EC]"
       contentPosition="left"

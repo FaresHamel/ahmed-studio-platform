@@ -1,13 +1,17 @@
+"use client";
 import GenericHeroSection from "@/src/components/sections/GenericHeroSection";
+import { useI18n } from "@/src/i18n/context";
 
 export default function HeroSubscriptionSection() {
+  const { t } = useI18n();
+  const h = t.subscriptions.hero;
   return (
     <GenericHeroSection
       imageSrc="/images/heroSubscription.jpg"
       imageAlt="Subscription"
-      title="Your Priceless"
-      titleHighlight="Memories Digitized"
-      description="Beyond mere conversion—we provide a master-class restoration for your family’s visual heritage. From the grain of vintage 8mm film to the nostalgic hum of VHS, we treat every frame as a work of art, bridging the gap between your most cherished yesterdays and the high-definition clarity of today."
+      title={h.title}
+      titleHighlight={h.titleHighlight}
+      description={h.description}
       height="medium"
     />
   );
