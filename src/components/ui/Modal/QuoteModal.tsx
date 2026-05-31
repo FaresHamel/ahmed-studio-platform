@@ -54,7 +54,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
         </button>
 
         {/* Main form title */}
-        <h2 className="font-poppins text-[#84634B] text-[24px] sm:text-[28px] font-[500] pb-4 border-b border-gray-200 mb-6 text-left">
+        <h2 className="text-[#84634B] text-[24px] sm:text-[28px] font-[500] pb-4 border-b border-gray-200 mb-6 text-left">
           Request a Quote
         </h2>
 
@@ -66,7 +66,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
           {/* Full name fields laid out in one row on desktop and stacked on mobile */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="flex flex-col gap-1.5">
-              <label className="text-[13px] font-[500] text-black font-poppins">
+              <label className="text-[13px] font-[500] text-black">
                 First Name
               </label>
               <input
@@ -76,7 +76,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-[13px] font-[500] text-black font-poppins">
+              <label className="text-[13px] font-[500] text-black">
                 Middle Name
               </label>
               <input
@@ -86,7 +86,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-[13px] font-[500] text-black font-poppins">
+              <label className="text-[13px] font-[500] text-black">
                 Surname
               </label>
               <input
@@ -99,7 +99,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
 
           {/* Email field */}
           <div className="flex flex-col gap-1.5">
-            <label className="text-[13px] font-[500] text-black font-poppins">
+            <label className="text-[13px] font-[500] text-black">
               Email
             </label>
             <input
@@ -112,7 +112,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
           {/* Phone number and service type fields side by side */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
-              <label className="text-[13px] font-[500] text-black font-poppins">
+              <label className="text-[13px] font-[500] text-black">
                 Phone Number
               </label>
               <input
@@ -122,7 +122,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-[13px] font-[500] text-black font-poppins">
+              <label className="text-[13px] font-[500] text-black">
                 Service Type
               </label>
               <select className="w-full bg-[#F4F4F4] border-none rounded-lg p-3 text-sm text-gray-500 focus:outline-none focus:ring-1 focus:ring-[#84634B] appearance-none">
@@ -137,7 +137,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
           {/* City and address fields */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
-              <label className="text-[13px] font-[500] text-black font-poppins">
+              <label className="text-[13px] font-[500] text-black">
                 City
               </label>
               <input
@@ -147,7 +147,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label className="text-[13px] font-[500] text-black font-poppins">
+              <label className="text-[13px] font-[500] text-black">
                 Address
               </label>
               <input
@@ -160,7 +160,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
 
           {/* Message / project details field */}
           <div className="flex flex-col gap-1.5">
-            <label className="text-[13px] font-[500] text-black font-poppins">
+            <label className="text-[13px] font-[500] text-black">
               Message / Project Details
             </label>
             <textarea
@@ -179,7 +179,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
             />
             <label
               htmlFor="terms"
-              className="text-[12px] text-black font-poppins cursor-pointer"
+              className="text-[12px] text-black cursor-pointer"
             >
               I agree to the{" "}
               <span className="underline font-[500]">Privacy Policy</span> and{" "}
@@ -191,7 +191,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
           <div className="w-full flex justify-end mt-4">
             <button
               type="submit"
-              className="bg-[#6F533E] hover:bg-[#5C4331] text-white font-poppins font-[500] text-[15px] px-8 py-3 rounded-md shadow-md transition-colors"
+              className="bg-[#6F533E] hover:bg-[#5C4331] text-white font-[500] text-[15px] px-8 py-3 rounded-md shadow-md transition-colors"
             >
               Submit
             </button>

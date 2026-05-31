@@ -19,12 +19,12 @@ export default function AboutSection() {
       }
       rightContent={
         <div className="flex flex-col items-start">
-          <h2 className="font-poppins text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500]">
+          <h2 className="text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500]">
             One of the <br />
             region&apos;s most
           </h2>
 
-          <p className="mt-6 md:mt-8 font-poppins text-black text-[13px] sm:text-[15px] md:text-lg leading-relaxed">
+          <p className="mt-6 md:mt-8 text-black text-[13px] sm:text-[15px] md:text-lg leading-relaxed">
             Trusted names in audiovisual digitization, preservation, and archival
             consulting in Saudi Arabia. We provide advanced, standards-driven
             solutions for converting and safeguarding legacy media, ensuring
@@ -34,7 +34,7 @@ export default function AboutSection() {
             archival standards.
           </p>
 
-          <button className="mt-8 md:mt-10 bg-primary text-white px-8 md:px-12 py-3 md:py-4 font-poppins font-[500] text-[14px] md:text-base rounded-lg hover:bg-primary/90 transition-all">
+          <button className="mt-8 md:mt-10 bg-primary text-white px-8 md:px-12 py-3 md:py-4 font-[500] text-[14px] md:text-base rounded-lg hover:bg-primary/90 transition-all">
             Read More
           </button>
         </div>

@@ -150,7 +150,7 @@ export default function ReadyToPreserve({
 
           {/* CTA Section */}
           <div className="flex flex-col items-center text-center">
-            <h2 className="font-poppins text-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-[500] mb-6 md:mb-8">
+            <h2 className="text-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-[500] mb-6 md:mb-8">
               {mainTitle}
             </h2>
             <p className="text-gray-600 text-sm md:text-base max-w-2xl mx-auto mb-8 md:mb-12">

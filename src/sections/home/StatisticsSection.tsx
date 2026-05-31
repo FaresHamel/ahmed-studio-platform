@@ -12,7 +12,7 @@ export default function StatisticsSection() {
     <section className="py-12 md:py-20 bg-white px-2 sm:px-4">
       {/* TITLE */}
       <div className="text-center mb-8 md:mb-16">
-        <h2 className="font-poppins text-black text-[22px] sm:text-[30px] md:text-[40px] font-[500]">
+        <h2 className="text-black text-[22px] sm:text-[30px] md:text-[40px] font-[500]">
           Statistics
         </h2>
       </div>
@@ -32,7 +32,7 @@ export default function StatisticsSection() {
             {/* VALUE */}
             <span
               className="
-          font-poppins
+         
           text-primary
           text-[12px] sm:text-[18px] md:text-[48px]
           font-[500]
@@ -46,7 +46,7 @@ export default function StatisticsSection() {
             {/* LABEL */}
             <span
               className="
-          font-poppins
+         
           text-black
           text-[9px] sm:text-[12px] md:text-[18px]
           font-[500]

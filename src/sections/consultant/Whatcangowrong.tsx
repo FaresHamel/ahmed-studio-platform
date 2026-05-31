@@ -72,7 +72,7 @@ export default function WhatCanGoWrong({
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         {/* Top Section: Title with Background Image */}
         <div className="mb-12 md:mb-16">
-          <h2 className="font-poppins text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500] text-center mb-4">
+          <h2 className="text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500] text-center mb-4">
            { topTitle}
           </h2>
         </div>
@@ -90,7 +90,7 @@ export default function WhatCanGoWrong({
 
             {/* Text Overlay */}
             <div className="absolute inset-0 flex flex-col items-start justify-center p-6 md:p-12">
-              <h2 className="font-poppins text-white text-[28px] sm:text-4xl md:text-5xl lg:text-6xl leading-tight font-[500] max-w-2xl">
+              <h2 className="text-white text-[28px] sm:text-4xl md:text-5xl lg:text-6xl leading-tight font-[500] max-w-2xl">
                 The <span className="text-red-500">Risks</span> of{" "}
                 <br className="hidden sm:block" />
                 Unguided Digitization

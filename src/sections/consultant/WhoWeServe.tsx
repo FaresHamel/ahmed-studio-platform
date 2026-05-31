@@ -43,7 +43,7 @@ export default function WhoWeServe({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           {/* Left Content */}
           <div className="flex flex-col justify-center order-2 lg:order-1">
-            <h2 className="font-poppins text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-5xl leading-tight font-[500] mb-8 md:mb-12">
+            <h2 className="text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-5xl leading-tight font-[500] mb-8 md:mb-12">
               {title}
             </h2>
 

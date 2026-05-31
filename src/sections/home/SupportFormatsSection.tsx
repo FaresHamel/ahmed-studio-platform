@@ -7,7 +7,7 @@ export default function SupportFormatsSection() {
         <div className="lg:col-span-4 flex flex-col items-start">
           <h2
             className="
-            font-poppins
+           
             text-[#242E42]
             text-[24px]
             sm:text-[30px]
@@ -21,7 +21,7 @@ export default function SupportFormatsSection() {
 
           <p
             className="
-            font-poppins
+           
             text-[#444647]
             text-[13px]
             sm:text-[14px]
@@ -43,11 +43,11 @@ export default function SupportFormatsSection() {
         <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-8">
           {/* Audio */}
           <div>
-            <h3 className="font-poppins text-[#CC8C33] text-[16px] md:text-[18px] font-[400] mb-3 md:mb-4 border-b border-[#D5D7DD] pb-2">
+            <h3 className="text-[#CC8C33] text-[16px] md:text-[18px] font-[400] mb-3 md:mb-4 border-b border-[#D5D7DD] pb-2">
               Audio
             </h3>
 
-            <ul className="space-y-1 md:space-y-2 font-poppins text-[#444647] text-[12px] md:text-sm">
+            <ul className="space-y-1 md:space-y-2 text-[#444647] text-[12px] md:text-sm">
               <li>1/4" Open Reel</li>
               <li>Compact Cassette</li>
               <li>DAT / ADAT</li>
@@ -58,11 +58,11 @@ export default function SupportFormatsSection() {
 
           {/* Video */}
           <div>
-            <h3 className="font-poppins text-[#CC8C33] text-[16px] md:text-[18px] font-[400] mb-3 md:mb-4 border-b border-[#D5D7DD] pb-2">
+            <h3 className="text-[#CC8C33] text-[16px] md:text-[18px] font-[400] mb-3 md:mb-4 border-b border-[#D5D7DD] pb-2">
               Video
             </h3>
 
-            <ul className="space-y-1 md:space-y-2 font-poppins text-[#444647] text-[12px] md:text-sm">
+            <ul className="space-y-1 md:space-y-2 text-[#444647] text-[12px] md:text-sm">
               <li>VHS / S-VHS</li>
               <li>Betacam SP/Digi</li>
               <li>U-Matic (3/4")</li>
@@ -73,11 +73,11 @@ export default function SupportFormatsSection() {
 
           {/* Film */}
           <div>
-            <h3 className="font-poppins text-[#CC8C33] text-[16px] md:text-[18px] font-[400] mb-3 md:mb-4 border-b border-[#D5D7DD] pb-2">
+            <h3 className="text-[#CC8C33] text-[16px] md:text-[18px] font-[400] mb-3 md:mb-4 border-b border-[#D5D7DD] pb-2">
               Film
             </h3>
 
-            <ul className="space-y-1 md:space-y-2 font-poppins text-[#444647] text-[12px] md:text-sm">
+            <ul className="space-y-1 md:space-y-2 text-[#444647] text-[12px] md:text-sm">
               <li>32mm</li>
               <li>16mm / Super 16</li>
               <li>8mm / Super 8</li>
