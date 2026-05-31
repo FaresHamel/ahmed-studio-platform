@@ -1,0 +1,629 @@
+{
+  "nav": {
+    "home": "Home",
+    "aboutUs": "About Us",
+    "order": "Order",
+    "consultant": "Consultant",
+    "cloudStorage": "Cloud Storage",
+    "subscription": "Subscription",
+    "ourLab": "Our Lab",
+    "signUp": "Sign Up",
+    "login": "Login",
+    "switchLang": "العربية"
+  },
+  "footer": {
+    "requestQuote": "Request A Quote",
+    "quickLinks": "Quick Links",
+    "resources": "Resources",
+    "contactSupport": "Contact & Support",
+    "phoneNumber": "Phone Number",
+    "email": "Email",
+    "inquiries": "Inquiries: Support for individuals and organizations.",
+    "copyright": "All Rights Reserved.",
+    "links": {
+      "home": "Home",
+      "howToOrder": "How To Order",
+      "consultant": "Consultant",
+      "cloudStorage": "Cloud Storage",
+      "aboutUs": "About Us",
+      "services": "Services",
+      "enhancement": "Enhancement",
+      "ourLab": "Our LAB",
+      "subscription": "Subscription",
+      "differences": "Differences"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Every Archive",
+      "titleHighlight": "tells a story",
+      "description": "Professional audio, visual, and film digitization for museums, archives, and private collections."
+    },
+    "about": {
+      "titleLine1": "One of the",
+      "titleLine2": "region's most",
+      "description": "Trusted names in audiovisual digitization, preservation, and archival consulting in Saudi Arabia. We provide advanced, standards-driven solutions for converting and safeguarding legacy media, ensuring long-term preservation with the highest levels of quality, accuracy, and security. With years of experience and collaboration with leading local and international experts, we deliver workflows that meet global archival standards.",
+      "cta": "Read More"
+    },
+    "workflow": {
+      "title": "How It Works",
+      "steps": [
+        { "title": "Place an Order", "description": "Place an order from our store/whatsapp." },
+        { "title": "Shipment", "description": "Your shipment will be picked up by our trusted logistic Co." },
+        { "title": "Digitization", "description": "Professional-grade media conversion with private content handled by trained female staff." },
+        { "title": "Instant Access", "description": "View your digitized memories instantly on our secure cloud." },
+        { "title": "Safely Returned", "description": "Your original media is returned to you via our tracked truck service." }
+      ]
+    },
+    "coreServices": {
+      "title": "Our Services",
+      "description": "Comprehensive solutions for every format in your collection.",
+      "learnMore": "LEARN MORE",
+      "viewAll": "View All Services",
+      "readMore": "Read More",
+      "ourCommunity": "Our Community",
+      "services": [
+        {
+          "category": "VIDEO",
+          "title": "AV Digitization",
+          "description": "Archival-grade digitization of legacy audio-visual formats including magnetic tapes, film reels, and vintage media using international preservation standards.",
+          "points": ["RAW master archiving files", "Format conversion & migration", "Structural metadata generation"]
+        },
+        {
+          "category": "IMAGE",
+          "title": "Enhancement and Restoration",
+          "description": "Advanced software and hardware restoration processes to repair video signal degradation, fix color shifts, and bring clarity back to damaged media files.",
+          "points": ["Signal processing & stabilization", "Dust, scratch, and noise reduction", "Color grading & tonal balance optimization"]
+        },
+        {
+          "category": "CONSULT",
+          "title": "Consulting",
+          "description": "Helping organizations, cultural institutions, and individuals plan, design, and supervise archiving strategies according to international best practices.",
+          "points": ["End-to-end workflow planning", "RFP preparation & technical documentation", "Hardware & software stack selection"]
+        },
+        {
+          "category": "VISION",
+          "title": "AV Project Execution and Audit",
+          "description": "Complete supervision of large-scale audio-visual integration projects alongside rigorous technical auditing to guarantee quality control and compliance.",
+          "points": ["Quality control & output verification", "System integration oversight", "Compliance auditing and technical scoring"]
+        }
+      ],
+      "pillars": ["AV Digitization", "Enhancement and Restoration", "Consulting", "AV Project Execution and Audit"]
+    },
+    "supportFormats": {
+      "title": "Supported Formats",
+      "description": "We support a wide range of legacy formats. If you don't see your format listed, please contact us for a custom assessment.",
+      "cta": "Discover More",
+      "audio": "Audio",
+      "video": "Video",
+      "film": "Film",
+      "audioFormats": ["1/4\" Open Reel", "Compact Cassette", "DAT / ADAT", "Vinyl / Shellac", "Wire Recordings"],
+      "videoFormats": ["VHS / S-VHS", "Betacam SP/Digi", "U-Matic (3/4\")", "Hi8 / Video8", "MiniDV / DVCAM"],
+      "filmFormats": ["32mm", "16mm / Super 16", "8mm / Super 8", "9.5mm", "Pathe Baby"]
+    },
+    "cloud": {
+      "titleLine1": "From your",
+      "titleLine2": "attic to our app",
+      "description": "Immerse yourself in the world of your memories from any screen, at any time. The AS Cloud makes it easy to stream and share thousands of moments from our app across your TV, tablet, laptop, phone and more. We provide you a FREE Cloud Hosting for 10 days! An amazing cloud hosting service for your home movies with many features. You can access memories anywhere, any time.",
+      "cta": "Find Out More"
+    },
+    "professional": {
+      "titleLine1": "We operate at a",
+      "titleLine2": "professional archival",
+      "p1": "Grade to guarantee the highest possible quality during digitization. Our workflows are designed to capture every single bit of information from video, audio, and photographic materials—without compression, processing loss, or data reduction.",
+      "p2": "By digitizing content in true RAW / preservation formats, we ensure that the digital files remain an authentic and complete representation of the original media. This approach avoids irreversible data loss and preserves maximum detail, accuracy, and integrity.",
+      "p3": "Our main purpose is long-term preservation. All digitization is performed in accordance with internationally recognized best practices, ensuring your archive remains stable, accessible, and future-ready for decades to come.",
+      "cta": "Read More",
+      "compressed": "Compressed",
+      "raw": "RAW"
+    },
+    "possibilities": {
+      "titleLine1": "The Possibilities",
+      "titleLine2": "Are Endless",
+      "p1": "When the moment calls for memories, open iMemories Cloud to effortlessly experience your family's digital library on your Apple TV, at any time.",
+      "p2": "After we digitize your movies and photos, you can stream hours of home-made content directly from your TV, laptop, tablet or smartphone. We call it foreverizing—because only iMemories lets you relive your entire family history on demand.",
+      "cta": "Read More"
+    },
+    "enhancement": {
+      "title": "Enhancement & Restoration",
+      "items": [
+        { "title": "Spectacular AI Enhancement", "desc": "Transform blurry, aged footage into crisp, high-definition memories using our advanced AI-driven upscaling technology." },
+        { "title": "Pro-Grade Accuracy", "desc": "By capturing materials in true RAW form, we guarantee an uncompressed representation of your original content." },
+        { "title": "Pure Archival Sound", "desc": "We ensure every bit of information in a photo or video." },
+        { "title": "35mm Precision", "desc": "Specialized restoration for 35mm film on shelves." },
+        { "title": "Global Best Practices", "desc": "We avoid costly mistakes by using the right equipment and strategy." }
+      ]
+    },
+    "statistics": {
+      "title": "Statistics",
+      "labels": ["Years in the Field", "RAW Accuracy", "Minutes Captured", "Cities Within Our Network", "Number of Visitors", "Client Satisfied"]
+    },
+    "whyUs": {
+      "title": "Why Us",
+      "features": [
+        { "title": "Since 2017 years", "desc": "Over 8+ years of global expertise in preserving audiovisual heritage to the highest international standards." },
+        { "title": "Best practices", "desc": "Every project we supervise aligns with international standards, including high end legacy machines and professional grade equipments." },
+        { "title": "RAW Capture", "desc": "We guarantee an uncompressed, authentic RAW capture of your original content, preserving every bit of information. Our lab uses industry-leading technology to deliver quality that home-grade equipment simply cannot match." }
+      ],
+      "consultation": {
+        "title": "Free Consultation",
+        "p1": "First Meeting is Free: Start your journey with a complimentary 15-minute consultation to discuss your specific technical needs.",
+        "p2": "Support for Individuals: We guide families with the same expert methods used for large institutions to ensure their personal memories are protected for decades.",
+        "cta": "Read More"
+      }
+    },
+    "whyTrusted": {
+      "title": "Why We Are Trusted",
+      "contact": "For contact and inquiries",
+      "items": [
+        { "id": "CALIBRATED", "title": "Calibrated Equipment", "description": "Our digitization systems and decks undergo rigorous technical calibrations to guarantee absolute signal fidelity and accurate archival capturing output values." },
+        { "id": "SIGNAL", "title": "Signal Processing", "description": "Advanced broadcast-grade time base correctors (TBC) and hardware signal processors optimize tape tracking stability, correct color vectors, and clean up source distortions." },
+        { "id": "FEMALE", "title": "Female Staff", "description": "We provide dedicated, secure private processing environments supervised entirely by specialized female technical experts to handle family archives with ultimate comfort." },
+        { "id": "TEAM", "title": "Experience & Certified Team", "description": "Your historical assets are cataloged, treated, and preserved by certified audio-visual archiving professionals trained in international collection management standards." },
+        { "id": "AFTER_SALE", "title": "After Sale Service", "description": "Our commitment continues post-delivery. We provide secure master file cloud storage backups, formatting technical support, and easy adjustments to match your playback systems." },
+        { "id": "PRIVACY", "title": "Confidentiality & Privacy", "description": "Strict non-disclosure compliance protocols, safe vault storage infrastructure, and air-gapped workstations guarantee your high-profile media contents stay completely secure." }
+      ]
+    },
+    "subscription": {
+      "title": "Subscription Plan",
+      "perMonth": "/Month",
+      "buyPlan": "Buy Plan",
+      "plans": [
+        {
+          "name": "Trial Plan",
+          "desc": "Experience the magic of your digital history.",
+          "features": ["Secure 5GB Storage", "14 Days of Free Access", "4 free guest accounts", "Multi-Device Streaming", "Global Sharing"]
+        },
+        {
+          "name": "Standard Cloud",
+          "desc": "Secure, long-term hosting for home movies.",
+          "features": ["Secure 10GB Storage", "AI Tagging & Indexing", "Deep Search Functionality", "Multi-Platform Access", "Extended Hosting"]
+        },
+        {
+          "name": "Pro Archival",
+          "desc": "Enterprise-grade preservation for large collections.",
+          "features": ["Secure 20GB+ Storage", "RFP Development Support", "Comprehensive Archive", "Test Digitization Samples", "Unlimited Sharing"]
+        }
+      ]
+    },
+    "payment": {
+      "title": "Split To 4 Payments",
+      "subtitle": "No Fees Or Interest",
+      "cardsLabel": "All Bank Cards Accepted",
+      "availableVia": "Available Via:"
+    }
+  },
+  "about": {
+    "intro": {
+      "title": "About Us",
+      "description": "We work to fully support digital transformation by leveraging technology to develop advanced archival solutions, digitize audiovisual materials, and transform traditional libraries into accessible digital libraries available at any time, in accordance with international preservation and archiving standards. We also provide professional restoration and enhancement services for images, videos, and audio recordings, in addition to solutions that accelerate digital transformation for our clients. Furthermore, we deliver effective solutions for the preservation, organization, and storage of archives, enabling secure, structured, and easy access to digital content—anytime and anywhere."
+    },
+    "videoTapes": {
+      "title": "Video Tapes",
+      "description": "Our old VHS, MiniDV, Hi8, and camcorder tapes won't last forever but your memories can. We carefully digitize your video tapes into high-quality digital files, preserving every moment with clarity, safety and care."
+    },
+    "audioTapes": {
+      "title": "Audio Tapes",
+      "description": "Our audio tapes include cassettes, vinyl, reel-to-reel recordings, and more. We digitize them with precision, preserving the original sound quality and detail for future generations."
+    },
+    "movieFilms": {
+      "title": "Movie Films",
+      "description": "Old reels, new memories. Convert your 8mm, Super 8, and 16mm films into high-quality digital videos perfect for reliving every moment."
+    },
+    "dvd": {
+      "title": "DVDs & Mini DVDs",
+      "description": "No more broken discs or outdated players. We convert your DVDs and Mini DVDs into modern digital video files that are easy to save, share, and enjoy on any device."
+    },
+    "photos": {
+      "title": "Photos Slides",
+      "description": "No projector? No problem. We convert your old photo slides into modern digital images, making it easy to enjoy your favorite moments on any device."
+    },
+    "tapeTreatment": {
+      "title": "Tape Treatment",
+      "description": "Focuses on addressing abnormalities that have developed over time, such as mold contamination, physical damage, or deterioration of the tape and its casing. When mold is present, we carefully clean and stabilize the tape to prevent information loss and ensure safe playback. The goal of tape treatment is to give aging or damaged tapes a new chance—allowing us to safely extract the original video and audio with minimal risk and maximum accuracy."
+    },
+    "formatsChange": {
+      "title": "Formats change, Memories stay",
+      "description": "Old tapes fade, discs scratch, but memories last forever. Convert your media with us and keep your moments alive in crystal-clear digital quality."
+    },
+    "moreServices": {
+      "title": "For More Services And Prices",
+      "p1": "We offer a wide range of professional digitization and media services tailored to preserve your memories with the highest quality. Our services include video tape conversion, photo and film digitization, audio restoration, image enhancement, and customized media solutions.",
+      "p2": "Pricing varies depending on the type of service, media format, duration, and level of restoration required. Whether you need basic digitization or advanced enhancement, we provide flexible options to match your needs and budget.",
+      "cta": "Visit Our Store"
+    }
+  },
+  "consultant": {
+    "hero": {
+      "title": "Protect Your Archive",
+      "titleHighlight": "Secure Your Legacy.",
+      "description": "From individual memories to national heritage—we ensure your digitization project is done right the first time."
+    },
+    "coreServices": {
+      "title": "At Ahmed Studio",
+      "description": "Our consulting services are built on over 20 years of combined experience through Ahmed Studio and our trusted international partners. We help individuals, companies, and government entities plan, execute, and supervise digitization and preservation projects to the highest international standards. Digitization is not just a technical process—it is a strategic decision that affects the future accessibility, authenticity, and safety of your archive. Our role as consultants is to protect your project, your investment, and your archive."
+    },
+    "whatDoes": {
+      "titleLine1": "What Does",
+      "titleLine2": "a 'Consultant Do?",
+      "p1": "A digitization consultant acts as your technical representative and quality guardian. We translate your goals into clear technical requirements, design reliable workflows, and ensure that every stage of the project is executed correctly—from the first tape inspection to the final archived file. We make sure:",
+      "p2": "Technology: The right technologies are selected quality guardian.\nWorkflow: The correct workflows are applied.\nOutputs: The final outputs meet international best practices\nPreservation: Long-term preservation is achieved, not just short-term delivery"
+    },
+    "whyConsultant": {
+      "titleLine1": "Why Consulting",
+      "titleLine2": "Is Essential",
+      "description": "Without proper consulting, many projects suffer from:\nProper Correction: Incorrect digitization methods.\nStorage: Poor storage and metadata design.\nCost: Costly rework or data loss."
+    },
+    "benefits": {
+      "title": "Beyond Digitization",
+      "subtitle": "The Value of Professional Archival Consulting",
+      "items": [
+        "Your content is preserved in authentic, preservation-grade master files",
+        "Long-term preservation is ensured through correct formats and storage strategies",
+        "Your archive remains accessible and usable for future generations",
+        "Metadata is properly applied, guaranteeing discoverability, context, and rights management",
+        "The risk of quality loss or re-digitization is eliminated"
+      ]
+    },
+    "beyond": {
+      "title": "Beyond Digitization",
+      "subtitle": "The Value of Professional Archival Consulting",
+      "quote": "A Professionally Consulted Project Guarantees That Every Bit Of Information Is Captured, Documented, And Preserved Correctly — Protecting Your Investment And Your Heritage. Be Smart. Invest In Your Project Once. Do It Right From The Beginning. And Ensure Your Archive Remains Accessible, Meaningful, And Preserved For Generations To Come.",
+      "futureProof": "A Future-Proof Archive Digitization Is Not Simply About A VTR And Analog-to-Digital Converter. It Is A Complete Ecosystem Of Hardware, Software, Workflows, Standards, And Preservation Strategies.",
+      "oversight": "Professional oversight ensures that every piece of data is captured, documented, and preserved correctly."
+    },
+    "futureProof": {
+      "title": "A Future-Proof Archive",
+      "subtitle": "Ensuring Your Archive Stands the Test of Time",
+      "description": "We do not just deliver files—we help you build a future-proof archive. Start with a Consultation Whether you are planning a new project, correcting an existing one, or preparing a large-scale national initiative, our consulting team is ready to support you. Contact us today to schedule a consultation and protect your archive the right way.",
+      "pillars": [
+        { "label": "Technology", "desc": "The right technologies are selected" },
+        { "label": "Workflow", "desc": "The correct workflows are applied." },
+        { "label": "Outputs", "desc": "The final outputs meet international best practices" },
+        { "label": "Preservation", "desc": "Long-term preservation is achieved, not just short-term delivery" }
+      ]
+    },
+    "readyToPreserve": {
+      "hiddenLabel": "HIDDEN CONSEQUENCES",
+      "hiddenTitle": "The True Cost of Doing It Wrong",
+      "hiddenIntro": "Poor digitization decisions may appear cost-effective at the beginning, but they often result in:",
+      "hiddenItems": [
+        "Lost historical and cultural value",
+        "Technical incompatibility in the future",
+        "Increased long-term costs",
+        "Permanent damage to irreplaceable content"
+      ],
+      "approachLabel": "OUR APPROACH",
+      "approachTitle": "Digitization as a Preservation Strategy",
+      "approachDesc": "Digitization is not simply about a VTR and an analog-to-digital converter. It is a comprehensive system of hardware, software, workflows, standards, and preservation strategies designed to protect your archive for the long term.",
+      "approachItems": [
+        "Long-term preservation of your content",
+        "Reliable and future access to your media",
+        "Proper metadata application, enabling search, identification, rights management, and historical context",
+        "Authentic, preservation-grade master files that will never need to be digitized again"
+      ],
+      "ctaTitle": "Ready to Preserve Your Archives Properly?",
+      "ctaDesc": "Get expert consultation to ensure your digitization project meets the highest preservation standards.",
+      "ctaButton": "Schedule A Consultation"
+    },
+    "ourServices": {
+      "title": "Our Consulting Services",
+      "subtitle": "Comprehensive solutions tailored to your archive needs",
+      "swipeHint": "← Swipe to see more →",
+      "services": [
+        {
+          "title": "Workflow Design & Project Planning",
+          "subtitle": "Strategic project organization",
+          "features": ["Media assessment and prioritization", "Tape and film handling rules", "Digitization standards (RAW/ Preservation masters)", "Quality control and validation steps"]
+        },
+        {
+          "title": "Archive Evaluation & Media Treatment",
+          "subtitle": "Professional assessment",
+          "features": ["Media condition and risks", "Required treatments before digitization", "Best technical approach per format", "Preservation priorities"]
+        },
+        {
+          "title": "Technical Proposals & RFP Support",
+          "subtitle": "Expert technical guidance",
+          "features": ["Writing and reviewing RFPs", "Defining technical specifications", "Setting quality and delivery benchmarks", "Avoiding vague or risky requirements"]
+        },
+        {
+          "title": "Equipment Selection & Supply",
+          "subtitle": "Professional digitization solutions",
+          "features": ["Professional digitization machines", "Restoration and processing systems", "Storage and backup solutions", "Procurement support and validation"]
+        },
+        {
+          "title": "Project Supervision & Quality Assurance",
+          "subtitle": "Quality-focused oversight",
+          "features": ["Monitoring workflows and outputs", "Ensuring compliance with international best practices", "Verifying file integrity, formats, and metadata", "Aligning the project with its original goals"]
+        }
+      ]
+    },
+    "professionalConsulting": {
+      "title": "Professional Consulting",
+      "subtitle": "Guaranteed Excellence",
+      "description": "A professionally consulted project ensures every bit of information is captured, documented, and preserved correctly–protecting your investment and heritage for generations.",
+      "statLabel": "Preserved for up to",
+      "statValue": "100 years",
+      "statSuffix": "through continuous preservation planning."
+    },
+    "whatCanGoWrong": {
+      "title": "What Happens Without a Consultant?",
+      "subtitle": "What Can Go Wrong Without Expert Guidance",
+      "items": [
+        { "title": "Low Quality Outputs", "desc": "Incorrect digitization workflows or consumer-grade processes result in outputs that fail to meet archival standards." },
+        { "title": "Wrong Hardware Selection", "desc": "Directly impacts signal accuracy, color integrity, and audio fidelity of your preserved media." },
+        { "title": "Non Recommend Software", "desc": "Results in improper processing and permanent loss of original detail from your source materials." },
+        { "title": "Incorrect Codecs, Container", "desc": "Produces files that are compressed, unstable, or unsuitable for long-term preservation." },
+        { "title": "Inaccurate Capture Methods", "desc": "Fails to preserve all the original data (bits) from the source media, losing critical information." },
+        { "title": "Irreversible Quality Loss", "desc": "Once detail is lost during digitization, it can never be recovered—the damage is permanent." }
+      ],
+      "risksTitle": "The Risks of Unguided Digitization",
+      "risksDesc": "Poor hardware and software choices lead to compromised signal integrity and lost original detail.",
+      "consequenceTitle": "The Consequence",
+      "consequenceDesc": "In many cases, these mistakes lead to project failure, forcing organizations to re-digitize the entire archive, increasing cost, time, and risk—if the original media is still playable."
+    },
+    "whoWeServe": {
+      "title": "Who We Serve",
+      "groups": [
+        { "label": "For Individuals", "desc": "Preserving family memories with future-proof formats and storage advice to ensure accessibility for generations." },
+        { "label": "For Companies", "desc": "Protecting your commercial archive by representing your technical interests and reducing operational risks." },
+        { "label": "For Government", "desc": "Supporting ministries with preservation policies, national RFPs, and large-scale program supervision." }
+      ]
+    },
+    "whyAhmedStudio": {
+      "title": "Why Ahmed Studio Consulting?",
+      "subtitle": "Industry-Leading Expertise and Commitment",
+      "pillars": [
+        { "title": "High Quality", "desc": "Outputs built to last and exceed industry standards." },
+        { "title": "Clear Documentation", "desc": "Clear logs and documentation for every project step." },
+        { "title": "International Standards", "desc": "Expert processes aligned with international benchmarks." },
+        { "title": "Project Lifecycle", "desc": "Smooth, disciplined management from start to finish." }
+      ],
+      "cta": "Book Your Free 15-Min Consultation"
+    }
+  },
+  "cloudStorage": {
+    "about": {
+      "title": "About Cloud Storage",
+      "description": "Imagine if we took all your old home movies, cine film, video and camcorder tapes, and remastered them into HD and even 4K films. Now imagine you can access and share these amazing memories from your Computer, iPad, iPhone, Smart TV.. Anytime, Anywhere! Videos uploaded to Ahmed Studio Cloud are available to watch in stunning HD. Get ready for a game-changing experience with our cutting-edge AI technology! Say goodbye to hours of endless scrolling through your home movies to find that special moment. The AI bot in the Ahmed Studio Cloud automatically labels and organizes every detail of your videos, from people and objects to text, actions, and sounds. With just a click, you can easily search and access every memory. Relive your favorite moments like never before. It's time to experience your home movies in style!"
+    },
+    "afterDigitization": {
+      "title": "Once your films are digitized",
+      "description": "The magic begins. AS Cloud creates a stunning, private online gallery for your entire collection. No more digging through boxes or finding old players—just instant access to your most precious moments.",
+      "devices": [
+        { "title": "Smart TV", "desc": "Watch on the big screen with our dedicated app." },
+        { "title": "Mobile & Tablet", "desc": "Carry your memories in your pocket." },
+        { "title": "Computer", "desc": "High-definition streaming on any browser." },
+        { "title": "Secure Storage", "desc": "Your original files are protected in our encrypted cloud." }
+      ],
+      "sharingTitle": "Memories are better when shared",
+      "sharingDesc": "Every subscription includes 4 Free Guest Accounts, allowing you to invite loved ones across the globe to view, comment, and enjoy your family movies at no extra cost.",
+      "sharingFeatures": [
+        { "title": "4 Free Guests", "desc": "Invite family to join the fun for free." },
+        { "title": "Worldwide Access", "desc": "Share memories with anyone, anywhere." },
+        { "title": "Private & Secure", "desc": "You control exactly who can watch." }
+      ]
+    },
+    "features": {
+      "title": "Cloud Features",
+      "items": [
+        { "title": "Customise Your Gallery", "desc": "Add titles and descriptions and chapter markers to each video. Sort and organise to get them in the perfect order. Make the thumbnail images bigger or smaller as you prefer or in the new list view." },
+        { "title": "Manage Your Sharing", "desc": "Create up to 4 additional users who can access your gallery. You remain in complete control, deciding which videos can be viewed by each user." },
+        { "title": "AI Indexing And Video Search", "desc": "Our Artificial Intelligence analyzes and indexes your video library, letting you search for speech, text, objects, actions and sounds. Search inside your videos and find the moment you are looking for with our unique in-video search." },
+        { "title": "Watch Anywhere, Anytime", "desc": "We have built some simple to use Apps for Alive Cloud has a free download for phone, tablet or TV. We also support Chromecast and Airplay for pushing your movies to your Smart TV." }
+      ]
+    },
+    "streamlined": {
+      "title": "We've streamlined the journey from",
+      "steps": [
+        { "title": "The Digitization", "description": "We professionally transfer your old tapes and films using industry-leading technology." },
+        { "title": "The Notification", "description": "Upon completion of your job, we'll send you an email to let you know your FREE online gallery is available." },
+        { "title": "The Celebration", "description": "Log in and start your 14-day free trial. Watch, share, and enjoy!" }
+      ],
+      "ctaTitle": "Enjoy your first 14 days on us. Cancel anytime",
+      "ctaDesc": "To ship your memories for digital conversion. Includes a crush-proof box, waterproof bags, shock-resistant cushions, and free FedEx shipping.",
+      "ctaButton": "Claim Your 14 Days"
+    }
+  },
+  "enhancement": {
+    "hero": {
+      "title": "Preserving Memories",
+      "titleHighlight": "for the Future",
+      "description": "Ahmed Studio offers professional digitization and consulting services for audio, video, photos, and film designed to protect your archives and ensure long-term access."
+    },
+    "story": {
+      "title": "Yesterday's tools captured your stories",
+      "description": "McKenzie AI brings them to life. As the most innovative solution in memory preservation, McKenzie resolves the limitations of decades-old technology to show you every detail as it really happened.",
+      "items": [
+        { "title": "3X Visual Clarity", "desc": "Get up to three times the visual clarity compared to the original video or photo." },
+        { "title": "Custom Training", "desc": "The first truly custom AI solution trained to enhance specific formats from VHS tapes to Super 8 films." },
+        { "title": "Intelligent Assessment", "desc": "Instantly assesses where to add sharpness and remove imperfections while preserving a natural look." }
+      ]
+    },
+    "aiSolution": {
+      "title": "McKenzie™ is a custom AI solution",
+      "intro": "designed to enhance specific memories by understanding the unique properties of various formats, such as: VHS tapes, Super 8 films",
+      "features": [
+        { "label": "Quality & Clarity :", "desc": "Enhanced quality, sharper detail, and crisper video clarity." },
+        { "label": "Color & Light :", "desc": "Better color accuracy, more vibrant colors, and cleaner visuals in low-light conditions." },
+        { "label": "Motion & Detail :", "desc": "Smoother playback, reduced motion blur from camera movement, and refined facial details." }
+      ]
+    },
+    "training": {
+      "title": "McKenzie™ is trained to understand",
+      "intro": "the unique properties of various analog formats, ranging from VHS tapes to Super 8 films. It performs instant assessments to improve the following:",
+      "features": [
+        { "label": "Clarity:", "desc": "It adds sharpness and creates crisper video clarity." },
+        { "label": "Correction :", "desc": "It removes imperfections and reduces motion blur caused by camera movement." },
+        { "label": "Preservation :", "desc": "It aims to heighten the power of moments while preserving the natural look and feel of the original memories." }
+      ]
+    },
+    "coreServices": {
+      "title": "The Dawn of Your New Family History",
+      "description": "We believe your memories are irreplaceable. That's why we've combined twenty years of digitization expertise with the most advanced AI technology in the world. From our secure SafeShip process to our 100% satisfaction guarantee, we treat your tapes and photos as if they were our own. Join over 1 million happy customers who have seen their past transformed. It's time to stop just 'keeping' your memories and start truly seeing them-clearer, brighter, and more beautiful than before."
+    }
+  },
+  "order": {
+    "placeOrder": {
+      "number": "1.",
+      "title": "Place an Order",
+      "description": "Placing an order with Ahmed Studio is easy. Simply visit our store, choose the digitization or preservation service you need, and confirm your order. Our team will guide you through packaging, delivery, and processing to ensure your materials are handled safely and professionally from start to finish. Or send us through WhatsApp and our customer care will help you.",
+      "visitStore": "Visit Our Store",
+      "whatsapp": "WhatsApp"
+    },
+    "steps": {
+      "step2": {
+        "number": "2.",
+        "title": "Shipment Pick",
+        "description": "Pick up your shipment from Ahmed Studio by visiting our studio during working hours. Bring your order confirmation and a valid ID, and our team will hand over your package safely."
+      },
+      "step3": {
+        "number": "3.",
+        "title": "Digitization Your Memory",
+        "description": "You can digitize your tapes, photos, films, or audio by placing an order with Ahmed Studio. Share your media details with our team, send or drop off your materials, and we'll carefully digitize them using professional archival equipment. Once completed, you'll receive your files in high quality digital format."
+      }
+    },
+    "howItWorks": {
+      "title": "HOW IT WORKS",
+      "description": "We make preserving your memories simple. First, you share your tapes, films or audio reels with our team. We carefully clean, restore and digitize each item using specialized equipment. Once completed, we deliver your files digitally or on USB giving you secure access to your memories anytime without the risk of deterioration."
+    },
+    "finalSteps": {
+      "step4": {
+        "number": "4.",
+        "title": "Instant Access",
+        "description": "You can get instant access to your digitized files through our secure online delivery system. Once your project is completed, we send you a private download link allowing you to view and access your files immediately from any device."
+      },
+      "step5": {
+        "number": "5.",
+        "title": "Safely Returned",
+        "description": "At Ahmed Studio, your original materials are safely returned after digitization. We carefully pack and seal every item, label it properly, and return it through secure delivery or in-person collection to ensure nothing is damaged or misplaced."
+      }
+    },
+    "faq": {
+      "title": "Frequently Asked Question",
+      "items": [
+        {
+          "question": "What services do you offer?",
+          "answer": "We provide professional audiovisual digitization, legacy media restoration, and archival consulting. This includes transferring magnetic tapes, film reels, and vintage audio formats into high-grade uncompressed RAW digital files safely."
+        },
+        {
+          "question": "How do I book a session?",
+          "answer": "You can book a session or get a direct consultation by visiting our physical store, using the 'Place an Order' sequence on our cloud interface, or by reaching out directly to our support team through WhatsApp."
+        },
+        {
+          "question": "Can you shoot on location?",
+          "answer": "For specialized enterprise archival collections or highly sensitive historic materials, we offer professional on-site evaluation and custom consultation setups to securely map out the preservation process."
+        },
+        {
+          "question": "How long will it take to get my photos or videos?",
+          "answer": "The timeline depends closely on the volume and overall physical condition of the assets. Once the digitization, cleaning, and indexing process is completed, you receive instant secure private download access."
+        },
+        {
+          "question": "Can I request revisions?",
+          "answer": "Yes, absolute technical accuracy is our priority. We offer test digitization samples beforehand so you can evaluate technical compatibility and output quality before your primary project officially begins."
+        }
+      ]
+    }
+  },
+  "ourLab": {
+    "hero": {
+      "title": "Where Technology",
+      "titleHighlight": "Meets Preservation",
+      "description": "Inside our state-of-the-art lab, your media is digitized using advanced equipment and calibrated systems that deliver exceptional clarity and detail."
+    },
+    "digitizationEquipment": {
+      "title": "Our Professional Digitization Equipment",
+      "description": "Our studio is equipped with specialized machines for film, video, audio, and photo conversion ensuring accurate playback, high quality scanning and reliable long term preservation.",
+      "items": [
+        "Professional Audio Reel Machine",
+        "Vintage Film Multi-Reel Digitizer",
+        "Broadcast Tape Deck Racks",
+        "High-End Audio Restoration Console",
+        "CRT Monitor and Tape Deck System",
+        "Horizontal Film Editing Table",
+        "Specialized Grooved Disc Player",
+        "Analog Video Mastering Control Board"
+      ]
+    },
+    "ourEquipment": {
+      "title": "Our Equipment",
+      "archivalStandards": "Archival Standards",
+      "items": [
+        { "id": "REFURBISHED", "title": "Full Refurbished", "description": "We make sure each device has its components fully replaced and structural mechanisms completely rebuilt to meet original manufacturer production specifications." },
+        { "id": "CALIBRATED", "title": "Calibrated", "description": "Precisely aligned head drums and fine sound tracking calibration ensure our decks perfectly match high-fidelity archival studio reference readings." },
+        { "id": "LOW_HOURS", "title": "Low Hours Operation", "description": "Utilizing devices with exceptionally low-use original recording drums is critical to preventing tracking artifacts and reaching maximum quality for tapes." },
+        { "id": "HIGH_END", "title": "High End Equipment", "description": "We process archives exclusively through premium broadcast-grade master decks, high-end time base correctors, and specialized ingestion pipelines." }
+      ]
+    },
+    "preservation": {
+      "title": "Inside Our Preservation Workflow",
+      "description": "This video outlines our structured preservation methodology, including media assessment, stabilization, digitization, and post-processing review. Each step is performed by trained technicians following recognized archival standards to ensure long term integrity and accuracy.",
+      "playVideo": "Play workflow video"
+    }
+  },
+  "services": {
+    "hero": {
+      "title": "Preserving Memories",
+      "titleHighlight": "for the Future",
+      "description": "Ahmed Studio offers professional digitization and consulting services for audio, video, photos, and film designed to protect your archives and ensure long-term access."
+    },
+    "coreServices": {
+      "title": "Preserving What Matters Most",
+      "description": "Your memories are irreplaceable. At Ahmed Studio, we specialize in digitizing, restoring, and preserving audio, video, film, and photographic materials with the highest level of precision and care. Every project is handled by experienced professionals who understand the emotional and historical value behind each recording, image, and frame. Using advanced technology and carefully controlled processes, we ensure that fragile and aging media is protected, enhanced, and converted into high-quality digital formats. From family memories to valuable archives, our goal is to preserve authenticity while improving clarity, stability, and longevity—so your memories can be safely stored, easily shared, and enjoyed for generations to come."
+    },
+    "cards": {
+      "learnMore": "LEARN MORE",
+      "requestQuote": "Request A Quote",
+      "services": [
+        {
+          "tag": "VIDEO",
+          "title": "Video Digitization",
+          "description": "Archival grade digitization of video tapes including VHS, Betacam, U-matic, and MiniDV...",
+          "features": ["RAW master file/High quality video", "Signal processing", "Metadata creation"]
+        },
+        {
+          "tag": "AUDIO",
+          "title": "Audio Digitization",
+          "description": "Professional Transfer of Analog Audio formats including 1/4\" tape, cassettes, and vinyl to ...",
+          "features": ["24-bit / 96KHZ", "Sound Restoration", "WAV/Flac"]
+        },
+        {
+          "tag": "FILM",
+          "title": "Film Scanning",
+          "description": "Frame-by-frame scanning of 8mm, 16mm, and 35mm film reels up to 4k resolution.",
+          "features": ["SD / HD / FHD / 4K", "Accurate scanning", "Film cleaning"]
+        },
+        {
+          "tag": "IMAGE",
+          "title": "Slides / Negative / Photo Scanning",
+          "description": "We scan every available detail to preserve color, contrast, and original image integrity for long-term preservation.",
+          "features": ["High-resolution", "Dust & defect reduction", "Accurate color reproduction & tonal balance", "Archival formats suitable for future access"]
+        },
+        {
+          "tag": "CONSULT",
+          "title": "Consulting",
+          "description": "Help organizations, institutions, and individuals plan, execute, and supervise projects according to international best practices.",
+          "features": ["End-to-end workflow design", "RFP preparation & technical documentation", "Hardware & software selection", "Quality control & project supervision"]
+        },
+        {
+          "tag": "ENHANCEMENT & RESTORATION",
+          "title": "Enhancement & Restoration",
+          "description": "Professional enhancement and restoration of photos, videos, and audio to recover clarity, stability, and detail while respecting the authenticity of the original content.",
+          "features": ["Image, video, and audio enhancement", "Noise, dust, scratch & flicker reduction", "Color correction & exposure balancing", "Preservation-safe outputs alongside original"]
+        }
+      ]
+    }
+  },
+  "subscriptions": {
+    "hero": {
+      "title": "Your Priceless",
+      "titleHighlight": "Memories Digitized",
+      "description": "Beyond mere conversion—we provide a master-class restoration for your family's visual heritage. From the grain of vintage 8mm film to the nostalgic hum of VHS, we treat every frame as a work of art, bridging the gap between your most cherished yesterdays and the high-definition clarity of today."
+    },
+    "coreServices": {
+      "titleLine1": "Your Family History,",
+      "titleLine2": "Reimagined for the Digital Age",
+      "description": "Stop letting your family's legacy fade on obsolete tapes and brittle film. Ahmed Studio utilizes industry-leading technology to convert every format—from VHS and 8mm reels to vintage slides—into stunning 4K-ready digital files. With our proprietary McKenzie™ AI Enhancement, we don't just transfer your media; we restore it, sharpening clarity and correcting color to look better than the day it was recorded. Enjoy free digital downloads or secure your archive on custom USBs and DVDs, all backed by our 100% accuracy guarantee."
+    }
+  }
+}

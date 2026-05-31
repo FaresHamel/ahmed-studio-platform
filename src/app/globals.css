@@ -16,6 +16,7 @@
   /* Font definitions using variables passed in the Layout */
   --font-playfair: var(--font-playfair);
   --font-poppins: var(--font-poppins);
+  --font-amiri: var(--font-amiri);
 
   /* Color definitions as Tailwind classes */
   --color-primary: var(--primary-gold);

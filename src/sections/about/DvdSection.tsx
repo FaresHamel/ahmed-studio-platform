@@ -1,15 +1,8 @@
+"use client";
 import Image from "next/image";
+import { useI18n } from "@/src/i18n/context";
 
-interface FilmReel {
-  id: number;
-  sizeLabel: string;
-  imageSrc: string;
-  imageAlt: string;
-  sizeClass: string;
-  positionClass: string;
-}
-
-const filmReelsData: FilmReel[] = [
+const filmReelsData = [
   {
     id: 1,
     sizeLabel: "DVDs",
@@ -29,31 +22,22 @@ const filmReelsData: FilmReel[] = [
 ];
 
 export default function DvdSection() {
+  const { t } = useI18n();
   return (
     <div className="w-full py-12 max-w-7xl flex flex-col bg-white lg:flex-row items-center justify-between gap-14 lg:gap-30 overflow-visible px-20">
-      {/* Left Content */}
       <div className="w-full lg:w-1/2 z-10">
         <h2 className="text-primary text-[34px] sm:text-[42px] md:text-[52px] font-semibold leading-tight mb-5">
-          DVDs & Mini DVDs
+          {t.about.dvd.title}
         </h2>
         <p className="text-black/70 text-[15px] md:text-[17px] leading-relaxed max-w-xl">
-          No more broken discs or outdated players. We convert your DVDs and
-          Mini DVDs into modern digital video files that are easy to save,
-          share, and enjoy on any device.
+          {t.about.dvd.description}
         </p>
       </div>
 
-      {/* Right Reels */}
-      <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-end relative  space-y-4 md:space-y-6 lg:space-y-10">
+      <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-end relative space-y-4 md:space-y-6 lg:space-y-10">
         {filmReelsData.map((reel) => (
-          <div
-            key={reel.id}
-            className={`relative flex items-center gap-3 md:gap-5 ${reel.positionClass}`}
-          >
-            {/* Reel Image */}
-            <div
-              className={`relative ${reel.sizeClass} flex-shrink-0 drop-shadow-[0_12px_20px_rgba(0,0,0,0.28)]`}
-            >
+          <div key={reel.id} className={`relative flex items-center gap-3 md:gap-5 ${reel.positionClass}`}>
+            <div className={`relative ${reel.sizeClass} flex-shrink-0 drop-shadow-[0_12px_20px_rgba(0,0,0,0.28)]`}>
               <Image
                 src={reel.imageSrc}
                 alt={reel.imageAlt}
@@ -63,8 +47,6 @@ export default function DvdSection() {
                 priority
               />
             </div>
-
-            {/* Label */}
             <span className="text-black font-500 text-[10px] md:text-[14px] whitespace-nowrap">
               {reel.sizeLabel}
             </span>
