@@ -80,18 +80,10 @@ export default function OurEquipmentSection() {
             {equipmentItems.map((item, index) => (
               <button
                 key={item.id}
-                onClick={() => {
-                  if (window.innerWidth >= 768) {
-                    setActiveId(item.id);
-                  }
-                }}
+                onClick={() => setActiveId(item.id)}
                 className={`flex flex-col items-center justify-center p-6 text-center transition-all duration-300 relative min-h-[160px] md:group
                   ${index % 2 === 0 ? "border-r border-white/20" : ""}
-                  ${
-                    window.innerWidth < 768
-                      ? "cursor-default"
-                      : "cursor-pointer"
-                  }
+                  cursor-default md:cursor-pointer
                 `}
               >
                 {/* Desktop Interactive State Background Fill Triggers */}

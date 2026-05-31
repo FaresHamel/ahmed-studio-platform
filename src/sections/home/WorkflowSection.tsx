@@ -50,7 +50,7 @@ export default function WorkflowSection() {
         <div className="absolute top-4 bottom-4 left-1/2 -translate-x-1/2 w-[2px] bg-[#B39174]/40" />
 
         {steps.map((step, index) => {
-          const isEven = false;
+          const isEven = index % 2 === 0;
 
           return (
             <div

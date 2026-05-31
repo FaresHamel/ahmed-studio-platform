@@ -84,15 +84,11 @@ export default function WhyTrustedSection() {
               <button
                 key={item.id}
                 // MODIFIED: On mobile, clicking does nothing because the right panel is hidden anyway
-                onClick={() => {
-                  if (window.innerWidth >= 768) {
-                    setActiveId(item.id);
-                  }
-                }}
+                onClick={() => setActiveId(item.id)}
                 // MODIFIED: Removed 'group' on mobile to disable hover effects on touch screens
                 className={`flex flex-col items-center justify-center p-6 text-center transition-all duration-300 relative min-h-[155px] md:group
               ${index % 2 === 0 ? "border-r border-[#112438]/30" : ""}
-              ${window.innerWidth < 768 ? "cursor-default" : "cursor-pointer"}
+              cursor-default md:cursor-pointer
             `}
               >
                 <div
@@ -146,14 +142,10 @@ export default function WhyTrustedSection() {
               {trustItems.slice(4, 6).map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => {
-                    if (window.innerWidth >= 768) {
-                      setActiveId(item.id);
-                    }
-                  }}
+                  onClick={() => setActiveId(item.id)}
                   // MODIFIED: Kept fonts standard on mobile device screens without active underlines
                   className={`text-xs md:text-sm tracking-wide font-medium transition-all duration-200 text-[#112438]/70 md:hover:text-[#112438]
-                ${window.innerWidth < 768 ? "cursor-default" : "cursor-pointer"}
+                cursor-default md:cursor-pointer
                 ${
                   activeId === item.id
                     ? "md:text-[#112438] md:font-bold md:border-b md:border-[#112438]"
