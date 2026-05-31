@@ -43,7 +43,7 @@ export default function ProfessionalConsulting({
           <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-10 lg:p-12">
             {/* Top Section: Title and Main Text */}
             <div className="max-w-2xl">
-              <h2 className="font-playfair text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight font-bold mb-4 md:mb-6">
+              <h2 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight font-bold mb-4 md:mb-6">
                 {title} <br /> {subtitle}
               </h2>
               <p className="text-white/90 text-sm md:text-base lg:text-lg leading-relaxed max-w-xl">

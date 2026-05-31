@@ -56,11 +56,11 @@ export default function DigitizationEquipmentSection() {
       {/* 1. Upper section: Colored background #FFEDDE with titles and texts */}
       <div className="w-full bg-[#FFEDDE] pt-16 pb-24 md:pt-24 md:pb-36 px-6 md:px-12 lg:px-20 text-center">
         <div className="max-w-4xl mx-auto flex flex-col items-center">
-          <h2 className="font-poppins text-black text-[28px] sm:text-[34px] md:text-[42px] lg:text-[46px] font-[600] leading-tight mb-6">
+          <h2 className="text-black text-[28px] sm:text-[34px] md:text-[42px] lg:text-[46px] font-[600] leading-tight mb-6">
             Our Professional Digitization Equipment
           </h2>
 
-          <p className="font-poppins text-black text-[14px] sm:text-[15px] md:text-[16px] leading-relaxed opacity-75 max-w-3xl">
+          <p className="text-black text-[14px] sm:text-[15px] md:text-[16px] leading-relaxed opacity-75 max-w-3xl">
             Our studio is equipped with specialized machines for film, video,
             audio, and photo conversion ensuring accurate playback, high quality
             scanning and reliable long term preservation.

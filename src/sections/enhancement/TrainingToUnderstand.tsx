@@ -19,10 +19,10 @@ export default function TrainingToUnderstand() {
       }
       rightContent={
         <div className="flex flex-col items-start text-left">
-          <h2 className="font-poppins text-primary text-[18px] sm:text-[28px] md:text-5xl lg:text-6xl leading-tight font-[500] mb-8">
+          <h2 className="text-primary text-[18px] sm:text-[28px] md:text-5xl lg:text-6xl leading-tight font-[500] mb-8">
             McKenzie™ is trained to understand
           </h2>
-          <div className="space-y-6 font-poppins text-black text-[15px] md:text-[16px] leading-relaxed">
+          <div className="space-y-6 text-black text-[15px] md:text-[16px] leading-relaxed">
             <p className="opacity-80">
               the unique properties of various analog formats, ranging from VHS
               tapes to Super 8 films. It performs instant assessments to improve

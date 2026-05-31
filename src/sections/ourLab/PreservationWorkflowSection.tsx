@@ -6,11 +6,11 @@ export default function PreservationWorkflowSection() {
       <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-20">
         {/* 1. Left side: Title and descriptive text */}
         <div className="w-full lg:w-[45%] flex flex-col items-start z-10 text-left">
-          <h2 className="font-poppins text-black text-[32px] sm:text-[40px] md:text-[44px] lg:text-[48px] font-[600] leading-tight mb-6">
+          <h2 className="text-black text-[32px] sm:text-[40px] md:text-[44px] lg:text-[48px] font-[600] leading-tight mb-6">
             Inside Our <br className="hidden sm:block" /> Preservation Workflow
           </h2>
 
-          <p className="font-poppins text-[#555555] text-[14px] sm:text-[15px] lg:text-[16px] leading-relaxed max-w-xl">
+          <p className="text-[#555555] text-[14px] sm:text-[15px] lg:text-[16px] leading-relaxed max-w-xl">
             This video outlines our structured preservation methodology,
             including media assessment, stabilization, digitization, and
             post-processing review. Each step is performed by trained

@@ -113,7 +113,7 @@ export default function AfterDigitization({
                     : "lg:order-2"
                 }`}
               >
-                <h2 className="text-primary font-playfair text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-bold mb-6 md:mb-8">
+                <h2 className="text-primary text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-bold mb-6 md:mb-8">
                   {section.title}
                 </h2>
 

@@ -61,10 +61,10 @@ export default function TapTratmentSections() {
           ))}
         </div>
         <div className="w-full lg:w-1/2 z-10">
-          <h2 className="font-poppins text-primary text-[34px] sm:text-[42px] md:text-[52px] font-semibold leading-tight mb-5">
+          <h2 className="text-primary text-[34px] sm:text-[42px] md:text-[52px] font-semibold leading-tight mb-5">
             Tape Treatment
           </h2>
-          <p className="font-poppins text-black/70 text-[15px] md:text-[17px] leading-relaxed max-w-xl">
+          <p className="text-black/70 text-[15px] md:text-[17px] leading-relaxed max-w-xl">
             Focuses on addressing abnormalities that have developed over time,
             such as mold contamination, physical damage, or deterioration of the
             tape and its casing. When mold is present, we carefully clean and

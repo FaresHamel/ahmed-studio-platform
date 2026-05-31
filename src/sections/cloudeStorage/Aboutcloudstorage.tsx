@@ -31,7 +31,7 @@ export default function AboutCloudStorage({
 
           {/* Content */}
           <div className="flex flex-col justify-center">
-            <h2 className="font-poppins text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-5xl leading-tight font-[500] mb-6 md:mb-8">
+            <h2 className="text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-5xl leading-tight font-[500] mb-6 md:mb-8">
               {title}
             </h2>
             <p className="text-gray-700 text-sm md:text-base leading-relaxed whitespace-pre-wrap">

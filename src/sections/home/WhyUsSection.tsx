@@ -38,11 +38,11 @@ export default function WhyUsSection() {
         <Icon icon={item.icon} className={`text-black/80 ${isMobile ? "text-xl" : "text-2xl"}`} />
       </div>
 
-      <h3 className={`font-poppins text-primary font-[500] mb-${isMobile ? "3" : "4"} ${isMobile ? "text-[18px]" : "text-[24px]"}`}>
+      <h3 className={`text-primary font-[500] mb-${isMobile ? "3" : "4"} ${isMobile ? "text-[18px]" : "text-[24px]"}`}>
         {item.title}
       </h3>
 
-      <p className={`font-poppins text-black leading-relaxed opacity-90 ${isMobile ? "text-[14px]" : "text-[16px]"}`}>
+      <p className={`text-black leading-relaxed opacity-90 ${isMobile ? "text-[14px]" : "text-[16px]"}`}>
         {item.desc}
       </p>
     </div>
@@ -54,11 +54,11 @@ export default function WhyUsSection() {
         <Icon icon="hugeicons:message-01" className={`text-black/80 ${isMobile ? "text-xl" : "text-2xl"}`} />
       </div>
 
-      <h3 className={`font-poppins text-primary font-[500] mb-${isMobile ? "4" : "4"} ${isMobile ? "text-[20px]" : "text-[24px]"}`}>
+      <h3 className={`text-primary font-[500] mb-${isMobile ? "4" : "4"} ${isMobile ? "text-[20px]" : "text-[24px]"}`}>
         Free Consultation
       </h3>
 
-      <div className={`font-poppins text-black opacity-90 leading-relaxed flex-grow ${isMobile ? "text-[14px] space-y-4" : "text-[16px] space-y-6"}`}>
+      <div className={`text-black opacity-90 leading-relaxed flex-grow ${isMobile ? "text-[14px] space-y-4" : "text-[16px] space-y-6"}`}>
         <p>
           First Meeting is Free: Start your journey with a complimentary
           15-minute consultation to discuss your specific technical needs.
@@ -72,13 +72,13 @@ export default function WhyUsSection() {
       </div>
 
       {isMobile ? (
-        <button className="mt-6 bg-primary text-white px-6 py-3 rounded-lg font-poppins font-[500] w-full hover:bg-primary/90 transition-all">
+        <button className="mt-6 bg-primary text-white px-6 py-3 rounded-lg font-[500] w-full hover:bg-primary/90 transition-all">
           Read More
         </button>
       ) : (
         <Link
           href="/consultant"
-          className="mt-10 bg-primary text-white px-8 py-3 rounded-lg font-poppins font-[500] w-fit hover:bg-primary/90 transition-all"
+          className="mt-10 bg-primary text-white px-8 py-3 rounded-lg font-[500] w-fit hover:bg-primary/90 transition-all"
         >
           Read More
         </Link>
@@ -88,7 +88,7 @@ export default function WhyUsSection() {
 
   return (
     <section className="py-12 md:py-20 px-4 max-w-7xl mx-auto overflow-hidden">
-      <h2 className="font-poppins text-primary text-[28px] md:text-[40px] font-bold text-center mb-10 md:mb-16">
+      <h2 className="text-primary text-[28px] md:text-[40px] font-bold text-center mb-10 md:mb-16">
         Why Us
       </h2>
 

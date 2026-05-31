@@ -20,7 +20,7 @@ export default function BeyondDigitization({
     <section className="w-full py-12 md:py-20 lg:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         {/* Title */}
-        <h2 className="font-poppins text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500] text-center mb-12 md:mb-16">
+        <h2 className="text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500] text-center mb-12 md:mb-16">
           {title}
         </h2>
         <div className="relative w-full aspect-video md:aspect-auto md:h-[400px] rounded-3xl overflow-hidden shadow-xl my-[100px]">
@@ -36,7 +36,7 @@ export default function BeyondDigitization({
 
           {/* Text Overlay */}
           <div className="absolute inset-0 flex flex-col justify-center p-6 md:p-8">
-            <h3 className="text-white font-playfair text-3xl md:text-4xl lg:text-5xl leading-tight font-bold mb-4">
+            <h3 className="text-white text-3xl md:text-4xl lg:text-5xl leading-tight font-bold mb-4">
               {mainTitle}
             </h3>
             <p className="text-white/90 text-sm md:text-base leading-relaxed max-w-md">
