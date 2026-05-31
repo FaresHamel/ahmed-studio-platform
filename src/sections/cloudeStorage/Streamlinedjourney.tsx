@@ -1,14 +1,11 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
-
 interface JourneyStep {
   label: string;
   title: string;
   description: string;
 }
-
 interface StreamlinedJourneyProps {
   title?: string;
   steps?: JourneyStep[];
@@ -19,7 +16,6 @@ interface StreamlinedJourneyProps {
   ctaImageUrl?: string;
   onButtonClick?: () => void;
 }
-
 const defaultSteps: JourneyStep[] = [
   {
     label: "The Digitization",
@@ -103,9 +99,15 @@ export default function StreamlinedJourney({
 
       {/* Section 2: CTA Banner */}
       <div className="relative py-12 md:py-20 lg:py-24">
-        <div className="max-w-7xl mx-auto px-6 md:px-8">
-          {/* Full Width CTA Image with Overlay */}
-          <div className="relative w-full aspect-video md:aspect-auto md:h-[500px] rounded-3xl overflow-hidden shadow-xl">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+          {" "}
+          {/* Adjusted mobile padding slightly */}
+          {/* FIXED CONTAINER: 
+      - Removed aspect-video on mobile.
+      - Added min-h-[480px] on mobile so it has plenty of room to stretch.
+      - Kept md:h-[500px] so it retains your original layout size on desktop.
+    */}
+          <div className="relative w-full min-h-[480px] md:h-[500px] rounded-3xl overflow-hidden shadow-xl flex flex-col">
             <Image
               src={ctaImageUrl}
               alt="Claim Your Days"
@@ -113,27 +115,30 @@ export default function StreamlinedJourney({
               className="object-cover"
               priority={false}
             />
-
             {/* Dark Overlay */}
             <div className="absolute inset-0 bg-black/50" />
 
-            {/* Content */}
-            <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-12 lg:p-16">
+            {/* CONTENT WRAPPER: 
+        - Changed from absolute to absolute inset-0 but retained flex layout.
+        - On mobile, items are padded cleanly to ensure no text cuts off.
+      */}
+            <div className="absolute inset-0 flex flex-col justify-between p-6 sm:p-8 md:p-12 lg:p-16 z-10">
               {/* Title */}
               <div>
-                <h2 className="font-playfair text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight font-bold mb-4 md:mb-6">
+                <h2 className="font-playfair text-white text-2xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight font-bold mb-4 md:mb-6">
                   {ctaTitle}
                 </h2>
               </div>
 
               {/* Bottom: Description and Button */}
-              <div className="flex flex-col sm:flex-row sm:items-end sm:gap-6 gap-4">
+              {/* Changed items-start on mobile to items-stretch/normal, then items-end on sm and up */}
+              <div className="flex flex-col sm:flex-row sm:items-end sm:gap-6 gap-6 mt-auto">
                 <p className="text-white/90 text-sm md:text-base leading-relaxed max-w-md flex-1">
                   {ctaDescription}
                 </p>
                 <Link
                   href="/subscription"
-                  className="bg-primary hover:bg-primary/90 text-white px-8 md:px-10 py-4 md:py-5 rounded-lg font-bold text-base md:text-lg transition-all duration-300 hover:shadow-lg active:scale-95 whitespace-nowrap flex-shrink-0"
+                  className="bg-primary hover:bg-primary/90 text-white px-8 md:px-10 py-4 md:py-5 rounded-lg font-bold text-base md:text-lg transition-all duration-300 hover:shadow-lg active:scale-95 whitespace-nowrap flex-shrink-0 text-center"
                 >
                   {ctaButtonText}
                 </Link>

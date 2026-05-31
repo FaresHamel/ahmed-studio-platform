@@ -1,5 +1,5 @@
 import Image from "next/image";
-import CardGrid, { CardItem } from "@/src/components/sections/CardGrid";
+import { CardItem } from "@/src/components/sections/CardGrid";
 
 interface EnhancementItem extends CardItem {
   id: number;
