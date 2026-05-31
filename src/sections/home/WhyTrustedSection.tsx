@@ -68,7 +68,7 @@ export default function WhyTrustedSection() {
       <div className="w-full md:w-[38%] bg-[#ebdcd0] pt-12 pb-10 flex flex-col justify-between text-[#112438]">
         <div>
           {/* 1. Title on a single line with precise spacing */}
-          <h2 className="font-poppins text-primary text-[28px] md:text-[40px] font-[550] text-2xl lg:text-3xl text-center whitespace-nowrap px-4 mb-8">
+          <h2 className="font-poppins text-primary text-xl md:text-2xl lg:text-3xl font-[550] text-center whitespace-nowrap px-4 mb-8">
             Why We Are Trusted
           </h2>
 
@@ -95,10 +95,6 @@ export default function WhyTrustedSection() {
               ${window.innerWidth < 768 ? "cursor-default" : "cursor-pointer"}
             `}
               >
-                {/* 
-              MODIFIED: Active Hover Background State
-              Only shows highlight color states on desktop viewports (md:)
-            */}
                 <div
                   className={`absolute inset-0 bg-[#112438]/5 transition-opacity duration-300 hidden md:block ${
                     activeId === item.id
@@ -197,20 +193,19 @@ export default function WhyTrustedSection() {
           </div>
 
           <div className="hidden md:block w-[1px] h-20 bg-white/20 self-center shrink-0" />
-
-          <div className="flex-1 flex flex-col justify-center gap-4">
+          <div className="flex-1 flex flex-col justify-center gap-4 w-full overflow-hidden">
             <p className="text-stone-300 text-sm md:text-base leading-relaxed font-light">
               {currentItem.description || currentItem.title}
             </p>
 
             <a
               href="mailto:old-to-new@hotmail.com"
-              className="flex items-center gap-3 mt-2 group cursor-pointer w-max text-left select-none"
+              className="flex items-center gap-3 mt-2 group cursor-pointer w-max max-w-full text-left select-none"
             >
-              <div className="w-9 h-9 rounded-full bg-[#ebdcd0] text-[#112438] flex items-center justify-center transition-transform group-hover:scale-105 shadow-sm">
+              <div className="w-9 h-9 rounded-full bg-[#ebdcd0] text-[#112438] flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 shadow-sm">
                 <Icon icon="lucide:mail" className="w-4 h-4 stroke-[2]" />
               </div>
-              <span className="text-xs md:text-sm font-medium tracking-wide text-stone-200 group-hover:text-white transition-colors border-b border-transparent group-hover:border-white/40 pb-0.5">
+              <span className="text-xs lg:text-sm font-medium tracking-wide text-stone-200 group-hover:text-white transition-colors border-b border-transparent group-hover:border-white/40 pb-0.5 truncate max-w-[160px] sm:max-w-[220px] md:max-w-[140px] lg:max-w-none">
                 For contact and inquiries
               </span>
             </a>
