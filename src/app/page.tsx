@@ -1,5 +1,6 @@
 import AboutSection from "../sections/home/AboutSection";
 import CloudSection from "../sections/home/CloudSection";
+import CoreServices from "../sections/home/CoreServicesSection";
 import CoreServicesSection from "../sections/home/CoreServicesSection";
 import EnhancementSection from "../sections/home/EnhancementSection";
 import HeroSection from "../sections/home/HeroSection"
@@ -20,8 +21,8 @@ export default function Home() {
         <HeroSection />
         <AboutSection />
         <WorkflowSection />
-        <CoreServicesSection />
       </section>
+      <CoreServices />
       <SupportFormatsSection />
       <section className={`w-full px-6 md:px-16 py-20`}>
         <CloudSection />
@@ -33,9 +34,11 @@ export default function Home() {
         <EnhancementSection />
         <StatisticsSection />
         <WhyUsSection />
-        <WhyTrustedSection />
-        <SubscriptionSection/>
       </section>
-    </>
+      <WhyTrustedSection />
+     <section>
+      <SubscriptionSection />
+      </section>
+      </>
   );
 }
