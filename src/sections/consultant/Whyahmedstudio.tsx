@@ -88,7 +88,7 @@ export default function WhyAhmedStudio({
           <div className="flex justify-center">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-primary hover:bg-primary/90 text-white px-8 md:px-10 py-4 md:py-5 rounded-lg font-bold text-base md:text-lg transition-all duration-300 hover:shadow-lg active:scale-95"
+              className="bg-[#937052] hover:bg-primary/90 text-white px-8 md:px-10 py-4 md:py-5 rounded-lg font-bold text-[600] md:text-lg transition-all duration-300 hover:shadow-lg active:scale-95"
             >
               {buttonText}
             </button>
@@ -110,9 +110,9 @@ interface FeatureCardProps {
 
 function FeatureCard({ feature }: FeatureCardProps) {
   return (
-    <div className="bg-gray-50 rounded-2xl p-6 md:p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+    <div className="bg-[#F7F1EC] rounded-2xl p-6 md:p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
       {/* Icon Container */}
-      <div className="w-16 h-16 md:w-20 md:h-20 bg-primary rounded-xl flex items-center justify-center mb-6">
+      <div className="w-16 h-16 md:w-20 md:h-20 bg-[#B39174] rounded-xl flex items-center justify-center mb-6">
         <Icon
           icon={feature.icon}
           width="32"
@@ -122,10 +122,10 @@ function FeatureCard({ feature }: FeatureCardProps) {
       </div>
 
       {/* Content */}
-      <h3 className="text-lg md:text-xl font-bold text-black mb-3">
+      <h3 className="text-lg md:text-xl font-[600] text-primary mb-3">
         {feature.title}
       </h3>
-      <p className="text-gray-600 text-sm md:text-base leading-relaxed">
+      <p className="text-black font-[400] text-sm md:text-base leading-relaxed">
         {feature.description}
       </p>
     </div>

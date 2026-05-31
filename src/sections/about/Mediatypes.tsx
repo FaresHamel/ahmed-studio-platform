@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import SimpleInfoSection from "@/src/components/sections/SimpleInfoSection";
 
 interface MediaSection {
   title: string;
@@ -90,16 +91,14 @@ export default function MediaTypes({
   return (
     <section className="w-full bg-white">
       {/* ABOUT US SECTION */}
-      <div className="py-12 md:py-20 lg:py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-6 md:px-8">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black text-center mb-8 md:mb-12">
-            {aboutTitle}
-          </h2>
-          <p className="text-gray-700 text-sm md:text-base leading-relaxed text-center">
-            {aboutDescription}
-          </p>
-        </div>
-      </div>
+      <SimpleInfoSection
+        title={aboutTitle}
+        description={aboutDescription}
+        titleClassName="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-8 md:mb-12"
+        descriptionClassName="text-gray-700 text-sm md:text-base leading-relaxed"
+        containerClassName="py-12 md:py-20 lg:py-24"
+        maxWidth="max-w-5xl"
+      />
     </section>
   );
 }

@@ -47,7 +47,8 @@ export default function Footer({
         { label: "Services", href: "/services" },
         { label: "Enhancement", href: "/enhancement" },
         { label: "Our LAB", href: "/ourlab" },
-        { label: "Subscription", href: "/subscription" }
+        { label: "Subscription", href: "/subscription" },
+        { label: "Differences", href: "/differences" }
       ]
     }
   ];

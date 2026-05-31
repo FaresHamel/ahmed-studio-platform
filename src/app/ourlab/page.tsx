@@ -8,10 +8,10 @@ export default function OurLab() {
     <>
       <section className={`w-full px-6 md:px-16 py-20`}>
         <HeroOurLabSection />
-        <OurEquipmentSection />
       </section>
+      <OurEquipmentSection />
       <DigitizationEquipmentSection />
-      <PreservationWorkflowSection/>
+      <PreservationWorkflowSection />
     </>
   );
 }
