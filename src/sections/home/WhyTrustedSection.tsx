@@ -63,8 +63,8 @@ export default function WhyTrustedSection() {
     trustItems.find((item) => item.id === activeId) || trustItems[0];
 
   return (
-    <section className="w-full flex flex-col mb-20 md:flex-row min-h-[700px] bg-[#112438] overflow-hidden">
-      {/* LEFT COLUMN PANEL (Visible on both Mobile & Desktop) */}
+    <section className="w-full flex flex-col mb-20 md:flex-row min-h-[700px] bg-[#ebdcd0] md:bg-[#112438] overflow-hidden">
+      {/* LEFT COLUMN PANEL */}
       <div className="w-full md:w-[38%] bg-[#ebdcd0] pt-12 pb-10 flex flex-col justify-between text-[#112438]">
         <div>
           {/* 1. Title on a single line with precise spacing */}
@@ -83,37 +83,45 @@ export default function WhyTrustedSection() {
             {trustItems.slice(0, 4).map((item, index) => (
               <button
                 key={item.id}
-                onClick={() => setActiveId(item.id)}
-                className={`flex flex-col items-center justify-center p-6 text-center transition-all duration-300 relative group min-h-[155px]
+                // MODIFIED: On mobile, clicking does nothing because the right panel is hidden anyway
+                onClick={() => {
+                  if (window.innerWidth >= 768) {
+                    setActiveId(item.id);
+                  }
+                }}
+                // MODIFIED: Removed 'group' on mobile to disable hover effects on touch screens
+                className={`flex flex-col items-center justify-center p-6 text-center transition-all duration-300 relative min-h-[155px] md:group
               ${index % 2 === 0 ? "border-r border-[#112438]/30" : ""}
+              ${window.innerWidth < 768 ? "cursor-default" : "cursor-pointer"}
             `}
               >
-                {/* Active Hover Background State */}
+                {/* 
+              MODIFIED: Active Hover Background State
+              Only shows highlight color states on desktop viewports (md:)
+            */}
                 <div
-                  className={`absolute inset-0 bg-[#112438]/5 transition-opacity duration-300 ${
+                  className={`absolute inset-0 bg-[#112438]/5 transition-opacity duration-300 hidden md:block ${
                     activeId === item.id
                       ? "opacity-100"
                       : "opacity-0 group-hover:opacity-40"
                   }`}
                 />
 
-                {/* Minimal Line Icon */}
+                {/* Minimal Line Icon - Normal uniform styling on mobile, interactive on desktop */}
                 <div
-                  className={`mb-3 transition-transform duration-300 ${
-                    activeId === item.id
-                      ? "text-[#112438] scale-110"
-                      : "text-[#112438]/60 group-hover:scale-105"
+                  className={`mb-3 transition-transform duration-300 text-[#112438] md:text-[#112438]/60 md:group-hover:scale-105 ${
+                    activeId === item.id ? "md:text-[#112438] md:scale-110" : ""
                   }`}
                 >
                   <Icon icon={item.icon} className="w-9 h-9 stroke-[1.2]" />
                 </div>
 
-                {/* Grid Title */}
+                {/* Grid Title - Always standard layout color on mobile */}
                 <span
-                  className={`text-xs md:text-sm tracking-wide font-medium relative z-10 transition-colors ${
+                  className={`text-xs md:text-sm tracking-wide text-[#112438] relative z-10 transition-colors md:text-[#112438]/70 ${
                     activeId === item.id
-                      ? "font-bold text-[#112438]"
-                      : "text-[#112438]/70"
+                      ? "md:font-bold md:text-[#112438]"
+                      : "font-medium"
                   }`}
                 >
                   {item.title}
@@ -142,12 +150,18 @@ export default function WhyTrustedSection() {
               {trustItems.slice(4, 6).map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => setActiveId(item.id)}
-                  className={`text-xs md:text-sm tracking-wide font-medium transition-all duration-200 hover:text-[#112438]
+                  onClick={() => {
+                    if (window.innerWidth >= 768) {
+                      setActiveId(item.id);
+                    }
+                  }}
+                  // MODIFIED: Kept fonts standard on mobile device screens without active underlines
+                  className={`text-xs md:text-sm tracking-wide font-medium transition-all duration-200 text-[#112438]/70 md:hover:text-[#112438]
+                ${window.innerWidth < 768 ? "cursor-default" : "cursor-pointer"}
                 ${
                   activeId === item.id
-                    ? "text-[#112438] font-bold border-b border-[#112438]"
-                    : "text-[#112438]/70"
+                    ? "md:text-[#112438] md:font-bold md:border-b md:border-[#112438]"
+                    : ""
                 }
               `}
                 >
@@ -159,12 +173,9 @@ export default function WhyTrustedSection() {
         </div>
       </div>
 
-      {/* ========================================================
-      RIGHT COLUMN PANEL 
-      ADDED 'hidden md:flex' -> Totally completely hidden on mobile viewports!
-      ======================================================== */}
+      {/* RIGHT COLUMN PANEL (Hidden completely on mobile viewports) */}
       <div className="hidden md:flex w-full md:w-[62%] flex-col relative justify-between bg-[#112438]">
-        {/* UPPER ROW Canvas Area: Interactive Background Media Window Frame */}
+        {/* UPPER ROW Canvas Area */}
         <div className="relative w-full h-[320px] md:h-[60%] overflow-hidden border-b border-white/5">
           <Image
             src="/images/beyond-digitization.jpg"
@@ -177,25 +188,21 @@ export default function WhyTrustedSection() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#112438] via-transparent to-black/20" />
         </div>
 
-        {/* LOWER ROW Canvas Area: Detailed Content Layer Blocks */}
+        {/* LOWER ROW Canvas Area */}
         <div className="p-8 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 md:gap-12 flex-1">
-          {/* Main Selected Header Label */}
           <div className="w-full md:w-[45%] shrink-0">
             <h3 className="font-serif text-3xl md:text-4xl lg:text-5xl font-medium tracking-wide text-white leading-tight">
               {currentItem.title}
             </h3>
           </div>
 
-          {/* Separation Accent Pipe Marker */}
           <div className="hidden md:block w-[1px] h-20 bg-white/20 self-center shrink-0" />
 
-          {/* Context Descriptive Meta Block Area & Fast Action Trigger Links */}
           <div className="flex-1 flex flex-col justify-center gap-4">
             <p className="text-stone-300 text-sm md:text-base leading-relaxed font-light">
               {currentItem.description || currentItem.title}
             </p>
 
-            {/* Clean Email Link Target */}
             <a
               href="mailto:old-to-new@hotmail.com"
               className="flex items-center gap-3 mt-2 group cursor-pointer w-max text-left select-none"
