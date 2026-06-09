@@ -60,8 +60,6 @@ export function I18nProvider({ children, initialLanguage }: Props) {
       value={{
         language,
         setLanguage,
-
-        // 🔥 SAFE: prevents t undefined crash
         t: getTranslation(language) ?? getTranslation("en"),
 
         isRTL: isRTL(language)
