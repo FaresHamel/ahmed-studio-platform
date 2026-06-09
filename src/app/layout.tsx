@@ -34,7 +34,6 @@ export default async function RootLayout({
           antialiased
         `}
       >
-        {/* ✅ FIX IS HERE */}
         <I18nProvider initialLanguage={language}>
           <Navbar />
           <main>{children}</main>
