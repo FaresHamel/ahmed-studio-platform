@@ -13,17 +13,27 @@ export default function TrainingToUnderstand() {
       margin="large"
       leftContent={
         <div className="relative aspect-square w-full overflow-hidden rounded-[20px]">
-          <Image src="/images/aiProcessor.png" alt="The Possibilities Are Endless" fill className="object-cover" />
+          <Image
+            src="/images/aiProcessor.png"
+            alt="The Possibilities Are Endless"
+            fill
+            className="object-cover"
+          />
         </div>
       }
       rightContent={
-        <div className="flex flex-col items-start text-left">
-          <h2 className="text-primary text-[18px] sm:text-[28px] md:text-5xl lg:text-6xl leading-tight font-[500] mb-8">{tr.title}</h2>
-          <div className="space-y-6 text-black text-[15px] md:text-[16px] leading-relaxed">
+        /* FIXED: Changed text alignments to text-start and adjusted sizes for mobile devices */
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-start w-full">
+          <h2 className="text-primary text-[26px] sm:text-[28px] md:text-5xl lg:text-6xl leading-tight font-[500] mb-4 md:mb-8 w-full">
+            {tr.title}
+          </h2>
+          <div className="space-y-6 text-black text-[14px] md:text-[16px] leading-relaxed text-start w-full">
             <p className="opacity-80">{tr.intro}</p>
             {tr.features.map((feature, i) => (
               <p key={i} className="text-gray-700">
-                <strong className="text-black font-[700] block sm:inline">{feature.label} </strong>
+                <strong className="text-black font-[700] block sm:inline">
+                  {feature.label}{" "}
+                </strong>
                 <span className="opacity-80">{feature.desc}</span>
               </p>
             ))}

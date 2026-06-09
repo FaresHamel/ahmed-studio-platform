@@ -1,71 +1,59 @@
+"use client";
 import Image from "next/image";
+import { useI18n } from "@/src/i18n/context";
 
-interface FeatureSection {
-  badge: string;
-  heading: string;
-  body: string;
-  reversed: boolean;
-  cta?: string;
-  image: string;
-}
-
-const FEATURE_SECTIONS: FeatureSection[] = [
-  {
-    badge: "Care",
-    heading: "We treat every shipment like a",
-    body: "National treasure. Since our founding, we have processed over millions of memories without losing a single one. Our facility is climate-controlled, monitored 24/7, and every item is barcoded the moment it arrives, so you can track your family's history through every stage of the journey.",
-    reversed: false,
-    image: "/images/boxdelivery.jpg"
-  },
-  {
-    badge: "Streaming",
-    heading: "Stop Digging for Files. Start",
-    body: 'Streaming your Life. With other services, your "digital" memories end up trapped on a USB drive in a junk drawer or buried in a complex cloud folder that is hard to navigate. We believe your memories should be as easy to watch as your favorite show on Netflix.',
-    reversed: true,
-    cta: "Invite Your Family Now",
-    image: "/images/watchTv.png"
-  },
-  {
-    badge: "Enhancement",
-    heading: "See Your Memories for the",
-    body: "First Time—Again. Old film fades. Tapes get grainy. Photos lose their luster. But they don't have to stay that way. Our proprietary AI Enhancement technology uses advanced machine learning to go beyond simple scanning.",
-    reversed: false,
-    image: "/images/city.jpg"
-  }
+const IMAGES_MAP = [
+  "/images/boxdelivery.jpg",
+  "/images/watchTv.png",
+  "/images/city.jpg"
 ];
 
 export default function FeaturesSection() {
-  return (
-    <div className="max-w-[1170px] mx-auto px-4 mt-24 space-y-24 mb-20">
-      {FEATURE_SECTIONS.map((section, idx) => (
-        <section
-          key={idx}
-          className={`flex flex-col md:flex-row items-center gap-20 ${
-            section.reversed ? "md:flex-row-reverse" : ""
-          }`}
-        >
-          <div
-            className="relative w-full md:w-[470px] shrink-0 rounded-2xl  from-amber-200 to-amber-100  shadow-lg"
-            style={{ minHeight: "480px" }}
-          >
-            <Image
-              src={section.image}
-              alt="Feature image"
-              fill
-              className="object-cover rounded-2xl "
-            />
-          </div>
+  const { t } = useI18n();
+  const sectionsData = t.differences.features.sections || [];
 
-          <div className="flex-1 min-w-0">
-            <h2 className="text-3xl md:text-5xl font-semibold text-[#77510A] leading-tight mb-6">
-              {section.heading}
-            </h2>
-            <p className="text-base md:text-lg text-[#3C3C3C] leading-relaxed text-justify">
-              {section.body}
-            </p>
-          </div>
-        </section>
-      ))}
+  return (
+    <div className="max-w-[1170px] mx-auto px-4 mt-12 md:mt-24 space-y-16 md:space-y-24 mb-16 md:mb-20">
+      {sectionsData.map(
+        (
+          section: { badge: string; heading: string; body: string },
+          idx: number
+        ) => {
+          const isReversed = idx % 2 !== 0;
+
+          return (
+            <section
+              key={idx}
+              className={`flex flex-col lg:flex-row items-center gap-8 md:gap-16 lg:gap-20 ${
+                isReversed ? "lg:flex-row-reverse" : ""
+              }`}
+            >
+              {/* Image Box Wrapper Container */}
+              <div className="relative w-full lg:w-[470px] shrink-0 rounded-2xl shadow-lg h-[260px] sm:h-[350px] md:h-[420px] lg:h-[480px]">
+                <Image
+                  src={IMAGES_MAP[idx] || "/images/boxdelivery.jpg"}
+                  alt="Feature illustration asset"
+                  fill
+                  className="object-cover rounded-2xl"
+                />
+              </div>
+
+              {/* Structured Text Alignment Layer Box */}
+              <div className="flex-1 min-w-0 flex flex-col items-center lg:items-start text-center lg:text-start">
+                <span className="bg-[#F7F1EC] text-[#77510A] text-xs uppercase font-bold tracking-wider px-3 py-1.5 rounded-md mb-3 md:mb-4 inline-block self-center lg:self-start">
+                  {section.badge}
+                </span>
+                <h2 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-semibold text-[#77510A] leading-tight mb-4 md:mb-6 w-full">
+                  {section.heading}
+                </h2>
+                <p className="text-sm md:text-base lg:text-lg text-[#3C3C3C] leading-relaxed text-start w-full opacity-90">
+                  {section.body}
+                </p>
+              </div>
+            </section>
+          );
+        }
+      )}
     </div>
   );
 }

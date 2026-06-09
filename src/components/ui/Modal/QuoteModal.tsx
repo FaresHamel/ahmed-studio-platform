@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useI18n } from "@/src/i18n/context";
 
 interface QuoteModalProps {
   isOpen: boolean;
@@ -8,6 +9,40 @@ interface QuoteModalProps {
 }
 
 export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
+  const { t } = useI18n();
+
+  // Reading safely from your updated modal2 config key
+  const m = t?.modal2 || {
+    title: "Request a Quote",
+    firstName: "First Name",
+    middleName: "Middle Name",
+    surname: "Surname",
+    email: "Email",
+    phoneNumber: "Phone Number",
+    serviceType: "Service Type",
+    selectServices: "Select services",
+    videoDigi: "Video Digitization",
+    audioDigi: "Audio Digitization",
+    filmScan: "Film Scanning",
+    city: "City",
+    address: "Address",
+    messageLabel: "Message / Project Details",
+    messagePlaceholder:
+      "Write here number of mediums u have and the condition and any information u need to add...",
+    agreeTo: "I agree to the",
+    privacyPolicy: "Privacy Policy",
+    and: "and",
+    terms: "Terms of Service",
+    submit: "Submit",
+    placeholderName: "Ahmed...",
+    placeholderCity: "Jeddah",
+    placeholderAddress: "Road no - 12, House no - 40"
+  };
+
+  // Safely check text layout direction configuration dynamically
+  const isRtl =
+    typeof window !== "undefined" && document.documentElement.dir === "rtl";
+
   // Prevent background scrolling when Modal is open (Scroll Lock)
   useEffect(() => {
     if (isOpen) {
@@ -31,11 +66,13 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
       />
 
       {/* 2. Modal body container */}
-      <div className="relative bg-white w-full max-w-xl md:max-w-2xl rounded-xl shadow-2xl p-6 sm:p-8 z-10 my-8 transition-all transform animate-in fade-in zoom-in-95 duration-200">
+      <div className="relative bg-white w-full max-w-xl md:max-w-2xl rounded-xl shadow-2xl p-6 sm:p-8 z-10 my-8 text-start transition-all transform animate-in fade-in zoom-in-95 duration-200">
         {/* Top close button (X Button) */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 text-gray-400 hover:text-black transition-colors"
+          className={`absolute top-5 ${
+            isRtl ? "left-5" : "right-5"
+          } text-gray-400 hover:text-black transition-colors`}
           aria-label="Close modal"
         >
           <svg
@@ -54,44 +91,44 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
         </button>
 
         {/* Main form title */}
-        <h2 className="text-[#84634B] text-[24px] sm:text-[28px] font-[500] pb-4 border-b border-gray-200 mb-6 text-left">
-          Request a Quote
+        <h2 className="text-[#84634B] text-[24px] sm:text-[28px] font-[500] pb-4 border-b border-gray-200 mb-6Next">
+          {m.title}
         </h2>
 
         {/* Input fields matching the attached design exactly */}
         <form
-          className="w-full flex flex-col gap-4 text-left"
+          className="w-full flex flex-col gap-4"
           onSubmit={(e) => e.preventDefault()}
         >
           {/* Full name fields laid out in one row on desktop and stacked on mobile */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-[12px]">
             <div className="flex flex-col gap-1.5">
               <label className="text-[13px] font-[500] text-black">
-                First Name
+                {m.firstName}
               </label>
               <input
                 type="text"
-                placeholder="Ahmed..."
+                placeholder={m.placeholderName}
                 className="w-full bg-[#F4F4F4] border-none rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#84634B]"
               />
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="text-[13px] font-[500] text-black">
-                Middle Name
+                {m.middleName}
               </label>
               <input
                 type="text"
-                placeholder="Ahmed..."
+                placeholder={m.placeholderName}
                 className="w-full bg-[#F4F4F4] border-none rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#84634B]"
               />
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="text-[13px] font-[500] text-black">
-                Surname
+                {m.surname}
               </label>
               <input
                 type="text"
-                placeholder="Ahmed..."
+                placeholder={m.placeholderName}
                 className="w-full bg-[#F4F4F4] border-none rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#84634B]"
               />
             </div>
@@ -100,11 +137,11 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
           {/* Email field */}
           <div className="flex flex-col gap-1.5">
             <label className="text-[13px] font-[500] text-black">
-              Email
+              {m.email}
             </label>
             <input
               type="email"
-              placeholder="Email"
+              placeholder={m.email}
               className="w-full bg-[#F4F4F4] border-none rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#84634B]"
             />
           </div>
@@ -113,7 +150,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
               <label className="text-[13px] font-[500] text-black">
-                Phone Number
+                {m.phoneNumber}
               </label>
               <input
                 type="tel"
@@ -123,13 +160,13 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="text-[13px] font-[500] text-black">
-                Service Type
+                {m.serviceType}
               </label>
-              <select className="w-full bg-[#F4F4F4] border-none rounded-lg p-3 text-sm text-gray-500 focus:outline-none focus:ring-1 focus:ring-[#84634B] appearance-none">
-                <option>Select services</option>
-                <option>Video Digitization</option>
-                <option>Audio Digitization</option>
-                <option>Film Scanning</option>
+              <select className="w-full bg-[#F4F4F4] border-none rounded-lg p-3 text-sm text-gray-500 focus:outline-none focus:ring-1 focus:ring-[#84634B] appearance-none rtl:bg-left">
+                <option>{m.selectServices}</option>
+                <option>{m.videoDigi}</option>
+                <option>{m.audioDigi}</option>
+                <option>{m.filmScan}</option>
               </select>
             </div>
           </div>
@@ -138,21 +175,21 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex flex-col gap-1.5">
               <label className="text-[13px] font-[500] text-black">
-                City
+                {m.city}
               </label>
               <input
                 type="text"
-                placeholder="Jeddah"
+                placeholder={m.placeholderCity}
                 className="w-full bg-[#F4F4F4] border-none rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#84634B]"
               />
             </div>
             <div className="flex flex-col gap-1.5">
               <label className="text-[13px] font-[500] text-black">
-                Address
+                {m.address}
               </label>
               <input
                 type="text"
-                placeholder="Road no - 12, House no - 40"
+                placeholder={m.placeholderAddress}
                 className="w-full bg-[#F4F4F4] border-none rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#84634B]"
               />
             </div>
@@ -161,11 +198,11 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
           {/* Message / project details field */}
           <div className="flex flex-col gap-1.5">
             <label className="text-[13px] font-[500] text-black">
-              Message / Project Details
+              {m.messageLabel}
             </label>
             <textarea
               rows={4}
-              placeholder="Write here number of mediums u have and the condition and any information u need to add..."
+              placeholder={m.messagePlaceholder}
               className="w-full bg-[#F4F4F4] border-none rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#84634B] resize-none"
             />
           </div>
@@ -175,25 +212,25 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
             <input
               type="checkbox"
               id="terms"
-              className="w-4 h-4 accent-[#84634B] cursor-pointer"
+              className="w-4 h-4 accent-[#84634B] cursor-pointer shrink-0"
             />
             <label
               htmlFor="terms"
-              className="text-[12px] text-black cursor-pointer"
+              className="text-[12px] text-black cursor-pointer leading-tight select-none"
             >
-              I agree to the{" "}
-              <span className="underline font-[500]">Privacy Policy</span> and{" "}
-              <span className="underline font-[500]">Terms of Service</span>
+              {m.agreeTo}{" "}
+              <span className="underline font-[500]">{m.privacyPolicy}</span>{" "}
+              {m.and} <span className="underline font-[500]">{m.terms}</span>
             </label>
           </div>
 
-          {/* Submit button aligned to the right */}
-          <div className="w-full flex justify-end mt-4">
+          {/* Submit button alignment changes automatically using document direction flow context rules */}
+          <div className="w-full flex justify-end rtl:justify-start mt-4">
             <button
               type="submit"
               className="bg-[#6F533E] hover:bg-[#5C4331] text-white font-[500] text-[15px] px-8 py-3 rounded-md shadow-md transition-colors"
             >
-              Submit
+              {m.submit}
             </button>
           </div>
         </form>

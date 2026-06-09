@@ -11,18 +11,30 @@ export default function BeyondDigitization({ imageUrl = "/images/beyond-digitiza
         <h2 className="text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500] text-center mb-12 md:mb-16">
           {b.title}
         </h2>
-        <div className="relative w-full aspect-video md:aspect-auto md:h-[400px] rounded-3xl overflow-hidden shadow-xl my-[100px]">
-          <Image src={imageUrl} alt="Professional Archival Consulting" fill className="object-cover" priority={false} />
-          <div className="absolute inset-0 bg-black/40" />
+        <div className="relative w-full h-[300px] md:h-[400px] rounded-xl md:rounded-3xl overflow-hidden shadow-xl my-10 md:my-[100px]">
+          <Image
+            src={imageUrl}
+            alt="Professional Archival Consulting"
+            fill
+            className="object-cover"
+            priority={false}
+          />
+          <div className="absolute inset-0 bg-black/50 md:bg-black/40" />
           <div className="absolute inset-0 flex flex-col justify-center p-6 md:p-8">
-            <h3 className="text-white text-3xl md:text-4xl lg:text-5xl leading-tight font-bold mb-4">{b.subtitle}</h3>
-            <p className="text-white/90 text-sm md:text-base leading-relaxed max-w-md">{b.oversight}</p>
+            <h3 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-bold mb-3 md:mb-4">
+              {b.subtitle}
+            </h3>
+            <p className="text-white/90 text-xs sm:text-sm md:text-base leading-relaxed max-w-md">
+              {b.oversight}
+            </p>
           </div>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
           <div className="flex flex-col justify-center space-y-6">
             <div className="border-l-4 border-primary pl-6">
-              <p className="text-gray-700 text-sm md:text-base leading-relaxed">{b.quote}</p>
+              <p className="text-gray-700 text-sm md:text-base leading-relaxed">
+                {b.quote}
+              </p>
             </div>
             <div className="bg-gray-50 rounded-xl p-6 md:p-8">
               <blockquote className="text-gray-700 text-sm md:text-base leading-relaxed italic">

@@ -72,7 +72,7 @@ export default function Navbar() {
         <div className="flex items-center gap-4 md:gap-8">
           {/* Language Switcher */}
           <button
-            onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
+            onClick={() => setLanguage(language === "en" ? "ar" : "en")}
             className="
               text-sm font-medium
               px-3 py-2
@@ -84,7 +84,7 @@ export default function Navbar() {
               hover:border-primary/40
               flex items-center gap-1
             "
-            title={language === 'en' ? 'Switch to Arabic' : 'Switch to English'}
+            title={language === "en" ? "Switch to Arabic" : "Switch to English"}
           >
             <Icon icon="mdi:earth" className="text-lg" />
             <span className="hidden sm:inline text-xs">{t.nav.switchLang}</span>
@@ -93,7 +93,9 @@ export default function Navbar() {
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-6">
             <Link
-              href="/signup"
+              href="https://op.ahmed-studio.com/login"
+              target="_blank"
+              rel="noopener noreferrer"
               className="
                 font-body
                 text-sm
@@ -105,11 +107,14 @@ export default function Navbar() {
                 transition-all
                 duration-300
               "
-              style={{ borderRadius: "10px" }}>
+              style={{ borderRadius: "10px" }}
+            >
               {t.nav.signUp}
             </Link>
             <Link
-              href="/login"
+              href="https://op.ahmed-studio.com/login"
+              target="_blank"
+              rel="noopener noreferrer"
               className="
                 font-body
                 text-sm
@@ -118,7 +123,8 @@ export default function Navbar() {
                 transition-colors
                 duration-300
                 text-zinc-600
-              ">
+              "
+            >
               {t.nav.login}
             </Link>
           </div>

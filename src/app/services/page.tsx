@@ -5,10 +5,10 @@ import ServicesSectionCards from "@/src/sections/services/ServicesSectionCards";
 export default function Services() {
   return (
     <>
-      <section className={`w-full px-6 md:px-16 py-20`}>
+      <section className={"w-full px-4 md:px-16 py-20 md:py-20 space-y-12 md:space-y-24"}>
         <HeroServicesSection />
         <CoreServicesServicesSections />
-        <ServicesSectionCards/>
+        <ServicesSectionCards />
       </section>
     </>
   );

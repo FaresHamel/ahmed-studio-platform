@@ -1,7 +1,15 @@
-'use client';
+"use client";
+import{
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode
+} from "react";
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Language, getTranslation, isRTL } from './translations';
+import { useRouter } from "next/navigation";
+
+import { Language, getTranslation, isRTL } from "./translations";
 
 interface I18nContextType {
   language: Language;
@@ -11,38 +19,54 @@ interface I18nContextType {
 }
 
 const I18nContext = createContext<I18nContextType>({
-  language: 'en',
+  language: "en",
   setLanguage: () => {},
-  t: getTranslation('en'),
+  t: getTranslation("en"),
   isRTL: false
 });
 
-export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(() => {
-    if (typeof window === 'undefined') return 'en';
-    const saved = localStorage.getItem('language');
-    return saved === 'en' || saved === 'ar' ? saved : 'en';
-  });
+type Props = {
+  children: ReactNode;
+  initialLanguage: Language;
+};
 
+export function I18nProvider({ children, initialLanguage }: Props) {
+  const router = useRouter();
+
+  const [language, setLanguageState] = useState<Language>(initialLanguage);
+
+  // Sync HTML lang + dir
   useEffect(() => {
     document.documentElement.lang = language;
-    document.documentElement.dir = isRTL(language) ? 'rtl' : 'ltr';
+    document.documentElement.dir = isRTL(language) ? "rtl" : "ltr";
   }, [language]);
 
+  // Change language
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem('language', lang);
+
+    // Save cookie so server can read it
+    document.cookie = `language=${lang}; path=/; max-age=31536000`;
+
     document.documentElement.lang = lang;
-    document.documentElement.dir = isRTL(lang) ? 'rtl' : 'ltr';
+    document.documentElement.dir = isRTL(lang) ? "rtl" : "ltr";
+
+    // Re-render server with new language
+    router.refresh();
   };
 
   return (
-    <I18nContext.Provider value={{
-      language,
-      setLanguage,
-      t: getTranslation(language),
-      isRTL: isRTL(language)
-    }}>
+    <I18nContext.Provider
+      value={{
+        language,
+        setLanguage,
+
+        // 🔥 SAFE: prevents t undefined crash
+        t: getTranslation(language) ?? getTranslation("en"),
+
+        isRTL: isRTL(language)
+      }}
+    >
       {children}
     </I18nContext.Provider>
   );

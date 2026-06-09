@@ -23,7 +23,7 @@ export default function PaymentSplitSection() {
           <div className="bg-[#E8D4B5] px-6 py-2 rounded-[8px] flex items-center justify-center min-w-[110px] shadow-sm transition-transform hover:scale-105">
             <span className="text-[#23140C] font-black italic text-[16px] tracking-tighter">tabby</span>
           </div>
-          <div className="bg-[#B67B5F] px-6 py-2 rounded-[8px] flex items-center justify-center min-w-[110px] h-12 shadow-sm transition-transform hover:scale-105">
+          <div className="bg-[#B67B5F] px-6 py-2 rounded-[8px] flex items-center justify-center min-w-[110px]  shadow-sm transition-transform hover:scale-105">
             <span className="text-white font-black italic text-[16px] tracking-tighter">tamara</span>
           </div>
         </div>

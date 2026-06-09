@@ -14,7 +14,7 @@ import WhyAhmedStudio from "@/src/sections/consultant/Whyahmedstudio";
 
 export default function Consultant() {
   return (
-    <section className={`w-full px-6 md:px-16 py-20`}>
+    <section className={"w-full px-4 py-10 md:px-5 md:py-24"}>
       <HeroConsultantSection />
       <CoreServicesConsultationSection />
       <WhatDoes />
@@ -27,7 +27,7 @@ export default function Consultant() {
       <ReadyToPreserve />
       <BeyondDigitization />
       <BenefitsGrid />
-      <ProfessionalConsulting/>
+      <ProfessionalConsulting />
     </section>
   );
 }

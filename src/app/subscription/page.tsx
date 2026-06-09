@@ -5,9 +5,9 @@ import HeroSubscriptionSection from "@/src/sections/subscriptions/HeroSubscripti
 export default function Subscription() {
   return (
     <>
-      <section className={`w-full px-6 md:px-16 py-20`}>
+      <section className={"w-full px-4 md:px-16 py-10 md:py-20 space-y-12 md:space-y-24"}>
         <HeroSubscriptionSection />
-        <CoreServicesSubscriptionSection/>
+        <CoreServicesSubscriptionSection />
       </section>
       <SubscriptionSection />
     </>

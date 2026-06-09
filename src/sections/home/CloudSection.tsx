@@ -13,7 +13,12 @@ export default function CloudSection() {
       margin="medium"
       leftContent={
         <div className="relative aspect-square w-full overflow-hidden rounded-[10px]">
-          <Image src="/images/setUpDesktop.jpg" alt="From your attic to our app" fill className="object-cover" />
+          <Image
+            src="/images/setUpDesktop.jpg"
+            alt="From your attic to our app"
+            fill
+            className="object-cover"
+          />
         </div>
       }
       rightContent={
@@ -21,8 +26,10 @@ export default function CloudSection() {
           <h2 className="text-primary text-[26px] sm:text-[36px] md:text-5xl lg:text-6xl leading-tight font-[500]">
             {c.titleLine1} <br /> {c.titleLine2}
           </h2>
-          <p className="mt-8 text-black text-[400] text-[16px] leading-relaxed opacity-90">{c.description}</p>
-          <button className="mt-10 bg-primary text-white px-12 py-4 font-bold rounded-lg hover:bg-primary/90 transition-all shadow-md">
+          <p className="mt-8 text-black text-[400] text-[16px] leading-relaxed opacity-90">
+            {c.description}
+          </p>
+          <button className="mt-6 md:mt-10 bg-primary text-white px-7 py-3 md:px-12 md:py-4 font-bold text-sm md:text-base rounded-lg hover:bg-primary/90 transition-all shadow-md active:scale-95">
             {c.cta}
           </button>
         </div>
