@@ -179,7 +179,9 @@ export default function Navbar() {
             {/* Mobile Actions */}
             <div className="flex flex-col gap-4 pt-4 border-t border-borderColor">
               <Link
-                href="/login"
+                href="https://op.ahmed-studio.com/login"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="
                   font-body
                   text-lg
@@ -194,7 +196,9 @@ export default function Navbar() {
               </Link>
 
               <Link
-                href="/signup"
+                href="https://op.ahmed-studio.com/login"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="
                   font-body
                   text-lg
