@@ -12,13 +12,19 @@ export default function CustomeAiSolution() {
       gap="medium"
       margin="large"
       leftContent={
-        <div className="flex flex-col items-start text-left">
-          <h2 className="text-primary text-[18px] sm:text-[28px] md:text-5xl lg:text-6xl leading-tight font-[500] mb-8">{ai.title}</h2>
-          <div className="space-y-6 text-black text-[15px] md:text-[16px] leading-relaxed">
+        /* FIXED: Replaced items-start with responsive alignment and text-left with text-start */
+        <div className="flex flex-col items-center lg:items-start text-center lg:text-start w-full">
+          <h2 className="text-primary text-[26px] sm:text-[28px] md:text-5xl lg:text-6xl leading-tight font-[500] mb-4 md:mb-8 w-full">
+            {ai.title}
+          </h2>
+          {/* FIXED: Swapped inline structural utilities to text-start for RTL compatibility */}
+          <div className="space-y-6 text-black text-[14px] md:text-[16px] leading-relaxed text-start w-full">
             <p className="opacity-80">{ai.intro}</p>
             {ai.features.map((feature, i) => (
               <p key={i} className="text-gray-700">
-                <strong className="text-black font-[700] block sm:inline">{feature.label} </strong>
+                <strong className="text-black font-[700] block sm:inline">
+                  {feature.label}{" "}
+                </strong>
                 <span className="opacity-80">{feature.desc}</span>
               </p>
             ))}
@@ -27,7 +33,12 @@ export default function CustomeAiSolution() {
       }
       rightContent={
         <div className="relative aspect-square w-full overflow-hidden rounded-[20px]">
-          <Image src="/images/customAiSoltion.png" alt="The Possibilities Are Endless" fill className="object-cover" />
+          <Image
+            src="/images/customAiSoltion.png"
+            alt="The Possibilities Are Endless"
+            fill
+            className="object-cover"
+          />
         </div>
       }
     />

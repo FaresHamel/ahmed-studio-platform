@@ -7,12 +7,12 @@ import TrainingToUnderstand from '@/src/sections/enhancement/TrainingToUnderstan
 const Enhancement = () => {
   return (
     <>
-      <section className={`w-full px-6 md:px-16 py-20`}>
+      <section className={`w-full px-4  md:py-24 md:px-16 py-20`}>
         <HeroEnhancementSection />
         <CoreServicesEnhancement />
         <StorySection />
         <CustomeAiSolution />
-        <TrainingToUnderstand/>
+        <TrainingToUnderstand />
       </section>
     </>
   );

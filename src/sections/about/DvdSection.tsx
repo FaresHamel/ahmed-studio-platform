@@ -24,20 +24,25 @@ const filmReelsData = [
 export default function DvdSection() {
   const { t } = useI18n();
   return (
-    <div className="w-full py-12 max-w-7xl flex flex-col bg-white lg:flex-row items-center justify-between gap-14 lg:gap-30 overflow-visible px-20">
-      <div className="w-full lg:w-1/2 z-10">
-        <h2 className="text-primary text-[34px] sm:text-[42px] md:text-[52px] font-semibold leading-tight mb-5">
+    <div className="w-full py-8 md:py-12 max-w-7xl flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-30 overflow-visible px-4 md:px-12 lg:px-20 bg-white">
+      <div className="w-full lg:w-1/2 z-10 flex flex-col items-center lg:items-start text-center lg:text-start">
+        <h2 className="text-primary text-[26px] sm:text-[36px] md:text-[52px] font-semibold leading-tight mb-4 md:mb-5 w-full">
           {t.about.dvd.title}
         </h2>
-        <p className="text-black/70 text-[15px] md:text-[17px] leading-relaxed max-w-xl">
+        <p className="text-black/70 text-[14px] md:text-[17px] leading-relaxed max-w-xl m-0 p-0">
           {t.about.dvd.description}
         </p>
       </div>
 
       <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-end relative space-y-4 md:space-y-6 lg:space-y-10">
         {filmReelsData.map((reel) => (
-          <div key={reel.id} className={`relative flex items-center gap-3 md:gap-5 ${reel.positionClass}`}>
-            <div className={`relative ${reel.sizeClass} flex-shrink-0 drop-shadow-[0_12px_20px_rgba(0,0,0,0.28)]`}>
+          <div
+            key={reel.id}
+            className={`relative flex items-center gap-3 md:gap-5 ${reel.positionClass}`}
+          >
+            <div
+              className={`relative ${reel.sizeClass} flex-shrink-0 drop-shadow-[0_12px_20px_rgba(0,0,0,0.28)]`}
+            >
               <Image
                 src={reel.imageSrc}
                 alt={reel.imageAlt}

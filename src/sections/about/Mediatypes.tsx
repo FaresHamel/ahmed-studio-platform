@@ -10,7 +10,7 @@ export default function MediaTypes() {
         title={t.about.intro.title}
         description={t.about.intro.description}
         titleClassName="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-8 md:mb-12"
-        descriptionClassName="text-gray-700 text-sm md:text-base leading-relaxed"
+        descriptionClassName="w-full text-gray-700 text-sm md:text-base leading-relaxed px-4 md:px-0"
         containerClassName="py-12 md:py-20 lg:py-24"
         maxWidth="max-w-5xl"
       />

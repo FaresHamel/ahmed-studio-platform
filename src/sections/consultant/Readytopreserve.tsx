@@ -21,28 +21,54 @@ export default function ReadyToPreserve() {
         <div className="max-w-7xl mx-auto px-6 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 mb-12 md:mb-16 lg:mb-20">
             <div className="border-2 border-gray-200 rounded-2xl p-8 md:p-10 hover:shadow-lg transition-all duration-300">
-              <p className="text-primary font-bold text-xs md:text-sm uppercase tracking-widest mb-4">{r.hiddenLabel}</p>
-              <h3 className="text-3xl md:text-4xl font-bold text-black mb-8 leading-tight">{r.hiddenTitle}</h3>
-              <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-8">{r.hiddenIntro}</p>
+              <p className="text-primary font-bold text-xs md:text-sm uppercase tracking-widest mb-4">
+                {r.hiddenLabel}
+              </p>
+              <h4 className="text-black font-bold text-xs md:text-sm uppercase tracking-widest mb-4">
+                {r.hiddenTitle}
+              </h4>
+              <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-8">
+                {r.hiddenIntro}
+              </p>
               <div className="space-y-4">
                 {consequencePoints.map((point, index) => (
                   <div key={index} className="flex gap-3 items-start">
-                    <Icon icon={point.icon} width="20" height="20" className="text-red-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700 text-sm md:text-base">{point.text}</span>
+                    <Icon
+                      icon={point.icon}
+                      width="20"
+                      height="20"
+                      className="text-red-500 flex-shrink-0 mt-0.5"
+                    />
+                    <span className="text-gray-700 text-sm md:text-base">
+                      {point.text}
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
 
             <div className="border-2 border-gray-200 rounded-2xl p-8 md:p-10 hover:shadow-lg transition-all duration-300">
-              <p className="text-primary font-bold text-xs md:text-sm uppercase tracking-widest mb-4">{r.approachLabel}</p>
-              <h3 className="text-3xl md:text-4xl font-bold text-black mb-8 leading-tight">{r.approachTitle}</h3>
-              <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-8">{r.approachDesc}</p>
+              <p className="text-primary font-bold text-xs md:text-sm uppercase tracking-widest mb-4">
+                {r.approachLabel}
+              </p>
+              <h3 className="text-black font-bold text-xs md:text-sm uppercase tracking-widest mb-4">
+                {r.approachTitle}
+              </h3>
+              <p className="text-gray-700 text-sm md:text-base leading-relaxed mb-8">
+                {r.approachDesc}
+              </p>
               <div className="space-y-4">
                 {approachPoints.map((point, index) => (
                   <div key={index} className="flex gap-3 items-start">
-                    <Icon icon={point.icon} width="20" height="20" className="text-blue-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700 text-sm md:text-base">{point.text}</span>
+                    <Icon
+                      icon={point.icon}
+                      width="20"
+                      height="20"
+                      className="text-blue-500 flex-shrink-0 mt-0.5"
+                    />
+                    <span className="text-gray-700 text-sm md:text-base">
+                      {point.text}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -53,17 +79,23 @@ export default function ReadyToPreserve() {
             <h2 className="text-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight font-[500] mb-6 md:mb-8">
               {r.ctaTitle}
             </h2>
-            <p className="text-gray-600 text-sm md:text-base max-w-2xl mx-auto mb-8 md:mb-12">{r.ctaDesc}</p>
+            <p className="text-gray-600 text-sm md:text-base max-w-2xl mx-auto mb-8 md:mb-12">
+              {r.ctaDesc}
+            </p>
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-primary hover:bg-primary/90 text-white px-8 md:px-10 py-4 md:py-5 rounded-lg font-bold text-base md:text-lg transition-all duration-300 hover:shadow-lg active:scale-95"
+              className="bg-primary hover:bg-primary/90 text-white px-6 md:px-10 py-3 md:py-5 rounded-lg font-bold text-[14px] md:text-lg transition-all duration-300 hover:shadow-lg active:scale-95"
             >
               {r.ctaButton}
             </button>
           </div>
         </div>
       </section>
-      <AppointmentModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onSubmit={(data) => console.log("Appointment booked:", data)} />
+      <AppointmentModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={(data) => console.log("Appointment booked:", data)}
+      />
     </>
   );
 }

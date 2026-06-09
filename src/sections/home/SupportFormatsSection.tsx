@@ -14,7 +14,7 @@ export default function SupportFormatsSection() {
           <p className="text-[#444647] text-[13px] sm:text-[14px] md:text-[16px] font-[400] mb-8 md:mb-10 leading-relaxed">
             {sf.description}
           </p>
-          <button className="bg-primary text-white px-10 py-4 font-[400] rounded-lg hover:bg-primary/90 transition-all">
+          <button className="bg-primary text-white px-6 py-3 md:px-10 md:py-4 font-[400] text-sm md:text-base rounded-lg hover:bg-primary/90 transition-all active:scale-95">
             {sf.cta}
           </button>
         </div>
@@ -29,7 +29,9 @@ export default function SupportFormatsSection() {
                 {label}
               </h3>
               <ul className="space-y-1 md:space-y-2 text-[#444647] text-[12px] md:text-sm">
-                {items.map((fmt) => <li key={fmt}>{fmt}</li>)}
+                {items.map((fmt) => (
+                  <li key={fmt}>{fmt}</li>
+                ))}
               </ul>
             </div>
           ))}

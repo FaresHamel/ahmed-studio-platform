@@ -16,9 +16,9 @@ export default function BenefitsGrid() {
   const benefits = b.items.map((text, i) => ({ icon: benefitIcons[i] ?? "mdi:check", title: text }));
 
   return (
-    <section className="w-full py-12 md:py-20 lg:py-24 bg-white">
+    <section className="w-full py-12 md:py-5 lg:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
-        <div className="mb-12 md:mb-16">
+        <div className="mb-12 md:mb-10">
           <h2 className="text-primary text-[26px] sm:text-[34px] md:text-5xl lg:text-6xl leading-tight font-[500] text-center mb-4">
             {b.title}
           </h2>
@@ -30,7 +30,7 @@ export default function BenefitsGrid() {
               <div className="w-12 h-12 md:w-14 md:h-14 bg-white rounded-full flex items-center justify-center mb-4 md:mb-6">
                 <Icon icon={benefit.icon} width="24" height="24" className="text-primary" />
               </div>
-              <h3 className="text-base md:text-lg font-semibold text-black leading-tight">{benefit.title}</h3>
+              <p className="text-base md:text-lg font-[400] text-black leading-tight">{benefit.title}</p>
             </div>
           ))}
         </div>

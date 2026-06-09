@@ -20,8 +20,10 @@ export default function MoreServicesPricesSection() {
           </p>
         </div>
         <Link
-          href="/store"
-          className="inline-flex items-center justify-center bg-[#84634B] hover:bg-[#6F503A] text-white font-[500] text-[15px] sm:text-[16px] px-8 py-3.5 sm:px-10 sm:py-4 rounded-lg shadow-[0_4px_14px_rgba(132,99,75,0.25)] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
+          href="https://ahmad-studio.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center bg-[#84634B] hover:bg-[#6F503A] text-white font-[500] text-[14px] sm:text-[16px] px-6 py-3 sm:px-10 sm:py-4 rounded-lg shadow-[0_4px_14px_rgba(132,99,75,0.25)] transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]"
         >
           {ms.cta}
         </Link>

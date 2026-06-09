@@ -13,7 +13,12 @@ export default function PossibilitiesSection() {
       margin="medium"
       leftContent={
         <div className="relative aspect-square w-full overflow-hidden rounded-[20px]">
-          <Image src="/images/PossibilitiesImg.jpg" alt={p.titleLine1} fill className="object-cover" />
+          <Image
+            src="/images/PossibilitiesImg.jpg"
+            alt={p.titleLine1}
+            fill
+            className="object-cover"
+          />
         </div>
       }
       rightContent={
@@ -25,7 +30,7 @@ export default function PossibilitiesSection() {
             <p>{p.p1}</p>
             <p>{p.p2}</p>
           </div>
-          <button className="mt-10 bg-primary text-white px-12 py-4 font-[400] rounded-lg hover:bg-primary/90 transition-all shadow-md">
+          <button className="mt-6 md:mt-10 bg-primary text-white px-7 py-3 md:px-12 md:py-4 font-[400] text-sm md:text-base rounded-lg hover:bg-primary/90 transition-all shadow-md active:scale-95">
             {p.cta}
           </button>
         </div>

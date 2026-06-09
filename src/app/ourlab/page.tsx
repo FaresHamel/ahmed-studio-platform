@@ -6,7 +6,9 @@ import PreservationWorkflowSection from "@/src/sections/ourLab/PreservationWorkf
 export default function OurLab() {
   return (
     <>
-      <section className={`w-full px-6 md:px-16 py-20`}>
+      <section
+        className={`w-full px-4 md:px-16 py-10 space-y-12 md:space-y-24 py-20`}
+      >
         <HeroOurLabSection />
       </section>
       <OurEquipmentSection />
