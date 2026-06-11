@@ -23,12 +23,12 @@ export default function ProfessionalSection() {
             <p>{p.p2}</p>
             <p>{p.p3}</p>
           </div>
-          <Link
+          {/* <Link
             href="/enhancement"
             className="mt-6 md:mt-10 inline-block bg-primary text-white px-7 py-3 md:px-12 md:py-4 font-[400] text-sm md:text-base rounded-lg hover:bg-primary/90 transition-all shadow-md active:scale-95 text-center"
           >
             {p.cta}
-          </Link>
+          </Link> */}
         </div>
       }
       rightContent={

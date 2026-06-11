@@ -12,32 +12,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
   const { t } = useI18n();
 
   // Reading safely from your updated modal2 config key
-  const m = t?.modal2 || {
-    title: "Request a Quote",
-    firstName: "First Name",
-    middleName: "Middle Name",
-    surname: "Surname",
-    email: "Email",
-    phoneNumber: "Phone Number",
-    serviceType: "Service Type",
-    selectServices: "Select services",
-    videoDigi: "Video Digitization",
-    audioDigi: "Audio Digitization",
-    filmScan: "Film Scanning",
-    city: "City",
-    address: "Address",
-    messageLabel: "Message / Project Details",
-    messagePlaceholder:
-      "Write here number of mediums u have and the condition and any information u need to add...",
-    agreeTo: "I agree to the",
-    privacyPolicy: "Privacy Policy",
-    and: "and",
-    terms: "Terms of Service",
-    submit: "Submit",
-    placeholderName: "Ahmed...",
-    placeholderCity: "Jeddah",
-    placeholderAddress: "Road no - 12, House no - 40"
-  };
+  const m = t?.modal2;
 
   // Safely check text layout direction configuration dynamically
   const isRtl =
@@ -112,7 +87,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                 className="w-full bg-[#F4F4F4] border-none rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#84634B]"
               />
             </div>
-            <div className="flex flex-col gap-1.5">
+            {/* <div className="flex flex-col gap-1.5">
               <label className="text-[13px] font-[500] text-black">
                 {m.middleName}
               </label>
@@ -121,7 +96,7 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                 placeholder={m.placeholderName}
                 className="w-full bg-[#F4F4F4] border-none rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#84634B]"
               />
-            </div>
+            </div> */}
             <div className="flex flex-col gap-1.5">
               <label className="text-[13px] font-[500] text-black">
                 {m.surname}
@@ -205,6 +180,17 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
               placeholder={m.messagePlaceholder}
               className="w-full bg-[#F4F4F4] border-none rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-[#84634B] resize-none"
             />
+          </div>
+
+          {/* ADDED NEW ITEM: Service Duration Type Selection Options Field */}
+          <div className="flex flex-col gap-1.5">
+            <label className="text-[13px] font-[500] text-black">
+              {m.durationLabel}
+            </label>
+            <select className="w-full bg-[#F4F4F4] border-none rounded-lg p-3 text-sm text-gray-500 focus:outline-none focus:ring-1 focus:ring-[#84634B] appearance-none rtl:bg-left">
+              <option>{m.regularService}</option>
+              <option>{m.urgentService}</option>
+            </select>
           </div>
 
           {/* Terms and privacy policy checkbox */}

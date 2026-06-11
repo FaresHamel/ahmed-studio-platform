@@ -1,10 +1,9 @@
 "use client";
-
 import React from "react";
 
 interface SideByTwoLayoutProps {
-  leftContent: React.ReactNode;
-  rightContent: React.ReactNode;
+  leftContent?: React.ReactNode;
+  rightContent?: React.ReactNode;
   imagePosition?: "left" | "right";
   gap?: "small" | "medium" | "large";
   reverseOnMobile?: boolean;

@@ -8,14 +8,14 @@ import { useI18n } from "@/src/i18n/context";
 
 const serviceImages = [
   "/images/video-service.jpg",
-  "/images/consult-service.jpg",
+  "/images/aiImgProcessor.jpg",
   "/images/consult-service.jpg",
   "/images/image-service.jpg"
 ];
 
 const pillarIcons = [
-  { id: "VIDEO", icon: "lucide:layers" },
-  { id: "IMAGE", icon: "eos-icons:enhancement" },
+  { id: "VIDEO", icon: "ph:cassette-tape-light" },
+  { id: "IMAGE", icon: "fluent:image-sparkle-16-regular" },
   { id: "CONSULT", icon: "material-symbols-light:overview-outline" },
   { id: "VISION", icon: "ix:project-server" }
 ];
@@ -116,7 +116,6 @@ export default function CoreServices() {
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-black/70 backdrop-blur-sm transition-opacity duration-300 animate-fadeIn">
           <div
-            /* FIXED: Added vertical height constraints and layout flex rules for mobile screens */
             className="relative w-full max-w-5xl max-h-[85vh] md:max-h-[90vh] bg-[#3c241c] rounded-2xl overflow-hidden shadow-2xl border border-stone-800 flex flex-col md:flex-row-reverse text-left"
             dir="ltr"
           >
@@ -152,15 +151,15 @@ export default function CoreServices() {
             <div className="w-full md:w-[68%] p-5 md:p-8 overflow-y-auto flex flex-col justify-between custom-scrollbar">
               <div>
                 {/* Main Image Banner Container */}
-                <div className="relative w-full aspect-[16/10] md:aspect-[16/9] rounded-xl overflow-hidden shadow-md mb-5 border border-stone-800/50">
-                  <Image
-                    src={currentData.image}
-                    alt={currentData.title}
-                    fill
-                    className="object-cover transition-transform duration-500 hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 60vw"
-                  />
-                </div>
+              <div className="relative w-full aspect-[4/3] md:aspect-[16/10] rounded-xl overflow-hidden shadow-md mb-5 border border-stone-800/50">
+                <Image
+                  src={currentData.image}
+                  alt={currentData.title}
+                  fill
+                  className="object-cover object-top transition-transform duration-500 hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 60vw"
+                />
+              </div>
 
                 <div className="flex-1 flex flex-col justify-end">
                   <h2 className="text-xl md:text-3xl font-bold text-amber-100 mb-2">
