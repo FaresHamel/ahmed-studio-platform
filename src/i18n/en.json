@@ -22,6 +22,7 @@
   },
   "nav": {
     "home": "Home",
+    "services": "Services",
     "aboutUs": "About Us",
     "order": "Order",
     "consultant": "Consultant",
@@ -30,7 +31,9 @@
     "ourLab": "Our Lab",
     "signUp": "Sign Up",
     "login": "Login",
-    "switchLang": "العربية"
+    "switchLang": "العربية",
+    "enhancement": "Enhancement",
+    "differences":"Differences"
   },
   "footer": {
     "requestQuote": "Request A Quote",
@@ -61,9 +64,9 @@
       "description": "Professional audio, visual, and film digitization for museums, archives, and private collections."
     },
     "about": {
-      "titleLine1": "One of the",
+      "titleLine1": "A legacy to be preserved, a history to be told",
       "titleLine2": "region's most",
-      "description": "Trusted names in audiovisual digitization, preservation, and archival consulting in Saudi Arabia. We provide advanced, standards-driven solutions for converting and safeguarding legacy media, ensuring long-term preservation with the highest levels of quality, accuracy, and security. With years of experience and collaboration with leading local and international experts, we deliver workflows that meet global archival standards.",
+      "description": "Images, audio, and video recordings represent an integral part of a society's cultural memory, documenting the stories of individuals, institutions, and events that have shaped our history. We aim to preserve this heritage by digitizing it and protecting it from damage or loss, ensuring its continuity and accessibility for future generations. Preserving visual and audio memory is preserving cultural identity and human history.",
       "cta": "Read More"
     },
     "workflow": {
@@ -250,13 +253,7 @@
           "title": "RAW Capture",
           "desc": "We guarantee an uncompressed, authentic RAW capture of your original content, preserving every bit of information. Our lab uses industry-leading technology to deliver quality that home-grade equipment simply cannot match."
         }
-      ],
-      "consultation": {
-        "title": "Free Consultation",
-        "p1": "First Meeting is Free: Start your journey with a complimentary 15-minute consultation to discuss your specific technical needs.",
-        "p2": "Support for Individuals: We guide families with the same expert methods used for large institutions to ensure their personal memories are protected for decades.",
-        "cta": "Read More"
-      }
+      ]
     },
     "whyTrusted": {
       "title": "Why We Are Trusted",
@@ -758,6 +755,8 @@
   "order": {
     "placeOrder": {
       "number": "1.",
+      "storeText":"Visit our store",
+      "whatsappText": "WhatsApp",
       "title": "Place an Order",
       "description": "Placing an order with Ahmed Studio is easy. Simply visit our store, choose the digitization or preservation service you need, and confirm your order. Our team will guide you through packaging, delivery, and processing to ensure your materials are handled safely and professionally from start to finish. Or send us through WhatsApp and our customer care will help you.",
       "visitStore": "Visit Our Store",
@@ -1075,6 +1074,9 @@
     }
   },
   "modal2": {
+    "durationLabel": "Duration of Service",
+    "regularService": "Regular Service",
+    "urgentService": "Urgent Service",
     "title": "Request a Quote",
     "firstName": "First Name",
     "middleName": "Middle Name",

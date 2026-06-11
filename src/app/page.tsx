@@ -24,9 +24,9 @@ export default function Home() {
       <CoreServices />
       <SupportFormatsSection />
       <section className={"w-full px-4 md:px-16 py-10 space-y-12 md:space-y-24 py-20"}>
-        <CloudSection />
+        {/* <CloudSection /> */}
         <ProfessionalSection />
-        <PossibilitiesSection />
+        {/* <PossibilitiesSection /> */}
       </section>
       <PaymentSplitSection />
       <section className={"w-full px-4 md:px-16 py-10 space-y-12 md:space-y-24 py-20"}>

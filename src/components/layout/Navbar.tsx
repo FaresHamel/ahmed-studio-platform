@@ -15,15 +15,18 @@ export default function Navbar() {
     { label: t.nav.home, href: "/" },
     { label: t.nav.aboutUs, href: "/about" },
     { label: t.nav.order, href: "/order" },
+    { label: t.nav.services, href: "/services" },
     { label: t.nav.consultant, href: "/consultant" },
-    { label: t.nav.cloudStorage, href: "/cloudStorage" },
+    // { label: t.nav.cloudStorage, href: "/cloudStorage" },
     { label: t.nav.subscription, href: "/subscription" },
+    { label: t.nav.enhancement, href: "/enhancement" },
+    { label: t.nav.differences, href: "/differences" },
     { label: t.nav.ourLab, href: "/ourlab" }
   ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white">
-      <div className="w-full h-20 flex items-center justify-between px-6 md:px-16">
+      <div className="w-full h-20 flex items-center justify-between px-4 md:px-10">
         {/* Logo */}
         <Link href="/" className="flex items-center shrink-0">
           <Image
@@ -36,7 +39,7 @@ export default function Navbar() {
         </Link>
 
         {/* Navigation Desktop */}
-        <nav className="hidden md:flex items-center gap-10">
+        <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
 
@@ -92,7 +95,7 @@ export default function Navbar() {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-6">
-            <Link
+            {/* <Link
               href="https://op.ahmed-studio.com/login"
               target="_blank"
               rel="noopener noreferrer"
@@ -110,7 +113,7 @@ export default function Navbar() {
               style={{ borderRadius: "10px" }}
             >
               {t.nav.signUp}
-            </Link>
+            </Link> */}
             <Link
               href="https://op.ahmed-studio.com/login"
               target="_blank"
@@ -194,7 +197,6 @@ export default function Navbar() {
               >
                 {t.nav.login}
               </Link>
-
               <Link
                 href="https://op.ahmed-studio.com/login"
                 target="_blank"
