@@ -56,7 +56,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
     { label: f.links.home, href: "/" },
     { label: f.links.howToOrder, href: "/order" },
     { label: f.links.consultant, href: "/consultant" },
-    { label: f.links.cloudStorage, href: "/cloudStorage" },
+    // { label: f.links.cloudStorage, href: "/cloudStorage" },
     { label: f.links.aboutUs, href: "/about" }
   ];
 
@@ -64,7 +64,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
     { label: f.links.services, href: "/services" },
     { label: f.links.enhancement, href: "/enhancement" },
     { label: f.links.ourLab, href: "/ourlab" },
-    { label: f.links.subscription, href: "/subscription" },
+    // { label: f.links.subscription, href: "/subscription" },
     { label: f.links.differences, href: "/differences" }
   ];
 
