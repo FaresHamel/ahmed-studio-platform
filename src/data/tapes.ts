@@ -2,8 +2,8 @@ import { TapeItem } from "@/src/components/sections/TapeGridSection";
 
 export const videoTapesData: TapeItem[] = [
   { id: 1, src: "/images/video-betacam.png", alt: "Hi8 Video Tape" },
-  { id: 2, src: "/images/video-camcorder.png", alt: "Sony Betacam Tape" },
-  { id: 3, src: "/images/video-dvd.png", alt: "MP90 Camcorder Tape" },
+  { id: 2, src: "/images/video-other1.png", alt: "Sony Betacam Tape" },
+  { id: 3, src: "/images/video-other11.png", alt: "MP90 Camcorder Tape" },
   { id: 4, src: "/images/video-minidv.png", alt: "MiniDV Tape" },
   { id: 5, src: "/images/video-other1.png", alt: "Metal HG Video Tape" },
   {
@@ -11,13 +11,16 @@ export const videoTapesData: TapeItem[] = [
     src: "/images/video-other2.png",
     alt: "Siemens Compact Video Cassette"
   },
-  { id: 7, src: "/images/video-other3.png", alt: "Sony DVCAM 34" },
+  { id: 7, src: "/images/video-minidv.png", alt: "Sony DVCAM 34" },
   {
     id: 8,
     src: "/images/video-other11.png",
     alt: "Vintage Audio Open Reel"
   },
-  { id: 9, src: "/images/tape-cassette.png", alt: "U-Matic Tape" }
+  { id: 9, src: "/images/tape-cassette.png", alt: "U-Matic Tape" },
+  { id: 10, src: "/images/tape-cassette.png", alt: "U-Matic Tape" },
+  { id:11, src: "/images/tape-cassette.png", alt: "U-Matic Tape" },
+  { id: 12, src: "/images/video-vhs.png", alt: "U-Matic Tape" }
 ];
 
 export const audioTapesData: TapeItem[] = [

@@ -18,6 +18,10 @@ export default function SideByTwoLayout({
   reverseOnMobile = false,
   margin = "medium"
 }: SideByTwoLayoutProps) {
+  const hasLeft = !!leftContent;
+  const hasRight = !!rightContent;
+  const isSingleContent = !hasLeft || !hasRight;
+
   const gapClass = {
     small: "gap-4 lg:gap-8",
     medium: "gap-12 lg:gap-20",
@@ -35,21 +39,57 @@ export default function SideByTwoLayout({
       ? "order-2 lg:order-1"
       : "order-1"
     : imagePosition === "left"
-      ? "order-1"
-      : "order-2 lg:order-1";
+    ? "order-1"
+    : "order-2 lg:order-1";
 
   const rightOrder = reverseOnMobile
     ? imagePosition === "right"
       ? "order-2 lg:order-1"
       : "order-1"
     : imagePosition === "right"
-      ? "order-1"
-      : "order-2 lg:order-1";
+    ? "order-1"
+    : "order-2 lg:order-1";
 
   return (
-    <div className={`grid grid-cols-1 lg:grid-cols-2 items-center ${gapClass} ${marginClass}`}>
-      <div className={leftOrder}>{leftContent}</div>
-      <div className={rightOrder}>{rightContent}</div>
+    <div
+      className={`w-full flex flex-col lg:flex-row items-center justify-center ${marginClass} ${
+        !isSingleContent ? gapClass : ""
+      }`}
+    >
+      {/* Left Content Wrapper */}
+      {hasLeft && (
+        <div
+          className={`w-full transition-all duration-300 ${
+            isSingleContent
+              ? "w-full max-w-4xl text-center flex flex-col items-center justify-center mx-auto"
+              : `lg:w-[50%] ${leftOrder}`
+          }`}
+        >
+          {/* We inject an isCentered prop so your inner content knows to center its text/buttons */}
+          {React.isValidElement(leftContent)
+            ? React.cloneElement(leftContent as React.ReactElement<any>, {
+                isCentered: isSingleContent
+              })
+            : leftContent}
+        </div>
+      )}
+
+      {/* Right Content Wrapper */}
+      {hasRight && (
+        <div
+          className={`w-full transition-all duration-300 ${
+            isSingleContent
+              ? "w-full max-w-4xl text-center flex flex-col items-center justify-center mx-auto"
+              : `lg:w-[50%] ${rightOrder}`
+          }`}
+        >
+          {React.isValidElement(rightContent)
+            ? React.cloneElement(rightContent as React.ReactElement<any>, {
+                isCentered: isSingleContent
+              })
+            : rightContent}
+        </div>
+      )}
     </div>
   );
 }

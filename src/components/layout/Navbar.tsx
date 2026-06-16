@@ -18,7 +18,7 @@ export default function Navbar() {
     { label: t.nav.services, href: "/services" },
     { label: t.nav.consultant, href: "/consultant" },
     // { label: t.nav.cloudStorage, href: "/cloudStorage" },
-    { label: t.nav.subscription, href: "/subscription" },
+    // { label: t.nav.subscription, href: "/subscription" },
     { label: t.nav.enhancement, href: "/enhancement" },
     { label: t.nav.differences, href: "/differences" },
     { label: t.nav.ourLab, href: "/ourlab" }
