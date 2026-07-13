@@ -8,7 +8,6 @@ export default function AboutSection() {
   const { t } = useI18n();
   return (
     <SideByTwoLayout
-      // imagePosition="left"
       gap="medium"
       margin="medium"
       leftContent=""
