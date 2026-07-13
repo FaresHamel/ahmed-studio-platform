@@ -50,6 +50,20 @@ export default function SideByTwoLayout({
     ? "order-1"
     : "order-2 lg:order-1";
 
+  // Helper function to safely inject props only to custom React components, not native HTML tags
+  const renderChild = (content: React.ReactNode) => {
+    if (!React.isValidElement(content)) return content;
+
+    // If the element is a basic HTML tag (like 'div', 'section', 'span'), do NOT inject custom props
+    if (typeof content.type === "string") {
+      return content;
+    }
+
+    return React.cloneElement(content as React.ReactElement<any>, {
+      isCentered: isSingleContent
+    });
+  };
+
   return (
     <div
       className={`w-full flex flex-col lg:flex-row items-center justify-center ${marginClass} ${
@@ -65,12 +79,7 @@ export default function SideByTwoLayout({
               : `lg:w-[50%] ${leftOrder}`
           }`}
         >
-          {/* We inject an isCentered prop so your inner content knows to center its text/buttons */}
-          {React.isValidElement(leftContent)
-            ? React.cloneElement(leftContent as React.ReactElement<any>, {
-                isCentered: isSingleContent
-              })
-            : leftContent}
+          {renderChild(leftContent)}
         </div>
       )}
 
@@ -83,11 +92,7 @@ export default function SideByTwoLayout({
               : `lg:w-[50%] ${rightOrder}`
           }`}
         >
-          {React.isValidElement(rightContent)
-            ? React.cloneElement(rightContent as React.ReactElement<any>, {
-                isCentered: isSingleContent
-              })
-            : rightContent}
+          {renderChild(rightContent)}
         </div>
       )}
     </div>

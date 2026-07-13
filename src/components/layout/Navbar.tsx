@@ -95,8 +95,8 @@ export default function Navbar() {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-6">
-            {/* <Link
-              href="https://op.ahmed-studio.com/login"
+            <Link
+              href="https://culture-archives.blogspot.com/?m=1"
               target="_blank"
               rel="noopener noreferrer"
               className="
@@ -112,8 +112,8 @@ export default function Navbar() {
               "
               style={{ borderRadius: "10px" }}
             >
-              {t.nav.signUp}
-            </Link> */}
+              {t.nav.blog}
+            </Link>
             <Link
               href="https://op.ahmed-studio.com/login"
               target="_blank"
