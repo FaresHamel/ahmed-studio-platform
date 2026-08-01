@@ -1,8 +1,7 @@
 "use client";
-
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Clock } from "lucide-react";
-import { useI18n } from "@/src/i18n/context";
+import { useI18n } from "@/i18n/context";
 
 interface AppointmentFormData {
   name: string;

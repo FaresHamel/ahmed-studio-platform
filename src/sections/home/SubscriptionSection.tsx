@@ -1,6 +1,6 @@
 ﻿"use client";
 import { Icon } from "@iconify/react";
-import { useI18n } from "@/src/i18n/context";
+import { useI18n } from "@/i18n/context";
 
 const prices = ["0", "24", "100"];
 const isMainFlags = [false, true, false];

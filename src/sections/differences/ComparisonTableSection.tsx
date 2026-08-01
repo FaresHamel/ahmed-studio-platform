@@ -1,7 +1,7 @@
 "use client";
-import SimpleInfoSection from "@/src/components/sections/SimpleInfoSection";
+import SimpleInfoSection from "@/components/sections/SimpleInfoSection";
 import Image from "next/image";
-import { useI18n } from "@/src/i18n/context";
+import { useI18n } from "@/i18n/context";
 
 type FeatureKey =
   | "streaming"

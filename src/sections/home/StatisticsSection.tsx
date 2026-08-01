@@ -1,5 +1,5 @@
 ﻿"use client";
-import { useI18n } from "@/src/i18n/context";
+import { useI18n } from "@/i18n/context";
 
 const values = ["8", "100%", "2,570,000", "22", "1,850,000", "98%"];
 

@@ -1,8 +1,8 @@
 "use client";
-import AppointmentModal from "@/src/components/ui/Modal/AppointmentModal";
+import AppointmentModal from "@/components/ui/Modal/AppointmentModal";
 import { Icon } from "@iconify/react";
 import { useState } from "react";
-import { useI18n } from "@/src/i18n/context";
+import { useI18n } from "@/i18n/context";
 
 const pillarIcons = ["mdi:star-check", "mdi:wrench", "mdi:earth", "mdi:chart-timeline"];
 

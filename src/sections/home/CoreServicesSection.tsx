@@ -1,10 +1,10 @@
 "use client";
-import { CardItem } from "@/src/components/sections/CardGrid";
+import { CardItem } from "@/components/sections/CardGrid";
 import { useState } from "react";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
-import { useI18n } from "@/src/i18n/context";
+import { useI18n } from "@/i18n/context";
 
 const serviceImages = [
   "/images/video-service.jpg",

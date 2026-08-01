@@ -1,8 +1,7 @@
 ﻿"use client";
 import Image from "next/image";
-import SideByTwoLayout from "@/src/components/layouts/SideByTwoLayout";
-import Link from "next/link";
-import { useI18n } from "@/src/i18n/context";
+import SideByTwoLayout from "@/components/layouts/SideByTwoLayout";
+import { useI18n } from "@/i18n/context";
 
 export default function ProfessionalSection() {
   const { t } = useI18n();

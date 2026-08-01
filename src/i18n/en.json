@@ -32,9 +32,9 @@
     "signUp": "Sign Up",
     "login": "Login",
     "switchLang": "العربية",
-    "blog":"Blog",
+    "blog": "Blog",
     "enhancement": "Enhancement",
-    "differences":"Differences"
+    "differences": "Differences"
   },
   "footer": {
     "requestQuote": "Request A Quote",
@@ -756,7 +756,7 @@
   "order": {
     "placeOrder": {
       "number": "1.",
-      "storeText":"Visit our store",
+      "storeText": "Visit our store",
       "whatsappText": "WhatsApp",
       "title": "Place an Order",
       "description": "Placing an order with Ahmed Studio is easy. Simply visit our store, choose the digitization or preservation service you need, and confirm your order. Our team will guide you through packaging, delivery, and processing to ensure your materials are handled safely and professionally from start to finish. Or send us through WhatsApp and our customer care will help you.",
@@ -1101,5 +1101,104 @@
     "placeholderName": "Ahmed...",
     "placeholderCity": "Jeddah",
     "placeholderAddress": "Road no - 12, House no - 40"
+  },
+  "login": {
+    "welcome": "Welcome Back!",
+    "subtitle": "Enter to get unlimited data & information",
+    "emailLabel": "Email *",
+    "emailPlaceholder": "Enter your mail address...",
+    "passwordLabel": "Password *",
+    "passwordPlaceholder": "Enter Password...",
+    "rememberMe": "Remember Me",
+    "forgotPassword": "Forget Password?",
+    "signIn": "Sign In",
+    "orLoginWith": "Or Login with",
+    "signInWithGoogle": "Sign In with google",
+    "noAccount": "Don’t have an account?",
+    "signUp": "Sign Up",
+    "heroTagline": "Collecting Memories\nCreating Moments",
+    "errors": {
+      "emailRequired": "Email address is required",
+      "emailInvalid": "Please enter a valid email address",
+      "passwordRequired": "Password is required",
+      "passwordMin": "Password must be at least 6 characters"
+    }
+  },
+  "register": {
+    "welcome": "Welcome to Ahmed Studio",
+    "title": "Create an account",
+    "nameLabel": "Name",
+    "namePlaceholder": "Enter your name...",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your mail address...",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "Enter your phone number...",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter Password...",
+    "confirmPasswordLabel": "Confirm Password",
+    "confirmPasswordPlaceholder": "Enter Password...",
+    "agreeTerms": "I agree to the terms & conditions",
+    "createAccount": "Create Account",
+    "alreadyHaveAccount": "Already have an account?",
+    "signIn": "Sign in",
+    "heroTagline": "Collecting Memories\nCreating Moments",
+    "errors": {
+      "nameRequired": "Name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email address",
+      "phoneRequired": "Phone number is required",
+      "phoneInvalid": "Invalid phone number",
+      "passwordRequired": "Password is required",
+      "passwordMin": "Password must be at least 8 characters",
+      "confirmPasswordRequired": "Please confirm your password",
+      "passwordsMustMatch": "Passwords must match",
+      "termsRequired": "You must agree to the terms"
+    }
+  },
+  "forgotPassword": {
+    "title": "Forgot Password",
+    "subtitle": "Please create your new password",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your mail address...",
+    "continueBtn": "Continue",
+    "backToLogin": "Back to",
+    "signIn": "Sign in",
+    "heroTagline": "Collecting Memories\nCreating Moments",
+    "errors": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email address"
+    }
+  },
+  "verifyOtp": {
+    "title": "Verify Code",
+    "subtitle": "Enter the 6-digit code sent to your email",
+    "otpLabel": "Verification Code",
+    "continueBtn": "Verify",
+    "resendPrompt": "Didn't receive the code?",
+    "resend": "Resend",
+    "backToLogin": "Back to",
+    "signIn": "Sign in",
+    "heroTagline": "Collecting Memories\nCreating Moments",
+    "errors": {
+      "otpRequired": "Code is required",
+      "otpLength": "Code must be 6 digits",
+      "invalidCode": "Invalid or expired code"
+    }
+  },
+  "resetPassword": {
+    "title": "Reset Password",
+    "subtitle": "Enter your new password",
+    "passwordLabel": "New Password",
+    "passwordPlaceholder": "Enter Password...",
+    "confirmPasswordLabel": "Confirm Password",
+    "confirmPasswordPlaceholder": "Enter Password...",
+    "continueBtn": "Reset Password",
+    "heroTagline": "Collecting Memories\nCreating Moments",
+    "errors": {
+      "passwordRequired": "Password is required",
+      "passwordMin": "Password must be at least 8 characters",
+      "confirmPasswordRequired": "Please confirm your password",
+      "passwordsMustMatch": "Passwords must match"
+    }
   }
 }

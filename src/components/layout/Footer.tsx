@@ -2,8 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
-import { useI18n } from "@/src/i18n/context";
-import QuoteModal from "../ui/Modal/QuoteModal";
+import { useI18n } from "@/i18n/context";
+import QuoteModal from "@/components/ui/Modal/QuoteModal";
 import { useState } from "react";
 
 const socialLinks = [

@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useI18n } from "@/src/i18n/context";
-import { isRTL } from "@/src/i18n/translations";
+import { useI18n } from "@/i18n/context";
+import { isRTL } from "@/i18n/translations";
 
 // ── extended type with per-image natural dimensions ───────────────────────────
 interface TapeItem {

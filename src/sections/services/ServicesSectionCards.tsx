@@ -1,10 +1,10 @@
 "use client";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
-import CardGrid, { CardItem } from "@/src/components/sections/CardGrid";
-import QuoteModal from "@/src/components/ui/Modal/QuoteModal";
+import CardGrid, { CardItem } from "@/components/sections/CardGrid";
+import QuoteModal from "@/components/ui/Modal/QuoteModal";
 import { useState } from "react";
-import { useI18n } from "@/src/i18n/context";
+import { useI18n } from "@/i18n/context";
 
 const serviceImages = [
   "/images/video-service.jpg",

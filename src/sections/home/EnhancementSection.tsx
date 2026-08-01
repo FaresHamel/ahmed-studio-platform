@@ -1,6 +1,5 @@
 ﻿"use client";
-import Image from "next/image";
-import { useI18n } from "@/src/i18n/context";
+import { useI18n } from "@/i18n/context";
 import Link from "next/link";
 
 const colSpans = ["lg:col-span-3", "lg:col-span-3", "lg:col-span-2", "lg:col-span-2", "lg:col-span-2"];

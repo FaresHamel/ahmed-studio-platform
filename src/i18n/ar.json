@@ -30,8 +30,8 @@
     "subscription": "الاشتراك",
     "ourLab": "معملنا",
     "signUp": "التسجيل",
-    "blog":"المدونة",
-    "enhancement":"التحسين",
+    "blog": "المدونة",
+    "enhancement": "التحسين",
     "login": "تسجيل الدخول",
     "differences": "الفروقات",
     "switchLang": "English"
@@ -744,8 +744,8 @@
   "order": {
     "placeOrder": {
       "number": "1.",
-      "storeText":"قم بزيارة متجرنا",
-      "whatsappText":"  واتس آب",
+      "storeText": "قم بزيارة متجرنا",
+      "whatsappText": "  واتس آب",
       "title": "ضع طلباً",
       "description": "وضع طلب مع أحمد ستوديو سهل. ما عليك سوى زيارة متجرنا واختيار خدمة الرقمنة أو الحفاظ التي تحتاجها وتأكيد طلبك. سيوجهك فريقنا خلال التغليف والتسليم والمعالجة لضمان التعامل مع مواد الخاصة بك بأمان واحترافية من البداية إلى النهاية. أو أرسل لنا عبر واتس آب وسيساعدك فريق خدمة العملاء لدينا.",
       "visitStore": "زر متجرنا",
@@ -1085,5 +1085,104 @@
     "durationLabel": "مدة الخدمة",
     "regularService": "خدمة عادية",
     "urgentService": "خدمة مستعجلة"
+  },
+  "login": {
+    "welcome": "أهلاً بك مجدداً!",
+    "subtitle": "أدخل للوصول إلى بيانات ومعلومات غير محدودة",
+    "emailLabel": "البريد الإلكتروني *",
+    "emailPlaceholder": "أدخل عنوان بريدك الإلكتروني...",
+    "passwordLabel": "كلمة المرور *",
+    "passwordPlaceholder": "أدخل كلمة المرور...",
+    "rememberMe": "تذكرني",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "signIn": "تسجيل الدخول",
+    "orLoginWith": "أو تسجيل الدخول بواسطة",
+    "signInWithGoogle": "تسجيل الدخول باستخدام جوجل",
+    "noAccount": "ليس لديك حساب؟",
+    "signUp": "إنشاء حساب",
+    "heroTagline": "نجمع الذكريات\nصناعة اللحظات",
+    "errors": {
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
+      "passwordRequired": "كلمة المرور مطلوبة",
+      "passwordMin": "كلمة المرور يجب أن تكون 6 أحرف على الأقل"
+    }
+  },
+  "register": {
+    "welcome": "مرحباً بكم في أحمد ستوديو",
+    "title": "إنشاء حساب",
+    "nameLabel": "الاسم",
+    "namePlaceholder": "أدخل اسمك...",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "أدخل عنوان بريدك الإلكتروني...",
+    "phoneLabel": "رقم الهاتف",
+    "phonePlaceholder": "أدخل رقم هاتفك...",
+    "passwordLabel": "كلمة المرور",
+    "passwordPlaceholder": "أدخل كلمة المرور...",
+    "confirmPasswordLabel": "تأكيد كلمة المرور",
+    "confirmPasswordPlaceholder": "أدخل كلمة المرور...",
+    "agreeTerms": "أوافق على الشروط والأحكام",
+    "createAccount": "إنشاء حساب",
+    "alreadyHaveAccount": "لديك حساب بالفعل؟",
+    "signIn": "تسجيل الدخول",
+    "heroTagline": "جمع الذكريات\nصناعة اللحظات",
+    "errors": {
+      "nameRequired": "الاسم مطلوب",
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "البريد الإلكتروني غير صالحة",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "phoneInvalid": "رقم الهاتف غير صالح",
+      "passwordRequired": "كلمة المرور مطلوبة",
+      "passwordMin": "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
+      "confirmPasswordRequired": "يرجى تأكيد كلمة المرور",
+      "passwordsMustMatch": "كلمتا المرور غير متطابقتين",
+      "termsRequired": "يجب الموافقة على الشروط والأحكام"
+    }
+  },
+  "forgotPassword": {
+    "title": "نسيت كلمة المرور",
+    "subtitle": "يرجى إنشاء كلمة المرور الجديدة الخاصة بك",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "أدخل عنوان بريدك الإلكتروني...",
+    "continueBtn": "متابعة",
+    "backToLogin": "العودة إلى",
+    "signIn": "تسجيل الدخول",
+    "heroTagline": "جمع الذكريات\nصناعة اللحظات",
+    "errors": {
+      "emailRequired": "البريد الإلكتروني مطلوب",
+      "emailInvalid": "البريد الإلكتروني غير صالح"
+    }
+  },
+  "verifyOtp": {
+    "title": "التحقق من الرمز",
+    "subtitle": "أدخل الرمز المكون من 6 أرقام المرسل إلى بريدك الإلكتروني",
+    "otpLabel": "رمز التحقق",
+    "continueBtn": "تحقق",
+    "resendPrompt": "لم تستلم الرمز؟",
+    "resend": "إعادة إرسال",
+    "backToLogin": "العودة إلى",
+    "signIn": "تسجيل الدخول",
+    "heroTagline": "جمع الذكريات\nصناعة اللحظات",
+    "errors": {
+      "otpRequired": "الرمز مطلوب",
+      "otpLength": "يجب أن يتكون الرمز من 6 أرقام",
+      "invalidCode": "الرمز غير صالح أو منتهي الصلاحية"
+    }
+  },
+  "resetPassword": {
+    "title": "إعادة تعيين كلمة المرور",
+    "subtitle": "أدخل كلمة المرور الجديدة",
+    "passwordLabel": "كلمة المرور الجديدة",
+    "passwordPlaceholder": "أدخل كلمة المرور...",
+    "confirmPasswordLabel": "تأكيد كلمة المرور",
+    "confirmPasswordPlaceholder": "أدخل كلمة المرور...",
+    "continueBtn": "إعادة تعيين كلمة المرور",
+    "heroTagline": "جمع الذكريات\nصناعة اللحظات",
+    "errors": {
+      "passwordRequired": "كلمة المرور مطلوبة",
+      "passwordMin": "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
+      "confirmPasswordRequired": "يرجى تأكيد كلمة المرور",
+      "passwordsMustMatch": "كلمتا المرور غير متطابقتين"
+    }
   }
 }

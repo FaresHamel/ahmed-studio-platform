@@ -1,5 +1,5 @@
 "use client";
-import { useI18n } from "@/src/i18n/context";
+import { useI18n } from "@/i18n/context";
 
 export default function CoreServicesSubscriptionSection() {
   const { t } = useI18n();

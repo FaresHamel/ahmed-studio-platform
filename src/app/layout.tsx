@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
 import { cookies } from "next/headers";
-
-import { poppins, playfair, amiri } from "@/src/lib/fonts";
-import { I18nProvider } from "@/src/i18n/context";
-
-import Navbar from "../components/layout/Navbar";
-import Footer from "../components/layout/Footer";
-
+import { poppins, playfair, amiri } from "@/lib/fonts";
+import { I18nProvider } from "@/i18n/context";
+import { Toaster } from "react-hot-toast";
+import { AuthInitializer } from "@/components/providers/AuthInitializer";
 export const metadata: Metadata = {
   title: "Ahmed Studio",
   description:
@@ -34,11 +30,10 @@ export default async function RootLayout({
           antialiased
         `}
       >
-        <I18nProvider initialLanguage={language}>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </I18nProvider>
+        <AuthInitializer>
+          <Toaster position="top-center" reverseOrder={false} />
+          <I18nProvider initialLanguage={language}>{children}</I18nProvider>
+        </AuthInitializer>
       </body>
     </html>
   );

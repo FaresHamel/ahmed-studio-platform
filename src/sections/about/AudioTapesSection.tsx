@@ -1,6 +1,6 @@
 "use client";
-import { useI18n } from "@/src/i18n/context";
-import { isRTL } from "@/src/i18n/translations";
+import { useI18n } from "@/i18n/context";
+import { isRTL } from "@/i18n/translations";
 import Image from "next/image";
 
 const BAND_HEIGHT = 380;

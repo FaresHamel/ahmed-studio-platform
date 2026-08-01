@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useI18n } from "@/src/i18n/context";
+import { useI18n } from "@/i18n/context";
 
 const featureImages = [
   "/images/feature-1.jpg",

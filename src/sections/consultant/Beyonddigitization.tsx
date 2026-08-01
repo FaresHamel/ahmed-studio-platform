@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useI18n } from "@/src/i18n/context";
+import { useI18n } from "@/i18n/context";
 
 export default function BeyondDigitization({ imageUrl = "/images/beyond-digitization.jpg" }: { imageUrl?: string }) {
   const { t } = useI18n();

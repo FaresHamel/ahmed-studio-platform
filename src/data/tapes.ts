@@ -1,4 +1,4 @@
-import { TapeItem } from "@/src/components/sections/TapeGridSection";
+import { TapeItem } from "@/components/sections/TapeGridSection";
 
 export const videoTapesData: TapeItem[] = [
   { id: 1, src: "/images/video-betacam.png", alt: "Hi8 Video Tape" },

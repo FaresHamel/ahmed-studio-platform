@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Icon } from "@iconify/react";
-import { useI18n } from "@/src/i18n/context";
+import { useI18n } from "@/i18n/context";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -115,8 +115,9 @@ export default function Navbar() {
               {t.nav.blog}
             </Link>
             <Link
-              href="https://op.ahmed-studio.com/login"
-              target="_blank"
+              // href="https://op.ahmed-studio.com/login"
+              href="/login"
+              // target="_blank"
               rel="noopener noreferrer"
               className="
                 font-body

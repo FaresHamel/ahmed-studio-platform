@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import CardGrid, { CardItem } from "@/src/components/sections/CardGrid";
+import CardGrid, { CardItem } from "@/components/sections/CardGrid";
 
 interface ConsultingService extends CardItem {
   id: number;

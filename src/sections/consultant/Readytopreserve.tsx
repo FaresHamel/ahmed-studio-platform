@@ -1,8 +1,8 @@
 "use client";
 import { Icon } from "@iconify/react";
-import AppointmentModal from "@/src/components/ui/Modal/AppointmentModal";
+import AppointmentModal from "@/components/ui/Modal/AppointmentModal";
 import { useState } from "react";
-import { useI18n } from "@/src/i18n/context";
+import { useI18n } from "@/i18n/context";
 
 const consequenceIcons = ["mdi:trash-can", "mdi:bug", "mdi:trending-up", "mdi:lock"];
 const approachIcons = ["mdi:archive-check", "mdi:cloud-check", "mdi:database-check", "mdi:certificate"];

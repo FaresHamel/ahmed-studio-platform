@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useRef, useEffect, useState } from "react";
-import { useI18n } from "@/src/i18n/context";
+import { useI18n } from "@/i18n/context";
 
 const serviceIcons = ["📋", "🔍", "📝", "⚙️", "✅"];
 
