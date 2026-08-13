@@ -5,7 +5,7 @@ import { useI18n } from "@/i18n/context";
 const IMAGES_MAP = [
   "/images/boxdelivery.jpg",
   "/images/watchTv.png",
-  "/images/city.jpg"
+  "/images/differences_page.jpg"
 ];
 
 export default function FeaturesSection() {

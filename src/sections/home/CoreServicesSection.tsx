@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { useI18n } from "@/i18n/context";
+import { isRTL } from "@/i18n/translations";
 
 const serviceImages = [
   "/images/video-service.jpg",
@@ -32,9 +33,10 @@ interface Service extends CardItem {
 export default function CoreServices() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<string>("VIDEO");
-  const { t } = useI18n();
+  const { t, language } = useI18n();
   const cs = t.home.coreServices;
 
+  const isRtl = isRTL(language);
   const services: Service[] = cs.services.map((s, i) => ({
     id: i + 1,
     category: s.category,
@@ -128,17 +130,30 @@ export default function CoreServices() {
             </button>
 
             {/* LEFT SIDEBAR (Tabs): Made scrollable on mobile if there are many tabs, or row flexed */}
-            <div className="w-full md:w-[32%] bg-[#2e1a14] p-5 flex flex-row md:flex-col gap-3 items-center md:justify-center border-b md:border-b-0 md:border-r border-stone-800/40 overflow-x-auto md:overflow-x-visible md:overflow-y-auto shrink-0 scrollbar-hide">
-              <span className="text-amber-100/40 text-xs font-bold tracking-wider md:mb-2 block shrink-0 hidden md:block px-2">
+            <div
+              dir={isRtl ? "rtl" : "ltr"}
+              className={`w-full md:w-[32%] bg-[#2e1a14] p-5 flex flex-row md:flex-col gap-3 items-center md:justify-center border-b md:border-b-0 ${
+                isRtl ? "md:border-l" : "md:border-r"
+              } border-stone-800/40 overflow-x-auto md:overflow-x-visible md:overflow-y-auto shrink-0 scrollbar-hide`}
+            >
+              <span
+                className={`text-amber-100/40 text-xs font-bold tracking-wider md:mb-2 block shrink-0 hidden md:block px-2 ${
+                  isRtl ? "text-right" : "text-left"
+                }`}
+              >
                 {cs.ourCommunity}
               </span>
               {services.map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.category)}
-                  className={`text-left px-4 py-2.5 md:py-3 rounded-lg text-xs md:text-base font-semibold transition-all duration-200 shrink-0 whitespace-nowrap md:w-full md:whitespace-normal ${
+                  className={`px-4 py-2.5 md:py-3 rounded-lg text-xs md:text-base font-semibold transition-all duration-200 shrink-0 whitespace-nowrap md:w-full md:whitespace-normal ${
+                    isRtl ? "text-right" : "text-left"
+                  } ${
                     activeTab === tab.category
-                      ? "bg-[#ebdcd0] text-[#3c241c] shadow-md md:transform md:translate-x-1"
+                      ? `bg-[#ebdcd0] text-[#3c241c] shadow-md md:transform ${
+                          isRtl ? "md:-translate-x-1" : "md:translate-x-1"
+                        }`
                       : "bg-[#ebdcd0]/10 text-stone-300 hover:bg-[#ebdcd0]/20"
                   }`}
                 >
@@ -146,20 +161,24 @@ export default function CoreServices() {
                 </button>
               ))}
             </div>
-
-            {/* RIGHT CONTENT SECTION: Added independent custom scrolling area */}
-            <div className="w-full md:w-[68%] p-5 md:p-8 overflow-y-auto flex flex-col justify-between custom-scrollbar">
+            {/* RIGHT CONTENT SECTION: Added RTL conditional support */}
+            <div
+              dir={isRtl ? "rtl" : "ltr"}
+              className={`w-full md:w-[68%] p-5 md:p-8 overflow-y-auto flex flex-col justify-between custom-scrollbar ${
+                isRtl ? "text-right" : "text-left"
+              }`}
+            >
               <div>
                 {/* Main Image Banner Container */}
-              <div className="relative w-full aspect-[4/3] md:aspect-[16/10] rounded-xl overflow-hidden shadow-md mb-5 border border-stone-800/50">
-                <Image
-                  src={currentData.image}
-                  alt={currentData.title}
-                  fill
-                  className="object-cover object-top transition-transform duration-500 hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 60vw"
-                />
-              </div>
+                <div className="relative w-full aspect-[4/3] md:aspect-[16/10] rounded-xl overflow-hidden shadow-md mb-5 border border-stone-800/50">
+                  <Image
+                    src={currentData.image}
+                    alt={currentData.title}
+                    fill
+                    className="object-cover object-top transition-transform duration-500 hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 60vw"
+                  />
+                </div>
 
                 <div className="flex-1 flex flex-col justify-end">
                   <h2 className="text-xl md:text-3xl font-bold text-amber-100 mb-2">
@@ -175,7 +194,12 @@ export default function CoreServices() {
               <div className="border-t border-stone-700/50 pt-4 mt-2">
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-stone-400 text-[11px] md:text-sm">
                   {currentData.points.map((point, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-left">
+                    <li
+                      key={idx}
+                      className={`flex items-center gap-2 ${
+                        isRtl ? "text-right" : "text-left"
+                      }`}
+                    >
                       <span className="w-1.5 h-1.5 rounded-full bg-amber-400/70 shrink-0" />
                       <span>{point}</span>
                     </li>

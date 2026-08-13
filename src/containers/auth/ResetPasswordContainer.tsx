@@ -16,7 +16,7 @@ export const ResetPasswordContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDone, setIsDone] = useState(false); // ← new: blocks the guard effect once we're finishing up
   const { resetToken, clear } = usePasswordResetStore();
-const clearAuth = useAuthStore((s) => s.clearAuth);
+  const clearAuth = useAuthStore((s) => s.clearAuth);
   const dir = language === "ar" ? "rtl" : "ltr";
 
   useEffect(() => {

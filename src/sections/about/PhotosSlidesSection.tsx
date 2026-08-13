@@ -9,11 +9,6 @@ export default function PhotosSlidesSection() {
   const { t, language } = useI18n();
   const isRtl = isRTL(language);
 
-  /*
-    LTR (English): images LEFT  → order-1 | text RIGHT → order-2
-    RTL (Arabic):  text LEFT    → order-1 | images RIGHT → order-2
-  */
-
   return (
     <section className="mt-40 mb-40 w-full bg-[#F5EFEA] py-16 md:py-10 px-6 md:px-12 lg:px-20 overflow-visible">
       <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-center gap-12 lg:gap-20 overflow-visible">
@@ -27,7 +22,7 @@ export default function PhotosSlidesSection() {
           <div className="flex lg:hidden flex-col items-center gap-6 py-6">
             <div className="relative w-[220px] h-[180px] drop-shadow-[0_12px_20px_rgba(0,0,0,0.18)] transition-transform duration-300 hover:rotate-2">
               <Image
-                src="/images/slides-stack.png"
+                src="/images/differences_page_last_picture-removebg-preview.png"
                 alt="Printed Photos Stack"
                 fill
                 sizes="220px"
@@ -72,7 +67,7 @@ export default function PhotosSlidesSection() {
               }}
             >
               <Image
-                src="/images/slides-stack.png"
+                src="/images/differences_page_last_picture-removebg-preview.png"
                 alt="Printed Photos Stack"
                 fill
                 sizes="220px"

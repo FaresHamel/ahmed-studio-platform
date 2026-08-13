@@ -12,7 +12,7 @@ const serviceImages = [
   "/images/filmScaning.jpg",
   "/images/image-service.jpg",
   "/images/consult-service.jpg",
-  "/images/aiImgProcessor.jpg"
+  "/images/enhancment_page_last picture.jpg"
 ];
 
 interface ServiceCard extends CardItem {

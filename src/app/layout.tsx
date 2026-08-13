@@ -5,11 +5,23 @@ import { poppins, playfair, amiri } from "@/lib/fonts";
 import { I18nProvider } from "@/i18n/context";
 import { Toaster } from "react-hot-toast";
 import { AuthInitializer } from "@/components/providers/AuthInitializer";
-export const metadata: Metadata = {
-  title: "Ahmed Studio",
-  description:
-    "Ahmed Studio is a software development company specializing in building high-quality web applications and services."
-};
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const language = cookieStore.get("language")?.value === "en" ? "en" : "ar";
+
+  return language === "ar"
+    ? {
+        title: "استوديو أحمد",
+        description:
+          "استوديو أحمد شركة متخصصة في تطوير تطبيقات الويب والخدمات البرمجية عالية الجودة."
+      }
+    : {
+        title: "Ahmed Studio",
+        description:
+          "Ahmed Studio is a software development company specializing in building high-quality web applications and services."
+      };
+}
 
 export default async function RootLayout({
   children
@@ -18,8 +30,7 @@ export default async function RootLayout({
 }) {
   const cookieStore = await cookies();
 
-  const language = cookieStore.get("language")?.value === "ar" ? "ar" : "en";
-
+  const language = cookieStore.get("language")?.value === "en" ? "en" : "ar";
   return (
     <html lang={language} dir={language === "ar" ? "rtl" : "ltr"}>
       <body

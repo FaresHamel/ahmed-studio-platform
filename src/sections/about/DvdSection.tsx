@@ -4,8 +4,20 @@ import { useI18n } from "@/i18n/context";
 import { isRTL } from "@/i18n/translations";
 
 const dvdData = [
-  { id: 1, imageSrc: "/images/dvd1.png", imageAlt: "DVDs",      labelEn: "DVDs",      labelAr: "أقراص DVD"      },
-  { id: 2, imageSrc: "/images/dvd2.png", imageAlt: "Mini DVDs", labelEn: "Mini DVDs", labelAr: "أقراص DVD صغيرة" },
+  {
+    id: 1,
+    imageSrc: "/images/dvd1.png",
+    imageAlt: "DVDs",
+    labelEn: "Mini DVDs",
+    labelAr: "أقراص DVD صغيرة"
+  },
+  {
+    id: 2,
+    imageSrc: "/images/dvd2.png",
+    imageAlt: "Mini DVDs",
+    labelEn: "DVDs",
+    labelAr: "أقراص DVD"
+  }
 ];
 
 // Fixed image size — same for both discs

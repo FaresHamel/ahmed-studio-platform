@@ -1,127 +1,105 @@
 "use client";
-
 import Image from "next/image";
 import { useI18n } from "@/i18n/context";
 import { isRTL } from "@/i18n/translations";
 
-// ── extended type with per-image natural dimensions ───────────────────────────
-interface TapeItem {
+export interface TapeItem {
   id: number;
   src: string;
   alt: string;
-  w: number;
-  h: number;
-  resizeMode: string;
+  w?: number; // Optional
+  h?: number; // Optional
+  scale?: number;
+  offsetY?: number; // px to nudge up (negative) or down (positive)
+  offsetX?: number;
 }
 
-/*
-  Sizes chosen to respect each image's natural aspect ratio
-  while keeping a consistent visual height of ~100px per row.
-  Adjust w/h here if your actual images differ.
-*/
 const videoTapesData: TapeItem[] = [
-  // Row 1 — 3 images (beside title)
   {
     id: 1,
     src: "/images/video-other11.png",
     alt: "Hi8 Video Tape",
-    w: 155,
-    h: 118,
-    resizeMode: "object-contain"
+    scale: 0.9
   },
   {
     id: 2,
-    src: "/images/video-other3.png",
+    src: "/images/video-other2.png",
     alt: "Sony Betacam Tape",
-    w: 145,
-    h: 100,
-    resizeMode: "object-center"
+    scale: 0.6,
+    offsetY: 12
   },
   {
     id: 3,
     src: "/images/video-other1.png",
     alt: "MP90 Camcorder Tape",
-    w: 200,
-    h: 100,
-    resizeMode: "object-cover"
+    scale: 0.9
   },
-  // Row 2 — 4 images (beside description)
   {
     id: 4,
     src: "/images/three07.png",
     alt: "MiniDV Tape",
-    w: 130,
-    h: 100,
-    resizeMode: "object-center"
+    scale: 0.8
+    // offsetY: -6
   },
   {
     id: 5,
     src: "/images/three06.png",
     alt: "Metal HG Video Tape",
-    w: 185,
-    h: 118,
-    resizeMode: "object-center"
+    scale: 1,
+    offsetY: -12
   },
   {
     id: 6,
-    src: "/images/video-other2.png",
+    src: "/images/video-other3.png",
     alt: "Siemens Compact Cassette",
-    w: 185,
-    h: 118,
-    resizeMode: "object-center"
+    scale: 0.9
   },
   {
     id: 7,
     src: "/images/video-minidv.png",
     alt: "Sony DVCAM 34",
-    w: 130,
-    h: 100,
-    resizeMode: "object-center"
+    scale: 0.9,
+    offsetY: -8
   },
-  // Row 3 — 5 images (full bottom row)
   {
     id: 8,
     src: "/images/three08.png",
     alt: "Vintage Audio Open Reel",
-    w: 100,
-    h: 100,
-    resizeMode: "object-center"
+    scale: 0.8,
+    offsetY: 15
   },
   {
     id: 10,
     src: "/images/video-camcorder.png",
     alt: "U-Matic Tape",
-    w: 185,
-    h: 118,
-    resizeMode: "object-center"
+    scale: 0.8,
+    offsetY: 15
   },
   {
     id: 11,
     src: "/images/video-dvd.png",
     alt: "U-Matic Tape",
-    w: 185,
-    h: 118,
-    resizeMode: "object-center"
+    scale: 1.1
   },
   {
     id: 12,
     src: "/images/three09.png",
     alt: "U-Matic Tape",
-    w: 185,
-    h: 118,
-    resizeMode: "object-center"
+    scale: 0.9,
+    offsetY: 8
   },
   {
     id: 13,
     src: "/images/video-vhs.png",
     alt: "VHS Tape",
-    w: 145,
-    h: 122,
-    resizeMode: "object-cover"
+    scale: 0.9,
+    offsetY: 18
   }
 ];
 
-// ── image cell — uses each item's own w/h ────────────────────────────────────
+const CELL_WIDTH = 180;
+const CELL_HEIGHT = 140;
+
 function TapeImage({
   item,
   priority = false
@@ -129,18 +107,25 @@ function TapeImage({
   item: TapeItem;
   priority?: boolean;
 }) {
+  const scale = item.scale ?? 1;
+  const offsetY = item.offsetY ?? 0;
+  const offsetX = item.offsetX ?? 0;
+
   return (
     <div
-      className="relative flex-shrink-0 transition-transform duration-300 hover:scale-105 drop-shadow-[0_8px_15px_rgba(0,0,0,0.12)]"
-      style={{ width: item.w, height: item.h }}
+      className="relative flex-shrink-0 flex items-center justify-center transition-transform duration-300 hover:scale-105 drop-shadow-[0_8px_15px_rgba(0,0,0,0.12)]"
+      style={{ width: CELL_WIDTH, height: CELL_HEIGHT }}
     >
       <Image
         src={item.src}
         alt={item.alt}
         fill
-        sizes={`${item.w}px`}
+        sizes={`${CELL_WIDTH}px`}
         className="object-contain"
         priority={priority}
+        style={{
+          transform: `translate(${offsetX}px, ${offsetY}px) scale(${scale})`
+        }}
       />
     </div>
   );

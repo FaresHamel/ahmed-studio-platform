@@ -115,9 +115,9 @@ export default function Navbar() {
               {t.nav.blog}
             </Link>
             <Link
-              // href="https://op.ahmed-studio.com/login"
-              href="/login"
-              // target="_blank"
+               href="https://op.ahmed-studio.com/login"
+              //href="/login"
+              target="_blank"
               rel="noopener noreferrer"
               className="
                 font-body

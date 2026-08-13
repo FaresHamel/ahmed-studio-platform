@@ -15,18 +15,6 @@ const images = [
     src: "/images/tapTratment02.png",
     alt: "Damaged VHS tape",
     center: 0
-  },
-  {
-    id: 2,
-    src: "/images/tapTratment01.png",
-    alt: "Deteriorated tape reel",
-    center: CENTER
-  },
-  {
-    id: 3,
-    src: "/images/tapTratment03.png",
-    alt: "Broken cassette casing",
-    center: BAND_HEIGHT
   }
 ];
 
@@ -60,55 +48,43 @@ export default function TapeTreatmentSection() {
               isRtl ? "lg:order-2 justify-end" : "lg:order-1 justify-start"
             }`}
           >
-            {/* Mobile — horizontal row, centered */}
-            <div className="flex lg:hidden flex-row items-center justify-center gap-4 py-6">
-              {images.map((img) => (
-                <div
-                  key={img.id}
-                  className="relative flex-shrink-0 drop-shadow-[0_8px_16px_rgba(0,0,0,0.2)] transition-transform duration-300 hover:scale-105"
-                  style={{
-                    width: Math.round(IMG_W * 0.6),
-                    height: Math.round(IMG_H * 0.6)
-                  }}
-                >
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    sizes="80px"
-                    className="object-contain"
-                    priority
-                  />
-                </div>
-              ))}
+            {/* Mobile — single image centered */}
+            <div className="flex lg:hidden items-center justify-center py-6 w-full">
+              <div
+                className="relative flex-shrink-0 drop-shadow-[0_8px_16px_rgba(0,0,0,0.2)] transition-transform duration-300 hover:scale-105"
+                style={{
+                  /* Increased scale factor (e.g., 0.85 or 1.0) so the single image stands out nicely on mobile */
+                  width: Math.round(IMG_W * 0.85),
+                  height: Math.round(IMG_H * 0.85)
+                }}
+              >
+                <Image
+                  src="/images/tapTratment02.png"
+                  alt="Damaged VHS tape"
+                  fill
+                  sizes={`${Math.round(IMG_W * 0.85)}px`}
+                  className="object-contain"
+                  priority
+                />
+              </div>
             </div>
 
             {/* Desktop — absolute stack, bleed top & bottom */}
             <div
-              className="hidden lg:block relative overflow-visible flex-shrink-0"
+              className="hidden lg:block relative overflow-visible  drop-shadow-[0_10px_20px_rgba(0,0,0,0.25)]"
               style={{ width: IMG_W, height: BAND_HEIGHT }}
             >
-              {images.map((img) => (
-                <div
-                  key={img.id}
-                  className="absolute drop-shadow-[0_10px_20px_rgba(0,0,0,0.25)] transition-transform duration-300 hover:scale-105"
-                  style={{
-                    width: IMG_W,
-                    height: IMG_H,
-                    top: img.center - IMG_H / 2,
-                    ...(isRtl ? { right: 0 } : { left: 0 })
-                  }}
-                >
-                  <Image
-                    src={img.src}
-                    alt={img.alt}
-                    fill
-                    sizes={`${IMG_W}px`}
-                    className="object-contain"
-                    priority
-                  />
-                </div>
-              ))}
+              <Image
+                src="/images/tapTratment02.png"
+                alt="Damaged VHS tape"
+                fill
+                sizes={`${IMG_W}px`}
+                className="object-contain scale-230 offset-y-[200px]"
+                priority
+                style={{
+                  transform: `translate(30px)`
+                }}
+              />
             </div>
           </div>
 

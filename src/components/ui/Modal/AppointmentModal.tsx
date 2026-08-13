@@ -1,5 +1,8 @@
 "use client";
 import { useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import toast from "react-hot-toast";
 import { ChevronLeft, ChevronRight, Clock } from "lucide-react";
 import { useI18n } from "@/i18n/context";
 
@@ -19,47 +22,44 @@ interface AppointmentModalProps {
 
 // Raw time slots as Date objects (date part is irrelevant, only time matters)
 const TIME_SLOTS: Date[] = [9, 10, 11, 12, 13, 14, 15, 16, 17].map((h) => {
-  const d = new Date(2000, 0, 1, h, 0, 0);
+  const d = new Date(2026, 0, 1, h, 0, 0);
   return d;
 });
 
 // Fixed English days of the week array
 const ENGLISH_DAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
+const WHATSAPP_NUMBER = "966500238627";
+const CONTACT_EMAIL = "old-to-new@hotmail.com";
+
 export default function AppointmentModal({
   isOpen,
   onClose,
-  onSubmit
+  onSubmit,
 }: AppointmentModalProps) {
-  const [currentMonth, setCurrentMonth] = useState(new Date(2026, 0));
-  const [formData, setFormData] = useState<AppointmentFormData>({
-    name: "",
-    email: "",
-    phone: "",
-    date: null,
-    time: null
-  });
-  const [errors, setErrors] = useState<
-    Partial<Record<keyof AppointmentFormData, string>>
-  >({});
   const { t, language } = useI18n();
   const m = t.modal.appointment;
-
   const isArabic = language === "ar";
-
-  // Force "en-US" so months, years, and times always render in standard English format
   const locale = "en-US";
+
+  // Normalize "today" to midnight so date-only comparisons work correctly
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const [currentMonth, setCurrentMonth] = useState(
+    new Date(today.getFullYear(), today.getMonth())
+  );
 
   const formatTime = (d: Date) =>
     d.toLocaleTimeString(locale, {
       hour: "numeric",
       minute: "2-digit",
-      hour12: true
+      hour12: true,
     });
   const formatDate = (d: Date) => d.toLocaleDateString(locale);
   const monthName = currentMonth.toLocaleString(locale, {
     month: "long",
-    year: "numeric"
+    year: "numeric",
   });
 
   const getDaysInMonth = (d: Date) =>
@@ -75,40 +75,111 @@ export default function AppointmentModal({
       new Date(currentMonth.getFullYear(), currentMonth.getMonth(), i)
     );
 
-  const isDateSelected = (day: Date) =>
-    formData.date &&
-    day.getDate() === formData.date.getDate() &&
-    day.getMonth() === formData.date.getMonth() &&
-    day.getFullYear() === formData.date.getFullYear();
+  const isPastDay = (day: Date) => day < today;
 
-  const validateForm = () => {
-    const e: Partial<Record<keyof AppointmentFormData, string>> = {};
-    if (!formData.name.trim()) e.name = m.errors.nameRequired;
-    if (!formData.email.trim()) e.email = m.errors.emailRequired;
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
-      e.email = m.errors.emailInvalid;
-    if (!formData.phone.trim()) e.phone = m.errors.phoneRequired;
-    if (!formData.date) e.date = m.errors.dateRequired;
-    if (!formData.time) e.time = m.errors.timeRequired;
-    setErrors(e);
-    return Object.keys(e).length === 0;
-  };
+  // ---- Bilingual validation schema (uses your i18n error keys, with inline fallbacks) ----
+  const validationSchema = Yup.object({
+    name: Yup.string()
+      .trim()
+      .min(2, isArabic ? "يجب ألا يقل عن حرفين" : "Must be at least 2 characters")
+      .required(m.errors?.nameRequired || (isArabic ? "هذا الحقل مطلوب" : "This field is required")),
+    email: Yup.string()
+      .trim()
+      .email(m.errors?.emailInvalid || (isArabic ? "يرجى إدخال بريد إلكتروني صحيح" : "Please enter a valid email address"))
+      .required(m.errors?.emailRequired || (isArabic ? "هذا الحقل مطلوب" : "This field is required")),
+    phone: Yup.string()
+      .trim()
+      .matches(
+        /^[0-9+()\s-]{7,15}$/,
+        isArabic ? "يرجى إدخال رقم هاتف صحيح" : "Please enter a valid phone number"
+      )
+      .required(m.errors?.phoneRequired || (isArabic ? "هذا الحقل مطلوب" : "This field is required")),
+    date: Yup.date()
+      .nullable()
+      .min(today, m.errors?.dateMin || (isArabic ? "لا يمكن اختيار تاريخ في الماضي" : "The date cannot be in the past"))
+      .required(m.errors?.dateRequired || (isArabic ? "هذا الحقل مطلوب" : "This field is required")),
+    time: Yup.date()
+      .nullable()
+      .required(m.errors?.timeRequired || (isArabic ? "هذا الحقل مطلوب" : "This field is required")),
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validateForm()) {
-      onSubmit(formData);
-      setFormData({ name: "", email: "", phone: "", date: null, time: null });
-      onClose();
-    }
-  };
+  const formik = useFormik<AppointmentFormData>({
+    initialValues: { name: "", email: "", phone: "", date: null, time: null },
+    validationSchema,
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...values, formType: "appointment" }),
+        });
+
+        const text = await response.text();
+        if (!response.ok) throw new Error(text || "Failed to send email");
+
+        toast.success(
+          isArabic ? "تم حجز موعدك بنجاح!" : "Your appointment request was sent successfully!"
+        );
+
+        onSubmit(values);
+        resetForm();
+        onClose();
+      } catch (error) {
+        console.error("Appointment form error:", error);
+
+        toast.error(
+          (tst) => (
+            <div className="text-sm leading-relaxed">
+              <p className="font-medium mb-1">
+                {isArabic
+                  ? "حدث خطأ أثناء إرسال طلب الحجز."
+                  : "Something went wrong sending your appointment request."}
+              </p>
+              <p>
+                {isArabic
+                  ? "يرجى المحاولة لاحقًا، أو تواصل معنا عبر "
+                  : "Please try again later, or reach us via "}
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="underline font-medium"
+                  onClick={() => toast.dismiss(tst.id)}
+                >
+              
+                  {isArabic ? "البريد الإلكتروني" : "email"}
+                </a>
+                {isArabic ? " أو " : " or "}
+                <a
+                  href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline font-medium"
+                  onClick={() => toast.dismiss(tst.id)}
+                >
+                  WhatsApp
+                </a>
+                .
+              </p>
+            </div>
+          ),
+          { duration: 7000 }
+        );
+      } finally {
+        setSubmitting(false);
+      }
+    },
+  });
 
   if (!isOpen) return null;
 
-  // Dynamic text alignment classes based on active translation context language
   const inputAlignmentClass = isArabic
     ? "text-right placeholder:text-right dir-rtl"
     : "text-left placeholder:text-left dir-ltr";
+
+  const isDateSelected = (day: Date) =>
+    formik.values.date &&
+    day.getDate() === formik.values.date.getDate() &&
+    day.getMonth() === formik.values.date.getMonth() &&
+    day.getFullYear() === formik.values.date.getFullYear();
 
   return (
     <div
@@ -121,6 +192,7 @@ export default function AppointmentModal({
             <h1 className="text-3xl font-semibold text-amber-800">{m.title}</h1>
             <button
               onClick={onClose}
+              type="button"
               className="text-gray-500 hover:text-gray-700 text-2xl mx-2"
             >
               ×
@@ -128,14 +200,13 @@ export default function AppointmentModal({
           </div>
 
           <form
-            onSubmit={handleSubmit}
+            onSubmit={formik.handleSubmit}
             className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+            noValidate
           >
             {/* Calendar Layout */}
             <div className="lg:col-span-1">
               <div className="bg-amber-50 rounded-lg p-6" dir="ltr">
-                {" "}
-                {/* Locked to LTR so calendar layouts don't invert columns */}
                 <div className="flex items-center justify-between mb-6">
                   <button
                     type="button"
@@ -168,7 +239,6 @@ export default function AppointmentModal({
                   </button>
                 </div>
                 <div className="grid grid-cols-7 gap-1 text-center">
-                  {/* Swapped custom dynamic translations for explicit English Day Headings */}
                   {ENGLISH_DAYS.map((day, i) => (
                     <div
                       key={i}
@@ -177,27 +247,37 @@ export default function AppointmentModal({
                       {day}
                     </div>
                   ))}
-                  {calendarDays.map((day, i) => (
-                    <button
-                      key={i}
-                      type="button"
-                      onClick={() =>
-                        day && setFormData({ ...formData, date: day })
-                      }
-                      disabled={!day}
-                      className={`py-2 text-sm rounded ${
-                        !day
-                          ? "text-gray-300"
-                          : isDateSelected(day)
-                          ? "bg-amber-700 text-white font-semibold"
-                          : "text-amber-900 hover:bg-amber-100"
-                      }`}
-                    >
-                      {day ? day.getDate() : ""}
-                    </button>
-                  ))}
+                  {calendarDays.map((day, i) => {
+                    const disabled = !day || isPastDay(day);
+                    return (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() =>
+                          day && !disabled && formik.setFieldValue("date", day)
+                        }
+                        disabled={disabled}
+                        className={`py-2 text-sm rounded ${
+                          !day
+                            ? "text-gray-300"
+                            : disabled
+                            ? "text-gray-300 cursor-not-allowed"
+                            : isDateSelected(day)
+                            ? "bg-amber-700 text-white font-semibold"
+                            : "text-amber-900 hover:bg-amber-100"
+                        }`}
+                      >
+                        {day ? day.getDate() : ""}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
+              {formik.touched.date && formik.errors.date && (
+                <p className="text-red-500 text-sm mt-2">
+                  {formik.errors.date as string}
+                </p>
+              )}
             </div>
 
             {/* Input Form Fields Content Area */}
@@ -205,49 +285,57 @@ export default function AppointmentModal({
               <div>
                 <input
                   type="text"
+                  name="name"
                   placeholder={m.namePlaceholder}
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-700 ${inputAlignmentClass} ${
-                    errors.name ? "border-red-500" : "border-gray-300"
+                    formik.touched.name && formik.errors.name
+                      ? "border-red-500"
+                      : "border-gray-300"
                   }`}
                 />
-                {errors.name && (
-                  <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                {formik.touched.name && formik.errors.name && (
+                  <p className="text-red-500 text-sm mt-1">{formik.errors.name}</p>
                 )}
               </div>
+
               <div>
                 <input
                   type="email"
+                  name="email"
                   placeholder={m.emailPlaceholder}
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-700 ${inputAlignmentClass} ${
-                    errors.email ? "border-red-500" : "border-gray-300"
+                    formik.touched.email && formik.errors.email
+                      ? "border-red-500"
+                      : "border-gray-300"
                   }`}
                 />
-                {errors.email && (
-                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                {formik.touched.email && formik.errors.email && (
+                  <p className="text-red-500 text-sm mt-1">{formik.errors.email}</p>
                 )}
               </div>
+
               <div>
                 <input
                   type="tel"
+                  name="phone"
                   placeholder={m.phonePlaceholder}
-                  value={formData.phone}
-                  onChange={(e) =>
-                    setFormData({ ...formData, phone: e.target.value })
-                  }
+                  value={formik.values.phone}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-700 ${inputAlignmentClass} ${
-                    errors.phone ? "border-red-500" : "border-gray-300"
+                    formik.touched.phone && formik.errors.phone
+                      ? "border-red-500"
+                      : "border-gray-300"
                   }`}
                 />
-                {errors.phone && (
-                  <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                {formik.touched.phone && formik.errors.phone && (
+                  <p className="text-red-500 text-sm mt-1">{formik.errors.phone}</p>
                 )}
               </div>
 
@@ -265,9 +353,9 @@ export default function AppointmentModal({
                     <button
                       key={i}
                       type="button"
-                      onClick={() => setFormData({ ...formData, time: slot })}
+                      onClick={() => formik.setFieldValue("time", slot)}
                       className={`py-2 px-3 rounded font-medium transition-colors ${
-                        formData.time === slot
+                        formik.values.time === slot
                           ? "bg-amber-700 text-white"
                           : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                       }`}
@@ -276,13 +364,13 @@ export default function AppointmentModal({
                     </button>
                   ))}
                 </div>
-                {errors.time && (
+                {formik.touched.time && formik.errors.time && (
                   <p
                     className={`text-red-500 text-sm mt-2 ${
                       isArabic ? "text-right" : "text-left"
                     }`}
                   >
-                    {errors.time}
+                    {formik.errors.time as string}
                   </p>
                 )}
               </div>
@@ -292,12 +380,12 @@ export default function AppointmentModal({
                 <span>{m.timezone}</span>
               </div>
 
-              {formData.date && formData.time && (
+              {formik.values.date && formik.values.time && (
                 <div className="bg-blue-50 border border-blue-200 rounded p-3 text-center">
                   <p className="text-blue-900">
                     {m.selected}{" "}
                     <span className="font-semibold">
-                      {formatDate(formData.date)} — {formatTime(formData.time)}
+                      {formatDate(formik.values.date)} — {formatTime(formik.values.time)}
                     </span>
                   </p>
                 </div>
@@ -305,9 +393,14 @@ export default function AppointmentModal({
 
               <button
                 type="submit"
-                className="w-full bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors mt-8"
+                disabled={formik.isSubmitting}
+                className="w-full bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 px-6 rounded-lg transition-colors mt-8 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {m.submit}
+                {formik.isSubmitting
+                  ? isArabic
+                    ? "جارٍ الإرسال..."
+                    : "Sending..."
+                  : m.submit}
               </button>
             </div>
           </form>

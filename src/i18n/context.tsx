@@ -19,10 +19,10 @@ interface I18nContextType {
 }
 
 const I18nContext = createContext<I18nContextType>({
-  language: "en",
+  language: "ar",
   setLanguage: () => {},
-  t: getTranslation("en"),
-  isRTL: false
+  t: getTranslation("ar"),
+  isRTL: true
 });
 
 type Props = {
@@ -33,8 +33,9 @@ type Props = {
 export function I18nProvider({ children, initialLanguage }: Props) {
   const router = useRouter();
 
-  const [language, setLanguageState] = useState<Language>(initialLanguage);
-
+const [language, setLanguageState] = useState<Language>(
+  initialLanguage || "ar"
+);
   // Sync HTML lang + dir
   useEffect(() => {
     document.documentElement.lang = language;
@@ -60,7 +61,7 @@ export function I18nProvider({ children, initialLanguage }: Props) {
       value={{
         language,
         setLanguage,
-        t: getTranslation(language) ?? getTranslation("en"),
+        t: getTranslation(language) ?? getTranslation("ar"),
 
         isRTL: isRTL(language)
       }}

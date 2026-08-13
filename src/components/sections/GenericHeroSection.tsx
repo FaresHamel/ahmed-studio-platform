@@ -25,7 +25,9 @@ export default function GenericHeroSection({
   }[height];
 
   return (
-    <div className={`relative w-full ${heightClass} mt-4 overflow-hidden rounded-[10px] pt-10`}>
+    <div
+      className={`relative w-full ${heightClass} mt-4 overflow-hidden rounded-[10px] pt-10`}
+    >
       <div className="absolute inset-0">
         <Image
           src={imageSrc}
@@ -43,7 +45,8 @@ export default function GenericHeroSection({
             {titleHighlight && (
               <>
                 <br />
-                <span className="text-primary">{titleHighlight}</span>
+                <br />
+                <span className="text-white">{titleHighlight}</span>
               </>
             )}
           </h1>

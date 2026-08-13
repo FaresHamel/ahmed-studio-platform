@@ -12,12 +12,12 @@ export default function TrainingToUnderstand() {
       gap="medium"
       margin="large"
       leftContent={
-        <div className="relative aspect-square w-full overflow-hidden rounded-[20px]">
+        <div className="relative aspect-square w-full  rounded-[40px]">
           <Image
-            src="/images/aiProcessor.png"
+            src="/images/enhancment_page_last picture.jpg"
             alt="The Possibilities Are Endless"
             fill
-            className="object-cover"
+            className="object-cover rounded-[30px] object-center"
           />
         </div>
       }

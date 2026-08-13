@@ -8,7 +8,7 @@ export default function HeroSection() {
 
   return (
     <GenericHeroSection
-      imageSrc="/images/differences.jpg"
+      imageSrc="/images/differnces_changment.jpg"
       imageAlt="Hero"
       title={hero.title}
       titleHighlight={hero.titleHighlight}

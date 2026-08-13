@@ -7,7 +7,7 @@ import PaymentSplitSection from "@/sections/home/PaymentSplitSection";
 //import PossibilitiesSection from "@/sections/home/PossibilitiesSection";
 import ProfessionalSection from "@/sections/home/ProfessionalSection";
 import StatisticsSection from "@/sections/home/StatisticsSection";
-import SubscriptionSection from "@/sections/home/SubscriptionSection";
+//import SubscriptionSection from "@/sections/home/SubscriptionSection";
 import SupportFormatsSection from "@/sections/home/SupportFormatsSection";
 import WhyTrustedSection from "@/sections/home/WhyTrustedSection";
 import WhyUsSection from "@/sections/home/WhyUsSection";
@@ -35,9 +35,9 @@ export default function Home() {
         <WhyUsSection />
       </section>
       <WhyTrustedSection />
-      <section className={"w-full px-4 md:px-16 py-10 space-y-12 md:space-y-24 py-20"}>
+      {/* <section className={"w-full px-4 md:px-16 py-10 space-y-12 md:space-y-24 py-20"}>
         <SubscriptionSection />
-      </section>
+      </section> */}
     </>
   );
 }

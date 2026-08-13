@@ -16,7 +16,8 @@
         "emailInvalid": "Invalid email format",
         "phoneRequired": "Phone number is required",
         "dateRequired": "Please select a date",
-        "timeRequired": "Please select a time"
+        "timeRequired": "Please select a time",
+        "dateMin":" The selected date cannot be in the past"
       }
     }
   },
@@ -155,9 +156,9 @@
       "title": "Supported Formats",
       "description": "We support a wide range of legacy formats. If you don't see your format listed, please contact us for a custom assessment.",
       "cta": "Discover More",
-      "audio": "Audio",
-      "video": "Video",
-      "film": "Film",
+      "audio": "🎵 Audio",
+      "video": "📼 Video",
+      "film": "🎞️ Film",
       "audioFormats": [
         "1/4\" Open Reel",
         "Compact Cassette",
@@ -172,19 +173,7 @@
         "Hi8 / Video8",
         "MiniDV / DVCAM"
       ],
-      "filmFormats": [
-        "32mm",
-        "16mm / Super 16",
-        "8mm / Super 8",
-        "9.5mm",
-        "Pathe Baby"
-      ]
-    },
-    "cloud": {
-      "titleLine1": "From your",
-      "titleLine2": "attic to our app",
-      "description": "Immerse yourself in the world of your memories from any screen, at any time. The AS Cloud makes it easy to stream and share thousands of moments from our app across your TV, tablet, laptop, phone and more. We provide you a FREE Cloud Hosting for 10 days! An amazing cloud hosting service for your home movies with many features. You can access memories anywhere, any time.",
-      "cta": "Find Out More"
+      "filmFormats": ["32mm", "16mm", "8mm / Super 8", "9.5mm"]
     },
     "professional": {
       "titleLine1": "We operate at a",
@@ -195,13 +184,6 @@
       "cta": "Read More",
       "compressed": "Compressed",
       "raw": "RAW"
-    },
-    "possibilities": {
-      "titleLine1": "The Possibilities",
-      "titleLine2": "Are Endless",
-      "p1": "When the moment calls for memories, open iMemories Cloud to effortlessly experience your family's digital library on your Apple TV, at any time.",
-      "p2": "After we digitize your movies and photos, you can stream hours of home-made content directly from your TV, laptop, tablet or smartphone. We call it foreverizing—because only iMemories lets you relive your entire family history on demand.",
-      "cta": "Read More"
     },
     "enhancement": {
       "title": "Enhancement & Restoration",
@@ -243,7 +225,7 @@
       "title": "Why Us",
       "features": [
         {
-          "title": "Since 2017 years",
+          "title": "Since 2017",
           "desc": "Over 8+ years of global expertise in preserving audiovisual heritage to the highest international standards."
         },
         {
@@ -291,6 +273,19 @@
           "description": "Strict non-disclosure compliance protocols, safe vault storage infrastructure, and air-gapped workstations guarantee your high-profile media contents stay completely secure."
         }
       ]
+    },
+    "cloud": {
+      "titleLine1": "From your",
+      "titleLine2": "attic to our app",
+      "description": "Immerse yourself in the world of your memories from any screen, at any time. The AS Cloud makes it easy to stream and share thousands of moments from our app across your TV, tablet, laptop, phone and more.",
+      "cta": "Find Out More"
+    },
+    "possibilities": {
+      "titleLine1": "The Possibilities",
+      "titleLine2": "Are Endless",
+      "p1": "When the moment calls for memories, open iMemories Cloud to effortlessly experience your family's digital library on your Apple TV, at any time.",
+      "p2": "After we digitize your movies and photos, you can stream hours of home-made content directly from your TV, laptop, tablet or smartphone.",
+      "cta": "Read More"
     },
     "subscription": {
       "title": "Subscription Plan",
@@ -444,7 +439,7 @@
       "hiddenIntro": "Poor digitization decisions may appear cost-effective at the beginning, but they often result in:",
       "hiddenItems": [
         "Lost historical and cultural value",
-        "Technical incompatibility in the future",
+        "Files do not comply with long-term preservation standards.",
         "Increased long-term costs",
         "Permanent damage to irreplaceable content"
       ],
@@ -696,7 +691,7 @@
     },
     "story": {
       "title": "Yesterday's tools captured your stories",
-      "description": "McKenzie AI brings them to life. As the most innovative solution in memory preservation, McKenzie resolves the limitations of decades-old technology to show you every detail as it really happened.",
+      "description": "As the most innovative solution in memory preservation, our solutions resolve the limitations of decades-old technology to show you every detail as it really happened.",
       "items": [
         {
           "title": "3X Visual Clarity",
@@ -704,7 +699,7 @@
         },
         {
           "title": "Custom Training",
-          "desc": "The first truly custom AI solution trained to enhance specific formats from VHS tapes to Super 8 films."
+          "desc": "The first truly custom AI solutions trained to enhance specific formats from VHS tapes to Super 8 films."
         },
         {
           "title": "Intelligent Assessment",
@@ -712,8 +707,12 @@
         }
       ]
     },
+    "photoRestoration": {
+      "title": "Photo Enhancement and Restoration",
+      "description": "We carefully enhance and restore old, faded, or damaged photographs using professional imaging tools and advanced restoration techniques. The process may include removing dust, scratches, stains, and unwanted marks, repairing damaged or missing areas, correcting faded colors, balancing exposure, and improving sharpness and detail. Every image is treated individually to preserve its original character and authenticity while creating a clearer, cleaner, and more visually balanced digital version suitable for sharing, printing, and long-term preservation."
+    },
     "aiSolution": {
-      "title": "McKenzie™ is a custom AI solution",
+      "title": "Ahmed Studio™ is a custom solution",
       "intro": "designed to enhance specific memories by understanding the unique properties of various formats, such as: VHS tapes, Super 8 films",
       "features": [
         {
@@ -731,7 +730,7 @@
       ]
     },
     "training": {
-      "title": "McKenzie™ is trained to understand",
+      "title": "Ahmed Studio™ is trained to understand",
       "intro": "the unique properties of various analog formats, ranging from VHS tapes to Super 8 films. It performs instant assessments to improve the following:",
       "features": [
         {
@@ -750,10 +749,14 @@
     },
     "coreServices": {
       "title": "The Dawn of Your New Family History",
-      "description": "We believe your memories are irreplaceable. That's why we've combined twenty years of digitization expertise with the most advanced AI technology in the world. From our secure SafeShip process to our 100% satisfaction guarantee, we treat your tapes and photos as if they were our own. Join over 1 million happy customers who have seen their past transformed. It's time to stop just 'keeping' your memories and start truly seeing them-clearer, brighter, and more beautiful than before."
+      "description": "We believe your memories are irreplaceable. That's why we've combined years of digitization expertise. From our secure SafeShip process to our 100% satisfaction guarantee, we treat your tapes and photos as if they were our own. Join over 1 million happy customers who have seen their past transformed. It's time to stop just 'keeping' your memories and start truly seeing them-clearer, brighter, and more beautiful than before."
     }
   },
   "order": {
+    "howItWorks": {
+      "title": "HOW IT WORKS",
+      "description": "We make preserving your memories simple. First, you share your tapes, films or audio reels with our team. We carefully clean, restore and digitize each item using specialized equipment. Once completed, we deliver your files digitally or on USB giving you secure access to your memories anytime without the risk of deterioration."
+    },
     "placeOrder": {
       "number": "1.",
       "storeText": "Visit our store",
@@ -767,17 +770,13 @@
       "step2": {
         "number": "2.",
         "title": "Shipment Pick",
-        "description": "Pick up your shipment from Ahmed Studio by visiting our studio during working hours. Bring your order confirmation and a valid ID, and our team will hand over your package safely."
+        "description": "Your shipment will be collected from Ahmed Studio by our trusted shipping partner. They will contact you in advance to arrange a safe and convenient pickup."
       },
       "step3": {
         "number": "3.",
         "title": "Digitization Your Memory",
         "description": "You can digitize your tapes, photos, films, or audio by placing an order with Ahmed Studio. Share your media details with our team, send or drop off your materials, and we'll carefully digitize them using professional archival equipment. Once completed, you'll receive your files in high quality digital format."
       }
-    },
-    "howItWorks": {
-      "title": "HOW IT WORKS",
-      "description": "We make preserving your memories simple. First, you share your tapes, films or audio reels with our team. We carefully clean, restore and digitize each item using specialized equipment. Once completed, we deliver your files digitally or on USB giving you secure access to your memories anytime without the risk of deterioration."
     },
     "finalSteps": {
       "step4": {
@@ -799,8 +798,8 @@
           "answer": "We provide professional audiovisual digitization, legacy media restoration, and archival consulting. This includes transferring magnetic tapes, film reels, and vintage audio formats into high-grade uncompressed RAW digital files safely."
         },
         {
-          "question": "How do I book a session?",
-          "answer": "You can book a session or get a direct consultation by visiting our physical store, using the 'Place an Order' sequence on our cloud interface, or by reaching out directly to our support team through WhatsApp."
+          "question": "How can I place an order?",
+          "answer": "You can place an order by visiting our online store. You may also contact us through WhatsApp, where our customer service team will help you choose the right service and guide you through the shipping, payment, and delivery process."
         },
         {
           "question": "Can you shoot on location?",
@@ -877,7 +876,7 @@
     },
     "coreServices": {
       "title": "Preserving What Matters Most",
-      "description": "Your memories are irreplaceable. At Ahmed Studio, we specialize in digitizing, restoring, and preserving audio, video, film, and photographic materials with the highest level of precision and care. Every project is handled by experienced professionals who understand the emotional and historical value behind each recording, image, and frame. Using advanced technology and carefully controlled processes, we ensure that fragile and aging media is protected, enhanced, and converted into high-quality digital formats. From family memories to valuable archives, our goal is to preserve authenticity while improving clarity, stability, and longevity—so your memories can be safely stored, easily shared, and enjoyed for generations to come."
+      "description": "Your memories are irreplaceable. At Ahmed Studio, we specialize in digitizing, restoring, and preserving audio, video, film, and photographic materials with the highest level of precision and care. Every project is handled by experienced professionals who understand the emotional and historical value behind each recording, image, and frame. Using advanced technology and carefully controlled processes, we ensure that fragile and aging media is protected, enhanced, and converted into high-quality digital formats. From family memories to valuable archives, our goal is to preserve authenticity while improving clarity, stability, and longevity, so your memories can be safely stored, easily shared, and enjoyed for generations to come."
     },
     "cards": {
       "learnMore": "LEARN MORE",
@@ -1077,17 +1076,21 @@
   "modal2": {
     "durationLabel": "Duration of Service",
     "regularService": "Regular Service",
-    "urgentService": "Urgent Service",
+    "urgentService": "Urgent service ( there is an extra fee will be charged on final invoice x2 )",
     "title": "Request a Quote",
     "firstName": "First Name",
     "middleName": "Middle Name",
     "surname": "Surname",
     "email": "Email",
+    "quantity": "Total quantity",
     "phoneNumber": "Phone Number",
     "serviceType": "Service Type",
     "selectServices": "Select services",
     "videoDigi": "Video Digitization",
     "audioDigi": "Audio Digitization",
+    "photoDigi": "⁠Photo/negative scanning",
+    "restorationDigi": "Restoration",
+    "otherDigi": "Other",
     "filmScan": "Film Scanning",
     "city": "City",
     "address": "Address",
@@ -1099,8 +1102,8 @@
     "terms": "Terms of Service",
     "submit": "Submit",
     "placeholderName": "Ahmed...",
-    "placeholderCity": "Jeddah",
-    "placeholderAddress": "Road no - 12, House no - 40"
+    "placeholderCity": "Djeddah",
+    "placeholderAddress": "ABCD1234"
   },
   "login": {
     "welcome": "Welcome Back!",
