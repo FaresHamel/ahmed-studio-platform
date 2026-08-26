@@ -22,7 +22,7 @@ export default function PhotosSlidesSection() {
           <div className="flex lg:hidden flex-col items-center gap-6 py-6">
             <div className="relative w-[220px] h-[180px] drop-shadow-[0_12px_20px_rgba(0,0,0,0.18)] transition-transform duration-300 hover:rotate-2">
               <Image
-                src="/images/differences_page_last_picture-removebg-preview.png"
+                src="/images/differencespreview.png"
                 alt="Printed Photos Stack"
                 fill
                 sizes="220px"
@@ -67,7 +67,7 @@ export default function PhotosSlidesSection() {
               }}
             >
               <Image
-                src="/images/differences_page_last_picture-removebg-preview.png"
+                src="/images/differencespreview.png"
                 alt="Printed Photos Stack"
                 fill
                 sizes="220px"

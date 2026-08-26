@@ -14,7 +14,7 @@ export default function TrainingToUnderstand() {
       leftContent={
         <div className="relative aspect-square w-full  rounded-[40px]">
           <Image
-            src="/images/enhancment_page_last picture.jpg"
+            src="/images/enhancmentlastpicture.jpg"
             alt="The Possibilities Are Endless"
             fill
             className="object-cover rounded-[30px] object-center"
