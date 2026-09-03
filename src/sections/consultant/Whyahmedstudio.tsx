@@ -30,7 +30,7 @@ export default function WhyAhmedStudio() {
                 key={index}
                 className="bg-[#F7F1EC] rounded-2xl p-6 md:p-8 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="flex flex-row items-center gap-4 mb-4 md:flex-col md:items-start md:gap-0 md:mb-0">
+                <div className="flex flex-row items-center justify-center gap-4 mb-4 md:flex-col md:items-center md:gap-0 md:mb-0 text-center">
                   <div className="w-10 h-10 sm:w-16 md:w-20 md:h-20 bg-[#B39174] rounded-lg md:rounded-xl flex items-center justify-center md:mb-6">
                     <Icon
                       icon={feature.icon}

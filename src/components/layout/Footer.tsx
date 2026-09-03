@@ -54,6 +54,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
 
   const quickLinks = [
     { label: f.links.home, href: "/" },
+     { label: f.links.estafeed, href: "/order" },
     { label: f.links.howToOrder, href: "/order" },
     { label: f.links.consultant, href: "/consultant" },
     // { label: f.links.cloudStorage, href: "/cloudStorage" },
@@ -101,7 +102,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
               </h3>
               <ul className="space-y-2.5 md:space-y-3">
                 {quickLinks.map((link) => (
-                  <li key={link.href}>
+                  <li key={link.label}>
                     <Link
                       href={link.href}
                       className="text-white font-[350] text-[12px] md:text-base leading-relaxed"
@@ -158,6 +159,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
                     {f.phoneNumber}
                   </p>
                   <a
+                    dir="ltr"
                     href="tel:+966500238627"
                     className="text-white hover:text-gray-300 transition-colors text-sm md:text-base font-medium break-all"
                   >

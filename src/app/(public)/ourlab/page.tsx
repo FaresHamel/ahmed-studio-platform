@@ -15,7 +15,7 @@ export default function OurLab() {
       </section>
       <OurEquipmentSection />
       <DigitizationEquipmentSection />
-      <PreservationWorkflowSection />
+      {/* <PreservationWorkflowSection /> */}
     </>
   );
 }

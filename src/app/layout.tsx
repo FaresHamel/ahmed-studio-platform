@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { cookies } from "next/headers";
-import { poppins, playfair, amiri } from "@/lib/fonts";
+import { ibmPlexArabic } from "@/lib/fonts";
 import { I18nProvider } from "@/i18n/context";
 import { Toaster } from "react-hot-toast";
 import { AuthInitializer } from "@/components/providers/AuthInitializer";
@@ -35,9 +35,7 @@ export default async function RootLayout({
     <html lang={language} dir={language === "ar" ? "rtl" : "ltr"}>
       <body
         className={`
-          ${poppins.variable}
-          ${playfair.variable}
-          ${amiri.variable}
+          ${ibmPlexArabic.variable}
           antialiased
         `}
       >

@@ -13,10 +13,11 @@
 }
 
 @theme inline {
-  /* Font definitions using variables passed in the Layout */
-  --font-playfair: var(--font-playfair);
-  --font-poppins: var(--font-poppins);
-  --font-amiri: var(--font-amiri);
+  /* Font definition using variable passed in the Layout */
+  --font-ibm-plex-arabic: var(--font-ibm-plex-arabic);
+  /* Maps IBM Plex Sans Arabic to Tailwind's built-in font-sans utility,
+     with sans-serif as the fallback, so `font-sans` works anywhere */
+  --font-sans: var(--font-ibm-plex-arabic), sans-serif;
 
   /* Color definitions as Tailwind classes */
   --color-primary: var(--primary-gold);
@@ -33,17 +34,37 @@
 
 /*
   Font system:
-  - Poppins  → default for everything (body text, titles, labels, buttons)
-  - Playfair → h1 headings only → use class font-playfair for explicit overrides
+  - IBM Plex Sans Arabic → the only font, used everywhere (body text, titles, navbar, buttons)
 */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-poppins), sans-serif;
+  font-family: var(--font-ibm-plex-arabic), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1 {
-  font-family: var(--font-playfair), serif;
+/* ── Reusable text style classes ───────────────────────────── */
+
+/* Navbar titles (mobile & desktop) */
+.text-navbar-title {
+  font-family: var(--font-ibm-plex-arabic), sans-serif;
+  font-size: 0.875rem;   /* 14px */
+  line-height: 1.25rem;  /* 20px */
+  font-weight: 600;
+}
+
+/* Page titles (inside pages) */
+.text-page-title {
+  font-family: var(--font-ibm-plex-arabic), sans-serif;
+  font-size: 2.25rem;    /* 36px */
+  line-height: 1.5rem;   /* 24px, as specified */
+  font-weight: 600;
+}
+
+/* Description / body text */
+.text-description {
+  font-family: var(--font-ibm-plex-arabic), sans-serif;
+  font-size: 1rem;       /* 16px */
+  line-height: 1.5rem;   /* 24px */
 }

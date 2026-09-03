@@ -49,13 +49,12 @@ export default function Navbar() {
                 href={link.href}
                 className={`
                   relative
-                  font-body
-                  text-sm
+                  text-navbar-title
                   transition-all
                   duration-300
                   ${
                     isActive
-                      ? "text-primary font-semibold"
+                      ? "text-primary"
                       : "text-zinc-600 hover:text-primary"
                   }
                 `}
@@ -77,7 +76,7 @@ export default function Navbar() {
           <button
             onClick={() => setLanguage(language === "en" ? "ar" : "en")}
             className="
-              text-sm font-medium
+              text-navbar-title
               px-3 py-2
               text-primary
               hover:bg-primary/10
@@ -100,8 +99,7 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               className="
-                font-body
-                text-sm
+                text-navbar-title
                 text-zinc-600
                 px-5
                 py-2.5
@@ -115,13 +113,12 @@ export default function Navbar() {
               {t.nav.blog}
             </Link>
             <Link
-               href="https://op.ahmed-studio.com/login"
+              href="https://op.ahmed-studio.com/login"
               //href="/login"
               target="_blank"
               rel="noopener noreferrer"
               className="
-                font-body
-                text-sm
+                text-navbar-title
                 text-navbarInactive
                 hover:text-primary
                 transition-colors
@@ -164,13 +161,12 @@ export default function Navbar() {
                   href={link.href}
                   onClick={() => setIsOpen(false)}
                   className={`
-                    font-body
-                    text-lg
+                    text-navbar-title
                     transition-colors
                     duration-300
                     ${
                       isActive
-                        ? "text-primary font-semibold"
+                        ? "text-primary"
                         : "text-navbarInactive hover:text-primary"
                     }
                   `}
@@ -187,9 +183,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
-                  font-body
-                  text-lg
-                  font-medium
+                  text-navbar-title
                   text-navbarInactive
                   hover:text-primary
                   transition-colors
@@ -203,9 +197,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
-                  font-body
-                  text-lg
-                  font-medium
+                  text-navbar-title
                   text-primary
                   border
                   border-primary

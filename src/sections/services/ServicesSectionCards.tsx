@@ -12,7 +12,7 @@ const serviceImages = [
   "/images/filmScaning.jpg",
   "/images/image-service.jpg",
   "/images/consult-service.jpg",
-  "/images/enhancment_page_last picture.jpg"
+  "/images/enhancmentlastpicture.jpg"
 ];
 
 interface ServiceCard extends CardItem {
@@ -70,15 +70,19 @@ const renderServiceCard = (service: ServiceCard, index: number) => {
             {service.tag}
           </span>
         </div>
-        <div className="w-full aspect-[16/10] relative rounded-[6px] sm:rounded-[10px] overflow-hidden bg-[#FAFAFA] mb-2 sm:mb-4">
+
+        {/* Image frame: taller box, border spans full width of this box (same width as its parent), no inner padding */}
+        <div className="w-full h-36 sm:h-48 md:h-60 lg:h-85 relative rounded-[6px] sm:rounded-[10px] overflow-hidden">
           <Image
             src={service.imageSrc}
             alt={service.title}
             fill
-            className="object-cover"
+            className="object-cover object-center"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
           />
         </div>
-        <h3 className="font-serif text-[#1A1A1A] text-[13px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-[600] leading-snug mb-1 sm:mb-2 min-h-[36px] sm:min-h-auto">
+
+        <h3 className="mt-10 font-serif text-[#1A1A1A] text-[13px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-[600] leading-snug mb-1 sm:mb-2 min-h-[36px] sm:min-h-auto">
           {service.title}
         </h3>
 

@@ -15,10 +15,10 @@ const serviceImages = [
 ];
 
 const pillarIcons = [
-  { id: "VIDEO", icon: "ph:cassette-tape-light" },
-  { id: "IMAGE", icon: "fluent:image-sparkle-16-regular" },
-  { id: "CONSULT", icon: "material-symbols-light:overview-outline" },
-  { id: "VISION", icon: "ix:project-server" }
+  { icon: "ph:cassette-tape-light" },
+  { icon: "fluent:image-sparkle-16-regular" },
+  { icon: "material-symbols-light:overview-outline" },
+  { icon: "ix:project-server" }
 ];
 
 interface Service extends CardItem {
@@ -31,12 +31,11 @@ interface Service extends CardItem {
 }
 
 export default function CoreServices() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<string>("VIDEO");
   const { t, language } = useI18n();
   const cs = t.home.coreServices;
-
   const isRtl = isRTL(language);
+
+  // Build services first — this is the single source of truth for category strings.
   const services: Service[] = cs.services.map((s, i) => ({
     id: i + 1,
     category: s.category,
@@ -46,9 +45,21 @@ export default function CoreServices() {
     points: s.points
   }));
 
-  const pillars = pillarIcons.map((p, i) => ({ ...p, title: cs.pillars[i] ?? p.id }));
+  // Pull each pillar's id directly from the matching service's category
+  // (by index) instead of a separately hardcoded id — guarantees an exact match.
+  const pillars = pillarIcons.map((p, i) => ({
+    ...p,
+    id: services[i]?.category ?? `pillar-${i}`,
+    title: cs.pillars[i] ?? services[i]?.title ?? ""
+  }));
 
-  const currentData = services.find((s) => s.category === activeTab) || services[0];
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<string>(
+    services[0]?.category ?? ""
+  );
+
+  const currentData =
+    services.find((s) => s.category === activeTab) || services[0];
 
   return (
     <>
@@ -78,7 +89,7 @@ export default function CoreServices() {
             <div className="absolute left-0 right-0 top-1/2 h-[1px] bg-white/20 md:hidden transform -translate-y-1/2 z-0" />
             {pillars.map((pillar, index) => (
               <div
-                key={pillar.id}
+                key={pillar.id || index}
                 className={
                   "flex flex-col items-center px-4 py-8 md:p-6 text-center group relative z-10 md:border-l md:border-r md:border-white/20"
                 }
