@@ -58,7 +58,7 @@ const [isModalOpen, setIsModalOpen] = useState(false);
     { label: f.links.howToOrder, href: "/order" },
     { label: f.links.consultant, href: "/consultant" },
     // { label: f.links.cloudStorage, href: "/cloudStorage" },
-    { label: f.links.aboutUs, href: "/about" }
+    { label: f.links.aboutUs, href: "/formats" }
   ];
 
   const resourceLinks = [

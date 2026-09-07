@@ -24,7 +24,7 @@
   "nav": {
     "home": "الرئيسية",
     "services": "خدماتنا",
-    "aboutUs": "من نحن",
+    "aboutUs": "الوسائط",
     "order": "طلب",
     "consultant": "استشارة",
     "cloudStorage": "التخزين السحابي",
@@ -51,7 +51,7 @@
       "howToOrder": "كيفية الطلب",
       "consultant": "استشارة",
       "cloudStorage": "التخزين السحابي",
-      "aboutUs": "من نحن",
+      "aboutUs":"الوسائط",
       "estafeed":"استفيد",
       "services": "الخدمات",
       "enhancement": "التحسين",

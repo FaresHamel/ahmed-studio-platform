@@ -251,17 +251,17 @@ export interface TapeItem {
 
 const videoTapesData: TapeItem[] = [
   { id: 1, src: "/images/video-other11.png", alt: "Hi8 Video Tape" },
-  { id: 2, src: "/images/video-other2.png", alt: "Sony Betacam Tape" },
-  { id: 3, src: "/images/video-other1.png", alt: "MP90 Camcorder Tape" },
+  { id: 2, src: "/images/video-other3.png", alt: "U matic" },
+  { id: 3, src: "/images/video-other1.png", alt: "Degital 8" },
   { id: 4, src: "/images/three07.png", alt: "MiniDV Tape" },
-  { id: 5, src: "/images/three06.png", alt: "Metal HG Video Tape" },
-  { id: 6, src: "/images/video-other3.png", alt: "Siemens Compact Cassette" },
+  { id: 5, src: "/images/three06.png", alt: "Video 8" },
+  { id: 6, src: "/images/video-other2.png", alt: "CVC" },
   { id: 7, src: "/images/video-minidv.png", alt: "Sony DVCAM 34" },
-  { id: 8, src: "/images/three08.png", alt: "Vintage Audio Open Reel" },
-  { id: 10, src: "/images/video-camcorder.png", alt: "U-Matic Tape" },
-  { id: 11, src: "/images/video-dvd.png", alt: "Video DVD" },
-  { id: 12, src: "/images/three09.png", alt: "Open Reel Tape" },
-  { id: 13, src: "/images/video-vhs.png", alt: "VHS Tape" }
+  { id: 8, src: "/images/three09.png", alt: "VHSC" },
+  { id: 10, src: "/images/video-camcorder.png", alt: "Micro MV" },
+  { id: 11, src: "/images/video-vhs.png", alt: "BetaCam" },
+  { id: 12, src: "/images/three08.png", alt: "Vintage Audio Open Reel" },
+  { id: 13, src: "/images/video-dvd.png", alt: "Video DVD" }
 ];
 
 function TapeCard({

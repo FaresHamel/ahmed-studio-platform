@@ -24,7 +24,7 @@
   "nav": {
     "home": "Home",
     "services": "Services",
-    "aboutUs": "About Us",
+    "aboutUs": "Formats",
     "order": "Order",
     "consultant": "Consultant",
     "cloudStorage": "Cloud Storage",
@@ -51,7 +51,7 @@
       "howToOrder": "How To Order",
       "consultant": "Consultant",
       "cloudStorage": "Cloud Storage",
-      "aboutUs": "About Us",
+      "aboutUs": "Formats",
       "estafeed":"Estafeed",
       "services": "Services",
       "enhancement": "Enhancement",

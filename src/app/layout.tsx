@@ -12,14 +12,16 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return language === "ar"
     ? {
-        title: "استوديو أحمد",
+        title: "الرقمنة والتحول الرقمي | استوديو أحمد",
         description:
-          "استوديو أحمد شركة متخصصة في تطوير تطبيقات الويب والخدمات البرمجية عالية الجودة."
+          "حلول متقدمة في الرقمنة والتحول الرقمي وبناء المكتبة الرقمية للشركات والمؤسسات.",
+        keywords: ["الرقمنة", "التحول الرقمي", "المكتبة الرقمية"]
       }
     : {
-        title: "Ahmed Studio",
+        title: "Digitization & Digital Transformation | Ahmed Studio",
         description:
-          "Ahmed Studio is a software development company specializing in building high-quality web applications and services."
+          "Advanced solutions for digitization, digital transformation, and digital library systems for organizations.",
+        keywords: ["Digitization", "Digital Transformation", "Digital Library"]
       };
 }
 

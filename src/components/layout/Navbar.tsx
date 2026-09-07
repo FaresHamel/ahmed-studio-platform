@@ -13,7 +13,7 @@ export default function Navbar() {
 
   const navLinks = [
     { label: t.nav.home, href: "/" },
-    { label: t.nav.aboutUs, href: "/about" },
+    { label: t.nav.aboutUs, href: "/formats" },
     { label: t.nav.order, href: "/order" },
     { label: t.nav.services, href: "/services" },
     { label: t.nav.consultant, href: "/consultant" },
