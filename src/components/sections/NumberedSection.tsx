@@ -61,7 +61,7 @@ export default function NumberedSection({
           )}
           {whatsappText && whatsappUrl && (
             <Link
-              href={whatsappUrl}
+              href={"https://wa.me/966500238627"}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-[#008834] text-white font-medium text-sm md:text-base px-6 py-3 rounded-[8px] hover:bg-[#20ba5a] transition-colors duration-300 shadow-md active:scale-95"

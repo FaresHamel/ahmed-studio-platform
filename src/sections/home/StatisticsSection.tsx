@@ -1,11 +1,21 @@
 ﻿"use client";
 import { useI18n } from "@/i18n/context";
 
-const values = ["8", "100%", "2,570,000", "22+", "1,850,000", "98%"];
-
 export default function StatisticsSection() {
   const { t } = useI18n();
-  const stats = values.map((value, i) => ({ value, label: t.home.statistics.labels[i] }));
+  const values = [
+    t.home.statistics.since,
+    "100%",
+    "2,570,000",
+    "+22",
+    "3321",
+    "98%"
+  ];
+
+  const stats = values.map((value, i) => ({
+    value,
+    label: t.home.statistics.labels[i]
+  }));
 
   return (
     <section className="py-8 lg:py-20 bg-white px-2 sm:px-4">
@@ -38,7 +48,7 @@ export default function StatisticsSection() {
               formatted = parseFloat((numericValue / 1000).toFixed(1)) + "K";
             }
 
-            return hasPlus ? `${formatted}+` : formatted;
+            return hasPlus ? `${formatted}` : formatted;
           };
 
           return (

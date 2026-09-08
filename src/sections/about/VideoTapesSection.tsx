@@ -261,7 +261,7 @@ const videoTapesData: TapeItem[] = [
   { id: 10, src: "/images/video-camcorder.png", alt: "Micro MV" },
   { id: 11, src: "/images/video-vhs.png", alt: "BetaCam" },
   { id: 12, src: "/images/three08.png", alt: "Vintage Audio Open Reel" },
-  { id: 13, src: "/images/video-dvd.png", alt: "Video DVD" }
+  { id: 13, src: "/images/video-dvd.png", alt: "VHS" }
 ];
 
 function TapeCard({
