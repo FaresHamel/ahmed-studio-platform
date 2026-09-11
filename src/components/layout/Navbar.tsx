@@ -179,9 +179,25 @@ export default function Navbar() {
             {/* Mobile Actions */}
             <div className="flex flex-col gap-4 pt-4 border-t border-borderColor">
               <Link
+                href="https://culture-archives.blogspot.com/?m=1"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsOpen(false)}
+                className="
+                  text-navbar-title
+                  text-navbarInactive
+                  hover:text-primary
+                  transition-colors
+                  duration-300
+                "
+              >
+                {t.nav.blog}
+              </Link>
+              <Link
                 href="https://op.ahmed-studio.com/login"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => setIsOpen(false)}
                 className="
                   text-navbar-title
                   text-navbarInactive
@@ -191,26 +207,6 @@ export default function Navbar() {
                 "
               >
                 {t.nav.login}
-              </Link>
-              <Link
-                href="https://op.ahmed-studio.com/login"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  text-navbar-title
-                  text-primary
-                  border
-                  border-primary
-                  rounded-full
-                  py-3
-                  text-center
-                  hover:bg-primary
-                  hover:text-white
-                  transition-all
-                  duration-300
-                "
-              >
-                {t.nav.signUp}
               </Link>
             </div>
           </div>
