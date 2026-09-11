@@ -8,24 +8,18 @@ import { cookies } from "next/headers";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
-  const language = cookieStore.get("language")?.value === "en" ? "en" : "ar";
+  const isEn = cookieStore.get("language")?.value === "en";
 
-  return language === "ar"
+  return isEn
     ? {
-        title: "طلب رقمنة الوسائط والأرشيف | استوديو أحمد",
+        title: "Ahmed Studio | Convert Old Video Tapes to Digital CD/Files",
         description:
-          "اطلب خدماتنا المخصصة في رقمنة الوسائط، رقمنة الأرشيف، ورقمنة الصور بدقة عالية.",
-        keywords: ["رقمنة الوسائط", "رقمنة الأرشيف", "رقمنة الصور"]
+          "We provide media, archive, and photo digitization services to convert tapes, film, and recordings into high-quality digital files."
       }
     : {
-        title: "Order Media & Archive Digitization | Ahmed Studio",
+        title: "Ahmed Studio | تحويل أشرطة الفيديو القديمة إلى رقمي سي دي",
         description:
-          "Order custom media digitization, archive digitization, and high-resolution photo scanning services.",
-        keywords: [
-          "Media Digitization",
-          "Archive Digitization",
-          "Photo Digitization"
-        ]
+          "نقدم خدمات رقمنة الوسائط ورقمنة الأرشيف ورقمنة الصور، لتحويل الأشرطة والأفلام والتسجيلات والصور إلى ملفات رقمية عالية الجودة مع حفظ آمن."
       };
 }
 export default function Order() {

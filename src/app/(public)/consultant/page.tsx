@@ -16,20 +16,18 @@ import { cookies } from "next/headers";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
-  const language = cookieStore.get("language")?.value === "en" ? "en" : "ar";
+  const isEn = cookieStore.get("language")?.value === "en";
 
-  return language === "ar"
+  return isEn
     ? {
-        title: "استشارات التحول الرقمي والرقمنة | استوديو أحمد",
+        title: "Ahmed Studio | Professional Digitization & Archival Consulting",
         description:
-          "تقديم استشارات تخصصة للمؤسسات في مجالات الرقمنة، التحول الرقمي، وإدارة البيانات.",
-        keywords: ["استشارات", "استشارات رقمية"]
+          "Get expert consulting for digitization and archiving projects, including archive assessment, workflow planning, and long-term preservation."
       }
     : {
-        title: "Digital Transformation & IT Consulting | Ahmed Studio",
+        title: "Ahmed Studio | استشارات الرقمنة وحفظ الأرشيف باحترافية",
         description:
-          "Expert digital consulting and technical advisory services for media digitization and strategy.",
-        keywords: ["Digital Consulting", "IT Advisory", "Consulting"]
+          "احصل على استشارات متخصصة لمشاريع الرقمنة والأرشفة، تشمل تقييم الأرشيف وتخطيط سير العمل واختيار الأجهزة والإشراف على الجودة والحفظ طويل الأمد."
       };
 }
 export default function Consultant() {

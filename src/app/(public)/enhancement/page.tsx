@@ -8,28 +8,18 @@ import { cookies } from "next/headers";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
-  const language = cookieStore.get("language")?.value === "en" ? "en" : "ar";
+  const isEn = cookieStore.get("language")?.value === "en";
 
-  return language === "ar"
+  return isEn
     ? {
-        title: "تحسين جودة الصورة والفيديو بالذكاء الاصطناعي | استوديو أحمد",
+        title: "Ahmed Studio | Photo Quality Enhancement & Video Restoration",
         description:
-          "خدمات متقدمة لتنفيذ تحسين جودة الصورة وتحسين الصور بالذكاء الاصطناعي مع تحسين جودة الفيديو.",
-        keywords: [
-          "تحسين جودة الصورة",
-          "تحسين الصور بالذكاء الاصطناعي",
-          "تحسين جودة الفيديو"
-        ]
+          "Visual archive processing services to enhance old video quality, reduce noise, and adjust colors using modern digital restoration tools."
       }
     : {
-        title: "AI Image & Video Quality Enhancement | Ahmed Studio",
+        title: "Ahmed Studio | تحسين جودة الصور و ترميم الفيديو",
         description:
-          "Advanced AI image restoration, image quality enhancement, and high-definition video enhancement.",
-        keywords: [
-          "Image Quality Enhancement",
-          "AI Image Restoration",
-          "Video Quality Enhancement"
-        ]
+          "خدمات معالجة الأرشيف المرئي وتحسين جودة الفيديوهات القديمة، إزالة التشويش وتعديل الألوان باستخدام احدث تقنيات المعالجة الرقمية."
       };
 }
 const Enhancement = () => {

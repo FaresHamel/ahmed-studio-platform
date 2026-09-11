@@ -10,24 +10,19 @@ import { cookies } from "next/headers";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
-  const language = cookieStore.get("language")?.value === "en" ? "en" : "ar";
+  const isEn = cookieStore.get("language")?.value === "en";
 
-  return language === "ar"
+  return isEn
     ? {
-        title: "توضيح الصور وزيادة دقة الصور | استوديو أحمد",
+        title:
+          "Ahmed Studio | Differences Between Professional & Home Digitization",
         description:
-          "أدوات وتقنيات احترافية في توضيح الصور وزيادة دقة الصور الضبابية القديمة بدقة عالية.",
-        keywords: ["توضيح الصور", "زيادة دقة الصور"]
+          "Learn the key differences between professional laboratory equipment and home digitization capture cards along with output comparisons."
       }
     : {
-        title: "Image Clarification & Upscaling | Ahmed Studio",
+        title: "Ahmed Studio | الفروقات بين الرقمنة الإحترافية و المنزلية",
         description:
-          "Professional technology for image clarification and photo resolution upscaling for blurred or old media.",
-        keywords: [
-          "Image Clarification",
-          "Photo Resolution Upscaling",
-          "Image Upscaling"
-        ]
+          "إحصل على الفروقات و وعي نفسك بأهم الإختلافات مابين الأجهزة الإحترافية و الوصلات المستخدمة في المعامل و الرقمنة المنزلية و مخرجاتها"
       };
 }
 export default function DifferencesPage() {

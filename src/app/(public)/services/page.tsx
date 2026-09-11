@@ -6,20 +6,19 @@ import { cookies } from "next/headers";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
-  const language = cookieStore.get("language")?.value === "en" ? "en" : "ar";
+  const isEn = cookieStore.get("language")?.value === "en";
 
-  return language === "ar"
+  return isEn
     ? {
-        title: "خدمات التسجيل الصوتي وتعديل الصور | استوديو أحمد",
+        title:
+          "Ahmed Studio | Digital Transformation, Image Editing & Restoration",
         description:
-          "خدمات احترافية تشمل تسجيل صوتي عالي النقاء وإجراء كافة عمليات تعديل الصور بأعلى معايير.",
-        keywords: ["تسجيل صوتي", "تعديل الصور"]
+          "Explore comprehensive services for digitizing video tapes, audio recordings, films, and photos with expert image and video restoration."
       }
     : {
-        title: "Audio Recording & Photo Editing Services | Ahmed Studio",
+        title: "Ahmed Studio | خدمات التحول الرقمي وتعديل الصور والترميم",
         description:
-          "Professional studio services offering crystal-clear audio recording and advanced photo editing.",
-        keywords: ["Audio Recording", "Photo Editing", "Audio Services"]
+          "اكتشف خدمات أحمد ستوديو المتكاملة لرقمنة أشرطة الفيديو والتسجيلات والأفلام والصور، مع تحسين و ترميم وتعديل للصور و الفيديو والاستشارات المتخصصة."
       };
 }
 export default function Services() {

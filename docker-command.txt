@@ -1,0 +1,39 @@
+cd /opt/ahmed-studio/frontend
+
+git pull origin master
+
+DOCKER_BUILDKIT=1 docker build --progress=plain \
+  --secret id=env,src=.env.production \
+  -t ahmed-studio-frontend:latest .
+
+docker stop ahmed-studio-frontend
+docker rm ahmed-studio-frontend
+
+docker run -d \
+  --name ahmed-studio-frontend \
+  --restart unless-stopped \
+  --env-file .env.production \
+  -p 3000:3000 \
+  ahmed-studio-frontend:latest
+
+Then:
+
+docker ps
+docker logs --tail 50 ahmed-studio-frontend
+
+docker build -t ahmed-studio-landing-page:latest .
+docker images | grep ahmed-studio-landing-page
+docker rm -f ahmed-studio-landing-page
+docker run -d \
+  --name ahmed-studio-landing-page \
+  --restart unless-stopped \
+  --network traefik_default \
+  --label "traefik.enable=true" \
+  --label "traefik.http.routers.ahmed-landing.rule=Host(\`store.ahmed-studio.com\`)" \
+  --label "traefik.http.routers.ahmed-landing.entrypoints=websecure" \
+  --label "traefik.http.routers.ahmed-landing.tls=true" \
+  --label "traefik.http.routers.ahmed-landing.tls.certresolver=letsencrypt" \
+  --label "traefik.http.services.ahmed-landing.loadbalancer.server.port=80" \
+  ahmed-studio-landing-page:latest
+  
+  docker ps

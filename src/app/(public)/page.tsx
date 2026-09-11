@@ -12,7 +12,26 @@ import SupportFormatsSection from "@/sections/home/SupportFormatsSection";
 import WhyTrustedSection from "@/sections/home/WhyTrustedSection";
 import WhyUsSection from "@/sections/home/WhyUsSection";
 import WorkflowSection from "@/sections/home/WorkflowSection";
+import { Metadata } from "next";
+import { cookies } from "next/headers";
 
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const isEn = cookieStore.get("language")?.value === "en";
+
+  return isEn
+    ? {
+        title:
+          "Ahmed Studio | Archival Digitization & Audiovisual Preservation",
+        description:
+          "Professional digitization services for tapes, films, photos, and audio recordings following industry best practices. Request a quote today."
+      }
+    : {
+        title: "Ahmed Studio | رقمنة الأرشيفات وحفظ التراث المرئي السمعي",
+        description:
+          "نعمل على تقديم خدمات الرقمنة الاحترافية بناءا على أفضل الممارسات للأشرطة والأفلام السينمائية والصور والتسجيلات الصوتية، ونرافقك في التحول الرقمي لبناء مكتبة رقمية آمنة. اطلب عرض سعر اليوم."
+      };
+}
 export default function Home() {
   return (
     <>

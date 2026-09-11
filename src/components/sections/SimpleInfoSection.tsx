@@ -23,9 +23,9 @@ export default function SimpleInfoSection({
     <div className={`flex flex-col items-center ${containerClassName}`}>
       <div className={`text-center mb-16 ${maxWidth}`}>
         {subtitle && (
-          <p className="text-gray-600 text-sm mb-2">
+          <h1 className="text-gray-600 text-sm mb-2">
             {subtitle}
-          </p>
+          </h1>
         )}
         <h2 className={titleClassName}>
           {title}

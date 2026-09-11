@@ -7,25 +7,25 @@ import MovieFilmsSection from "@/sections/about/MovieFilmsSection";
 import PhotosSlidesSection from "@/sections/about/PhotosSlidesSection";
 import TapTratmentSections from "@/sections/about/TapTratmentSections";
 import VideoTapesSection from "@/sections/about/VideoTapesSection";
+// import HeroServicesSection from "@/sections/services/HeroServicesSection";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
-// import HeroServicesSection from "@/sections/services/HeroServicesSection";
+
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
-  const language = cookieStore.get("language")?.value === "en" ? "en" : "ar";
+  const isEn = cookieStore.get("language")?.value === "en";
 
-  return language === "ar"
+  return isEn
     ? {
-        title: "إدارة المحفوظات وتحسين جودة الصور | استوديو أحمد",
+        title:
+          "Ahmed Studio | Converting Audiovisual Heritage to Digital Formats",
         description:
-          "متخصصون في حفظ وإدارة المحفوظات مع ضمان أفضل مستوى من جودة الصورة وتحسين الصور.",
-        keywords: ["المحفوظات", "جودة الصورة", "تحسين الصور"]
+          "Discover key media types and video tapes used for heritage preservation along with solutions for digitized media enhancement."
       }
     : {
-        title: "Archives Management & Image Quality | Ahmed Studio",
+        title: "Ahmed Studio | تحويل التراث السمعي و المرئي الى ملف رقمي",
         description:
-          "Experts in archives management, preserving digital records, and enhancing image quality.",
-        keywords: ["Archives", "Image Quality", "Image Enhancement"]
+          "اكتشف أهم الوسائط و انواع الاشرطة المستخدمة لحفظ التراث و الحلول في رقمنة و حفظ وتحسين الصور و الأفلام والأشرطة"
       };
 }
 export default function AboutPage() {

@@ -5,25 +5,12 @@ import { ibmPlexArabic } from "@/lib/fonts";
 import { I18nProvider } from "@/i18n/context";
 import { Toaster } from "react-hot-toast";
 import { AuthInitializer } from "@/components/providers/AuthInitializer";
-
-export async function generateMetadata(): Promise<Metadata> {
-  const cookieStore = await cookies();
-  const language = cookieStore.get("language")?.value === "en" ? "en" : "ar";
-
-  return language === "ar"
-    ? {
-        title: "الرقمنة والتحول الرقمي | استوديو أحمد",
-        description:
-          "حلول متقدمة في الرقمنة والتحول الرقمي وبناء المكتبة الرقمية للشركات والمؤسسات.",
-        keywords: ["الرقمنة", "التحول الرقمي", "المكتبة الرقمية"]
-      }
-    : {
-        title: "Digitization & Digital Transformation | Ahmed Studio",
-        description:
-          "Advanced solutions for digitization, digital transformation, and digital library systems for organizations.",
-        keywords: ["Digitization", "Digital Transformation", "Digital Library"]
-      };
-}
+import Script from "next/script";
+export const metadata: Metadata = {
+  verification: {
+    google: "yFjGhAA3Geb2P1IykGDss3b6CKr4nn3IgTaO68L1E-I"
+  }
+};
 
 export default async function RootLayout({
   children
@@ -35,6 +22,21 @@ export default async function RootLayout({
   const language = cookieStore.get("language")?.value === "en" ? "en" : "ar";
   return (
     <html lang={language} dir={language === "ar" ? "rtl" : "ltr"}>
+      <head>
+        {/* Google Analytics (GA4) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-PS2T5TC1HR"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-PS2T5TC1HR');
+          `}
+        </Script>
+      </head>
       <body
         className={`
           ${ibmPlexArabic.variable}

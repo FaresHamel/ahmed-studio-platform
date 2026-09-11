@@ -7,20 +7,19 @@ import { cookies } from "next/headers";
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
-  const language = cookieStore.get("language")?.value === "en" ? "en" : "ar";
+  const isEn = cookieStore.get("language")?.value === "en";
 
-  return language === "ar"
+  return isEn
     ? {
-        title: "معمل الحفظ الرقمي والأرشيف | استوديو أحمد",
+        title:
+          "Ahmed Studio | Digital Preservation & Professional Equipment Lab",
         description:
-          "معمل متخصص يمتلك أحدث تقنيات الحفظ الرقمي لحماية الأرشيف والتراث التاريخي من التلف.",
-        keywords: ["الحفظ الرقمي", "معمل الرقمية"]
+          "Discover the Ahmed Studio lab equipped with professional hardware for high-fidelity tape, film, audio, and photo digitization."
       }
     : {
-        title: "Digital Preservation Lab | Ahmed Studio",
+        title: "Ahmed Studio | الحفظ الرقمي ومعدات الرقمنة الاحترافية",
         description:
-          "Specialized lab equipped with advanced digital preservation technologies to protect historical archives.",
-        keywords: ["Digital Preservation", "Digital Archiving Lab"]
+          "تعرّف على معمل أحمد ستوديو المتخصص في الحفظ الرقمي، مع معدات رقمنة احترافية لتحويل الأفلام والفيديو والصوت والصور بجودة عالية وحفظ موثوق."
       };
 }
 export default function OurLab() {
