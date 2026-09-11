@@ -14,12 +14,42 @@ export async function generateMetadata(): Promise<Metadata> {
     ? {
         title: "Ahmed Studio | Photo Quality Enhancement & Video Restoration",
         description:
-          "Visual archive processing services to enhance old video quality, reduce noise, and adjust colors using modern digital restoration tools."
+          "Visual archive processing services to enhance old video quality, reduce noise, and adjust colors using modern digital restoration tools.",
+        alternates: {
+          canonical: "https://ahmed-studio.com/enhancement"
+        },
+        openGraph: {
+          title: "Ahmed Studio | Photo Quality Enhancement & Video Restoration",
+          description:
+            "Visual archive processing services to enhance old video quality, reduce noise, and adjust colors using modern digital restoration tools.",
+          url: "https://ahmed-studio.com/enhancement",
+          siteName: "Ahmed Studio",
+          type: "website"
+        },
+        robots: {
+          index: true,
+          follow: true
+        }
       }
     : {
         title: "Ahmed Studio | تحسين جودة الصور و ترميم الفيديو",
         description:
-          "خدمات معالجة الأرشيف المرئي وتحسين جودة الفيديوهات القديمة، إزالة التشويش وتعديل الألوان باستخدام احدث تقنيات المعالجة الرقمية."
+          "خدمات معالجة الأرشيف المرئي وتحسين جودة الفيديوهات القديمة، إزالة التشويش وتعديل الألوان باستخدام احدث تقنيات المعالجة الرقمية.",
+        alternates: {
+          canonical: "https://ahmed-studio.com/enhancement"
+        },
+        openGraph: {
+          title: "Ahmed Studio | تحسين جودة الصور و ترميم الفيديو",
+          description:
+            "خدمات معالجة الأرشيف المرئي وتحسين جودة الفيديوهات القديمة، إزالة التشويش وتعديل الألوان باستخدام احدث تقنيات المعالجة الرقمية.",
+          url: "https://ahmed-studio.com/enhancement",
+          siteName: "Ahmed Studio",
+          type: "website"
+        },
+        robots: {
+          index: true,
+          follow: true
+        }
       };
 }
 const Enhancement = () => {

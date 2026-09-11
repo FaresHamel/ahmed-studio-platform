@@ -22,12 +22,43 @@ export async function generateMetadata(): Promise<Metadata> {
     ? {
         title: "Ahmed Studio | Professional Digitization & Archival Consulting",
         description:
-          "Get expert consulting for digitization and archiving projects, including archive assessment, workflow planning, and long-term preservation."
+          "Get expert consulting for digitization and archiving projects, including archive assessment, workflow planning, and long-term preservation.",
+        alternates: {
+          canonical: "https://ahmed-studio.com/consultant"
+        },
+        openGraph: {
+          title:
+            "Ahmed Studio | Professional Digitization & Archival Consulting",
+          description:
+            "Get expert consulting for digitization and archiving projects, including archive assessment, workflow planning, and long-term preservation.",
+          url: "https://ahmed-studio.com/consultant",
+          siteName: "Ahmed Studio",
+          type: "website"
+        },
+        robots: {
+          index: true,
+          follow: true
+        }
       }
     : {
         title: "Ahmed Studio | استشارات الرقمنة وحفظ الأرشيف باحترافية",
         description:
-          "احصل على استشارات متخصصة لمشاريع الرقمنة والأرشفة، تشمل تقييم الأرشيف وتخطيط سير العمل واختيار الأجهزة والإشراف على الجودة والحفظ طويل الأمد."
+          "احصل على استشارات متخصصة لمشاريع الرقمنة والأرشفة، تشمل تقييم الأرشيف وتخطيط سير العمل واختيار الأجهزة والإشراف على الجودة والحفظ طويل الأمد.",
+        alternates: {
+          canonical: "https://ahmed-studio.com/consultant"
+        },
+        openGraph: {
+          title: "Ahmed Studio | استشارات الرقمنة وحفظ الأرشيف باحترافية",
+          description:
+            "احصل على استشارات متخصصة لمشاريع الرقمنة والأرشفة، تشمل تقييم الأرشيف وتخطيط سير العمل واختيار الأجهزة والإشراف على الجودة والحفظ طويل الأمد.",
+          url: "https://ahmed-studio.com/consultant",
+          siteName: "Ahmed Studio",
+          type: "website"
+        },
+        robots: {
+          index: true,
+          follow: true
+        }
       };
 }
 export default function Consultant() {

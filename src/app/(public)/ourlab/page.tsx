@@ -8,18 +8,38 @@ import { cookies } from "next/headers";
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
   const isEn = cookieStore.get("language")?.value === "en";
-
   return isEn
     ? {
         title:
           "Ahmed Studio | Digital Preservation & Professional Equipment Lab",
         description:
-          "Discover the Ahmed Studio lab equipped with professional hardware for high-fidelity tape, film, audio, and photo digitization."
+          "Discover the Ahmed Studio lab equipped with professional hardware for high-fidelity tape, film, audio, and photo digitization.",
+        alternates: { canonical: "https://ahmed-studio.com/ourlab" },
+        openGraph: {
+          title:
+            "Ahmed Studio | Digital Preservation & Professional Equipment Lab",
+          description:
+            "Discover the Ahmed Studio lab equipped with professional hardware for high-fidelity tape, film, audio, and photo digitization.",
+          url: "https://ahmed-studio.com/ourlab",
+          siteName: "Ahmed Studio",
+          type: "website"
+        },
+        robots: { index: true, follow: true }
       }
     : {
         title: "Ahmed Studio | الحفظ الرقمي ومعدات الرقمنة الاحترافية",
         description:
-          "تعرّف على معمل أحمد ستوديو المتخصص في الحفظ الرقمي، مع معدات رقمنة احترافية لتحويل الأفلام والفيديو والصوت والصور بجودة عالية وحفظ موثوق."
+          "تعرّف على معمل أحمد ستوديو المتخصص في الحفظ الرقمي، مع معدات رقمنة احترافية لتحويل الأفلام والفيديو والصوت والصور بجودة عالية وحفظ موثوق.",
+        alternates: { canonical: "https://ahmed-studio.com/ourlab" },
+        openGraph: {
+          title: "Ahmed Studio | الحفظ الرقمي ومعدات الرقمنة الاحترافية",
+          description:
+            "تعرّف على معمل أحمد ستوديو المتخصص في الحفظ الرقمي، مع معدات رقمنة احترافية لتحويل الأفلام والفيديو والصوت والصور بجودة عالية وحفظ موثوق.",
+          url: "https://ahmed-studio.com/ourlab",
+          siteName: "Ahmed Studio",
+          type: "website"
+        },
+        robots: { index: true, follow: true }
       };
 }
 export default function OurLab() {

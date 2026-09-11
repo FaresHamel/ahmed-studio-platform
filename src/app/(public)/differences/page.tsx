@@ -17,12 +17,43 @@ export async function generateMetadata(): Promise<Metadata> {
         title:
           "Ahmed Studio | Differences Between Professional & Home Digitization",
         description:
-          "Learn the key differences between professional laboratory equipment and home digitization capture cards along with output comparisons."
+          "Learn the key differences between professional laboratory equipment and home digitization capture cards along with output comparisons.",
+        alternates: {
+          canonical: "https://ahmed-studio.com/differences"
+        },
+        openGraph: {
+          title:
+            "Ahmed Studio | Differences Between Professional & Home Digitization",
+          description:
+            "Learn the key differences between professional laboratory equipment and home digitization capture cards along with output comparisons.",
+          url: "https://ahmed-studio.com/differences",
+          siteName: "Ahmed Studio",
+          type: "website"
+        },
+        robots: {
+          index: true,
+          follow: true
+        }
       }
     : {
         title: "Ahmed Studio | الفروقات بين الرقمنة الإحترافية و المنزلية",
         description:
-          "إحصل على الفروقات و وعي نفسك بأهم الإختلافات مابين الأجهزة الإحترافية و الوصلات المستخدمة في المعامل و الرقمنة المنزلية و مخرجاتها"
+          "إحصل على الفروقات و وعي نفسك بأهم الإختلافات مابين الأجهزة الإحترافية و الوصلات المستخدمة في المعامل و الرقمنة المنزلية و مخرجاتها",
+        alternates: {
+          canonical: "https://ahmed-studio.com/differences"
+        },
+        openGraph: {
+          title: "Ahmed Studio | الفروقات بين الرقمنة الإحترافية و المنزلية",
+          description:
+            "إحصل على الفروقات و وعي نفسك بأهم الإختلافات مابين الأجهزة الإحترافية و الوصلات المستخدمة في المعامل و الرقمنة المنزلية و مخرجاتها",
+          url: "https://ahmed-studio.com/differences",
+          siteName: "Ahmed Studio",
+          type: "website"
+        },
+        robots: {
+          index: true,
+          follow: true
+        }
       };
 }
 export default function DifferencesPage() {

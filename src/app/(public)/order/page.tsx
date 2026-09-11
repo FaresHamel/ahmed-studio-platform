@@ -9,17 +9,36 @@ import { cookies } from "next/headers";
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
   const isEn = cookieStore.get("language")?.value === "en";
-
   return isEn
     ? {
-        title: "Ahmed Studio | Convert Old Video Tapes to Digital CD/Files",
+        title: "Ahmed Studio | Convert Old Video Tapes to Digital Files & CD",
         description:
-          "We provide media, archive, and photo digitization services to convert tapes, film, and recordings into high-quality digital files."
+          "We provide media, archive, and photo digitization services to convert tapes, film, recordings, and photos into high-quality digital files.",
+        alternates: { canonical: "https://ahmed-studio.com/order" },
+        openGraph: {
+          title: "Ahmed Studio | Convert Old Video Tapes to Digital Files & CD",
+          description:
+            "We provide media, archive, and photo digitization services to convert tapes, film, recordings, and photos into high-quality digital files.",
+          url: "https://ahmed-studio.com/order",
+          siteName: "Ahmed Studio",
+          type: "website"
+        },
+        robots: { index: true, follow: true }
       }
     : {
         title: "Ahmed Studio | تحويل أشرطة الفيديو القديمة إلى رقمي سي دي",
         description:
-          "نقدم خدمات رقمنة الوسائط ورقمنة الأرشيف ورقمنة الصور، لتحويل الأشرطة والأفلام والتسجيلات والصور إلى ملفات رقمية عالية الجودة مع حفظ آمن."
+          "نقدم خدمات رقمنة الوسائط ورقمنة الأرشيف ورقمنة الصور، لتحويل الأشرطة والأفلام والتسجيلات والصور إلى ملفات رقمية عالية الجودة مع حفظ آمن.",
+        alternates: { canonical: "https://ahmed-studio.com/order" },
+        openGraph: {
+          title: "Ahmed Studio | تحويل أشرطة الفيديو القديمة إلى رقمي سي دي",
+          description:
+            "نقدم خدمات رقمنة الوسائط ورقمنة الأرشيف ورقمنة الصور، لتحويل الأشرطة والأفلام والتسجيلات والصور إلى ملفات رقمية عالية الجودة مع حفظ آمن.",
+          url: "https://ahmed-studio.com/order",
+          siteName: "Ahmed Studio",
+          type: "website"
+        },
+        robots: { index: true, follow: true }
       };
 }
 export default function Order() {

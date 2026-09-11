@@ -9,12 +9,41 @@ export async function generateMetadata(): Promise<Metadata> {
   return language === "ar"
     ? {
         title: "طلب عرض سعر | استوديو أحمد",
-        description: "أرسل تفاصيل طلبك وسنتواصل معك في أقرب وقت."
+        description: "أرسل تفاصيل طلبك وسنتواصل معك في أقرب وقت.",
+        alternates: {
+          canonical: "https://ahmed-studio.com/quote"
+        },
+        openGraph: {
+          title: "طلب عرض سعر | استوديو أحمد",
+          description: "أرسل تفاصيل طلبك وسنتواصل معك في أقرب وقت.",
+          url: "https://ahmed-studio.com/quote",
+          siteName: "Ahmed Studio",
+          type: "website"
+        },
+        robots: {
+          index: true,
+          follow: true
+        }
       }
     : {
         title: "Request a Quote | Ahmed Studio",
         description:
-          "Send us your request details and we'll get back to you shortly."
+          "Send us your request details and we'll get back to you shortly.",
+        alternates: {
+          canonical: "https://ahmed-studio.com/quote"
+        },
+        openGraph: {
+          title: "Request a Quote | Ahmed Studio",
+          description:
+            "Send us your request details and we'll get back to you shortly.",
+          url: "https://ahmed-studio.com/quote",
+          siteName: "Ahmed Studio",
+          type: "website"
+        },
+        robots: {
+          index: true,
+          follow: true
+        }
       };
 }
 

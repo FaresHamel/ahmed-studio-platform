@@ -12,24 +12,44 @@ import SupportFormatsSection from "@/sections/home/SupportFormatsSection";
 import WhyTrustedSection from "@/sections/home/WhyTrustedSection";
 import WhyUsSection from "@/sections/home/WhyUsSection";
 import WorkflowSection from "@/sections/home/WorkflowSection";
-import { Metadata } from "next";
-import { cookies } from "next/headers";
+import { Metadata } from 'next';
+import { cookies } from 'next/headers';
 
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
   const isEn = cookieStore.get("language")?.value === "en";
-
   return isEn
     ? {
         title:
           "Ahmed Studio | Archival Digitization & Audiovisual Preservation",
         description:
-          "Professional digitization services for tapes, films, photos, and audio recordings following industry best practices. Request a quote today."
+          "Professional digitization services for tapes, films, photos, and audio recordings following industry best practices. Request a quote today.",
+        alternates: { canonical: "https://ahmed-studio.com/" },
+        openGraph: {
+          title:
+            "Ahmed Studio | Archival Digitization & Audiovisual Preservation",
+          description:
+            "Professional digitization services for tapes, films, photos, and audio recordings following industry best practices. Request a quote today.",
+          url: "https://ahmed-studio.com/",
+          siteName: "Ahmed Studio",
+          type: "website"
+        },
+        robots: { index: true, follow: true }
       }
     : {
         title: "Ahmed Studio | رقمنة الأرشيفات وحفظ التراث المرئي السمعي",
         description:
-          "نعمل على تقديم خدمات الرقمنة الاحترافية بناءا على أفضل الممارسات للأشرطة والأفلام السينمائية والصور والتسجيلات الصوتية، ونرافقك في التحول الرقمي لبناء مكتبة رقمية آمنة. اطلب عرض سعر اليوم."
+          "نعمل على تقديم خدمات الرقمنة الاحترافية بناءا على أفضل الممارسات للأشرطة والأفلام السينمائية والصور والتسجيلات الصوتية، ونرافقك في التحول الرقمي لبناء مكتبة رقمية آمنة. اطلب عرض سعر اليوم.",
+        alternates: { canonical: "https://ahmed-studio.com/" },
+        openGraph: {
+          title: "Ahmed Studio | رقمنة الأرشيفات وحفظ التراث المرئي السمعي",
+          description:
+            "نعمل على تقديم خدمات الرقمنة الاحترافية بناءا على أفضل الممارسات للأشرطة والأفلام السينمائية والصور والتسجيلات الصوتية، ونرافقك في التحول الرقمي لبناء مكتبة رقمية آمنة.",
+          url: "https://ahmed-studio.com/",
+          siteName: "Ahmed Studio",
+          type: "website"
+        },
+        robots: { index: true, follow: true }
       };
 }
 export default function Home() {

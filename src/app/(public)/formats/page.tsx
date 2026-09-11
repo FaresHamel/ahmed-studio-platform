@@ -20,12 +20,43 @@ export async function generateMetadata(): Promise<Metadata> {
         title:
           "Ahmed Studio | Converting Audiovisual Heritage to Digital Formats",
         description:
-          "Discover key media types and video tapes used for heritage preservation along with solutions for digitized media enhancement."
+          "Discover key media types and video tapes used for heritage preservation along with solutions for digitized media enhancement.",
+        alternates: {
+          canonical: "https://ahmed-studio.com/formats"
+        },
+        openGraph: {
+          title:
+            "Ahmed Studio | Converting Audiovisual Heritage to Digital Formats",
+          description:
+            "Discover key media types and video tapes used for heritage preservation along with solutions for digitized media enhancement.",
+          url: "https://ahmed-studio.com/formats",
+          siteName: "Ahmed Studio",
+          type: "website"
+        },
+        robots: {
+          index: true,
+          follow: true
+        }
       }
     : {
         title: "Ahmed Studio | تحويل التراث السمعي و المرئي الى ملف رقمي",
         description:
-          "اكتشف أهم الوسائط و انواع الاشرطة المستخدمة لحفظ التراث و الحلول في رقمنة و حفظ وتحسين الصور و الأفلام والأشرطة"
+          "اكتشف أهم الوسائط و انواع الاشرطة المستخدمة لحفظ التراث و الحلول في رقمنة و حفظ وتحسين الصور و الأفلام والأشرطة",
+        alternates: {
+          canonical: "https://ahmed-studio.com/formats"
+        },
+        openGraph: {
+          title: "Ahmed Studio | تحويل التراث السمعي و المرئي الى ملف رقمي",
+          description:
+            "اكتشف أهم الوسائط و انواع الاشرطة المستخدمة لحفظ التراث و الحلول في رقمنة و حفظ وتحسين الصور و الأفلام والأشرطة",
+          url: "https://ahmed-studio.com/formats",
+          siteName: "Ahmed Studio",
+          type: "website"
+        },
+        robots: {
+          index: true,
+          follow: true
+        }
       };
 }
 export default function AboutPage() {
