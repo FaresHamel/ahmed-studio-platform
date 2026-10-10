@@ -7,7 +7,7 @@ export const DashboardLayout = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className="min-h-screen w-full bg-[#FFF3E8] flex">
+    <div className="min-h-screen w-full bg-[#ffffff] flex">
       <Sidebar />
       <div className="flex-1 flex flex-col">
         <Topbar />

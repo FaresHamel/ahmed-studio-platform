@@ -91,7 +91,6 @@ export default function Navbar() {
             <Icon icon="mdi:earth" className="text-lg" />
             <span className="hidden sm:inline text-xs">{t.nav.switchLang}</span>
           </button>
-
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-6">
             <Link
@@ -113,8 +112,8 @@ export default function Navbar() {
               {t.nav.blog}
             </Link>
             <Link
-              href="https://op.ahmed-studio.com/login"
-              //href="/login"
+              // href="https://op.ahmed-studio.com/login"
+              href="/login"
               target="_blank"
               rel="noopener noreferrer"
               className="

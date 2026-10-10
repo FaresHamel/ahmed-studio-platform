@@ -174,7 +174,7 @@
         "Hi8 / Video8",
         "MiniDV / DVCAM"
       ],
-      "filmFormats": ["32mm", "16mm", "8mm / Super 8", "9.5mm"]
+      "filmFormats": ["35mm", "16mm", "8mm / Super 8", "9.5mm"]
     },
     "professional": {
       "titleLine1": "We operate at a",
