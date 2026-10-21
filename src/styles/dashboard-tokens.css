@@ -1,0 +1,102 @@
+/* Import immediately after Tailwind in globals.css. Public-site colors stay intact. */
+@theme inline {
+  --color-dashboard-bg: var(--dashboard-bg);
+  --color-dashboard-surface: var(--dashboard-surface);
+  --color-dashboard-sidebar: var(--dashboard-surface);
+  --color-dashboard-text: var(--dashboard-text);
+  --color-dashboard-muted: var(--dashboard-muted);
+  --color-dashboard-border: var(--dashboard-border);
+  --color-dashboard-border-hover: var(--dashboard-border-hover);
+  --color-dashboard-hover: var(--dashboard-hover);
+  --color-dashboard-active: var(--dashboard-active);
+  --color-dashboard-action: var(--dashboard-action);
+  --color-dashboard-action-hover: var(--dashboard-action-hover);
+  --color-dashboard-action-text: var(--dashboard-action-text);
+  --color-dashboard-focus: var(--dashboard-focus);
+  --color-dashboard-blue: var(--dashboard-blue);
+  --color-dashboard-blue-soft: var(--dashboard-blue-soft);
+  --color-dashboard-emerald: var(--dashboard-emerald);
+  --color-dashboard-emerald-soft: var(--dashboard-emerald-soft);
+  --color-dashboard-orange: var(--dashboard-orange);
+  --color-dashboard-orange-soft: var(--dashboard-orange-soft);
+  --color-dashboard-violet: var(--dashboard-violet);
+  --color-dashboard-violet-soft: var(--dashboard-violet-soft);
+  --color-dashboard-cyan: var(--dashboard-cyan);
+  --color-dashboard-cyan-soft: var(--dashboard-cyan-soft);
+  --color-dashboard-amber: var(--dashboard-amber);
+  --color-dashboard-amber-soft: var(--dashboard-amber-soft);
+}
+
+.dashboard-shell {
+  --dashboard-bg: #fafafa;
+  --dashboard-surface: #ffffff;
+  --dashboard-text: #18181b;
+  --dashboard-muted: #71717a;
+  --dashboard-border: rgb(0 0 0 / 8%);
+  --dashboard-border-hover: rgb(0 0 0 / 15%);
+  --dashboard-hover: #f4f4f5;
+  --dashboard-active: #eeeeef;
+  --dashboard-action: #18181b;
+  --dashboard-action-hover: #27272a;
+  --dashboard-action-text: #ffffff;
+  --dashboard-focus: #2563eb;
+  --dashboard-blue: #2563eb;
+  --dashboard-blue-soft: #eff6ff;
+  --dashboard-emerald: #047857;
+  --dashboard-emerald-soft: #ecfdf5;
+  --dashboard-orange: #c2410c;
+  --dashboard-orange-soft: #fff7ed;
+  --dashboard-violet: #7c3aed;
+  --dashboard-violet-soft: #f5f3ff;
+  --dashboard-cyan: #0e7490;
+  --dashboard-cyan-soft: #ecfeff;
+  --dashboard-amber: #92400e;
+  --dashboard-amber-soft: #fffbeb;
+}
+
+.dashboard-shell[data-theme="dark"] {
+  --dashboard-bg: #09090b;
+  --dashboard-surface: #111113;
+  --dashboard-text: #f4f4f5;
+  --dashboard-muted: #a1a1aa;
+  --dashboard-border: rgb(255 255 255 / 10%);
+  --dashboard-border-hover: rgb(255 255 255 / 18%);
+  --dashboard-hover: #202023;
+  --dashboard-active: #29292e;
+  --dashboard-action: #f4f4f5;
+  --dashboard-action-hover: #d4d4d8;
+  --dashboard-action-text: #18181b;
+  --dashboard-focus: #60a5fa;
+  --dashboard-blue: #93c5fd;
+  --dashboard-blue-soft: #172440;
+  --dashboard-emerald: #6ee7b7;
+  --dashboard-emerald-soft: #102e27;
+  --dashboard-orange: #fdba74;
+  --dashboard-orange-soft: #352315;
+  --dashboard-violet: #c4b5fd;
+  --dashboard-violet-soft: #29203f;
+  --dashboard-cyan: #67e8f9;
+  --dashboard-cyan-soft: #123039;
+  --dashboard-amber: #fcd34d;
+  --dashboard-amber-soft: #322914;
+}
+
+/* These scoped rules also support the existing Sidebar classes. */
+.dashboard-shell .dashboard-nav-item {
+  color: var(--dashboard-muted);
+}
+.dashboard-shell .dashboard-nav-item:hover {
+  background: var(--dashboard-hover);
+  color: var(--dashboard-text);
+}
+.dashboard-shell .dashboard-nav-item-active {
+  background: var(--dashboard-active);
+  color: var(--dashboard-text);
+}
+.dashboard-shell .dashboard-btn-primary {
+  background: var(--dashboard-action);
+  color: var(--dashboard-action-text);
+}
+.dashboard-shell .dashboard-btn-primary:hover {
+  background: var(--dashboard-action-hover);
+}

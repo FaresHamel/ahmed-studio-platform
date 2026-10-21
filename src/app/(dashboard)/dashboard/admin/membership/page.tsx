@@ -1,11 +1,5 @@
-"use client";
-import { RoleGuard } from "@/components/auth/RoleGuard";
-import MembershipStatusContainer from "@/containers/dashboard/MembershipStatusContainer";
+import { redirect } from "next/navigation";
 
-export default function MembershipStatusPage() {
-  return (
-    <RoleGuard allow={["admin"]}>
-      <MembershipStatusContainer />
-    </RoleGuard>
-  );
+export default function MembershipPage() {
+  redirect("/dashboard/admin/users");
 }

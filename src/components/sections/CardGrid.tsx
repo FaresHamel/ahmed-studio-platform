@@ -2,7 +2,6 @@ import React from "react";
 
 export interface CardItem {
   id: number | string;
-  [key: string]: any;
 }
 
 interface CardGridProps<T extends CardItem = CardItem> {
@@ -34,7 +33,7 @@ export default function CardGrid<T extends CardItem = CardItem>({
     large: "gap-6 md:gap-8 lg:gap-10"
   };
 
-  const colsMap = {
+  const mobileColumns: Record<number, string> = {
     1: "grid-cols-1",
     2: "grid-cols-2",
     3: "grid-cols-3",
@@ -42,22 +41,30 @@ export default function CardGrid<T extends CardItem = CardItem>({
     5: "grid-cols-5"
   };
 
-  const getGridClasses = () => {
-    let classes = "w-full grid";
-
-    if (columns.mobile) {
-      classes += ` ${colsMap[columns.mobile as keyof typeof colsMap]}`;
-    }
-    if (columns.tablet) {
-      classes += ` md:${colsMap[columns.tablet as keyof typeof colsMap]}`;
-    }
-    if (columns.desktop) {
-      classes += ` lg:${colsMap[columns.desktop as keyof typeof colsMap]}`;
-    }
-
-    classes += ` ${gapMap[gap]}`;
-    return classes;
+  const tabletColumns: Record<number, string> = {
+    1: "md:grid-cols-1",
+    2: "md:grid-cols-2",
+    3: "md:grid-cols-3",
+    4: "md:grid-cols-4",
+    5: "md:grid-cols-5"
   };
+
+  const desktopColumns: Record<number, string> = {
+    1: "lg:grid-cols-1",
+    2: "lg:grid-cols-2",
+    3: "lg:grid-cols-3",
+    4: "lg:grid-cols-4",
+    5: "lg:grid-cols-5"
+  };
+
+  const getGridClasses = () =>
+    [
+      "w-full grid",
+      mobileColumns[columns.mobile ?? 2] ?? mobileColumns[2],
+      tabletColumns[columns.tablet ?? 2] ?? tabletColumns[2],
+      desktopColumns[columns.desktop ?? 3] ?? desktopColumns[3],
+      gapMap[gap]
+    ].join(" ");
 
   if (variant === "horizontal-scroll") {
     return (

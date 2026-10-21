@@ -50,19 +50,19 @@ export default function SideByTwoLayout({
     ? "order-1"
     : "order-2 lg:order-1";
 
-  // Helper function to safely inject props only to custom React components, not native HTML tags
-  const renderChild = (content: React.ReactNode) => {
-    if (!React.isValidElement(content)) return content;
+const renderChild = (content: React.ReactNode): React.ReactNode => {
+  if (
+    !React.isValidElement<{ isCentered?: boolean }>(content) ||
+    typeof content.type === "string" ||
+    content.type === React.Fragment
+  ) {
+    return content;
+  }
 
-    // If the element is a basic HTML tag (like 'div', 'section', 'span'), do NOT inject custom props
-    if (typeof content.type === "string") {
-      return content;
-    }
-
-    return React.cloneElement(content as React.ReactElement<any>, {
-      isCentered: isSingleContent
-    });
-  };
+  return React.cloneElement(content, {
+    isCentered: isSingleContent
+  });
+};
 
   return (
     <div

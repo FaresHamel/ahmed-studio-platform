@@ -1,41 +1,177 @@
 @import "tailwindcss";
 
+/* Public website */
+
 :root {
-  /* Your custom colors */
   --primary-gold: #846449;
-  --unselected-gray: #3C3C3C80;
+  --unselected-gray: #3c3c3c80;
   --section-brown: #937052;
   --pure-black: #000000;
   --background: #ffffff;
   --foreground: #171717;
-  --bg-secondary: #F7F1EC;
-  --dark-brown: #23140C;
+  --bg-secondary: #f7f1ec;
+  --dark-brown: #23140c;
 }
 
+/* Dashboard: light theme */
+
+.dashboard-shell {
+  --dashboard-bg: #fafafa;
+  --dashboard-surface: #ffffff;
+  --dashboard-sidebar: #fafafa;
+
+  --dashboard-border: rgb(0 0 0 / 8%);
+  --dashboard-border-hover: rgb(0 0 0 / 15%);
+
+  --dashboard-text: #18181b;
+  --dashboard-muted: #71717a;
+
+  --dashboard-action: #18181b;
+  --dashboard-action-hover: #27272a;
+  --dashboard-action-text: #ffffff;
+
+  --dashboard-hover: #f4f4f5;
+  --dashboard-active: #eeeeef;
+  --dashboard-focus: #2563eb;
+
+  --dashboard-blue: #2563eb;
+  --dashboard-blue-soft: #eff6ff;
+
+  --dashboard-green: #047857;
+  --dashboard-green-soft: #ecfdf5;
+
+  --dashboard-orange: #c2410c;
+  --dashboard-orange-soft: #fff7ed;
+
+  --dashboard-purple: #7c3aed;
+  --dashboard-purple-soft: #f5f3ff;
+
+  --dashboard-cyan: #0e7490;
+  --dashboard-cyan-soft: #ecfeff;
+
+  --dashboard-amber: #92400e;
+  --dashboard-amber-soft: #fffbeb;
+
+  --dashboard-red: #be123c;
+  --dashboard-red-soft: #fff1f2;
+
+  min-height: 100vh;
+  color-scheme: light;
+}
+
+/* Dashboard: dark theme */
+
+.dashboard-shell[data-theme="dark"] {
+  --dashboard-bg: #09090b;
+  --dashboard-surface: #111113;
+  --dashboard-sidebar: #111113;
+
+  --dashboard-border: rgb(255 255 255 / 10%);
+  --dashboard-border-hover: rgb(255 255 255 / 18%);
+
+  --dashboard-text: #f4f4f5;
+  --dashboard-muted: #a1a1aa;
+
+  --dashboard-action: #f4f4f5;
+  --dashboard-action-hover: #d4d4d8;
+  --dashboard-action-text: #18181b;
+
+  --dashboard-hover: #202023;
+  --dashboard-active: #29292e;
+  --dashboard-focus: #60a5fa;
+
+  --dashboard-blue: #93c5fd;
+  --dashboard-blue-soft: #172440;
+
+  --dashboard-green: #6ee7b7;
+  --dashboard-green-soft: #102e27;
+
+  --dashboard-orange: #fdba74;
+  --dashboard-orange-soft: #352315;
+
+  --dashboard-purple: #c4b5fd;
+  --dashboard-purple-soft: #29203f;
+
+  --dashboard-cyan: #67e8f9;
+  --dashboard-cyan-soft: #123039;
+
+  --dashboard-amber: #fcd34d;
+  --dashboard-amber-soft: #322914;
+
+  --dashboard-red: #fda4af;
+  --dashboard-red-soft: #381823;
+
+  color-scheme: dark;
+}
+
+/* Tailwind tokens */
+
 @theme inline {
-  /* Font definition using variable passed in the Layout */
-  --font-ibm-plex-arabic: var(--font-ibm-plex-arabic);
-  /* Maps IBM Plex Sans Arabic to Tailwind's built-in font-sans utility,
-     with sans-serif as the fallback, so `font-sans` works anywhere */
   --font-sans: var(--font-ibm-plex-arabic), sans-serif;
 
-  /* Color definitions as Tailwind classes */
+  /* Public website */
+
   --color-primary: var(--primary-gold);
   --color-unselected: var(--unselected-gray);
   --color-section-title: var(--section-brown);
   --color-description: var(--pure-black);
-
-  /* Default background settings */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-bg-soft: var(--bg-secondary);
   --color-dark-brown: var(--dark-brown);
+
+  /* Dashboard */
+
+  --color-dashboard-bg: var(--dashboard-bg);
+  --color-dashboard-surface: var(--dashboard-surface);
+  --color-dashboard-sidebar: var(--dashboard-sidebar);
+
+  --color-dashboard-border: var(--dashboard-border);
+  --color-dashboard-border-hover: var(--dashboard-border-hover);
+
+  --color-dashboard-text: var(--dashboard-text);
+  --color-dashboard-muted: var(--dashboard-muted);
+
+  --color-dashboard-action: var(--dashboard-action);
+  --color-dashboard-action-hover: var(--dashboard-action-hover);
+  --color-dashboard-action-text: var(--dashboard-action-text);
+
+  --color-dashboard-hover: var(--dashboard-hover);
+  --color-dashboard-active: var(--dashboard-active);
+  --color-dashboard-focus: var(--dashboard-focus);
+
+  --color-dashboard-blue: var(--dashboard-blue);
+  --color-dashboard-blue-soft: var(--dashboard-blue-soft);
+
+  --color-dashboard-green: var(--dashboard-green);
+  --color-dashboard-green-soft: var(--dashboard-green-soft);
+
+  --color-dashboard-orange: var(--dashboard-orange);
+  --color-dashboard-orange-soft: var(--dashboard-orange-soft);
+
+  --color-dashboard-purple: var(--dashboard-purple);
+  --color-dashboard-purple-soft: var(--dashboard-purple-soft);
+
+  --color-dashboard-cyan: var(--dashboard-cyan);
+  --color-dashboard-cyan-soft: var(--dashboard-cyan-soft);
+
+  --color-dashboard-amber: var(--dashboard-amber);
+  --color-dashboard-amber-soft: var(--dashboard-amber-soft);
+
+  --color-dashboard-red: var(--dashboard-red);
+  --color-dashboard-red-soft: var(--dashboard-red-soft);
+
+  /* Compatibility with the latest Overview components */
+
+  --color-dashboard-emerald: var(--dashboard-green);
+  --color-dashboard-emerald-soft: var(--dashboard-green-soft);
+
+  --color-dashboard-violet: var(--dashboard-purple);
+  --color-dashboard-violet-soft: var(--dashboard-purple-soft);
 }
 
-/*
-  Font system:
-  - IBM Plex Sans Arabic → the only font, used everywhere (body text, titles, navbar, buttons)
-*/
+/* Global typography */
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -44,27 +180,124 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── Reusable text style classes ───────────────────────────── */
-
-/* Navbar titles (mobile & desktop) */
 .text-navbar-title {
   font-family: var(--font-ibm-plex-arabic), sans-serif;
-  font-size: 0.875rem;   /* 14px */
-  line-height: 1.25rem;  /* 20px */
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   font-weight: 600;
 }
 
-/* Page titles (inside pages) */
 .text-page-title {
   font-family: var(--font-ibm-plex-arabic), sans-serif;
-  font-size: 2.25rem;    /* 36px */
-  line-height: 1.5rem;   /* 24px, as specified */
+  font-size: 2.25rem;
+  line-height: 2.5rem;
   font-weight: 600;
 }
 
-/* Description / body text */
 .text-description {
   font-family: var(--font-ibm-plex-arabic), sans-serif;
-  font-size: 1rem;       /* 16px */
-  line-height: 1.5rem;   /* 24px */
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+/* Dashboard components */
+
+@layer components {
+  .dashboard-shell {
+    @apply bg-dashboard-bg text-dashboard-text font-sans;
+  }
+
+  .dashboard-card {
+    @apply rounded-xl border border-dashboard-border
+      bg-dashboard-surface;
+  }
+
+  .dashboard-sidebar {
+    @apply border-e border-dashboard-border
+      bg-dashboard-sidebar text-dashboard-text;
+  }
+
+  .dashboard-topbar {
+    @apply border-b border-dashboard-border
+      bg-dashboard-surface text-dashboard-text;
+  }
+
+  .dashboard-muted {
+    @apply text-dashboard-muted;
+  }
+
+  /* Buttons */
+
+  .dashboard-btn-primary,
+  .dashboard-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2
+      rounded-lg px-4 py-2.5
+      text-sm font-medium transition-colors
+      focus-visible:outline-2
+      focus-visible:outline-offset-2
+      focus-visible:outline-dashboard-focus
+      disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .dashboard-btn-primary {
+    @apply bg-dashboard-action text-dashboard-action-text
+      hover:bg-dashboard-action-hover;
+  }
+
+  .dashboard-btn-secondary {
+    @apply border border-dashboard-border
+      bg-dashboard-surface text-dashboard-text
+      hover:bg-dashboard-hover;
+  }
+
+  /* Sidebar navigation */
+
+  .dashboard-nav-item {
+    @apply flex items-center gap-3
+      rounded-lg px-3 py-2.5
+      text-sm font-normal text-dashboard-muted
+      transition-colors
+      hover:bg-dashboard-hover
+      hover:text-dashboard-text
+      focus-visible:outline-2
+      focus-visible:outline-dashboard-focus;
+  }
+
+  .dashboard-nav-item-active {
+    @apply bg-dashboard-active
+      text-dashboard-text font-medium;
+  }
+
+  /* Inputs: spacing is supplied by each component */
+
+  .dashboard-input {
+    @apply w-full rounded-lg
+      border border-dashboard-border
+      bg-dashboard-surface
+      text-sm text-dashboard-text
+      placeholder:text-dashboard-muted
+      outline-none transition-colors
+      focus:border-dashboard-focus
+      focus:ring-2 focus:ring-dashboard-focus/15
+      disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* Icons */
+
+  .dashboard-icon-box {
+    @apply inline-flex size-9 shrink-0
+      items-center justify-center rounded-lg;
+  }
+
+  .dashboard-icon-button {
+    @apply inline-flex size-9 shrink-0
+      cursor-pointer items-center justify-center
+      rounded-lg text-dashboard-muted
+      transition-colors
+      hover:bg-dashboard-hover hover:text-dashboard-text
+      focus-visible:outline-2
+      focus-visible:outline-offset-2
+      focus-visible:outline-dashboard-focus
+      disabled:cursor-not-allowed disabled:opacity-50;
+  }
 }

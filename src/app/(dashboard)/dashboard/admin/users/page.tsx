@@ -1,12 +1,5 @@
-import { RoleGuard } from "@/components/auth/RoleGuard";
-import UserManagementContainer from "@/containers/dashboard/UserManagementContainer";
+import UserManagementContainer from "@/containers/dashboard/admin/users/UserManagementContainer";
 
-export const metadata = { title: "User Management | Ahmed Studio" };
-
-export default function UserManagementPage() {
-  return (
-    <RoleGuard allow={["admin"]}>
-      <UserManagementContainer />
-    </RoleGuard>
-  );
+export default function UsersPage() {
+  return <UserManagementContainer />;
 }
