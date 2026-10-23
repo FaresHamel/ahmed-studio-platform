@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useDashboard } from "@/components/dashboard/DashboardProvider";
 import { useAuthStore } from "@/store/auth.store";
 import { useDebouncedValue } from "@/hooks/useDebouncedValue";
-import { individualJobsService } from "@/services/individual-jobs.service";
+import { individualService } from "@/services/individual.service";
 import type {
     IndividualJobListItem,
     Page,
@@ -46,7 +46,7 @@ export function useIndividualJobs() {
 
         async function load() {
             try {
-                const response = await individualJobsService.list(
+                const response = await individualService.listJobs(
                     { page, limit: LIMIT, search: query || undefined },
                     controller.signal,
                 );

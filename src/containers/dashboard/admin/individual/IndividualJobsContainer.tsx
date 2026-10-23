@@ -6,10 +6,10 @@ import toast from "react-hot-toast";
 import { Building2, UserRound } from "lucide-react";
 import { CreateIndividualJobForm } from "@/components/dashboard/individual/CreateIndividualJobForm";
 import { useIndividualJobs } from "@/hooks/individual/useIndividualJobs";
-import { individualJobsService } from "@/services/individual-jobs.service";
 import { useAuthStore } from "@/store/auth.store";
 import type { NewJobInput } from "@/types/production-api";
-
+import Link from "next/link";
+import { individualService } from "@/services/individual.service";
 function requestError(error: unknown): string {
   if (axios.isAxiosError<{ message?: string | string[] }>(error)) {
     const message = error.response?.data?.message;
@@ -57,7 +57,7 @@ export default function IndividualJobsContainer() {
     setSaveError(null);
 
     try {
-      const job = await individualJobsService.create(input);
+      const job = await individualService.createJob(input);
 
       if (mounted.current && useAuthStore.getState().user?.id === actor.id) {
         toast.success(`INV ${job.inv_no} created.`);
@@ -167,7 +167,17 @@ export default function IndividualJobsContainer() {
     transition-colors hover:bg-dashboard-hover
   "
                   >
-                    <td className="px-5 py-4 font-semibold">{job.inv_no}</td>
+                    <td className="px-5 py-4 font-semibold">
+                      <Link
+                        href={`/dashboard/admin/individual/${encodeURIComponent(
+                          job.id
+                        )}`}
+                        className="rounded hover:underline focus-visible:outline-2 focus-visible:outline-dashboard-focus"
+                        aria-label={`View job INV ${job.inv_no}`}
+                      >
+                        {job.inv_no}
+                      </Link>
+                    </td>
                     <td className="px-5 py-4">
                       {job.clients ? (
                         <div className="flex items-center gap-3">

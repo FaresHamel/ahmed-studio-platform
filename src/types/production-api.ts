@@ -231,3 +231,18 @@ export interface IndividualJobListItem extends IndividualJob {
 
   ind_boxes: BoxSummary[];
 }
+export interface IndividualJobBox extends BoxSummary {
+  ind_tapes: TapeSummary[];
+}
+
+export interface IndividualJobDetails extends IndividualJob {
+  clients: Customer | null;
+  ind_boxes: IndividualJobBox[];
+}
+
+export interface IndividualBoxDetails extends BoxSummary {
+  client_id: string;
+  drive_url: string | null;
+  ind_clients: IndividualJob;
+  ind_tapes: TapeSummary[];
+}
