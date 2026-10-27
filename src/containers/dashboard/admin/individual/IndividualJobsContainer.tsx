@@ -154,8 +154,8 @@ export default function IndividualJobsContainer() {
                     {loading
                       ? "Loading jobs…"
                       : error
-                      ? "Jobs could not be loaded."
-                      : "No Individual jobs found."}
+                        ? "Jobs could not be loaded."
+                        : "No Individual jobs found."}
                   </td>
                 </tr>
               ) : (
@@ -186,11 +186,10 @@ export default function IndividualJobsContainer() {
                             className={`
           flex size-9 shrink-0 items-center justify-center
           rounded-lg border
-          ${
-            job.clients.client_type === "company"
-              ? "border-violet-500/25 bg-violet-500/10 text-violet-500"
-              : "border-blue-500/25 bg-blue-500/10 text-blue-500"
-          }
+          ${job.clients.client_type === "company"
+                                ? "border-violet-500/25 bg-violet-500/10 text-violet-500"
+                                : "border-blue-500/25 bg-blue-500/10 text-blue-500"
+                              }
         `}
                           >
                             {job.clients.client_type === "company" ? (

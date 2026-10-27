@@ -11,14 +11,14 @@ import {
 } from "lucide-react";
 import { NavItem } from "@/lib/nav-config";
 
-export const NAV_ICONS: Record<NavItem["icon"], React.ElementType> = {
-  overview: LayoutGrid,
-  users: Users,
-  membership: CreditCard,
-  media: ImageIcon,
-  subscription: Layers,
-  storage: BarChart3,
-  settings: Settings
-};
+// export const NAV_ICONS: Record<NavItem["icon"], React.ElementType> = {
+//   overview: LayoutGrid,
+//   users: Users,
+//   membership: CreditCard,
+//   media: ImageIcon,
+//   subscription: Layers,
+//   storage: BarChart3,
+//   settings: Settings
+// };
 
 export { LogOut, Search };

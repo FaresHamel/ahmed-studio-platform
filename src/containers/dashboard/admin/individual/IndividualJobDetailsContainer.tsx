@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Building2, Package, Plus, UserRound } from "lucide-react";
 import toast from "react-hot-toast";
-
 import {
   individualError,
   useIndividualJob

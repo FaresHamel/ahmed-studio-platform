@@ -64,12 +64,59 @@ export interface MyJob {
   boxes_closed: boolean;
   ind_boxes: BoxSummary[];
 }
+export interface TapeMetadata {
+  title?: string;
+  internal_ref?: string;
+  country?: string;
+  summary?: string;
+  content_tags?: string[];
+
+  event_date?: string;
+  city?: string;
+  people?: string;
+
+  singer?: string;
+  musician?: string;
+  words?: string;
+  company?: string;
+  published_date?: string;
+  tape_size?: string;
+  tape_speed?: string;
+
+  // Preserve additional metadata from other workflow stages.
+  [key: string]: unknown;
+}
+
 export interface TapeSummary {
   id: string;
+  tape_code: string | null;
   media_type: string;
   format: string;
   status: string;
   current_station: string | null;
+  metadata: TapeMetadata | null;
+}
+
+export interface TapeHistoryEntry {
+  station?: string;
+  result?: string;
+  by?: string;
+  at?: string;
+
+  // History may also contain additional production information.
+  [key: string]: unknown;
+}
+
+export interface IndividualTapeDetails extends TapeSummary {
+  box_id: string;
+  barcode: string;
+  capacity: number | null;
+  color_system: string | null;
+  audio_track: number | null;
+  photo_size: string | null;
+  picture_key: string | null;
+  created_at: string;
+  history: TapeHistoryEntry[];
 }
 export interface MyBox extends BoxSummary {
   ind_tapes: TapeSummary[];
@@ -77,16 +124,34 @@ export interface MyBox extends BoxSummary {
 export interface MyTape extends TapeSummary {
   box_id: string;
 }
+export type TapeMediaType = "video" | "audio" | "photo" | "document";
+
 export interface TapeInput {
-  media_type: "audio" | "video";
+  tape_code: string;
+  media_type: TapeMediaType;
   format: string;
-  capacity: number;
-  color_system: string;
-  audio_track?: number;
-  photo_size?: string;
+  capacity?: number | null;
+  color_system?: string | null;
+  audio_track?: number | null;
+  photo_size?: string | null;
+
+  title?: string;
+  internal_ref?: string;
   country?: string;
   summary?: string;
   content_tags?: string[];
+
+  event_date?: string;
+  city?: string;
+  people?: string;
+
+  singer?: string;
+  musician?: string;
+  words?: string;
+  company?: string;
+  published_date?: string;
+  tape_size?: string;
+  tape_speed?: string;
 }
 export type Station =
   | "received"

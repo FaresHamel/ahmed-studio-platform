@@ -15,7 +15,8 @@ import type {
   Message,
   IndividualJobListItem,
   IndividualJobDetails,
-  IndividualBoxDetails
+  IndividualBoxDetails,
+  IndividualTapeDetails
 } from "@/types/production-api";
 const id = encodeURIComponent;
 export const individualService = {
@@ -137,6 +138,17 @@ export const individualService = {
   ): Promise<IndividualBoxDetails> {
     const { data } = await api.get<IndividualBoxDetails>(
       `/individual/boxes/${id(boxId)}`,
+      { signal },
+    );
+
+    return data;
+  },
+  async getTape(
+    tapeId: string,
+    signal?: AbortSignal,
+  ): Promise<IndividualTapeDetails> {
+    const { data } = await api.get<IndividualTapeDetails>(
+      `/individual/tapes/${id(tapeId)}`,
       { signal },
     );
 
