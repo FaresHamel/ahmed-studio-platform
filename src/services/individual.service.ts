@@ -16,7 +16,8 @@ import type {
   IndividualJobListItem,
   IndividualJobDetails,
   IndividualBoxDetails,
-  IndividualTapeDetails
+  IndividualTapeDetails,
+  AssignableStage
 } from "@/types/production-api";
 const id = encodeURIComponent;
 export const individualService = {
@@ -153,5 +154,19 @@ export const individualService = {
     );
 
     return data;
+  },
+  async assignTape(
+    tapeId: string,
+    body: {
+      stage: AssignableStage;
+      operator_id: string;
+    },
+  ): Promise<unknown> {
+    return (
+      await api.patch(
+        `/individual/tapes/${id(tapeId)}/assignment`,
+        body,
+      )
+    ).data;
   },
 };

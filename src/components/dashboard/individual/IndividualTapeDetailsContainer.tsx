@@ -168,10 +168,12 @@ export default function IndividualTapeDetailsContainer({
     <section dir="ltr" className="space-y-6 text-dashboard-text">
       <header className="space-y-3">
         <Link
-          href="/dashboard/admin/individual"
+          href={`/dashboard/admin/individual/boxes/${encodeURIComponent(
+            tape.box_id
+          )}`}
           className="text-sm text-dashboard-muted hover:underline"
         >
-          ← Individual jobs
+          ← Back to box {tape.box_id}
         </Link>
 
         <div className="flex flex-wrap items-start justify-between gap-3">

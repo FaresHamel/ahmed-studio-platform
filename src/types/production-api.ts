@@ -95,6 +95,7 @@ export interface TapeSummary {
   status: string;
   current_station: string | null;
   metadata: TapeMetadata | null;
+  assignments?: TapeAssignment[];
 }
 
 export interface TapeHistoryEntry {
@@ -310,4 +311,31 @@ export interface IndividualBoxDetails extends BoxSummary {
   drive_url: string | null;
   ind_clients: IndividualJob;
   ind_tapes: TapeSummary[];
+}
+
+export type AssignableStage =
+  | "inspected"
+  | "cleaning"
+  | "baking"
+  | "ingest"
+  | "qc"
+  | "restoration";
+
+export interface TapeAssignment {
+  id: string;
+  tape_id: string;
+  stage: AssignableStage;
+  operator_id: string;
+  assigned_by: string;
+  created_at: string;
+  updated_at: string;
+  operator: {
+    id: string;
+    email: string;
+    status: string;
+    profiles: {
+      display_name: string | null;
+      operator_type: string | null;
+    } | null;
+  };
 }

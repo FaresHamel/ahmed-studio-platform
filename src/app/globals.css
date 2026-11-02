@@ -300,4 +300,188 @@ body {
       focus-visible:outline-dashboard-focus
       disabled:cursor-not-allowed disabled:opacity-50;
   }
+  /* Tape board */
+
+.tape-column {
+  width: 320px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--dashboard-hover);
+  padding: 8px;
+}
+
+.tape-column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 36px;
+  margin-bottom: 8px;
+  padding: 0 4px;
+}
+
+.tape-stage-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 5px;
+  background: var(--dashboard-surface);
+  color: var(--dashboard-text);
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.tape-stage-dot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.tape-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tape-card {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--dashboard-surface);
+  color: var(--dashboard-text);
+}
+
+.tape-card-content {
+  padding: 16px;
+}
+
+.tape-card-title {
+  color: var(--dashboard-text);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.tape-card-label {
+  flex-shrink: 0;
+  color: var(--dashboard-text);
+  font-weight: 500;
+}
+
+.tape-card-value {
+  min-width: 0;
+  color: var(--dashboard-muted);
+  overflow-wrap: anywhere;
+}
+
+.tape-card-divider {
+  height: 1px;
+  flex-shrink: 0;
+  margin: 0 16px;
+  background: var(--dashboard-border);
+}
+
+.tape-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+}
+
+.tape-person-button {
+  display: inline-flex;
+  max-width: 100%;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--dashboard-text);
+  padding: 2px;
+  cursor: pointer;
+}
+
+.tape-person-button:hover {
+  background: var(--dashboard-hover);
+}
+
+.tape-person-avatar {
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--dashboard-border);
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.tape-assign-button {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--dashboard-border-hover);
+  border-radius: 6px;
+  background: var(--dashboard-surface);
+  color: var(--dashboard-text);
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    color 150ms;
+}
+
+.tape-assign-button:hover:not(:disabled) {
+  border-color: var(--dashboard-action);
+  background: var(--dashboard-action);
+  color: var(--dashboard-action-text);
+}
+
+.tape-assign-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.tape-person-button:focus-visible,
+.tape-assign-button:focus-visible {
+  outline: 2px solid var(--dashboard-focus);
+  outline-offset: 2px;
+}
+
+.tape-person-panel {
+  margin: 0 16px 12px;
+  border: 1px solid var(--dashboard-border);
+  border-radius: 6px;
+  background: var(--dashboard-hover);
+  padding: 12px;
+}
+
+.tape-category {
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  border-radius: 4px;
+  background: var(--dashboard-purple-soft);
+  color: var(--dashboard-purple);
+  padding: 2px 7px;
+  font-size: 10px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
 }

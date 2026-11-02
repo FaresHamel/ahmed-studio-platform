@@ -266,7 +266,12 @@ export default function IndividualBoxDetailsContainer({
       )}
 
       <div className="min-w-0">
-        <TapeBoard tapes={box.ind_tapes} />
+        <TapeBoard
+          key={boxId}
+          boxId={boxId}
+          tapes={box.ind_tapes}
+          onAssigned={refresh}
+        />
       </div>
 
       <CreateTapeModal
