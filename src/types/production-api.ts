@@ -153,6 +153,7 @@ export interface TapeInput {
   published_date?: string;
   tape_size?: string;
   tape_speed?: string;
+  due_at?: string | null;
 }
 export type Station =
   | "received"

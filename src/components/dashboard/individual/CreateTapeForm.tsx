@@ -1,6 +1,14 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type FormEvent } from "react";
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type ComponentProps,
+  type FormEvent
+} from "react";
+import { ChevronDown } from "lucide-react";
 import type { TapeInput, TapeMediaType } from "@/types/production-api";
 
 interface Props {
@@ -12,7 +20,7 @@ interface Props {
   onCancel: () => void;
 }
 
-const inputClass = "dashboard-input w-full min-h-12 px-3 py-3";
+const inputClass = "dashboard-input min-h-12 px-4 py-3";
 
 const FORMATS: Record<TapeMediaType, readonly string[]> = {
   video: [
@@ -54,6 +62,12 @@ const FORMATS: Record<TapeMediaType, readonly string[]> = {
 const CAPACITIES = ["30", "60", "90", "120", "180", "240"];
 const VINYL_CAPACITIES = ["8", "15", "30", "40"];
 const COLOR_SYSTEMS = ["PAL 625", "NTSC 525", "SECAM 625", "MESECAM 625"];
+const AUDIO_TRACKS = ["2", "4", "8"];
+
+const VINYL_SIZES = ['7"', '10"', '12"'];
+const VINYL_SPEEDS = ["33 1/3", "45", "78"];
+const REEL_SIZES = ['3"', '7"', '10.5"'];
+const REEL_SPEEDS = ["1 7/8", "3 3/4", "7 1/2", "15", "30"];
 
 const SIZES = [
   "A1 (23x33 in)",
@@ -94,44 +108,40 @@ const MEDIA_SUFFIX: Record<TapeMediaType, string> = {
   document: "D"
 };
 
-// ISO country / territory codes.
-// Names are displayed in English; flag emoji support depends on the device.
-const COUNTRY_CODES = `
-AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ
-BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ
-CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ
-DE DJ DK DM DO DZ EC EE EG EH ER ES ET
-FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY
-HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT
-JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ
-LA LB LC LI LK LR LS LT LU LV LY
-MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ
-NA NC NE NF NG NI NL NO NP NR NU NZ OM
-PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA
-RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ
-TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ
-UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS YE YT ZA ZM ZW
-`
-  .trim()
-  .split(/\s+/);
+type Values = Record<string, string>;
 
-const countryNames = new Intl.DisplayNames(["en"], {
-  type: "region"
-});
+function FormSelect({
+  children,
+  className = "",
+  disabled,
+  ...props
+}: ComponentProps<"select">) {
+  return (
+    <div className="relative">
+      <select
+        {...props}
+        disabled={disabled}
+        className={`
+          dashboard-input min-h-12 appearance-none
+          py-3 pl-4 pr-12
+          ${className}
+        `}
+      >
+        {children}
+      </select>
 
-function countryFlag(code: string) {
-  return String.fromCodePoint(
-    ...Array.from(code).map((character) => 127397 + character.charCodeAt(0))
+      <ChevronDown
+        size={16}
+        aria-hidden="true"
+        className={`
+          pointer-events-none absolute right-4 top-1/2
+          -translate-y-1/2 text-dashboard-muted
+          ${disabled ? "opacity-50" : ""}
+        `}
+      />
+    </div>
   );
 }
-
-const COUNTRIES = COUNTRY_CODES.map((code) => ({
-  code,
-  name: countryNames.of(code) ?? code,
-  flag: countryFlag(code)
-})).sort((a, b) => a.name.localeCompare(b.name, "en"));
-
-type Values = Record<string, string>;
 
 export function CreateTapeModal({
   open,
@@ -146,10 +156,16 @@ export function CreateTapeModal({
 
   useEffect(() => {
     const dialog = dialogRef.current;
+
     if (!dialog) return;
 
-    if (open && !dialog.open) dialog.showModal();
-    if (!open && dialog.open) dialog.close();
+    if (open && !dialog.open) {
+      dialog.showModal();
+    }
+
+    if (!open && dialog.open) {
+      dialog.close();
+    }
 
     if (!open) return;
 
@@ -158,7 +174,10 @@ export function CreateTapeModal({
 
     return () => {
       document.body.style.overflow = previousOverflow;
-      if (dialog.open) dialog.close();
+
+      if (dialog.open) {
+        dialog.close();
+      }
     };
   }, [open]);
 
@@ -168,17 +187,16 @@ export function CreateTapeModal({
       aria-labelledby={titleId}
       onCancel={(event) => {
         event.preventDefault();
-        // Escape closes the modal unless a request is running.
+
         if (!busy && dialogRef.current?.dataset.saving !== "true") {
           onCancel();
         }
       }}
       className="
-        m-auto w-[calc(100%-2rem)] max-w-4xl
-        max-h-[90dvh] overflow-y-auto rounded-2xl
-        border border-dashboard-border bg-white p-0
-        text-slate-900 shadow-2xl
-        backdrop:bg-black/50
+        m-auto max-h-[90dvh] w-[calc(100%-2rem)] max-w-4xl
+        overflow-y-auto rounded-2xl
+        border border-dashboard-border bg-dashboard-surface p-0
+        text-dashboard-text shadow-2xl backdrop:bg-black/50
       "
     >
       {open && (
@@ -217,10 +235,8 @@ function TapeForm({
   const submitting = useRef(false);
 
   const [mediaType, setMediaType] = useState<TapeMediaType>("video");
-
   const [values, setValues] = useState<Values>({});
   const [categories, setCategories] = useState<string[]>([]);
-  const [countrySearch, setCountrySearch] = useState("");
   const [validation, setValidation] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
@@ -240,21 +256,12 @@ function TapeForm({
 
   const capacityOptions = isVinyl ? VINYL_CAPACITIES : CAPACITIES;
 
-  const visibleCountries = COUNTRIES.filter((country) =>
-    `${country.name} ${country.code}`
-      .toLowerCase()
-      .includes(countrySearch.trim().toLowerCase())
-  );
-
-  // Keep the selected country visible while searching.
-  const countryOptions = COUNTRIES.filter(
-    (country) =>
-      country.name === values.country ||
-      visibleCountries.some((item) => item.code === country.code)
-  );
-
   function change(key: string, value: string) {
-    setValues((previous) => ({ ...previous, [key]: value }));
+    setValues((previous) => ({
+      ...previous,
+      [key]: value
+    }));
+
     setValidation(null);
   }
 
@@ -269,6 +276,7 @@ function TapeForm({
           {label}
           {required ? " *" : ""}
         </span>
+
         <input
           id={`${id}-${key}`}
           name={key}
@@ -297,11 +305,11 @@ function TapeForm({
           {label}
           {required ? " *" : ""}
         </span>
-        <select
+
+        <FormSelect
           id={`${id}-${key}`}
           name={key}
           required={required}
-          className={inputClass}
           value={values[key] ?? ""}
           onChange={(event) => {
             const next = event.target.value;
@@ -315,25 +323,29 @@ function TapeForm({
                 tape_size: "",
                 tape_speed: ""
               }));
+
               setValidation(null);
-            } else {
-              change(key, next);
+              return;
             }
+
+            change(key, next);
           }}
         >
           <option value="">Select {label.toLowerCase()}</option>
+
           {options.map((option) => (
             <option key={option} value={option}>
               {option}
             </option>
           ))}
-        </select>
+        </FormSelect>
       </label>
     );
   }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
     if (locked || submitting.current) return;
 
     const materialId = (values.tape_code ?? "").trim();
@@ -368,7 +380,7 @@ function TapeForm({
       return;
     }
 
-    if (isAudio && !["2", "4", "8"].includes(values.audio_track ?? "")) {
+    if (isAudio && !AUDIO_TRACKS.includes(values.audio_track ?? "")) {
       setValidation("Select an audio track.");
       return;
     }
@@ -378,9 +390,43 @@ function TapeForm({
       return;
     }
 
-    if ((isVinyl || isReel) && (!values.tape_size || !values.tape_speed)) {
-      setValidation("Select the size and speed.");
+    if (
+      isVinyl &&
+      (!VINYL_SIZES.includes(values.tape_size ?? "") ||
+        !VINYL_SPEEDS.includes(values.tape_speed ?? ""))
+    ) {
+      setValidation("Select a valid vinyl size and speed.");
       return;
+    }
+
+    if (
+      isReel &&
+      (!REEL_SIZES.includes(values.tape_size ?? "") ||
+        !REEL_SPEEDS.includes(values.tape_speed ?? ""))
+    ) {
+      setValidation("Select a valid reel size and speed.");
+      return;
+    }
+
+    const dueDate = values.due_date?.trim();
+    const dueTime = values.due_time?.trim();
+
+    let deadline: string | undefined;
+
+    if (dueDate || dueTime) {
+      if (!dueDate || !dueTime) {
+        setValidation("Select both the due date and due time.");
+        return;
+      }
+
+      const date = new Date(`${dueDate}T${dueTime}`);
+
+      if (Number.isNaN(date.getTime())) {
+        setValidation("Enter a valid tape deadline.");
+        return;
+      }
+
+      deadline = date.toISOString();
     }
 
     const optional = (key: string) => values[key]?.trim() || undefined;
@@ -393,7 +439,8 @@ function TapeForm({
       internal_ref: optional("internal_ref"),
       country: optional("country"),
       summary: optional("summary"),
-      content_tags: categories
+      content_tags: categories,
+      ...(deadline ? { due_at: deadline } : {})
     };
 
     if (hasCapacity) {
@@ -457,6 +504,7 @@ function TapeForm({
           <h2 id={titleId} className="text-xl font-semibold">
             Add tape / material
           </h2>
+
           <p className="mt-2 text-sm text-dashboard-muted">
             Box: {boxId}. Enter the Material ID printed on the item.
           </p>
@@ -476,16 +524,21 @@ function TapeForm({
       <fieldset disabled={locked} className="space-y-6">
         <legend className="sr-only">Material intake</legend>
 
-        <label className="block space-y-2 text-sm">
+        <label htmlFor={`${id}-media-type`} className="block space-y-2 text-sm">
           <span>Media type *</span>
-          <select
-            className={inputClass}
+
+          <FormSelect
+            id={`${id}-media-type`}
+            name="media_type"
+            required
             value={mediaType}
             onChange={(event) => {
               const next = event.target.value as TapeMediaType;
+
               if (!(next in FORMATS)) return;
 
               setMediaType(next);
+
               setValues((previous) => ({
                 ...previous,
                 format: next === "document" ? "Document" : "",
@@ -496,6 +549,7 @@ function TapeForm({
                 tape_size: "",
                 tape_speed: ""
               }));
+
               setValidation(null);
             }}
           >
@@ -504,12 +558,13 @@ function TapeForm({
                 {label}
               </option>
             ))}
-          </select>
+          </FormSelect>
         </label>
 
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
             {text("tape_code", "Material ID", true)}
+
             <p className="mt-2 text-xs text-dashboard-muted">
               Example: {boxId}-001-{MEDIA_SUFFIX[mediaType]}. Must be unique
               across Individual and POV.
@@ -517,11 +572,19 @@ function TapeForm({
           </div>
 
           {isDocument ? (
-            <label className="block space-y-2 text-sm">
+            <label
+              htmlFor={`${id}-document-format`}
+              className="block space-y-2 text-sm"
+            >
               <span>Format</span>
-              <select className={inputClass} value="Document" disabled>
+
+              <FormSelect
+                id={`${id}-document-format`}
+                value="Document"
+                disabled
+              >
                 <option value="Document">Document</option>
-              </select>
+              </FormSelect>
             </label>
           ) : (
             select("format", "Format", FORMATS[mediaType])
@@ -529,40 +592,8 @@ function TapeForm({
 
           {text("title", "Title")}
           {text("internal_ref", "Internal reference")}
+          {text("country", "Country")}
         </div>
-
-        <section className="space-y-3">
-          <h3 className="text-sm font-semibold">Country</h3>
-
-          <div className="grid gap-3 sm:grid-cols-2">
-            <label className="block space-y-2 text-sm">
-              <span>Find a country</span>
-              <input
-                type="search"
-                className={inputClass}
-                value={countrySearch}
-                placeholder="Search name or country code"
-                onChange={(event) => setCountrySearch(event.target.value)}
-              />
-            </label>
-
-            <label className="block space-y-2 text-sm">
-              <span>Country</span>
-              <select
-                className={inputClass}
-                value={values.country ?? ""}
-                onChange={(event) => change("country", event.target.value)}
-              >
-                <option value="">Select country</option>
-                {countryOptions.map((country) => (
-                  <option key={country.code} value={country.name}>
-                    {country.flag} {country.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-          </div>
-        </section>
 
         <section className="space-y-4">
           <h3 className="text-base font-semibold">
@@ -575,25 +606,19 @@ function TapeForm({
 
             {isVideo && select("color_system", "Color system", COLOR_SYSTEMS)}
 
-            {isAudio && select("audio_track", "Audio track", ["2", "4", "8"])}
+            {isAudio && select("audio_track", "Audio track", AUDIO_TRACKS)}
 
             {isVinyl && (
               <>
-                {select("tape_size", "Vinyl size", ['7"', '10"', '12"'])}
-                {select("tape_speed", "Vinyl speed", ["33 1/3", "45", "78"])}
+                {select("tape_size", "Vinyl size", VINYL_SIZES)}
+                {select("tape_speed", "Vinyl speed", VINYL_SPEEDS)}
               </>
             )}
 
             {isReel && (
               <>
-                {select("tape_size", "Reel size", ['3"', '7"', '10.5"'])}
-                {select("tape_speed", "Reel speed (IPS)", [
-                  "1 7/8",
-                  "3 3/4",
-                  "7 1/2",
-                  "15",
-                  "30"
-                ])}
+                {select("tape_size", "Reel size", REEL_SIZES)}
+                {select("tape_speed", "Reel speed (IPS)", REEL_SPEEDS)}
               </>
             )}
 
@@ -631,6 +656,73 @@ function TapeForm({
           )}
         </section>
 
+        <section className="space-y-4 rounded-lg border border-dashboard-border p-4">
+          <div>
+            <h3 className="text-sm font-semibold">Schedule</h3>
+
+            <p className="mt-1 text-xs text-dashboard-muted">
+              Optional deadline for completing this tape.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <label
+              htmlFor={`${id}-due-date`}
+              className="block space-y-2 text-sm"
+            >
+              <span>Due date</span>
+
+              <input
+                id={`${id}-due-date`}
+                name="due_date"
+                type="date"
+                className={inputClass}
+                value={values.due_date ?? ""}
+                aria-describedby={`${id}-schedule-help`}
+                onChange={(event) => {
+                  const date = event.target.value;
+
+                  setValues((previous) => ({
+                    ...previous,
+                    due_date: date,
+                    due_time: date ? previous.due_time ?? "" : ""
+                  }));
+
+                  setValidation(null);
+                }}
+              />
+            </label>
+
+            <label
+              htmlFor={`${id}-due-time`}
+              className="block space-y-2 text-sm"
+            >
+              <span>Due time</span>
+
+              <input
+                id={`${id}-due-time`}
+                name="due_time"
+                type="time"
+                step={60}
+                disabled={locked || !values.due_date}
+                required={Boolean(values.due_date)}
+                className={inputClass}
+                value={values.due_time ?? ""}
+                onChange={(event) => change("due_time", event.target.value)}
+                aria-describedby={`${id}-schedule-help`}
+              />
+            </label>
+          </div>
+
+          <p
+            id={`${id}-schedule-help`}
+            className="text-xs text-dashboard-muted"
+          >
+            Leave the date empty for no deadline. If you select a date, select a
+            time too. Times use your device’s local timezone.
+          </p>
+        </section>
+
         <fieldset>
           <legend className="mb-3 text-sm font-semibold">
             Content category — select several
@@ -650,23 +742,28 @@ function TapeForm({
                   checked={categories.includes(category)}
                   onChange={(event) => {
                     const checked = event.target.checked;
+
                     setCategories((previous) =>
                       checked
                         ? [...previous, category]
                         : previous.filter((item) => item !== category)
                     );
                   }}
-                  className="h-4 w-4"
+                  className="h-4 w-4 accent-dashboard-focus"
                 />
+
                 <span>{category}</span>
               </label>
             ))}
           </div>
         </fieldset>
 
-        <label className="block space-y-2 text-sm">
+        <label htmlFor={`${id}-summary`} className="block space-y-2 text-sm">
           <span>Summary</span>
+
           <textarea
+            id={`${id}-summary`}
+            name="summary"
             rows={4}
             className={`${inputClass} resize-y`}
             value={values.summary ?? ""}
@@ -676,7 +773,7 @@ function TapeForm({
       </fieldset>
 
       {(validation || error) && (
-        <div role="alert" className="mt-5 space-y-1 text-sm text-rose-600">
+        <div role="alert" className="mt-5 space-y-1 text-sm text-dashboard-red">
           {validation && <p>{validation}</p>}
           {error && <p>{error}</p>}
         </div>
@@ -691,6 +788,7 @@ function TapeForm({
         >
           Cancel
         </button>
+
         <button
           type="submit"
           disabled={locked}
