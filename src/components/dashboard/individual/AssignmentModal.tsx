@@ -1,16 +1,21 @@
 "use client";
 
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
-import { X } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 import toast from "react-hot-toast";
 
 import api from "@/apis/axios";
 import { individualService } from "@/services/individual.service";
 import { individualError } from "@/hooks/individual/useIndividualJob";
-
 import type { AssignableStage, TapeSummary } from "@/types/production-api";
+import {
+  PRODUCTION_STAGES,
+  canOperateStage,
+  specialtyLabel,
+  stageLabel
+} from "../../../lib/individual/tape-workflow";
 
-interface AssignmentModalProps {
+interface Props {
   tape: TapeSummary;
   onClose: () => void;
   onAssigned: () => void | Promise<void>;
@@ -33,45 +38,35 @@ interface OperatorPage {
   };
 }
 
-const ASSIGNABLE_STAGES: AssignableStage[] = [
-  "inspected",
-  "cleaning",
-  "baking",
-  "ingest",
-  "qc",
-  "restoration"
-];
-
-function stageLabel(value: string) {
-  if (value === "qc") return "QC";
-
-  return value
-    .replace(/_/g, " ")
-    .replace(/\b\w/g, (letter) => letter.toUpperCase());
-}
+const selectClass = "dashboard-input min-h-12 appearance-none py-3 pl-3 pr-10";
 
 function operatorName(operator: Operator) {
-  return operator.profiles?.display_name || operator.email;
+  return operator.profiles?.display_name?.trim() || operator.email;
 }
 
-export default function AssignmentModal({
-  tape,
-  onClose,
-  onAssigned
-}: AssignmentModalProps) {
+function SelectArrow() {
+  return (
+    <ChevronDown
+      size={16}
+      aria-hidden="true"
+      className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-dashboard-muted"
+    />
+  );
+}
+
+export default function AssignmentModal({ tape, onClose, onAssigned }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
   const lock = useRef(false);
   const mounted = useRef(false);
-  const titleId = useId();
+  const id = useId();
 
   const initialStage =
-    ASSIGNABLE_STAGES.find((stage) => stage === tape.current_station) ??
+    PRODUCTION_STAGES.find((item) => item === tape.current_station) ??
     "inspected";
 
   const [stage, setStage] = useState<AssignableStage>(initialStage);
-
   const [operatorId, setOperatorId] = useState(
-    tape.assignments?.find((assignment) => assignment.stage === initialStage)
+    tape.assignments?.find((item) => item.stage === initialStage)
       ?.operator_id ?? ""
   );
 
@@ -85,21 +80,16 @@ export default function AssignmentModal({
     mounted.current = true;
 
     const element = dialog.current;
-
-    if (element && !element.open) {
-      element.showModal();
-    }
-
     const previousOverflow = document.body.style.overflow;
+
+    if (element && !element.open) element.showModal();
     document.body.style.overflow = "hidden";
 
     return () => {
       mounted.current = false;
       document.body.style.overflow = previousOverflow;
 
-      if (element?.open) {
-        element.close();
-      }
+      if (element?.open) element.close();
     };
   }, []);
 
@@ -112,8 +102,7 @@ export default function AssignmentModal({
       setOperators([]);
 
       try {
-        const result: Operator[] = [];
-
+        const result = new Map<string, Operator>();
         let page = 1;
         let totalPages = 1;
 
@@ -127,34 +116,29 @@ export default function AssignmentModal({
             signal: controller.signal
           });
 
-          result.push(...data.data);
+          if (controller.signal.aborted) return;
+
+          for (const operator of data.data) {
+            if (operator.status === "active") {
+              result.set(operator.id, operator);
+            }
+          }
+
           totalPages = data.meta.totalPages;
           page++;
         } while (page <= totalPages);
 
-        if (!controller.signal.aborted) {
-          const uniqueOperators = new Map<string, Operator>();
-
-          for (const operator of result) {
-            if (operator.status === "active") {
-              uniqueOperators.set(operator.id, operator);
-            }
-          }
-
-          setOperators(
-            Array.from(uniqueOperators.values()).sort((a, b) =>
-              operatorName(a).localeCompare(operatorName(b))
-            )
-          );
-        }
+        setOperators(
+          Array.from(result.values()).sort((a, b) =>
+            operatorName(a).localeCompare(operatorName(b))
+          )
+        );
       } catch (failure) {
         if (!controller.signal.aborted) {
-          setError(individualError(failure, "Could not load Operators."));
+          setError(individualError(failure, "Could not load operators."));
         }
       } finally {
-        if (!controller.signal.aborted) {
-          setLoading(false);
-        }
+        if (!controller.signal.aborted) setLoading(false);
       }
     }
 
@@ -163,20 +147,36 @@ export default function AssignmentModal({
     return () => controller.abort();
   }, [reload]);
 
-  const operatorAvailable = operators.some(
+  const eligibleOperators = operators.filter((operator) =>
+    canOperateStage(operator.profiles?.operator_type, stage, tape.media_type)
+  );
+
+  const selectedOperator = eligibleOperators.find(
     (operator) => operator.id === operatorId
   );
 
+  const currentAssignment = tape.assignments?.find(
+    (assignment) => assignment.stage === stage
+  );
+
+  const currentName = currentAssignment
+    ? currentAssignment.operator.profiles?.display_name?.trim() ||
+      currentAssignment.operator.email
+    : null;
+
+  const unavailable =
+    !["audio", "video"].includes(tape.media_type) ||
+    tape.status === "shipped" ||
+    tape.current_station === "shipped";
+
   function close() {
-    if (!lock.current) {
-      onClose();
-    }
+    if (!lock.current) onClose();
   }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (lock.current || loading || !operatorAvailable) {
+    if (lock.current || loading || unavailable || !selectedOperator) {
       return;
     }
 
@@ -187,20 +187,22 @@ export default function AssignmentModal({
     try {
       await individualService.assignTape(tape.id, {
         stage,
-        operator_id: operatorId
+        operator_id: selectedOperator.id
       });
     } catch (failure) {
       lock.current = false;
 
       if (mounted.current) {
         setSaving(false);
-        setError(individualError(failure, "Could not assign this Operator."));
+        setError(individualError(failure, "Could not save assignment."));
       }
 
       return;
     }
 
-    toast.success("Operator assigned.");
+    toast.success(
+      `${operatorName(selectedOperator)} assigned to ${stageLabel(stage)}.`
+    );
 
     try {
       await onAssigned();
@@ -219,12 +221,17 @@ export default function AssignmentModal({
   return (
     <dialog
       ref={dialog}
-      aria-labelledby={titleId}
+      aria-labelledby={`${id}-title`}
       onCancel={(event) => {
         event.preventDefault();
         close();
       }}
-      className="m-auto max-h-[90dvh] w-[calc(100%-2rem)] max-w-lg overflow-y-auto rounded-2xl border border-dashboard-border bg-white p-6 text-slate-900 shadow-xl backdrop:bg-black/50"
+      className="
+        m-auto max-h-[90dvh] w-[calc(100%-2rem)] max-w-lg
+        overflow-y-auto rounded-xl border border-dashboard-border
+        bg-dashboard-surface p-6 text-dashboard-text
+        shadow-xl backdrop:bg-black/50
+      "
     >
       <form
         onSubmit={(event) => void submit(event)}
@@ -233,11 +240,11 @@ export default function AssignmentModal({
       >
         <header className="flex items-start justify-between gap-3">
           <div>
-            <h2 id={titleId} className="text-lg font-semibold">
-              Assign Operator
+            <h2 id={`${id}-title`} className="text-lg font-semibold">
+              Assign operator
             </h2>
 
-            <p className="mt-1 break-all text-sm text-slate-500">
+            <p className="mt-1 break-all text-sm text-dashboard-blue">
               {tape.tape_code ?? tape.id}
             </p>
           </div>
@@ -247,96 +254,125 @@ export default function AssignmentModal({
             disabled={saving}
             onClick={close}
             aria-label="Close assignment"
-            className="rounded p-1"
+            className="dashboard-icon-button"
           >
-            <X size={20} aria-hidden="true" />
+            <X size={18} aria-hidden="true" />
           </button>
         </header>
 
-        <fieldset disabled={saving} className="space-y-4">
-          <label className="block space-y-2 text-sm">
-            <span>Production stage</span>
+        <fieldset disabled={saving || unavailable} className="space-y-4">
+          <label htmlFor={`${id}-stage`} className="block space-y-2 text-sm">
+            <span>Assign for stage</span>
 
-            <select
-              value={stage}
-              onChange={(event) => {
-                const next = event.target.value as AssignableStage;
+            <div className="relative">
+              <select
+                id={`${id}-stage`}
+                value={stage}
+                onChange={(event) => {
+                  const next = event.target.value as AssignableStage;
 
-                setStage(next);
-                setOperatorId(
-                  tape.assignments?.find(
-                    (assignment) => assignment.stage === next
-                  )?.operator_id ?? ""
-                );
-                setError(null);
-              }}
-              className="dashboard-input min-h-12 w-full px-3 py-3"
-            >
-              {ASSIGNABLE_STAGES.map((item) => (
-                <option key={item} value={item}>
-                  {stageLabel(item)}
-                </option>
-              ))}
-            </select>
+                  setStage(next);
+                  setOperatorId(
+                    tape.assignments?.find(
+                      (assignment) => assignment.stage === next
+                    )?.operator_id ?? ""
+                  );
+                  setError(null);
+                }}
+                className={selectClass}
+              >
+                {PRODUCTION_STAGES.map((item) => (
+                  <option key={item} value={item}>
+                    {stageLabel(item)}
+                  </option>
+                ))}
+              </select>
+
+              <SelectArrow />
+            </div>
           </label>
 
-          <label className="block space-y-2 text-sm">
+          <div className="rounded-lg bg-dashboard-hover p-3 text-sm">
+            <span className="text-dashboard-muted">Currently assigned: </span>
+            <span className="font-medium">{currentName || "No operator"}</span>
+          </div>
+
+          <label htmlFor={`${id}-operator`} className="block space-y-2 text-sm">
             <span>Operator</span>
 
-            <select
-              required
-              disabled={loading}
-              value={operatorAvailable ? operatorId : ""}
-              onChange={(event) => {
-                setOperatorId(event.target.value);
-                setError(null);
-              }}
-              className="dashboard-input min-h-12 w-full px-3 py-3"
-            >
-              <option value="">
-                {loading ? "Loading Operators…" : "Select Operator"}
-              </option>
-
-              {operators.map((operator) => (
-                <option key={operator.id} value={operator.id}>
-                  {operatorName(operator)}
-                  {" · "}
-                  {operator.profiles?.operator_type || "No specialty"}
+            <div className="relative">
+              <select
+                id={`${id}-operator`}
+                required
+                disabled={loading}
+                value={selectedOperator ? operatorId : ""}
+                onChange={(event) => {
+                  setOperatorId(event.target.value);
+                  setError(null);
+                }}
+                className={selectClass}
+              >
+                <option value="">
+                  {loading ? "Loading operators…" : "Select an operator"}
                 </option>
-              ))}
-            </select>
+
+                {eligibleOperators.map((operator) => (
+                  <option key={operator.id} value={operator.id}>
+                    {operatorName(operator)}
+                    {" · "}
+                    {specialtyLabel(operator.profiles?.operator_type)}
+                  </option>
+                ))}
+              </select>
+
+              <SelectArrow />
+            </div>
           </label>
 
-          <p className="text-xs text-slate-500">
-            Assignment applies to the selected stage. It does not move the tape
-            or start work. The server checks Operator specialty.
+          <p className="text-xs leading-5 text-dashboard-muted">
+            This person is responsible for {stageLabel(stage)}. Other stage
+            assignments stay unchanged. Work starts when the operator presses
+            Start.
           </p>
+
+          {stage === "baking" && (
+            <p className="rounded-lg bg-dashboard-amber-soft p-3 text-xs leading-5 text-dashboard-amber">
+              Baking can currently be assigned to a supervisor. Admins can also
+              perform baking directly.
+            </p>
+          )}
         </fieldset>
 
+        {unavailable && (
+          <p className="text-sm text-dashboard-amber">
+            Assignment is unavailable for this material.
+          </p>
+        )}
+
         {error && (
-          <p role="alert" className="text-sm text-rose-600">
+          <p role="alert" className="text-sm text-dashboard-red">
             {error}
           </p>
         )}
 
-        {!loading && operators.length === 0 && (
-          <div className="space-y-2">
-            <p className="text-sm text-slate-500">
-              No active Operators loaded.
-            </p>
-
-            <button
-              type="button"
-              disabled={saving}
-              onClick={() => setReload((previous) => previous + 1)}
-              className="dashboard-btn-secondary"
-            >
-              Reload Operators
-            </button>
-          </div>
+        {!loading && !unavailable && eligibleOperators.length === 0 && (
+          <p role="status" className="text-sm text-dashboard-muted">
+            No active operators match this stage and media type.
+          </p>
         )}
 
-        <footer className="flex justify-end gap-3">
+        {!loading && (
+          <button
+            type="button"
+            disabled={saving}
+            onClick={() => setReload((previous) => previous + 1)}
+            className="text-xs text-dashboard-blue underline underline-offset-4 disabled:opacity-50"
+          >
+            Reload operators
+          </button>
+        )}
+
+        <footer className="flex justify-end gap-3 border-t border-dashboard-border pt-4">
           <button
             type="button"
             disabled={saving}
@@ -348,7 +384,7 @@ export default function AssignmentModal({
 
           <button
             type="submit"
-            disabled={loading || saving || !operatorAvailable}
+            disabled={loading || saving || unavailable || !selectedOperator}
             className="dashboard-btn-primary"
           >
             {saving ? "Saving…" : "Save assignment"}

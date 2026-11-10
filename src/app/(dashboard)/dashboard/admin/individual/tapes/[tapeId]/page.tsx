@@ -1,5 +1,5 @@
 import { RoleGuard } from "@/components/auth/RoleGuard";
-import IndividualTapeDetailsContainer from "@/components/dashboard/individual/IndividualTapeDetailsContainer";
+import IndividualTapeDetailsContainer from "@/containers/dashboard/admin/individual/IndividualTapeDetailsContainer";
 
 export default async function IndividualTapePage({
   params

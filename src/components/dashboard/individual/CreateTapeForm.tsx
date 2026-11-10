@@ -9,6 +9,7 @@ import {
   type FormEvent
 } from "react";
 import { ChevronDown } from "lucide-react";
+import { individualError } from "@/hooks/individual/useIndividualJob";
 import type { TapeInput, TapeMediaType } from "@/types/production-api";
 
 interface Props {
@@ -20,7 +21,8 @@ interface Props {
   onCancel: () => void;
 }
 
-const inputClass = "dashboard-input min-h-12 px-4 py-3";
+const inputClass =
+  "dashboard-input min-h-12 px-4 py-3 placeholder:text-dashboard-muted";
 
 const FORMATS: Record<TapeMediaType, readonly string[]> = {
   video: [
@@ -63,7 +65,6 @@ const CAPACITIES = ["30", "60", "90", "120", "180", "240"];
 const VINYL_CAPACITIES = ["8", "15", "30", "40"];
 const COLOR_SYSTEMS = ["PAL 625", "NTSC 525", "SECAM 625", "MESECAM 625"];
 const AUDIO_TRACKS = ["2", "4", "8"];
-
 const VINYL_SIZES = ['7"', '10"', '12"'];
 const VINYL_SPEEDS = ["33 1/3", "45", "78"];
 const REEL_SIZES = ['3"', '7"', '10.5"'];
@@ -108,6 +109,19 @@ const MEDIA_SUFFIX: Record<TapeMediaType, string> = {
   document: "D"
 };
 
+const PLACEHOLDERS: Record<string, string> = {
+  title: "e.g. Wedding of Karim and Sara",
+  internal_ref: "e.g. FAM-1998-03",
+  country: "e.g. Algeria",
+  city: "e.g. Oran",
+  people: "e.g. Karim, Sara, family",
+  singer: "e.g. Ahmed Wahby",
+  musician: "e.g. Oran Orchestra",
+  words: "e.g. Traditional",
+  company: "e.g. Disques Oasis",
+  published_date: "e.g. 1972 or 1972-06-15"
+};
+
 type Values = Record<string, string>;
 
 function FormSelect({
@@ -141,6 +155,139 @@ function FormSelect({
       />
     </div>
   );
+}
+
+interface DateFieldProps {
+  id: string;
+  name: string;
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+}
+
+function DateField({ id, name, label, value, onChange }: DateFieldProps) {
+  return (
+    <label htmlFor={id} className="block space-y-2 text-sm">
+      <span>{label}</span>
+
+      <input
+        id={id}
+        name={name}
+        type="date"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        className={inputClass}
+        aria-describedby={`${id}-help`}
+      />
+
+      <span
+        id={`${id}-help`}
+        className="block text-xs leading-5 text-dashboard-muted"
+      >
+        Example: 18 March 2027. Choose from the calendar or type using the
+        format shown in the field.
+      </span>
+    </label>
+  );
+}
+
+interface ScheduleFieldsProps {
+  id: string;
+  prefix: "start" | "due";
+  label: string;
+  date: string;
+  time: string;
+  disabled: boolean;
+  onDateChange: (value: string) => void;
+  onTimeChange: (value: string) => void;
+}
+
+function ScheduleFields({
+  id,
+  prefix,
+  label,
+  date,
+  time,
+  disabled,
+  onDateChange,
+  onTimeChange
+}: ScheduleFieldsProps) {
+  return (
+    <div className="grid gap-4 sm:grid-cols-2">
+      <DateField
+        id={`${id}-${prefix}-date`}
+        name={`${prefix}_date`}
+        label={`${label} date`}
+        value={date}
+        onChange={onDateChange}
+      />
+
+      <label
+        htmlFor={`${id}-${prefix}-time`}
+        className="block space-y-2 text-sm"
+      >
+        <span>{label} time</span>
+
+        <input
+          id={`${id}-${prefix}-time`}
+          name={`${prefix}_time`}
+          type="time"
+          step={60}
+          disabled={disabled || !date}
+          required={Boolean(date)}
+          className={inputClass}
+          value={time}
+          onChange={(event) => onTimeChange(event.target.value)}
+          aria-describedby={`${id}-${prefix}-time-help`}
+        />
+
+        <span
+          id={`${id}-${prefix}-time-help`}
+          className="block text-xs leading-5 text-dashboard-muted"
+        >
+          Example: 09:30. Required when a date is selected.
+        </span>
+      </label>
+    </div>
+  );
+}
+
+function scheduleTimestamp(
+  dateValue: string | undefined,
+  timeValue: string | undefined,
+  label: string
+): string | undefined {
+  const date = dateValue?.trim() ?? "";
+  const time = timeValue?.trim() ?? "";
+
+  if (!date && !time) return undefined;
+
+  if (!date || !time) {
+    throw new Error(`Enter both the ${label} date and time.`);
+  }
+
+  const parsed = new Date(`${date}T${time}`);
+
+  if (Number.isNaN(parsed.getTime())) {
+    throw new Error(`Enter a valid ${label} date and time.`);
+  }
+
+  // Reject invalid dates and local times that were normalized,
+  // such as a time that does not exist during a daylight-saving change.
+  const [year, month, day] = date.split("-").map(Number);
+  const [hours, minutes] = time.split(":").map(Number);
+
+  if (
+    parsed.getFullYear() !== year ||
+    parsed.getMonth() + 1 !== month ||
+    parsed.getDate() !== day ||
+    parsed.getHours() !== hours ||
+    parsed.getMinutes() !== minutes
+  ) {
+    throw new Error(`Enter a valid ${label} date and time.`);
+  }
+
+  return parsed.toISOString();
 }
 
 export function CreateTapeModal({
@@ -265,7 +412,22 @@ function TapeForm({
     setValidation(null);
   }
 
+  function changeScheduleDate(prefix: "start" | "due", date: string) {
+    setValues((previous) => ({
+      ...previous,
+      [`${prefix}_date`]: date,
+      [`${prefix}_time`]: date ? previous[`${prefix}_time`] ?? "" : ""
+    }));
+
+    setValidation(null);
+  }
+
   function text(key: string, label: string, required = false) {
+    const placeholder =
+      key === "tape_code"
+        ? `e.g. ${boxId}-001-${MEDIA_SUFFIX[mediaType]}`
+        : PLACEHOLDERS[key] ?? `Enter ${label.toLowerCase()}`;
+
     return (
       <label
         key={key}
@@ -281,6 +443,7 @@ function TapeForm({
           id={`${id}-${key}`}
           name={key}
           required={required}
+          placeholder={placeholder}
           className={inputClass}
           value={values[key] ?? ""}
           onChange={(event) => change(key, event.target.value)}
@@ -408,25 +571,34 @@ function TapeForm({
       return;
     }
 
-    const dueDate = values.due_date?.trim();
-    const dueTime = values.due_time?.trim();
-
+    let plannedStart: string | undefined;
     let deadline: string | undefined;
 
-    if (dueDate || dueTime) {
-      if (!dueDate || !dueTime) {
-        setValidation("Select both the due date and due time.");
-        return;
+    try {
+      plannedStart = scheduleTimestamp(
+        values.start_date,
+        values.start_time,
+        "planned start"
+      );
+
+      deadline = scheduleTimestamp(
+        values.due_date,
+        values.due_time,
+        "deadline"
+      );
+
+      if (
+        plannedStart &&
+        deadline &&
+        new Date(deadline).getTime() < new Date(plannedStart).getTime()
+      ) {
+        throw new Error("Planned end cannot precede planned start.");
       }
-
-      const date = new Date(`${dueDate}T${dueTime}`);
-
-      if (Number.isNaN(date.getTime())) {
-        setValidation("Enter a valid tape deadline.");
-        return;
-      }
-
-      deadline = date.toISOString();
+    } catch (failure) {
+      setValidation(
+        failure instanceof Error ? failure.message : "Check the schedule dates."
+      );
+      return;
     }
 
     const optional = (key: string) => values[key]?.trim() || undefined;
@@ -440,6 +612,7 @@ function TapeForm({
       country: optional("country"),
       summary: optional("summary"),
       content_tags: categories,
+      ...(plannedStart ? { planned_start_at: plannedStart } : {}),
       ...(deadline ? { due_at: deadline } : {})
     };
 
@@ -482,10 +655,8 @@ function TapeForm({
 
     try {
       await onSubmit(input);
-    } catch {
-      setValidation(
-        "Could not create the tape. Check the API error and retry."
-      );
+    } catch (failure) {
+      setValidation(individualError(failure, "Could not create the tape."));
     } finally {
       submitting.current = false;
       setSaving(false);
@@ -626,7 +797,14 @@ function TapeForm({
 
             {hasEvent && (
               <>
-                {text("event_date", "Date")}
+                <DateField
+                  id={`${id}-event-date`}
+                  name="event_date"
+                  label="Original event date"
+                  value={values.event_date ?? ""}
+                  onChange={(value) => change("event_date", value)}
+                />
+
                 {text("city", "City")}
                 {text("people", "People")}
               </>
@@ -638,7 +816,15 @@ function TapeForm({
                 {text("musician", "Musician")}
                 {text("words", "Words / lyricist")}
                 {text("company", "Company")}
-                {text("published_date", "Published date")}
+
+                <div>
+                  {text("published_date", "Published date")}
+
+                  <p className="mt-2 text-xs text-dashboard-muted">
+                    A year alone is allowed, for example 1972. For a full date,
+                    use YYYY-MM-DD.
+                  </p>
+                </div>
               </>
             )}
           </div>
@@ -656,70 +842,43 @@ function TapeForm({
           )}
         </section>
 
-        <section className="space-y-4 rounded-lg border border-dashboard-border p-4">
+        <section className="space-y-5 rounded-lg border border-dashboard-border p-4">
           <div>
-            <h3 className="text-sm font-semibold">Schedule</h3>
+            <h3 className="text-sm font-semibold">Schedule — optional</h3>
 
-            <p className="mt-1 text-xs text-dashboard-muted">
-              Optional deadline for completing this tape.
+            <p className="mt-1 text-xs leading-5 text-dashboard-muted">
+              Plan when processing should begin and when the tape should be
+              finished. These dates do not start a timer.
             </p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            <label
-              htmlFor={`${id}-due-date`}
-              className="block space-y-2 text-sm"
-            >
-              <span>Due date</span>
+          <ScheduleFields
+            id={id}
+            prefix="start"
+            label="Planned start"
+            date={values.start_date ?? ""}
+            time={values.start_time ?? ""}
+            disabled={locked}
+            onDateChange={(value) => changeScheduleDate("start", value)}
+            onTimeChange={(value) => change("start_time", value)}
+          />
 
-              <input
-                id={`${id}-due-date`}
-                name="due_date"
-                type="date"
-                className={inputClass}
-                value={values.due_date ?? ""}
-                aria-describedby={`${id}-schedule-help`}
-                onChange={(event) => {
-                  const date = event.target.value;
-
-                  setValues((previous) => ({
-                    ...previous,
-                    due_date: date,
-                    due_time: date ? previous.due_time ?? "" : ""
-                  }));
-
-                  setValidation(null);
-                }}
-              />
-            </label>
-
-            <label
-              htmlFor={`${id}-due-time`}
-              className="block space-y-2 text-sm"
-            >
-              <span>Due time</span>
-
-              <input
-                id={`${id}-due-time`}
-                name="due_time"
-                type="time"
-                step={60}
-                disabled={locked || !values.due_date}
-                required={Boolean(values.due_date)}
-                className={inputClass}
-                value={values.due_time ?? ""}
-                onChange={(event) => change("due_time", event.target.value)}
-                aria-describedby={`${id}-schedule-help`}
-              />
-            </label>
+          <div className="border-t border-dashboard-border pt-5">
+            <ScheduleFields
+              id={id}
+              prefix="due"
+              label="Planned end / deadline"
+              date={values.due_date ?? ""}
+              time={values.due_time ?? ""}
+              disabled={locked}
+              onDateChange={(value) => changeScheduleDate("due", value)}
+              onTimeChange={(value) => change("due_time", value)}
+            />
           </div>
 
-          <p
-            id={`${id}-schedule-help`}
-            className="text-xs text-dashboard-muted"
-          >
-            Leave the date empty for no deadline. If you select a date, select a
-            time too. Times use your device’s local timezone.
+          <p className="text-xs leading-5 text-dashboard-muted">
+            Leave either date empty if it is unknown. Each selected date needs a
+            time. Times use your device’s local timezone.
           </p>
         </section>
 
@@ -765,6 +924,7 @@ function TapeForm({
             id={`${id}-summary`}
             name="summary"
             rows={4}
+            placeholder="e.g. Family wedding ceremony and evening party in Oran."
             className={`${inputClass} resize-y`}
             value={values.summary ?? ""}
             onChange={(event) => change("summary", event.target.value)}
@@ -775,7 +935,7 @@ function TapeForm({
       {(validation || error) && (
         <div role="alert" className="mt-5 space-y-1 text-sm text-dashboard-red">
           {validation && <p>{validation}</p>}
-          {error && <p>{error}</p>}
+          {error && error !== validation && <p>{error}</p>}
         </div>
       )}
 
@@ -797,6 +957,6 @@ function TapeForm({
           {locked ? "Creating…" : "Create tape"}
         </button>
       </footer>
-    </form>
+    </form> 
   );
 }

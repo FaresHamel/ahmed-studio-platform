@@ -95,7 +95,12 @@ export interface TapeSummary {
   status: string;
   current_station: string | null;
   metadata: TapeMetadata | null;
+
+  planned_start_at?: string | null;
+  due_at?: string | null;
+
   assignments?: TapeAssignment[];
+  stage_timings?: TapeStageTiming[];
 }
 
 export interface TapeHistoryEntry {
@@ -153,6 +158,7 @@ export interface TapeInput {
   published_date?: string;
   tape_size?: string;
   tape_speed?: string;
+  planned_start_at?: string | null;
   due_at?: string | null;
 }
 export type Station =
@@ -166,12 +172,10 @@ export type Station =
   | "ready"
   | "shipped";
 export interface TransitionInput {
-  to_station: Station;
-  result: "OK" | "NOT_OK";
+  to_station: Exclude<Station, "shipped">;
+  result: TapeWorkResult;
   issue_note?: string;
   photo_url?: string;
-  device_id?: string;
-  device_name?: string;
 }
 export interface ProjectSummary {
   id: string;
@@ -340,3 +344,78 @@ export interface TapeAssignment {
     } | null;
   };
 }
+export type TapeTimingStatus =
+  | "manual"
+  | "running"
+  | "paused"
+  | "completed"
+  | "cancelled";
+
+export type TapeWorkResult = "OK" | "NOT_OK";
+
+export interface TapeTimingPause {
+  id: string;
+  timing_id: string;
+  started_at: string;
+  ended_at: string | null;
+  reason: string;
+}
+
+export interface TapeStageTiming {
+  id: string;
+  tape_id: string;
+  stage: AssignableStage;
+  status: TapeTimingStatus;
+  operator_id: string | null;
+  due_at: string | null;
+  started_at: string | null;
+  ended_at: string | null;
+  result: TapeWorkResult | null;
+  note: string | null;
+  created_at: string;
+  updated_at: string;
+
+  // Included by tape detail and timer endpoints.
+  // The existing manual timing endpoint returns scalar fields only.
+  pauses?: TapeTimingPause[];
+}
+
+export interface TapeTimerResponse extends TapeStageTiming {
+  pauses: TapeTimingPause[];
+  active_seconds: number;
+  server_now: string;
+}
+
+export interface TapeScheduleInput {
+  planned_start_at?: string | null;
+  due_at?: string | null;
+}
+
+export interface TapeScheduleResponse {
+  id: string;
+  planned_start_at: string | null;
+  due_at: string | null;
+}
+
+export interface StageTimingInput {
+  due_at?: string | null;
+  started_at?: string | null;
+  ended_at?: string | null;
+}
+
+export interface CreateStageTimingInput extends StageTimingInput {
+  stage: AssignableStage;
+}
+
+export interface FinishTapeTimerInput {
+  result: TapeWorkResult;
+  issue_note?: string;
+
+  // Omit to finish work without moving the tape.
+  to_station?: Exclude<Station, "shipped">;
+}
+
+// Schedule edits use the separate schedule endpoint.
+export type TapeUpdateInput = Partial<
+  Omit<TapeInput, "planned_start_at" | "due_at">
+>;

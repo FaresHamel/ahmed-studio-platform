@@ -17,7 +17,15 @@ import type {
   IndividualJobDetails,
   IndividualBoxDetails,
   IndividualTapeDetails,
-  AssignableStage
+  AssignableStage,
+  TapeUpdateInput,
+  TapeScheduleInput,
+  TapeScheduleResponse,
+  TapeTimerResponse,
+  TapeStageTiming,
+  StageTimingInput,
+  CreateStageTimingInput,
+  FinishTapeTimerInput,
 } from "@/types/production-api";
 const id = encodeURIComponent;
 export const individualService = {
@@ -113,10 +121,13 @@ export const individualService = {
   },
   async updateTape(
     tapeId: string,
-    body: Partial<TapeInput>
+    body: TapeUpdateInput
   ): Promise<TapeSummary> {
     return (
-      await api.patch<TapeSummary>(`/individual/tapes/${id(tapeId)}`, body)
+      await api.patch<TapeSummary>(
+        `/individual/tapes/${id(tapeId)}`,
+        body
+      )
     ).data;
   },
   async transition(
@@ -166,6 +177,100 @@ export const individualService = {
       await api.patch(
         `/individual/tapes/${id(tapeId)}/assignment`,
         body,
+      )
+    ).data;
+  },
+  async updateSchedule(
+    tapeId: string,
+    body: TapeScheduleInput
+  ): Promise<TapeScheduleResponse> {
+    return (
+      await api.patch<TapeScheduleResponse>(
+        `/individual/tapes/${id(tapeId)}/schedule`,
+        body
+      )
+    ).data;
+  },
+
+  async createStageTiming(
+    tapeId: string,
+    body: CreateStageTimingInput
+  ): Promise<TapeStageTiming> {
+    return (
+      await api.post<TapeStageTiming>(
+        `/individual/tapes/${id(tapeId)}/stage-timings`,
+        body
+      )
+    ).data;
+  },
+
+  async updateStageTiming(
+    tapeId: string,
+    timingId: string,
+    body: StageTimingInput
+  ): Promise<TapeStageTiming> {
+    return (
+      await api.patch<TapeStageTiming>(
+        `/individual/tapes/${id(tapeId)}/stage-timings/${id(timingId)}`,
+        body
+      )
+    ).data;
+  },
+
+  async startTimer(tapeId: string): Promise<TapeTimerResponse> {
+    return (
+      await api.post<TapeTimerResponse>(
+        `/individual/tapes/${id(tapeId)}/timers`
+      )
+    ).data;
+  },
+
+  async pauseTimer(
+    tapeId: string,
+    timingId: string,
+    reason: string
+  ): Promise<TapeTimerResponse> {
+    return (
+      await api.patch<TapeTimerResponse>(
+        `/individual/tapes/${id(tapeId)}/timers/${id(timingId)}/pause`,
+        { reason }
+      )
+    ).data;
+  },
+
+  async resumeTimer(
+    tapeId: string,
+    timingId: string
+  ): Promise<TapeTimerResponse> {
+    return (
+      await api.patch<TapeTimerResponse>(
+        `/individual/tapes/${id(tapeId)}/timers/${id(timingId)}/resume`
+      )
+    ).data;
+  },
+
+  async finishTimer(
+    tapeId: string,
+    timingId: string,
+    body: FinishTapeTimerInput
+  ): Promise<TapeTimerResponse> {
+    return (
+      await api.patch<TapeTimerResponse>(
+        `/individual/tapes/${id(tapeId)}/timers/${id(timingId)}/finish`,
+        body
+      )
+    ).data;
+  },
+
+  async cancelTimer(
+    tapeId: string,
+    timingId: string,
+    reason: string
+  ): Promise<TapeTimerResponse> {
+    return (
+      await api.patch<TapeTimerResponse>(
+        `/individual/tapes/${id(tapeId)}/timers/${id(timingId)}/cancel`,
+        { reason }
       )
     ).data;
   },

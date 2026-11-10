@@ -9,7 +9,7 @@ import type { TapeSummary } from "@/types/production-api";
 import AssignmentModal from "./AssignmentModal";
 import TapeStageColumn, { REVIEW_STAGE, TAPE_STAGES } from "./TapeStageColumn";
 import { useTapeColumns } from "@/hooks/individual/useTapeColumns";
-
+import ChangeTapeStageModal from "./ChangeTapeStageModal";
 
 interface Props {
   boxId: string;
@@ -33,7 +33,7 @@ export default function TapeBoard({ boxId, tapes, onAssigned }: Props) {
   const [search, setSearch] = useState("");
   const [assignee, setAssignee] = useState("all");
   const [selectedTape, setSelectedTape] = useState<TapeSummary | null>(null);
-
+const [stageTape, setStageTape] = useState<TapeSummary | null>(null);
   const { expanded, toggle, update } = useTapeColumns(boxId);
 
   const assigneeNames = new Map<string, string>();
@@ -183,11 +183,19 @@ export default function TapeBoard({ boxId, tapes, onAssigned }: Props) {
               isAdmin={isAdmin}
               onToggle={() => toggle(stage.key)}
               onAssign={setSelectedTape}
+              onChangeStage={setStageTape}
             />
           ))}
         </div>
       </div>
-
+      {stageTape && (
+        <ChangeTapeStageModal
+          key={stageTape.id}
+          tape={stageTape}
+          onClose={() => setStageTape(null)}
+          onUpdated={onAssigned}
+        />
+      )}
       {selectedTape && isAdmin && (
         <AssignmentModal
           key={selectedTape.id}

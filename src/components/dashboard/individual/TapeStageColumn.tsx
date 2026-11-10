@@ -45,6 +45,7 @@ interface Props {
   isAdmin: boolean;
   onToggle: () => void;
   onAssign: (tape: TapeSummary) => void;
+  onChangeStage: (tape: TapeSummary) => void;
 }
 
 function assignmentAllowed(tape: TapeSummary) {
@@ -61,7 +62,8 @@ export default function TapeStageColumn({
   expanded,
   isAdmin,
   onToggle,
-  onAssign
+  onAssign,
+  onChangeStage
 }: Props) {
   const contentId = useId();
 
@@ -138,6 +140,7 @@ export default function TapeStageColumn({
             color={stage.color}
             canAssign={isAdmin && assignmentAllowed(tape)}
             onAssign={onAssign}
+            onChangeStage={onChangeStage}
           />
         ))}
       </div>
