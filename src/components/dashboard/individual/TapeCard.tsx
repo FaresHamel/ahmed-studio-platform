@@ -1,12 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRightLeft, Hash, MoreHorizontal, X } from "lucide-react";
+import {
+  ArrowRightLeft,
+  Hash,
+  MoreHorizontal,
+  Trash2,
+  UserRound,
+  X
+} from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 
 import type { TapeSummary } from "@/types/production-api";
 import { avatarColor } from "@/lib/users/account-display";
-import { stageLabel } from "@/lib/individual/tape-workflow";
 
 interface Props {
   tape: TapeSummary;
@@ -14,23 +20,27 @@ interface Props {
   canAssign: boolean;
   onAssign: (tape: TapeSummary) => void;
   onChangeStage: (tape: TapeSummary) => void;
+  canDelete: boolean;
+  onDelete: (tape: TapeSummary) => void;
+  editable: boolean;
 }
 
-const MEDIA_LABELS: Record<string, string> = {
-  video: "Video",
-  audio: "Audio",
-  photo: "Photo",
-  document: "Document"
-};
+interface TapeActionsProps {
+  materialId: string;
+  canAssign: boolean;
+  canChangeStage: boolean;
+  onAssign: () => void;
+  onChangeStage: () => void;
+  canDelete: boolean;
+  onDelete: () => void;
+}
 
 function formatDueDate(value?: string | null) {
   if (!value) return "Not set";
 
   const date = new Date(value);
 
-  if (Number.isNaN(date.getTime())) {
-    return "Not set";
-  }
+  if (Number.isNaN(date.getTime())) return "Not set";
 
   return date.toLocaleString("en-GB", {
     day: "2-digit",
@@ -41,11 +51,170 @@ function formatDueDate(value?: string | null) {
   });
 }
 
+function TapeActions({
+  materialId,
+  canAssign,
+  canChangeStage,
+  canDelete,
+  onAssign,
+  onChangeStage,
+  onDelete
+}: TapeActionsProps) {
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const panelId = useId();
+
+  useEffect(() => {
+    if (!open) return;
+
+    panelRef.current?.querySelector<HTMLButtonElement>("button")?.focus();
+
+    function handleOutside(event: MouseEvent) {
+      if (
+        event.target instanceof Node &&
+        !containerRef.current?.contains(event.target)
+      ) {
+        setOpen(false);
+      }
+    }
+
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+
+      event.preventDefault();
+      setOpen(false);
+      triggerRef.current?.focus();
+    }
+
+    document.addEventListener("mousedown", handleOutside);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [open]);
+
+  function selectAction(action: () => void) {
+    setOpen(false);
+    triggerRef.current?.focus();
+    action();
+  }
+
+  const actionClass =
+    "flex w-full cursor-pointer items-center gap-2 rounded px-3 py-2 " +
+    "text-left text-xs font-medium text-dashboard-text transition-colors " +
+    "hover:bg-dashboard-hover focus-visible:outline-2 " +
+    "focus-visible:outline-dashboard-focus";
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative shrink-0"
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          setOpen(false);
+        }
+      }}
+    >
+      <button
+        ref={triggerRef}
+        type="button"
+        title="Material actions"
+        aria-label={`Actions for ${materialId}`}
+        aria-haspopup="dialog"
+        aria-expanded={open}
+        aria-controls={open ? panelId : undefined}
+        onClick={() => setOpen((previous) => !previous)}
+        className="
+          flex shrink-0 cursor-pointer items-center justify-center
+          rounded p-1 text-dashboard-muted transition-colors
+          hover:bg-dashboard-hover hover:text-dashboard-text
+          focus-visible:outline-2 focus-visible:outline-offset-2
+          focus-visible:outline-dashboard-focus
+        "
+      >
+        <MoreHorizontal size={18} aria-hidden="true" />
+      </button>
+
+      {open && (
+        <div
+          ref={panelRef}
+          id={panelId}
+          role="dialog"
+          aria-label={`Actions for ${materialId}`}
+          className="
+            absolute right-0 top-full z-20 mt-1 w-44
+            rounded-md border border-dashboard-border
+            bg-dashboard-surface p-1 shadow-lg
+          "
+        >
+          {canAssign && (
+            <button
+              type="button"
+              onClick={() => selectAction(onAssign)}
+              className={actionClass}
+            >
+              <UserRound
+                size={14}
+                aria-hidden="true"
+                className="shrink-0 text-dashboard-blue"
+              />
+              Assign operator
+            </button>
+          )}
+
+          {canChangeStage && (
+            <button
+              type="button"
+              onClick={() => selectAction(onChangeStage)}
+              className={actionClass}
+            >
+              <ArrowRightLeft
+                size={14}
+                aria-hidden="true"
+                className="shrink-0 text-dashboard-purple"
+              />
+              Change status
+            </button>
+          )}
+
+          {canDelete && (
+            <button
+              type="button"
+              onClick={() => selectAction(onDelete)}
+              className={`${actionClass} text-dashboard-red`}
+            >
+              <Trash2
+                size={14}
+                aria-hidden="true"
+                className="shrink-0 text-dashboard-red"
+              />
+              Delete tape
+            </button>
+          )}
+
+          {!canAssign && !canChangeStage && !canDelete && (
+            <p className="px-3 py-2 text-xs text-dashboard-muted">
+              No actions available.
+            </p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function TapeCard({
   tape,
   canAssign,
+  canDelete,
   onAssign,
-  onChangeStage
+  onChangeStage,
+  onDelete,
+  editable
 }: Props) {
   const [selectedOperator, setSelectedOperator] = useState<{
     id: string;
@@ -64,6 +233,7 @@ export default function TapeCard({
   )}`;
 
   const canChangeStage =
+    editable &&
     ["audio", "video"].includes(tape.media_type) &&
     tape.status !== "shipped" &&
     tape.current_station !== "shipped";
@@ -116,7 +286,6 @@ export default function TapeCard({
   return (
     <article className="relative flex w-full min-w-0 flex-col overflow-hidden rounded-lg border-0 bg-dashboard-surface text-dashboard-text">
       <div className="p-4">
-        {/* Title and details */}
         <header className="flex items-center justify-between gap-3">
           <Link
             href={detailsUrl}
@@ -130,24 +299,26 @@ export default function TapeCard({
             {title}
           </Link>
 
-          <Link
-            href={detailsUrl}
-            title="Open tape details"
-            aria-label={`Open details for ${materialId}`}
-            className="
-              shrink-0 rounded p-1 text-dashboard-muted
-              transition-colors hover:bg-dashboard-hover
-              hover:text-dashboard-text
-              focus-visible:outline-2
-              focus-visible:outline-offset-2
-              focus-visible:outline-dashboard-focus
-            "
-          >
-            <MoreHorizontal size={18} aria-hidden="true" />
-          </Link>
+          <TapeActions
+            materialId={materialId}
+            canAssign={canAssign}
+            canChangeStage={canChangeStage}
+            canDelete={canDelete}
+            onAssign={() => {
+              setSelectedOperator(null);
+              onAssign(tape);
+            }}
+            onChangeStage={() => {
+              setSelectedOperator(null);
+              onChangeStage(tape);
+            }}
+            onDelete={() => {
+              setSelectedOperator(null);
+              onDelete(tape);
+            }}
+          />
         </header>
 
-        {/* Material ID */}
         <Link
           href={detailsUrl}
           title="Open material details"
@@ -162,22 +333,11 @@ export default function TapeCard({
           "
         >
           <Hash size={14} aria-hidden="true" className="mt-0.5 shrink-0" />
-
           <span className="shrink-0 font-medium">ID:</span>
-
           <span className="min-w-0 break-all">{materialId}</span>
         </Link>
 
-        {/* Material information */}
         <dl className="mt-5 space-y-3 text-xs leading-5">
-          <div className="flex items-baseline gap-2">
-            <dt className="shrink-0 font-medium text-dashboard-text">Type:</dt>
-
-            <dd className="m-0 text-dashboard-muted">
-              {MEDIA_LABELS[tape.media_type] ?? tape.media_type}
-            </dd>
-          </div>
-
           <div>
             <dt className="inline font-medium text-dashboard-text">
               Description:
@@ -188,14 +348,12 @@ export default function TapeCard({
           </div>
         </dl>
 
-        {/* Schedule */}
         <dl className="mt-5 space-y-3 text-xs leading-5">
           {tape.planned_start_at && (
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
               <dt className="font-medium text-dashboard-text">
                 Planned start:
               </dt>
-
               <dd className="m-0 rounded-md bg-dashboard-blue-soft px-2 py-1 text-dashboard-blue">
                 {formatDueDate(tape.planned_start_at)}
               </dd>
@@ -204,7 +362,6 @@ export default function TapeCard({
 
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5">
             <dt className="font-medium text-dashboard-text">Due date:</dt>
-
             <dd
               className={
                 tape.due_at
@@ -216,53 +373,9 @@ export default function TapeCard({
             </dd>
           </div>
         </dl>
-
-        {/* Stage and action */}
-        <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-dashboard-border pt-4">
-          <dl className="flex items-center gap-2 text-xs leading-5">
-            <dt className="font-medium text-dashboard-text">Stage:</dt>
-
-            <dd className="m-0 text-dashboard-muted">
-              {stageLabel(tape.current_station)}
-            </dd>
-          </dl>
-
-          {canChangeStage && (
-            <button
-              type="button"
-              onClick={() => onChangeStage(tape)}
-              className="
-                inline-flex shrink-0 cursor-pointer
-                items-center justify-center gap-1.5
-                rounded-md border border-dashboard-border
-                bg-dashboard-hover px-3 py-1.5
-                text-xs font-medium leading-5 text-dashboard-text
-                transition-colors hover:bg-dashboard-active
-                focus-visible:outline-2
-                focus-visible:outline-offset-2
-                focus-visible:outline-dashboard-focus
-              "
-            >
-              <ArrowRightLeft size={13} aria-hidden="true" />
-              Change stage
-            </button>
-          )}
-        </div>
       </div>
 
-      {/* Footer separator */}
-      <div
-        aria-hidden="true"
-        style={{
-          height: 1,
-          flexShrink: 0,
-          margin: "0 16px",
-          backgroundColor: "var(--dashboard-border)"
-        }}
-      />
-
       <div ref={peopleRef}>
-        {/* Assigned people and assignment action */}
         <footer className="flex items-center justify-between gap-3 px-4 py-3">
           <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2">
             {assignedOperators.length > 0 ? (
@@ -327,25 +440,6 @@ export default function TapeCard({
               <span className="text-xs text-dashboard-muted">Unassigned</span>
             )}
           </div>
-
-          <button
-            type="button"
-            disabled={!canAssign}
-            onClick={() => onAssign(tape)}
-            className="
-              inline-flex shrink-0 items-center justify-center
-              rounded-md border border-dashboard-border
-              bg-dashboard-surface px-3 py-1.5
-              text-xs font-medium leading-5 text-dashboard-text
-              transition-colors hover:bg-dashboard-hover
-              focus-visible:outline-2
-              focus-visible:outline-offset-2
-              focus-visible:outline-dashboard-focus
-              disabled:cursor-not-allowed disabled:opacity-50
-            "
-          >
-            Assign
-          </button>
         </footer>
 
         {selectedOperator && (

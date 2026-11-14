@@ -6,9 +6,11 @@ import {
   useRef,
   useState,
   type ComponentProps,
-  type FormEvent
+  type FormEvent,
+  type ReactNode
 } from "react";
 import { ChevronDown } from "lucide-react";
+
 import { individualError } from "@/hooks/individual/useIndividualJob";
 import type { TapeInput, TapeMediaType } from "@/types/production-api";
 
@@ -21,8 +23,25 @@ interface Props {
   onCancel: () => void;
 }
 
-const inputClass =
+type Values = Record<string, string>;
+type SchedulePrefix = "start" | "due";
+
+const INPUT_CLASS =
   "dashboard-input min-h-12 px-4 py-3 placeholder:text-dashboard-muted";
+
+const PLACEHOLDERS: Record<string, string> = {
+  title: "e.g. Wedding of Abdullah and Noura",
+  internal_ref: "e.g. FAM-1998-03",
+  country: "e.g. Saudi Arabia",
+  city: "e.g. Riyadh",
+  people: "e.g. Abdullah, Noura, family",
+  singer: "e.g. Mohammed Abdu",
+  musician: "e.g. Saudi National Orchestra",
+  words: "e.g. Traditional",
+  company: "e.g. Rotana",
+  published_date: "e.g. 1972 or 1972-06-15",
+  summary: "e.g. Family wedding ceremony and evening celebration in Riyadh."
+};
 
 const FORMATS: Record<TapeMediaType, readonly string[]> = {
   video: [
@@ -65,6 +84,7 @@ const CAPACITIES = ["30", "60", "90", "120", "180", "240"];
 const VINYL_CAPACITIES = ["8", "15", "30", "40"];
 const COLOR_SYSTEMS = ["PAL 625", "NTSC 525", "SECAM 625", "MESECAM 625"];
 const AUDIO_TRACKS = ["2", "4", "8"];
+
 const VINYL_SIZES = ['7"', '10"', '12"'];
 const VINYL_SPEEDS = ["33 1/3", "45", "78"];
 const REEL_SIZES = ['3"', '7"', '10.5"'];
@@ -109,20 +129,44 @@ const MEDIA_SUFFIX: Record<TapeMediaType, string> = {
   document: "D"
 };
 
-const PLACEHOLDERS: Record<string, string> = {
-  title: "e.g. Wedding of Karim and Sara",
-  internal_ref: "e.g. FAM-1998-03",
-  country: "e.g. Algeria",
-  city: "e.g. Oran",
-  people: "e.g. Karim, Sara, family",
-  singer: "e.g. Ahmed Wahby",
-  musician: "e.g. Oran Orchestra",
-  words: "e.g. Traditional",
-  company: "e.g. Disques Oasis",
-  published_date: "e.g. 1972 or 1972-06-15"
-};
+interface FormFieldProps {
+  id: string;
+  label: string;
+  required?: boolean;
+  hint?: string;
+  children: ReactNode;
+}
 
-type Values = Record<string, string>;
+function FormField({
+  id,
+  label,
+  required = false,
+  hint,
+  children
+}: FormFieldProps) {
+  return (
+    <div className="min-w-0">
+      <label
+        htmlFor={id}
+        className="mb-3 block text-sm font-medium text-dashboard-text"
+      >
+        {label}
+        {required && <span aria-hidden="true"> *</span>}
+      </label>
+
+      {children}
+
+      {hint && (
+        <p
+          id={`${id}-help`}
+          className="mt-2 text-xs leading-5 text-dashboard-muted"
+        >
+          {hint}
+        </p>
+      )}
+    </div>
+  );
+}
 
 function FormSelect({
   children,
@@ -162,38 +206,41 @@ interface DateFieldProps {
   name: string;
   label: string;
   value: string;
+  disabled?: boolean;
   onChange: (value: string) => void;
 }
 
-function DateField({ id, name, label, value, onChange }: DateFieldProps) {
+function DateField({
+  id,
+  name,
+  label,
+  value,
+  disabled,
+  onChange
+}: DateFieldProps) {
   return (
-    <label htmlFor={id} className="block space-y-2 text-sm">
-      <span>{label}</span>
-
+    <FormField
+      id={id}
+      label={label}
+      hint="Example: 18 March 2027. Choose from the calendar or type using the format shown in the field."
+    >
       <input
         id={id}
         name={name}
         type="date"
         value={value}
+        disabled={disabled}
         onChange={(event) => onChange(event.target.value)}
-        className={inputClass}
+        className={INPUT_CLASS}
         aria-describedby={`${id}-help`}
       />
-
-      <span
-        id={`${id}-help`}
-        className="block text-xs leading-5 text-dashboard-muted"
-      >
-        Example: 18 March 2027. Choose from the calendar or type using the
-        format shown in the field.
-      </span>
-    </label>
+    </FormField>
   );
 }
 
 interface ScheduleFieldsProps {
   id: string;
-  prefix: "start" | "due";
+  prefix: SchedulePrefix;
   label: string;
   date: string;
   time: string;
@@ -212,42 +259,37 @@ function ScheduleFields({
   onDateChange,
   onTimeChange
 }: ScheduleFieldsProps) {
+  const timeId = `${id}-${prefix}-time`;
+
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
+    <div className="grid gap-5 sm:grid-cols-2">
       <DateField
         id={`${id}-${prefix}-date`}
         name={`${prefix}_date`}
         label={`${label} date`}
         value={date}
+        disabled={disabled}
         onChange={onDateChange}
       />
 
-      <label
-        htmlFor={`${id}-${prefix}-time`}
-        className="block space-y-2 text-sm"
+      <FormField
+        id={timeId}
+        label={`${label} time`}
+        hint="Example: 09:30. Required when a date is selected."
       >
-        <span>{label} time</span>
-
         <input
-          id={`${id}-${prefix}-time`}
+          id={timeId}
           name={`${prefix}_time`}
           type="time"
           step={60}
           disabled={disabled || !date}
           required={Boolean(date)}
-          className={inputClass}
+          className={INPUT_CLASS}
           value={time}
           onChange={(event) => onTimeChange(event.target.value)}
-          aria-describedby={`${id}-${prefix}-time-help`}
+          aria-describedby={`${timeId}-help`}
         />
-
-        <span
-          id={`${id}-${prefix}-time-help`}
-          className="block text-xs leading-5 text-dashboard-muted"
-        >
-          Example: 09:30. Required when a date is selected.
-        </span>
-      </label>
+      </FormField>
     </div>
   );
 }
@@ -272,8 +314,6 @@ function scheduleTimestamp(
     throw new Error(`Enter a valid ${label} date and time.`);
   }
 
-  // Reject invalid dates and local times that were normalized,
-  // such as a time that does not exist during a daylight-saving change.
   const [year, month, day] = date.split("-").map(Number);
   const [hours, minutes] = time.split(":").map(Number);
 
@@ -412,7 +452,7 @@ function TapeForm({
     setValidation(null);
   }
 
-  function changeScheduleDate(prefix: "start" | "due", date: string) {
+  function changeScheduleDate(prefix: SchedulePrefix, date: string) {
     setValues((previous) => ({
       ...previous,
       [`${prefix}_date`]: date,
@@ -422,33 +462,33 @@ function TapeForm({
     setValidation(null);
   }
 
-  function text(key: string, label: string, required = false) {
+  function text(key: string, label: string, required = false, hint?: string) {
+    const fieldId = `${id}-${key}`;
+
     const placeholder =
       key === "tape_code"
         ? `e.g. ${boxId}-001-${MEDIA_SUFFIX[mediaType]}`
         : PLACEHOLDERS[key] ?? `Enter ${label.toLowerCase()}`;
 
     return (
-      <label
+      <FormField
         key={key}
-        htmlFor={`${id}-${key}`}
-        className="block space-y-2 text-sm"
+        id={fieldId}
+        label={label}
+        required={required}
+        hint={hint}
       >
-        <span>
-          {label}
-          {required ? " *" : ""}
-        </span>
-
         <input
-          id={`${id}-${key}`}
+          id={fieldId}
           name={key}
           required={required}
           placeholder={placeholder}
-          className={inputClass}
+          className={INPUT_CLASS}
           value={values[key] ?? ""}
           onChange={(event) => change(key, event.target.value)}
+          aria-describedby={hint ? `${fieldId}-help` : undefined}
         />
-      </label>
+      </FormField>
     );
   }
 
@@ -458,19 +498,12 @@ function TapeForm({
     options: readonly string[],
     required = true
   ) {
-    return (
-      <label
-        key={key}
-        htmlFor={`${id}-${key}`}
-        className="block space-y-2 text-sm"
-      >
-        <span>
-          {label}
-          {required ? " *" : ""}
-        </span>
+    const fieldId = `${id}-${key}`;
 
+    return (
+      <FormField key={key} id={fieldId} label={label} required={required}>
         <FormSelect
-          id={`${id}-${key}`}
+          id={fieldId}
           name={key}
           required={required}
           value={values[key] ?? ""}
@@ -502,15 +535,11 @@ function TapeForm({
             </option>
           ))}
         </FormSelect>
-      </label>
+      </FormField>
     );
   }
 
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    if (locked || submitting.current) return;
-
+  function validateMaterial() {
     const materialId = (values.tape_code ?? "").trim();
     const prefix = `${boxId}-`;
     const suffix = `-${MEDIA_SUFFIX[mediaType]}`;
@@ -521,36 +550,30 @@ function TapeForm({
         : "";
 
     if (!/^\d{3,}$/.test(sequence) || !/[1-9]/.test(sequence)) {
-      setValidation(
+      throw new Error(
         `Material ID must follow ${boxId}-001-${MEDIA_SUFFIX[mediaType]} ` +
           "with a positive sequence number."
       );
-      return;
     }
 
     if (!FORMATS[mediaType].includes(format)) {
-      setValidation("Select a valid format.");
-      return;
+      throw new Error("Select a valid format.");
     }
 
     if (hasCapacity && !capacityOptions.includes(values.capacity ?? "")) {
-      setValidation("Select a valid capacity.");
-      return;
+      throw new Error("Select a valid capacity.");
     }
 
     if (isVideo && !COLOR_SYSTEMS.includes(values.color_system ?? "")) {
-      setValidation("Select a color system.");
-      return;
+      throw new Error("Select a color system.");
     }
 
     if (isAudio && !AUDIO_TRACKS.includes(values.audio_track ?? "")) {
-      setValidation("Select an audio track.");
-      return;
+      throw new Error("Select an audio track.");
     }
 
     if (hasPaperSize && !SIZES.includes(values.photo_size ?? "")) {
-      setValidation("Select a size.");
-      return;
+      throw new Error("Select a size.");
     }
 
     if (
@@ -558,8 +581,7 @@ function TapeForm({
       (!VINYL_SIZES.includes(values.tape_size ?? "") ||
         !VINYL_SPEEDS.includes(values.tape_speed ?? ""))
     ) {
-      setValidation("Select a valid vinyl size and speed.");
-      return;
+      throw new Error("Select a valid vinyl size and speed.");
     }
 
     if (
@@ -567,38 +589,33 @@ function TapeForm({
       (!REEL_SIZES.includes(values.tape_size ?? "") ||
         !REEL_SPEEDS.includes(values.tape_speed ?? ""))
     ) {
-      setValidation("Select a valid reel size and speed.");
-      return;
+      throw new Error("Select a valid reel size and speed.");
     }
 
-    let plannedStart: string | undefined;
-    let deadline: string | undefined;
+    return materialId;
+  }
 
-    try {
-      plannedStart = scheduleTimestamp(
-        values.start_date,
-        values.start_time,
-        "planned start"
-      );
+  function buildInput(): TapeInput {
+    const materialId = validateMaterial();
 
-      deadline = scheduleTimestamp(
-        values.due_date,
-        values.due_time,
-        "deadline"
-      );
+    const plannedStart = scheduleTimestamp(
+      values.start_date,
+      values.start_time,
+      "planned start"
+    );
 
-      if (
-        plannedStart &&
-        deadline &&
-        new Date(deadline).getTime() < new Date(plannedStart).getTime()
-      ) {
-        throw new Error("Planned end cannot precede planned start.");
-      }
-    } catch (failure) {
-      setValidation(
-        failure instanceof Error ? failure.message : "Check the schedule dates."
-      );
-      return;
+    const deadline = scheduleTimestamp(
+      values.due_date,
+      values.due_time,
+      "deadline"
+    );
+
+    if (
+      plannedStart &&
+      deadline &&
+      new Date(deadline).getTime() < new Date(plannedStart).getTime()
+    ) {
+      throw new Error("Planned end cannot precede planned start.");
     }
 
     const optional = (key: string) => values[key]?.trim() || undefined;
@@ -648,6 +665,27 @@ function TapeForm({
       input.people = optional("people");
     }
 
+    return input;
+  }
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (locked || submitting.current) return;
+
+    let input: TapeInput;
+
+    try {
+      input = buildInput();
+    } catch (failure) {
+      setValidation(
+        failure instanceof Error
+          ? failure.message
+          : "Check the material information."
+      );
+      return;
+    }
+
     setValidation(null);
     submitting.current = true;
     setSaving(true);
@@ -670,13 +708,13 @@ function TapeForm({
       aria-busy={locked}
       className="p-5 sm:p-8"
     >
-      <header className="mb-6 flex items-start justify-between gap-4">
+      <header className="mb-8 flex items-start justify-between gap-4">
         <div>
           <h2 id={titleId} className="text-xl font-semibold">
             Add tape / material
           </h2>
 
-          <p className="mt-2 text-sm text-dashboard-muted">
+          <p className="mt-3 text-sm text-dashboard-muted">
             Box: {boxId}. Enter the Material ID printed on the item.
           </p>
         </div>
@@ -692,12 +730,10 @@ function TapeForm({
         </button>
       </header>
 
-      <fieldset disabled={locked} className="space-y-6">
+      <fieldset disabled={locked} className="space-y-8">
         <legend className="sr-only">Material intake</legend>
 
-        <label htmlFor={`${id}-media-type`} className="block space-y-2 text-sm">
-          <span>Media type *</span>
-
+        <FormField id={`${id}-media-type`} label="Media type" required>
           <FormSelect
             id={`${id}-media-type`}
             name="media_type"
@@ -730,25 +766,18 @@ function TapeForm({
               </option>
             ))}
           </FormSelect>
-        </label>
+        </FormField>
 
-        <div className="grid gap-5 sm:grid-cols-2">
-          <div>
-            {text("tape_code", "Material ID", true)}
-
-            <p className="mt-2 text-xs text-dashboard-muted">
-              Example: {boxId}-001-{MEDIA_SUFFIX[mediaType]}. Must be unique
-              across Individual and POV.
-            </p>
-          </div>
+        <div className="grid gap-x-5 gap-y-6 sm:grid-cols-2">
+          {text(
+            "tape_code",
+            "Material ID",
+            true,
+            `Example: ${boxId}-001-${MEDIA_SUFFIX[mediaType]}. Must be unique across Individual and POV.`
+          )}
 
           {isDocument ? (
-            <label
-              htmlFor={`${id}-document-format`}
-              className="block space-y-2 text-sm"
-            >
-              <span>Format</span>
-
+            <FormField id={`${id}-document-format`} label="Format">
               <FormSelect
                 id={`${id}-document-format`}
                 value="Document"
@@ -756,7 +785,7 @@ function TapeForm({
               >
                 <option value="Document">Document</option>
               </FormSelect>
-            </label>
+            </FormField>
           ) : (
             select("format", "Format", FORMATS[mediaType])
           )}
@@ -766,12 +795,12 @@ function TapeForm({
           {text("country", "Country")}
         </div>
 
-        <section className="space-y-4">
-          <h3 className="text-base font-semibold">
+        <section>
+          <h3 className="mb-5 text-base font-semibold">
             {MEDIA_LABELS[mediaType]} details
           </h3>
 
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-x-5 gap-y-6 sm:grid-cols-2">
             {hasCapacity &&
               select("capacity", "Capacity (min)", capacityOptions)}
 
@@ -816,37 +845,34 @@ function TapeForm({
                 {text("musician", "Musician")}
                 {text("words", "Words / lyricist")}
                 {text("company", "Company")}
-
-                <div>
-                  {text("published_date", "Published date")}
-
-                  <p className="mt-2 text-xs text-dashboard-muted">
-                    A year alone is allowed, for example 1972. For a full date,
-                    use YYYY-MM-DD.
-                  </p>
-                </div>
+                {text(
+                  "published_date",
+                  "Published date",
+                  false,
+                  "A year alone is allowed, for example 1972. For a full date, use YYYY-MM-DD."
+                )}
               </>
             )}
           </div>
 
           {isReel && (
-            <p className="text-xs text-dashboard-muted">
+            <p className="mt-4 text-xs text-dashboard-muted">
               Reel has no capacity field. Speed is measured in IPS.
             </p>
           )}
 
           {isVinyl && (
-            <p className="text-xs text-dashboard-muted">
+            <p className="mt-4 text-xs text-dashboard-muted">
               Vinyl speed is measured in RPM.
             </p>
           )}
         </section>
 
-        <section className="space-y-5 rounded-lg border border-dashboard-border p-4">
+        <section className="space-y-6 rounded-lg border border-dashboard-border p-4 sm:p-5">
           <div>
             <h3 className="text-sm font-semibold">Schedule — optional</h3>
 
-            <p className="mt-1 text-xs leading-5 text-dashboard-muted">
+            <p className="mt-3 text-xs leading-5 text-dashboard-muted">
               Plan when processing should begin and when the tape should be
               finished. These dates do not start a timer.
             </p>
@@ -863,7 +889,7 @@ function TapeForm({
             onTimeChange={(value) => change("start_time", value)}
           />
 
-          <div className="border-t border-dashboard-border pt-5">
+          <div className="border-t border-dashboard-border pt-6">
             <ScheduleFields
               id={id}
               prefix="due"
@@ -883,7 +909,7 @@ function TapeForm({
         </section>
 
         <fieldset>
-          <legend className="mb-3 text-sm font-semibold">
+          <legend className="mb-4 text-sm font-semibold">
             Content category — select several
           </legend>
 
@@ -917,19 +943,17 @@ function TapeForm({
           </div>
         </fieldset>
 
-        <label htmlFor={`${id}-summary`} className="block space-y-2 text-sm">
-          <span>Summary</span>
-
+        <FormField id={`${id}-summary`} label="Summary">
           <textarea
             id={`${id}-summary`}
             name="summary"
             rows={4}
-            placeholder="e.g. Family wedding ceremony and evening party in Oran."
-            className={`${inputClass} resize-y`}
+            placeholder={PLACEHOLDERS.summary}
+            className={`${INPUT_CLASS} resize-y`}
             value={values.summary ?? ""}
             onChange={(event) => change("summary", event.target.value)}
           />
-        </label>
+        </FormField>
       </fieldset>
 
       {(validation || error) && (
@@ -939,7 +963,7 @@ function TapeForm({
         </div>
       )}
 
-      <footer className="mt-6 flex justify-end gap-3 border-t border-dashboard-border pt-5">
+      <footer className="mt-8 flex justify-end gap-3 border-t border-dashboard-border pt-5">
         <button
           type="button"
           disabled={locked}
@@ -957,6 +981,6 @@ function TapeForm({
           {locked ? "Creating…" : "Create tape"}
         </button>
       </footer>
-    </form> 
+    </form>
   );
 }

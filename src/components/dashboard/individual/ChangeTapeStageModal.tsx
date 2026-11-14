@@ -29,6 +29,8 @@ interface Props {
 
 const selectClass = "dashboard-input min-h-12 appearance-none py-3 pl-3 pr-10";
 
+const labelClass = "mb-3 block text-sm font-medium text-dashboard-text";
+
 function SelectArrow() {
   return (
     <ChevronDown
@@ -250,7 +252,6 @@ export default function ChangeTapeStageModal({
     try {
       if (useAuthStore.getState().user?.id === actorId) {
         toast.success(`Moved to ${stageLabel(validDestination)}.`);
-
         await onUpdated();
       }
     } catch {
@@ -284,7 +285,7 @@ export default function ChangeTapeStageModal({
       <form
         onSubmit={(event) => void submit(event)}
         aria-busy={loading || saving}
-        className="space-y-5"
+        className="space-y-6"
       >
         <header className="flex items-start justify-between gap-3">
           <div>
@@ -292,7 +293,7 @@ export default function ChangeTapeStageModal({
               Change production stage
             </h2>
 
-            <p className="mt-1 break-all text-sm text-dashboard-blue">
+            <p className="mt-3 break-all text-sm text-dashboard-blue">
               {tape.tape_code ?? tape.id}
             </p>
           </div>
@@ -340,12 +341,11 @@ export default function ChangeTapeStageModal({
               </p>
             )}
 
-            <fieldset disabled={!canMove || saving} className="space-y-4">
-              <label
-                htmlFor={`${id}-result`}
-                className="block space-y-2 text-sm"
-              >
-                <span>Current work result</span>
+            <fieldset disabled={!canMove || saving} className="space-y-5">
+              <div>
+                <label htmlFor={`${id}-result`} className={labelClass}>
+                  Current work result
+                </label>
 
                 <div className="relative">
                   <select
@@ -359,19 +359,17 @@ export default function ChangeTapeStageModal({
                     className={selectClass}
                   >
                     <option value="OK">OK — work passed</option>
-
                     <option value="NOT_OK">Not OK — rework required</option>
                   </select>
 
                   <SelectArrow />
                 </div>
-              </label>
+              </div>
 
-              <label
-                htmlFor={`${id}-destination`}
-                className="block space-y-2 text-sm"
-              >
-                <span>Move to</span>
+              <div>
+                <label htmlFor={`${id}-destination`} className={labelClass}>
+                  Move to
+                </label>
 
                 <div className="relative">
                   <select
@@ -395,13 +393,13 @@ export default function ChangeTapeStageModal({
 
                   <SelectArrow />
                 </div>
-              </label>
+              </div>
 
-              <label htmlFor={`${id}-note`} className="block space-y-2 text-sm">
-                <span>
+              <div>
+                <label htmlFor={`${id}-note`} className={labelClass}>
                   Reason / notes
                   {reasonRequired ? " *" : " (optional)"}
-                </span>
+                </label>
 
                 <textarea
                   id={`${id}-note`}
@@ -416,7 +414,7 @@ export default function ChangeTapeStageModal({
                   placeholder="Explain rework or add a production note"
                   className="dashboard-input resize-y px-3 py-3"
                 />
-              </label>
+              </div>
 
               {canMove && options.length === 0 && (
                 <p className="text-xs leading-5 text-dashboard-muted">
@@ -455,7 +453,7 @@ export default function ChangeTapeStageModal({
           </button>
         )}
 
-        <footer className="flex justify-end gap-3 border-t border-dashboard-border pt-4">
+        <footer className="flex justify-end gap-3 border-t border-dashboard-border pt-5">
           <button
             type="button"
             disabled={saving}

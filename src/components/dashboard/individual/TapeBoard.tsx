@@ -1,42 +1,61 @@
 "use client";
 
 import { useState } from "react";
-import { Search, UserRound } from "lucide-react";
+import { ChevronDown, Search, UserRound } from "lucide-react";
 
 import { useAuthStore } from "@/store/auth.store";
+import { useTapeColumns } from "@/hooks/individual/useTapeColumns";
 import type { TapeSummary } from "@/types/production-api";
 
 import AssignmentModal from "./AssignmentModal";
-import TapeStageColumn, { REVIEW_STAGE, TAPE_STAGES } from "./TapeStageColumn";
-import { useTapeColumns } from "@/hooks/individual/useTapeColumns";
 import ChangeTapeStageModal from "./ChangeTapeStageModal";
+import DeleteTapeModal from "./DeleteTapeModal";
+import TapeStageColumn, { REVIEW_STAGE, TAPE_STAGES } from "./TapeStageColumn";
 
 interface Props {
   boxId: string;
+  boxOpen: boolean;
   tapes: TapeSummary[];
   onAssigned: () => void | Promise<void>;
 }
+
+type TapeAction = {
+  type: "assign" | "stage" | "delete";
+  tape: TapeSummary;
+};
 
 type AssignedOperator = NonNullable<
   TapeSummary["assignments"]
 >[number]["operator"];
 
+const TOOLBAR_BUTTON =
+  "rounded-md border border-dashboard-border " +
+  "bg-dashboard-surface px-3 py-2 text-xs text-dashboard-text " +
+  "hover:bg-dashboard-hover focus-visible:outline-2 " +
+  "focus-visible:outline-dashboard-focus";
+
 function operatorName(operator: AssignedOperator) {
   return operator.profiles?.display_name?.trim() || operator.email;
 }
 
-export default function TapeBoard({ boxId, tapes, onAssigned }: Props) {
+export default function TapeBoard({
+  boxId,
+  boxOpen,
+  tapes,
+  onAssigned
+}: Props) {
   const isAdmin = useAuthStore((state) =>
     Boolean(state.user?.roles.includes("admin"))
   );
 
   const [search, setSearch] = useState("");
   const [assignee, setAssignee] = useState("all");
-  const [selectedTape, setSelectedTape] = useState<TapeSummary | null>(null);
-const [stageTape, setStageTape] = useState<TapeSummary | null>(null);
+  const [action, setAction] = useState<TapeAction | null>(null);
+
   const { expanded, toggle, update } = useTapeColumns(boxId);
 
   const assigneeNames = new Map<string, string>();
+
   const groups = new Map<string, TapeSummary[]>(
     TAPE_STAGES.map((stage) => [stage.key, []])
   );
@@ -62,7 +81,9 @@ const [stageTape, setStageTape] = useState<TapeSummary | null>(null);
         ? tape.current_station
         : "unknown";
 
-    if (stageKey === "unknown") hasUnknown = true;
+    if (stageKey === "unknown") {
+      hasUnknown = true;
+    }
 
     const matchesAssignee =
       assignee === "all" ||
@@ -84,15 +105,16 @@ const [stageTape, setStageTape] = useState<TapeSummary | null>(null);
       .toLowerCase();
 
     if (matchesAssignee && searchable.includes(query)) {
-      groups.get(stageKey)!.push(tape);
+      groups.get(stageKey)?.push(tape);
       visibleCount++;
     }
   }
 
   const columns = hasUnknown ? [...TAPE_STAGES, REVIEW_STAGE] : TAPE_STAGES;
 
-  const toolbarButton =
-    "rounded-md border border-dashboard-border bg-dashboard-surface px-3 py-2 text-xs text-dashboard-text hover:bg-dashboard-hover focus-visible:outline-2 focus-visible:outline-dashboard-focus";
+  function closeAction() {
+    setAction(null);
+  }
 
   return (
     <section className="min-w-0 space-y-4">
@@ -104,24 +126,38 @@ const [stageTape, setStageTape] = useState<TapeSummary | null>(null);
             className="text-dashboard-muted"
           />
 
-          <span className="sr-only">Filter by assigned Operator</span>
+          <span className="sr-only">Filter by assigned operator</span>
 
-          <select
-            value={assignee}
-            onChange={(event) => setAssignee(event.target.value)}
-            className="dashboard-input min-h-10 px-3 py-2 text-sm"
-          >
-            <option value="all">All assignees</option>
-            <option value="unassigned">No assignments</option>
+          <div className="relative">
+            <select
+              value={assignee}
+              onChange={(event) => setAssignee(event.target.value)}
+              className="
+                dashboard-input min-h-10 appearance-none
+                py-2 pl-3 pr-10 text-sm
+              "
+            >
+              <option value="all">All assignees</option>
+              <option value="unassigned">No assignments</option>
 
-            {Array.from(assigneeNames.entries())
-              .sort((a, b) => a[1].localeCompare(b[1]))
-              .map(([operatorId, name]) => (
-                <option key={operatorId} value={operatorId}>
-                  {name}
-                </option>
-              ))}
-          </select>
+              {Array.from(assigneeNames.entries())
+                .sort((a, b) => a[1].localeCompare(b[1]))
+                .map(([operatorId, name]) => (
+                  <option key={operatorId} value={operatorId}>
+                    {name}
+                  </option>
+                ))}
+            </select>
+
+            <ChevronDown
+              size={16}
+              aria-hidden="true"
+              className="
+                pointer-events-none absolute right-3 top-1/2
+                -translate-y-1/2 text-dashboard-muted
+              "
+            />
+          </div>
         </label>
 
         <label className="relative w-full sm:w-72">
@@ -130,7 +166,10 @@ const [stageTape, setStageTape] = useState<TapeSummary | null>(null);
           <Search
             size={16}
             aria-hidden="true"
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-dashboard-muted"
+            className="
+              absolute left-3 top-1/2 -translate-y-1/2
+              text-dashboard-muted
+            "
           />
 
           <input
@@ -138,7 +177,10 @@ const [stageTape, setStageTape] = useState<TapeSummary | null>(null);
             value={search}
             onChange={(event) => setSearch(event.target.value)}
             placeholder="Search materials…"
-            className="dashboard-input min-h-10 w-full py-2 pl-10 pr-3 text-sm"
+            className="
+              dashboard-input min-h-10 w-full
+              py-2 pl-10 pr-3 text-sm
+            "
           />
         </label>
       </div>
@@ -152,7 +194,7 @@ const [stageTape, setStageTape] = useState<TapeSummary | null>(null);
           <button
             type="button"
             onClick={() => update(columns.map((stage) => stage.key))}
-            className={toolbarButton}
+            className={TOOLBAR_BUTTON}
           >
             Expand all
           </button>
@@ -160,7 +202,7 @@ const [stageTape, setStageTape] = useState<TapeSummary | null>(null);
           <button
             type="button"
             onClick={() => update([])}
-            className={toolbarButton}
+            className={TOOLBAR_BUTTON}
           >
             Collapse all
           </button>
@@ -181,27 +223,40 @@ const [stageTape, setStageTape] = useState<TapeSummary | null>(null);
               tapes={groups.get(stage.key) ?? []}
               expanded={expanded.includes(stage.key)}
               isAdmin={isAdmin}
+              boxOpen={boxOpen}
               onToggle={() => toggle(stage.key)}
-              onAssign={setSelectedTape}
-              onChangeStage={setStageTape}
+              onAssign={(tape) => setAction({ type: "assign", tape })}
+              onChangeStage={(tape) => setAction({ type: "stage", tape })}
+              onDelete={(tape) => setAction({ type: "delete", tape })}
             />
           ))}
         </div>
       </div>
-      {stageTape && (
+
+      {action?.type === "stage" && (
         <ChangeTapeStageModal
-          key={stageTape.id}
-          tape={stageTape}
-          onClose={() => setStageTape(null)}
+          key={`stage-${action.tape.id}`}
+          tape={action.tape}
+          onClose={closeAction}
           onUpdated={onAssigned}
         />
       )}
-      {selectedTape && isAdmin && (
+
+      {action?.type === "assign" && isAdmin && (
         <AssignmentModal
-          key={selectedTape.id}
-          tape={selectedTape}
-          onClose={() => setSelectedTape(null)}
+          key={`assignment-${action.tape.id}`}
+          tape={action.tape}
+          onClose={closeAction}
           onAssigned={onAssigned}
+        />
+      )}
+
+      {action?.type === "delete" && isAdmin && (
+        <DeleteTapeModal
+          key={`delete-${action.tape.id}`}
+          tape={action.tape}
+          onClose={closeAction}
+          onDeleted={onAssigned}
         />
       )}
     </section>

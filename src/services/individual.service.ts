@@ -274,4 +274,15 @@ export const individualService = {
       )
     ).data;
   },
+  async reopenBox(
+    boxId: string,
+    reason: string
+  ): Promise<BoxSummary> {
+    const { data } = await api.patch<BoxSummary>(
+      `/individual/boxes/${id(boxId)}/reopen`,
+      { reason }
+    );
+
+    return data;
+  },
 };

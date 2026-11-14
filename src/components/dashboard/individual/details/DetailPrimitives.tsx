@@ -18,7 +18,7 @@ import {
 
 import { display } from "@/lib/individual/tape-details-display";
 
-export const inputClass = "dashboard-input min-h-11 px-3 py-2.5";
+export const inputClass = "dashboard-input min-h-10 px-3 py-2 text-[13px]";
 
 export type RunAction = (
   work: () => Promise<unknown>,
@@ -27,86 +27,58 @@ export type RunAction = (
 
 type SectionTone = "blue" | "green" | "orange" | "purple" | "cyan" | "amber";
 
-interface SectionStyle {
-  iconClass: string;
-  borderColor: string;
-}
-
-const SECTION_STYLES: Record<SectionTone, SectionStyle> = {
-  blue: {
-    iconClass: "bg-dashboard-blue-soft text-dashboard-blue",
-    borderColor: "var(--dashboard-blue)"
-  },
-  green: {
-    iconClass: "bg-dashboard-green-soft text-dashboard-green",
-    borderColor: "var(--dashboard-green)"
-  },
-  orange: {
-    iconClass: "bg-dashboard-orange-soft text-dashboard-orange",
-    borderColor: "var(--dashboard-orange)"
-  },
-  purple: {
-    iconClass: "bg-dashboard-purple-soft text-dashboard-purple",
-    borderColor: "var(--dashboard-purple)"
-  },
-  cyan: {
-    iconClass: "bg-dashboard-cyan-soft text-dashboard-cyan",
-    borderColor: "var(--dashboard-cyan)"
-  },
-  amber: {
-    iconClass: "bg-dashboard-amber-soft text-dashboard-amber",
-    borderColor: "var(--dashboard-amber)"
-  }
+const ICON_COLORS: Record<SectionTone, string> = {
+  blue: "text-dashboard-blue",
+  green: "text-dashboard-green",
+  orange: "text-dashboard-orange",
+  purple: "text-dashboard-purple",
+  cyan: "text-dashboard-cyan",
+  amber: "text-dashboard-amber"
 };
 
-interface SectionAppearance {
-  icon: LucideIcon;
-  tone: SectionTone;
-}
-
-function sectionAppearance(title: string): SectionAppearance {
+function appearance(title: string): { icon: LucideIcon; tone: SectionTone } {
   const value = title.toLowerCase();
 
-  if (value.includes("customer")) {
+  if (/customer|individual job/.test(value)) {
     return { icon: UsersRound, tone: "purple" };
   }
 
-  if (value.includes("schedule")) {
+  if (/schedule/.test(value)) {
     return { icon: CalendarDays, tone: "blue" };
   }
 
-  if (value.includes("current stage")) {
+  if (/current stage/.test(value)) {
     return { icon: Timer, tone: "green" };
   }
 
-  if (value.includes("assignments")) {
+  if (/assignments/.test(value)) {
     return { icon: ListChecks, tone: "cyan" };
   }
 
-  if (value.includes("manual")) {
+  if (/manual/.test(value)) {
     return { icon: Clock3, tone: "amber" };
   }
 
-  if (value.includes("comment")) {
+  if (/comment/.test(value)) {
     return { icon: MessageSquare, tone: "purple" };
   }
 
-  if (value.includes("activity") || value.includes("history")) {
+  if (/activity|history/.test(value)) {
     return { icon: Activity, tone: "orange" };
   }
 
-  if (value.includes("material") || value.includes("identification")) {
+  if (/material|identification/.test(value)) {
     return { icon: Package, tone: "cyan" };
   }
 
-  if (value.includes("information")) {
+  if (/information/.test(value)) {
     return { icon: FileText, tone: "blue" };
   }
 
   return { icon: ClipboardList, tone: "blue" };
 }
 
-interface DetailSectionProps {
+interface SectionProps {
   title: string;
   children: ReactNode;
   action?: ReactNode;
@@ -124,29 +96,24 @@ export function DetailSection({
   tone,
   collapsible = true,
   defaultOpen = true
-}: DetailSectionProps) {
+}: SectionProps) {
   const id = useId();
   const [expanded, setExpanded] = useState(defaultOpen);
 
-  const appearance = sectionAppearance(title);
-  const Icon = icon ?? appearance.icon;
-  const style = SECTION_STYLES[tone ?? appearance.tone];
+  const selected = appearance(title);
+  const Icon = icon ?? selected.icon;
   const open = !collapsible || expanded;
 
-  const heading = (
+  const titleContent = (
     <>
-      <span
+      <Icon
+        size={16}
+        strokeWidth={1.8}
         aria-hidden="true"
-        className={`
-          inline-flex size-10 shrink-0 items-center
-          justify-center rounded-xl
-          ${style.iconClass}
-        `}
-      >
-        <Icon size={20} strokeWidth={1.8} />
-      </span>
+        className={`shrink-0 ${ICON_COLORS[tone ?? selected.tone]}`}
+      />
 
-      <span className="min-w-0 text-left text-base font-semibold capitalize leading-6 text-dashboard-text">
+      <span className="min-w-0 text-[15px] font-semibold capitalize leading-6 text-dashboard-text">
         {title}
       </span>
     </>
@@ -154,69 +121,50 @@ export function DetailSection({
 
   return (
     <section
+      style={{ borderWidth: "0.5px" }}
       className="
-        overflow-hidden rounded-xl
-        border border-dashboard-border
+        min-w-0 overflow-hidden rounded-lg
+        border-solid border-dashboard-border
         bg-dashboard-surface text-dashboard-text
-        transition-colors
       "
     >
       <header
         className={`
-          flex flex-wrap items-center justify-between gap-3
-          px-5 py-4 sm:px-6
+          flex min-h-16 items-center justify-between
+          gap-3 px-5 py-4
           ${open ? "bg-dashboard-surface" : "bg-dashboard-hover"}
         `}
-        style={{
-          borderInlineStart: `3px solid ${
-            open ? style.borderColor : "transparent"
-          }`
-        }}
       >
         <h2 id={`${id}-title`} className="min-w-0 flex-1">
           {collapsible ? (
             <button
               type="button"
-              onClick={() => setExpanded((value) => !value)}
               aria-expanded={open}
               aria-controls={`${id}-content`}
               aria-label={`${open ? "Collapse" : "Expand"} ${title}`}
+              onClick={() => setExpanded((value) => !value)}
               className="
-                flex w-full cursor-pointer items-center gap-3
-                rounded-md text-left
+                flex w-full cursor-pointer items-center
+                gap-2.5 rounded text-left
                 focus-visible:outline-2
                 focus-visible:outline-offset-4
                 focus-visible:outline-dashboard-focus
               "
             >
-              {heading}
-
-              <span
-                className={`
-                  ml-auto hidden shrink-0 rounded-md
-                  px-2 py-1 text-[10px] font-medium sm:inline-flex
-                  ${
-                    open
-                      ? style.iconClass
-                      : "bg-dashboard-surface text-dashboard-muted"
-                  }
-                `}
-              >
-                {open ? "Expanded" : "Collapsed"}
-              </span>
+              {titleContent}
 
               <ChevronDown
-                size={17}
+                size={14}
                 aria-hidden="true"
                 className={`
-                  shrink-0 text-dashboard-muted
+                  ml-auto shrink-0 text-dashboard-muted
                   transition-transform duration-200
                   ${open ? "rotate-180" : ""}
                 `}
               />
             </button>
           ) : (
-            <span className="flex items-center gap-3">{heading}</span>
+            <span className="flex items-center gap-2.5">{titleContent}</span>
           )}
         </h2>
 
@@ -228,10 +176,7 @@ export function DetailSection({
         role="region"
         aria-labelledby={`${id}-title`}
         hidden={!open}
-        className="
-          border-t border-dashboard-border
-          px-5 py-5 sm:px-6
-        "
+        className="border-t border-dashboard-border px-5 py-6"
       >
         {children}
       </div>
@@ -248,7 +193,7 @@ interface DetailFieldProps {
 export function DetailField({ title, value, icon: Icon }: DetailFieldProps) {
   return (
     <div className="min-w-0">
-      <dt className="flex items-center gap-1.5 text-xs text-dashboard-muted">
+      <dt className="flex items-center gap-1.5 text-[13px] leading-5 text-dashboard-muted">
         {Icon && (
           <Icon
             size={14}
@@ -260,7 +205,7 @@ export function DetailField({ title, value, icon: Icon }: DetailFieldProps) {
         {title}
       </dt>
 
-      <dd className="mt-1 whitespace-pre-wrap break-words text-sm leading-6 text-dashboard-text">
+      <dd className="mt-3 whitespace-pre-wrap break-words text-[13px] leading-6 text-dashboard-text">
         {display(value)}
       </dd>
     </div>
@@ -279,8 +224,9 @@ export function Badge({
   return (
     <span
       className={`
-        inline-flex items-center gap-1.5 rounded-md
-        px-2 py-1 text-xs font-medium leading-5
+        inline-flex items-center gap-1.5
+        rounded-full px-2 py-0.5
+        text-xs font-medium leading-5
         ${className}
       `}
     >

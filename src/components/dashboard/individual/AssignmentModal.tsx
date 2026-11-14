@@ -13,7 +13,7 @@ import {
   canOperateStage,
   specialtyLabel,
   stageLabel
-} from "../../../lib/individual/tape-workflow";
+} from "@/lib/individual/tape-workflow";
 
 interface Props {
   tape: TapeSummary;
@@ -40,6 +40,8 @@ interface OperatorPage {
 
 const selectClass = "dashboard-input min-h-12 appearance-none py-3 pl-3 pr-10";
 
+const labelClass = "mb-3 block text-sm font-medium text-dashboard-text";
+
 function operatorName(operator: Operator) {
   return operator.profiles?.display_name?.trim() || operator.email;
 }
@@ -49,7 +51,10 @@ function SelectArrow() {
     <ChevronDown
       size={16}
       aria-hidden="true"
-      className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-dashboard-muted"
+      className="
+        pointer-events-none absolute right-3 top-1/2
+        -translate-y-1/2 text-dashboard-muted
+      "
     />
   );
 }
@@ -65,6 +70,7 @@ export default function AssignmentModal({ tape, onClose, onAssigned }: Props) {
     "inspected";
 
   const [stage, setStage] = useState<AssignableStage>(initialStage);
+
   const [operatorId, setOperatorId] = useState(
     tape.assignments?.find((item) => item.stage === initialStage)
       ?.operator_id ?? ""
@@ -82,14 +88,19 @@ export default function AssignmentModal({ tape, onClose, onAssigned }: Props) {
     const element = dialog.current;
     const previousOverflow = document.body.style.overflow;
 
-    if (element && !element.open) element.showModal();
+    if (element && !element.open) {
+      element.showModal();
+    }
+
     document.body.style.overflow = "hidden";
 
     return () => {
       mounted.current = false;
       document.body.style.overflow = previousOverflow;
 
-      if (element?.open) element.close();
+      if (element?.open) {
+        element.close();
+      }
     };
   }, []);
 
@@ -138,7 +149,9 @@ export default function AssignmentModal({ tape, onClose, onAssigned }: Props) {
           setError(individualError(failure, "Could not load operators."));
         }
       } finally {
-        if (!controller.signal.aborted) setLoading(false);
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
       }
     }
 
@@ -170,7 +183,20 @@ export default function AssignmentModal({ tape, onClose, onAssigned }: Props) {
     tape.current_station === "shipped";
 
   function close() {
-    if (!lock.current) onClose();
+    if (!lock.current) {
+      onClose();
+    }
+  }
+
+  function changeStage(next: AssignableStage) {
+    setStage(next);
+
+    setOperatorId(
+      tape.assignments?.find((assignment) => assignment.stage === next)
+        ?.operator_id ?? ""
+    );
+
+    setError(null);
   }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -236,7 +262,7 @@ export default function AssignmentModal({ tape, onClose, onAssigned }: Props) {
       <form
         onSubmit={(event) => void submit(event)}
         aria-busy={saving}
-        className="space-y-5"
+        className="space-y-6"
       >
         <header className="flex items-start justify-between gap-3">
           <div>
@@ -244,7 +270,7 @@ export default function AssignmentModal({ tape, onClose, onAssigned }: Props) {
               Assign operator
             </h2>
 
-            <p className="mt-1 break-all text-sm text-dashboard-blue">
+            <p className="mt-3 break-all text-sm text-dashboard-blue">
               {tape.tape_code ?? tape.id}
             </p>
           </div>
@@ -260,25 +286,19 @@ export default function AssignmentModal({ tape, onClose, onAssigned }: Props) {
           </button>
         </header>
 
-        <fieldset disabled={saving || unavailable} className="space-y-4">
-          <label htmlFor={`${id}-stage`} className="block space-y-2 text-sm">
-            <span>Assign for stage</span>
+        <fieldset disabled={saving || unavailable} className="space-y-5">
+          <div>
+            <label htmlFor={`${id}-stage`} className={labelClass}>
+              Assign for stage
+            </label>
 
             <div className="relative">
               <select
                 id={`${id}-stage`}
                 value={stage}
-                onChange={(event) => {
-                  const next = event.target.value as AssignableStage;
-
-                  setStage(next);
-                  setOperatorId(
-                    tape.assignments?.find(
-                      (assignment) => assignment.stage === next
-                    )?.operator_id ?? ""
-                  );
-                  setError(null);
-                }}
+                onChange={(event) =>
+                  changeStage(event.target.value as AssignableStage)
+                }
                 className={selectClass}
               >
                 {PRODUCTION_STAGES.map((item) => (
@@ -290,15 +310,18 @@ export default function AssignmentModal({ tape, onClose, onAssigned }: Props) {
 
               <SelectArrow />
             </div>
-          </label>
+          </div>
 
           <div className="rounded-lg bg-dashboard-hover p-3 text-sm">
             <span className="text-dashboard-muted">Currently assigned: </span>
+
             <span className="font-medium">{currentName || "No operator"}</span>
           </div>
 
-          <label htmlFor={`${id}-operator`} className="block space-y-2 text-sm">
-            <span>Operator</span>
+          <div>
+            <label htmlFor={`${id}-operator`} className={labelClass}>
+              Operator
+            </label>
 
             <div className="relative">
               <select
@@ -327,7 +350,7 @@ export default function AssignmentModal({ tape, onClose, onAssigned }: Props) {
 
               <SelectArrow />
             </div>
-          </label>
+          </div>
 
           <p className="text-xs leading-5 text-dashboard-muted">
             This person is responsible for {stageLabel(stage)}. Other stage
@@ -366,13 +389,16 @@ export default function AssignmentModal({ tape, onClose, onAssigned }: Props) {
             type="button"
             disabled={saving}
             onClick={() => setReload((previous) => previous + 1)}
-            className="text-xs text-dashboard-blue underline underline-offset-4 disabled:opacity-50"
+            className="
+              text-xs text-dashboard-blue underline
+              underline-offset-4 disabled:opacity-50
+            "
           >
             Reload operators
           </button>
         )}
 
-        <footer className="flex justify-end gap-3 border-t border-dashboard-border pt-4">
+        <footer className="flex justify-end gap-3 border-t border-dashboard-border pt-5">
           <button
             type="button"
             disabled={saving}

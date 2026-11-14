@@ -46,6 +46,8 @@ interface Props {
   onToggle: () => void;
   onAssign: (tape: TapeSummary) => void;
   onChangeStage: (tape: TapeSummary) => void;
+  boxOpen: boolean;
+  onDelete: (tape: TapeSummary) => void;
 }
 
 function assignmentAllowed(tape: TapeSummary) {
@@ -61,9 +63,11 @@ export default function TapeStageColumn({
   tapes,
   expanded,
   isAdmin,
+  boxOpen,
   onToggle,
   onAssign,
-  onChangeStage
+  onChangeStage,
+  onDelete
 }: Props) {
   const contentId = useId();
 
@@ -138,9 +142,18 @@ export default function TapeStageColumn({
             key={tape.id}
             tape={tape}
             color={stage.color}
-            canAssign={isAdmin && assignmentAllowed(tape)}
+            canAssign={isAdmin && boxOpen && assignmentAllowed(tape)}
+            canDelete={
+              isAdmin &&
+              boxOpen &&
+              tape.status === "received" &&
+              tape.current_station === "received" &&
+              (tape.stage_timings?.length ?? 0) === 0
+            }
             onAssign={onAssign}
             onChangeStage={onChangeStage}
+            onDelete={onDelete}
+            editable={boxOpen}
           />
         ))}
       </div>
