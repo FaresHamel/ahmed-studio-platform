@@ -115,7 +115,11 @@ export default function IndividualTapeDetailsContainer({ tapeId }: { tapeId: str
   const job = tape.context.job;
   const customer = tape.context.customer;
   const canSchedule = !shipped && Boolean(admin || (user?.roles.includes('operator') && tape.assignments?.some((item) => item.operator_id === user.id)));
-
+  const boxLocked =
+    tape.context.box.closed ||
+    Boolean(tape.context.box.shipped_at) ||
+    tape.status === "shipped" ||
+    tape.current_station === "shipped";
   return (
     <main
       dir="ltr"
@@ -172,7 +176,7 @@ export default function IndividualTapeDetailsContainer({ tapeId }: { tapeId: str
                 Change stage
               </button>
             )}
-            {admin && supported && !shipped && (
+            {admin && supported && !shipped && !boxLocked && (
               <button
                 type="button"
                 disabled={disabled}
@@ -186,6 +190,12 @@ export default function IndividualTapeDetailsContainer({ tapeId }: { tapeId: str
           </div>
         </div>
       </header>
+
+      {tape.context.box.closed && !tape.context.box.shipped_at && (
+        <p className="rounded-lg bg-dashboard-amber-soft p-4 text-sm text-dashboard-amber">
+          This box is closed. Reopen it from Box details to make changes.
+        </p>
+      )}
 
       {(error || actionError || needsReload) && (
         <div
@@ -475,7 +485,7 @@ export default function IndividualTapeDetailsContainer({ tapeId }: { tapeId: str
         comments={<TapeComments tape={tape} disabled={disabled} run={run} />}
         activity={<TapeActivityHistory tape={tape} />}
       />
-      {showAssignment && admin && (
+      {showAssignment && admin && !boxLocked && (
         <AssignmentModal
           key={`assignment-${tape.id}`}
           tape={tape}
@@ -484,7 +494,7 @@ export default function IndividualTapeDetailsContainer({ tapeId }: { tapeId: str
         />
       )}
 
-      {showStage && staff && (
+      {showStage && staff && !boxLocked && (
         <ChangeTapeStageModal
           key={`stage-${tape.id}`}
           tape={tape}

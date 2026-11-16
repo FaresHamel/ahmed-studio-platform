@@ -1,7 +1,8 @@
 import type {
     AssignableStage,
     Station,
-    TapeWorkResult
+    TapeMediaType,
+    TapeWorkResult,
 } from "@/types/production-api";
 
 export const PRODUCTION_STAGES: AssignableStage[] = [
@@ -10,20 +11,27 @@ export const PRODUCTION_STAGES: AssignableStage[] = [
     "baking",
     "ingest",
     "qc",
-    "restoration"
+    "restoration",
 ];
 
 export const STATION_ORDER: Station[] = [
     "received",
     ...PRODUCTION_STAGES,
     "ready",
-    "shipped"
+    "shipped",
 ];
 
 const OPTIONAL_STAGES: Station[] = [
     "cleaning",
     "baking",
-    "restoration"
+    "restoration",
+];
+
+const PRODUCTION_MEDIA_TYPES: readonly TapeMediaType[] = [
+    "audio",
+    "video",
+    "photo",
+    "document",
 ];
 
 const SPECIALTY_LABELS: Record<string, string> = {
@@ -33,10 +41,20 @@ const SPECIALTY_LABELS: Record<string, string> = {
     video_specialist: "Video Specialist",
     audio_qc: "Audio QC",
     video_qc: "Video QC",
-    restoration: "Restoration Specialist"
+    restoration: "Restoration Specialist",
 };
 
-export function stageLabel(value: string | null) {
+export function supportsProduction(
+    mediaType: string,
+): mediaType is TapeMediaType {
+    return PRODUCTION_MEDIA_TYPES.some(
+        (supported) => supported === mediaType,
+    );
+}
+
+export function stageLabel(
+    value: string | null | undefined,
+): string {
     if (!value) return "Not recorded";
     if (value === "qc") return "QC";
 
@@ -45,16 +63,22 @@ export function stageLabel(value: string | null) {
         .replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
-export function specialtyLabel(value: string | null | undefined) {
-    return value ? SPECIALTY_LABELS[value] ?? value : "No specialty";
+export function specialtyLabel(
+    value: string | null | undefined,
+): string {
+    return value
+        ? SPECIALTY_LABELS[value] ?? value
+        : "No specialty";
 }
 
 export function canOperateStage(
     specialty: string | null | undefined,
     stage: AssignableStage,
-    mediaType: string
-) {
-    if (!["audio", "video"].includes(mediaType)) return false;
+    mediaType: string,
+): boolean {
+    if (!supportsProduction(mediaType)) return false;
+    if (!specialty) return false;
+
     if (specialty === "supervisor") return true;
 
     switch (stage) {
@@ -66,10 +90,20 @@ export function canOperateStage(
             return false;
 
         case "ingest":
-            return specialty === `${mediaType}_specialist`;
+            return (
+                (mediaType === "audio" &&
+                    specialty === "audio_specialist") ||
+                (mediaType === "video" &&
+                    specialty === "video_specialist")
+            );
 
         case "qc":
-            return specialty === `${mediaType}_qc`;
+            return (
+                (mediaType === "audio" &&
+                    specialty === "audio_qc") ||
+                (mediaType === "video" &&
+                    specialty === "video_qc")
+            );
 
         case "restoration":
             return specialty === "restoration";
@@ -82,16 +116,21 @@ export function canOperateStage(
 export function movementOptions(
     current: string | null,
     result: TapeWorkResult,
-    isAdmin: boolean
+    isAdmin: boolean,
 ): Station[] {
     const fromIndex = STATION_ORDER.findIndex(
-        (stage) => stage === current
+        (stage) => stage === current,
     );
 
     if (fromIndex < 0 || current === "shipped") return [];
 
     return STATION_ORDER.filter((target, targetIndex) => {
-        if (target === "shipped" || targetIndex === fromIndex) return false;
+        if (
+            target === "shipped" ||
+            targetIndex === fromIndex
+        ) {
+            return false;
+        }
 
         if (targetIndex < fromIndex) {
             const qcRework =

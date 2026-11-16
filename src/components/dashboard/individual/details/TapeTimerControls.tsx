@@ -10,7 +10,8 @@ import {
   movementOptions,
   PRODUCTION_STAGES,
   STATION_ORDER,
-  stageLabel
+  stageLabel,
+  supportsProduction
 } from "@/lib/individual/tape-workflow";
 import {
   duration,
@@ -83,12 +84,14 @@ export default function TapeTimerControls({ tape, now, disabled, run }: Props) {
   const [result, setResult] = useState<TapeWorkResult>("OK");
   const [destination, setDestination] = useState("");
   const [error, setError] = useState<string | null>(null);
-  
+
   const boxLocked =
     tape.context.box.closed ||
     Boolean(tape.context.box.shipped_at) ||
     tape.status === "shipped" ||
     tape.current_station === "shipped";
+  
+ 
   const active = tape.stage_timings.find(
     (item) => item.status === "running" || item.status === "paused"
   );
@@ -99,7 +102,7 @@ export default function TapeTimerControls({ tape, now, disabled, run }: Props) {
     (item) => item.stage === stage && item.operator_id === user?.id
   );
 
-  const supported = ["audio", "video"].includes(tape.media_type);
+ const supported = supportsProduction(tape.media_type);
 
   const shipped = Boolean(
     tape.context.box.shipped_at ||
@@ -117,13 +120,12 @@ export default function TapeTimerControls({ tape, now, disabled, run }: Props) {
         tape.media_type
       )
   );
-
   const canStart = Boolean(
-    !shipped && supported && stage && !active && (admin || eligibleOperator)
+    !boxLocked && supported && stage && !active && (admin || eligibleOperator)
   );
 
   const canControl = Boolean(
-    !shipped &&
+    !boxLocked &&
       active &&
       active.stage === tape.current_station &&
       (admin || (operator && active.operator_id === user?.id))
@@ -134,7 +136,7 @@ export default function TapeTimerControls({ tape, now, disabled, run }: Props) {
   const unavailableMessage = shipped
     ? "Production is read-only after shipment."
     : !supported
-    ? "Timers are configured for audio and video."
+    ? "Production is unavailable for this media type."
     : !stage
     ? "Move to a production stage before starting work."
     : "An admin or the eligible assigned operator can start this stage.";

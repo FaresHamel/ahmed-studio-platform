@@ -40,7 +40,8 @@ const PLACEHOLDERS: Record<string, string> = {
   words: "e.g. Traditional",
   company: "e.g. Rotana",
   published_date: "e.g. 1972 or 1972-06-15",
-  summary: "e.g. Family wedding ceremony and evening celebration in Riyadh."
+  summary:
+    "e.g. Family wedding ceremony and evening celebration in Riyadh."
 };
 
 const FORMATS: Record<TapeMediaType, readonly string[]> = {
@@ -462,7 +463,12 @@ function TapeForm({
     setValidation(null);
   }
 
-  function text(key: string, label: string, required = false, hint?: string) {
+  function text(
+    key: string,
+    label: string,
+    required = false,
+    hint?: string
+  ) {
     const fieldId = `${id}-${key}`;
 
     const placeholder =
@@ -501,7 +507,12 @@ function TapeForm({
     const fieldId = `${id}-${key}`;
 
     return (
-      <FormField key={key} id={fieldId} label={label} required={required}>
+      <FormField
+        key={key}
+        id={fieldId}
+        label={label}
+        required={required}
+      >
         <FormSelect
           id={fieldId}
           name={key}
@@ -733,7 +744,11 @@ function TapeForm({
       <fieldset disabled={locked} className="space-y-8">
         <legend className="sr-only">Material intake</legend>
 
-        <FormField id={`${id}-media-type`} label="Media type" required>
+        <FormField
+          id={`${id}-media-type`}
+          label="Media type"
+          required
+        >
           <FormSelect
             id={`${id}-media-type`}
             name="media_type"
@@ -777,7 +792,10 @@ function TapeForm({
           )}
 
           {isDocument ? (
-            <FormField id={`${id}-document-format`} label="Format">
+            <FormField
+              id={`${id}-document-format`}
+              label="Format"
+            >
               <FormSelect
                 id={`${id}-document-format`}
                 value="Document"
@@ -804,9 +822,11 @@ function TapeForm({
             {hasCapacity &&
               select("capacity", "Capacity (min)", capacityOptions)}
 
-            {isVideo && select("color_system", "Color system", COLOR_SYSTEMS)}
+            {isVideo &&
+              select("color_system", "Color system", COLOR_SYSTEMS)}
 
-            {isAudio && select("audio_track", "Audio track", AUDIO_TRACKS)}
+            {isAudio &&
+              select("audio_track", "Audio track", AUDIO_TRACKS)}
 
             {isVinyl && (
               <>
@@ -903,8 +923,8 @@ function TapeForm({
           </div>
 
           <p className="text-xs leading-5 text-dashboard-muted">
-            Leave either date empty if it is unknown. Each selected date needs a
-            time. Times use your device’s local timezone.
+            Leave either date empty if it is unknown. Each selected date needs
+            a time. Times use your device’s local timezone.
           </p>
         </section>
 
@@ -957,7 +977,10 @@ function TapeForm({
       </fieldset>
 
       {(validation || error) && (
-        <div role="alert" className="mt-5 space-y-1 text-sm text-dashboard-red">
+        <div
+          role="alert"
+          className="mt-5 space-y-1 text-sm text-dashboard-red"
+        >
           {validation && <p>{validation}</p>}
           {error && error !== validation && <p>{error}</p>}
         </div>

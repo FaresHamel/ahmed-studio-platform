@@ -7,18 +7,21 @@ import toast from "react-hot-toast";
 import { individualService } from "@/services/individual.service";
 import { individualError } from "@/hooks/individual/useIndividualJob";
 import { useAuthStore } from "@/store/auth.store";
+
 import type {
   IndividualTapeDetails,
   Station,
   TapeSummary,
   TapeWorkResult
 } from "@/types/production-api";
+
 import {
   canOperateStage,
   movementOptions,
   PRODUCTION_STAGES,
   STATION_ORDER,
-  stageLabel
+  stageLabel,
+  supportsProduction
 } from "@/lib/individual/tape-workflow";
 
 interface Props {
@@ -27,7 +30,17 @@ interface Props {
   onUpdated: () => void | Promise<void>;
 }
 
-const selectClass = "dashboard-input min-h-12 appearance-none py-3 pl-3 pr-10";
+type StageRecord = IndividualTapeDetails & {
+  context?: {
+    box?: {
+      closed: boolean;
+      shipped_at: string | null;
+    };
+  };
+};
+
+const selectClass =
+  "dashboard-input min-h-12 w-full appearance-none py-3 pl-3 pr-10";
 
 const labelClass = "mb-3 block text-sm font-medium text-dashboard-text";
 
@@ -58,7 +71,7 @@ export default function ChangeTapeStageModal({
   const isAdmin = Boolean(user?.roles.includes("admin"));
   const isOperator = Boolean(user?.roles.includes("operator"));
 
-  const [record, setRecord] = useState<IndividualTapeDetails | null>(null);
+  const [record, setRecord] = useState<StageRecord | null>(null);
   const [result, setResult] = useState<TapeWorkResult>("OK");
   const [destination, setDestination] = useState("");
   const [note, setNote] = useState("");
@@ -66,6 +79,16 @@ export default function ChangeTapeStageModal({
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [reload, setReload] = useState(0);
+
+  const currentContext = useRef({
+    tapeId: tape.id,
+    accountId: user?.id
+  });
+
+  currentContext.current = {
+    tapeId: tape.id,
+    accountId: user?.id
+  };
 
   useEffect(() => {
     mounted.current = true;
@@ -111,7 +134,7 @@ export default function ChangeTapeStageModal({
         }
       } catch (failure) {
         if (!controller.signal.aborted) {
-          setError(individualError(failure, "Could not load this tape."));
+          setError(individualError(failure, "Could not load this material."));
         }
       } finally {
         if (!controller.signal.aborted) {
@@ -158,16 +181,22 @@ export default function ChangeTapeStageModal({
   );
 
   const supportedMedia = Boolean(
-    record && ["audio", "video"].includes(record.media_type)
+    record && supportsProduction(record.media_type)
   );
 
-  const shipped =
-    record?.status === "shipped" || record?.current_station === "shipped";
+  const shipped = Boolean(
+    record?.context?.box?.shipped_at ||
+      record?.status === "shipped" ||
+      record?.current_station === "shipped"
+  );
+
+  const boxClosed = Boolean(record?.context?.box?.closed);
 
   const canMove = Boolean(
     record &&
       supportedMedia &&
       !shipped &&
+      !boxClosed &&
       !activeTimer &&
       (isAdmin || operatorAllowed)
   );
@@ -194,9 +223,13 @@ export default function ChangeTapeStageModal({
   const reasonRequired = backward || result === "NOT_OK";
 
   const unavailableMessage = shipped
-    ? "Shipped tapes cannot change production stage."
+    ? "Shipped materials cannot change production stage."
+    : boxClosed
+    ? "This box is closed. Reopen it from Box details before changing stages."
+    : activeTimer
+    ? "Finish or cancel the active timer before changing stage."
     : !supportedMedia
-    ? "Production stage changes currently support audio and video only."
+    ? "Production is unavailable for this media type."
     : "Operators need an assignment for the stage being completed and a matching specialty.";
 
   function close() {
@@ -208,15 +241,17 @@ export default function ChangeTapeStageModal({
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const actorId = useAuthStore.getState().user?.id;
+    const actor = useAuthStore.getState().user;
+    const requestedTapeId = tape.id;
 
     if (
       lock.current ||
       loading ||
       !canMove ||
       !validDestination ||
-      !actorId ||
-      actorId !== user?.id
+      !actor ||
+      actor.id !== user?.id ||
+      !actor.roles.some((role) => ["admin", "operator"].includes(role))
     ) {
       return;
     }
@@ -226,12 +261,21 @@ export default function ChangeTapeStageModal({
       return;
     }
 
+    function isCurrent() {
+      return (
+        mounted.current &&
+        currentContext.current.tapeId === requestedTapeId &&
+        currentContext.current.accountId === actor?.id &&
+        useAuthStore.getState().user?.id === actor?.id
+      );
+    }
+
     lock.current = true;
     setSaving(true);
     setError(null);
 
     try {
-      await individualService.transition(tape.id, {
+      await individualService.transition(requestedTapeId, {
         to_station: validDestination,
         result,
         ...(note.trim() ? { issue_note: note.trim() } : {})
@@ -239,28 +283,34 @@ export default function ChangeTapeStageModal({
     } catch (failure) {
       lock.current = false;
 
-      if (mounted.current && useAuthStore.getState().user?.id === actorId) {
+      if (mounted.current) {
         setSaving(false);
+      }
+
+      if (isCurrent()) {
         setError(individualError(failure, "Could not change stage."));
-      } else if (mounted.current) {
-        setSaving(false);
       }
 
       return;
     }
 
     try {
-      if (useAuthStore.getState().user?.id === actorId) {
+      if (isCurrent()) {
         toast.success(`Moved to ${stageLabel(validDestination)}.`);
         await onUpdated();
       }
     } catch {
-      toast.error("Stage changed. Reload to refresh the board.");
+      if (isCurrent()) {
+        toast.error("Stage changed. Reload to refresh the board.");
+      }
     } finally {
       lock.current = false;
 
       if (mounted.current) {
         setSaving(false);
+      }
+
+      if (isCurrent()) {
         onClose();
       }
     }
@@ -276,8 +326,7 @@ export default function ChangeTapeStageModal({
       }}
       className="
         m-auto max-h-[90dvh] w-[calc(100%-2rem)] max-w-lg
-        overflow-y-auto rounded-xl
-        border border-dashboard-border
+        overflow-y-auto rounded-xl border border-dashboard-border
         bg-dashboard-surface p-6 text-dashboard-text
         shadow-xl backdrop:bg-black/50
       "
@@ -288,7 +337,7 @@ export default function ChangeTapeStageModal({
         className="space-y-6"
       >
         <header className="flex items-start justify-between gap-3">
-          <div>
+          <div className="min-w-0">
             <h2 id={`${id}-title`} className="text-lg font-semibold">
               Change production stage
             </h2>
@@ -323,20 +372,14 @@ export default function ChangeTapeStageModal({
               </span>
             </div>
 
-            {activeTimer && (
+            {!canMove && (
               <p
                 role="status"
                 className="
                   rounded-lg bg-dashboard-amber-soft
-                  p-3 text-sm text-dashboard-amber
+                  p-3 text-sm leading-6 text-dashboard-amber
                 "
               >
-                Finish or cancel the active timer before changing stage.
-              </p>
-            )}
-
-            {!activeTimer && !canMove && (
-              <p className="text-sm leading-6 text-dashboard-muted">
                 {unavailableMessage}
               </p>
             )}
@@ -412,7 +455,9 @@ export default function ChangeTapeStageModal({
                     setError(null);
                   }}
                   placeholder="Explain rework or add a production note"
-                  className="dashboard-input resize-y px-3 py-3"
+                  className="
+                    dashboard-input w-full resize-y px-3 py-3
+                  "
                 />
               </div>
 
@@ -444,12 +489,11 @@ export default function ChangeTapeStageModal({
             disabled={saving}
             onClick={() => setReload((value) => value + 1)}
             className="
-              text-xs text-dashboard-blue
-              underline underline-offset-4
+              text-xs text-dashboard-blue underline underline-offset-4
               disabled:cursor-not-allowed disabled:opacity-50
             "
           >
-            Reload tape
+            Reload material
           </button>
         )}
 

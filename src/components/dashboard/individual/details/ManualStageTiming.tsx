@@ -8,7 +8,8 @@ import { useAuthStore } from "@/store/auth.store";
 import {
   canOperateStage,
   PRODUCTION_STAGES,
-  stageLabel
+  stageLabel,
+  supportsProduction
 } from "@/lib/individual/tape-workflow";
 import {
   dateTime,
@@ -68,20 +69,21 @@ export default function ManualStageTiming({ tape, disabled, run }: Props) {
     (item) => item.stage === stage && item.operator_id === user?.id
   );
 
-  const allowed = Boolean(
-    !tape.context.box.closed &&
-      !tape.context.box.shipped_at &&
-      tape.status !== "shipped" &&
-      ["audio", "video"].includes(tape.media_type) &&
-      (admin ||
-        (user?.roles.includes("operator") &&
-          assignment?.operator.status === "active" &&
-          canOperateStage(
-            assignment.operator.profiles?.operator_type,
-            stage,
-            tape.media_type
-          )))
-  );
+ const allowed = Boolean(
+   !tape.context.box.closed &&
+     !tape.context.box.shipped_at &&
+     tape.status !== "shipped" &&
+     tape.current_station !== "shipped" &&
+     supportsProduction(tape.media_type) &&
+     (admin ||
+       (user?.roles.includes("operator") &&
+         assignment?.operator.status === "active" &&
+         canOperateStage(
+           assignment.operator.profiles?.operator_type,
+           stage,
+           tape.media_type
+         )))
+ );
 
   useEffect(() => {
     setDue(toLocalInput(selected?.due_at));

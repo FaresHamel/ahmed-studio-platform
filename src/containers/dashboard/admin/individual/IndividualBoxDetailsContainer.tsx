@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -10,7 +9,12 @@ import {
   RefreshCw,
   Trash2,
   Truck,
-  UnlockKeyhole
+  UnlockKeyhole,
+  FileText,
+  Image as ImageIcon,
+  Layers3,
+  Music2,
+  Video
 } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -24,7 +28,7 @@ import { individualError } from "@/hooks/individual/useIndividualJob";
 import { individualService } from "@/services/individual.service";
 import { useAuthStore } from "@/store/auth.store";
 import type { TapeInput } from "@/types/production-api";
-
+import BoxActivity from "@/components/dashboard/individual/BoxActivity";
 interface Props {
   boxId: string;
 }
@@ -35,7 +39,44 @@ const ACTION_MESSAGES: Record<BoxAction, string> = {
   delete: "Box deleted.",
   ship: "Box and its materials shipped."
 };
+const BUTTON_BASE = `
+  inline-flex min-h-10 items-center justify-center gap-2
+  whitespace-nowrap rounded-lg px-4 py-2
+  text-[13px] font-medium transition-colors
+  focus-visible:outline-2 focus-visible:outline-offset-2
+  focus-visible:outline-dashboard-focus
+  disabled:pointer-events-none disabled:opacity-40
+`;
 
+const PRIMARY_BUTTON = `
+  ${BUTTON_BASE}
+  border border-slate-900 bg-slate-900 text-white
+  hover:border-slate-700 hover:bg-slate-700
+  active:bg-slate-800
+  dark:border-slate-100 dark:bg-slate-100 dark:text-slate-950
+  dark:hover:border-white dark:hover:bg-white
+  dark:active:bg-slate-200
+`;
+
+const SECONDARY_BUTTON = `
+  ${BUTTON_BASE}
+  border border-slate-200 bg-white text-slate-700
+  hover:border-slate-300 hover:bg-slate-50
+  active:bg-slate-100
+  dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200
+  dark:hover:border-slate-600 dark:hover:bg-slate-800
+  dark:active:bg-slate-700
+`;
+
+const DELETE_BUTTON = `
+  ${BUTTON_BASE}
+  border border-transparent bg-transparent text-red-700
+  hover:border-red-200 hover:bg-red-50
+  active:bg-red-100
+  dark:text-red-400
+  dark:hover:border-red-500/30 dark:hover:bg-red-500/10
+  dark:active:bg-red-500/20
+`;
 export default function IndividualBoxDetailsContainer({ boxId }: Props) {
   const router = useRouter();
 
@@ -387,34 +428,50 @@ export default function IndividualBoxDetailsContainer({ boxId }: Props) {
     ? "bg-dashboard-amber-soft text-dashboard-amber"
     : "bg-dashboard-green-soft text-dashboard-green";
 
-  const totals = [
-    {
-      label: "Total materials",
-      value: materialCount,
-      style: "text-dashboard-text"
-    },
-    {
-      label: "Video",
-      value: box.ind_tapes.filter((tape) => tape.media_type === "video").length,
-      style: "text-dashboard-blue"
-    },
-    {
-      label: "Audio",
-      value: box.ind_tapes.filter((tape) => tape.media_type === "audio").length,
-      style: "text-dashboard-purple"
-    },
-    {
-      label: "Photo",
-      value: box.ind_tapes.filter((tape) => tape.media_type === "photo").length,
-      style: "text-dashboard-red"
-    },
-    {
-      label: "Document",
-      value: box.ind_tapes.filter((tape) => tape.media_type === "document")
-        .length,
-      style: "text-dashboard-orange"
-    }
-  ];
+const totals = [
+  {
+    label: "Total materials",
+    value: materialCount,
+    icon: Layers3,
+    color: "text-dashboard-blue",
+    background: "bg-dashboard-surface",
+    // Highlighted summary card: filled blue with a blue outline
+    card: "bg-dashboard-blue-soft ring-1 ring-inset ring-dashboard-blue/30"
+  },
+  {
+    label: "Video",
+    value: box.ind_tapes.filter((tape) => tape.media_type === "video").length,
+    icon: Video,
+    color: "text-dashboard-blue",
+    background: "bg-dashboard-blue-soft",
+    card: ""
+  },
+  {
+    label: "Audio",
+    value: box.ind_tapes.filter((tape) => tape.media_type === "audio").length,
+    icon: Music2,
+    color: "text-dashboard-purple",
+    background: "bg-dashboard-purple-soft",
+    card: ""
+  },
+  {
+    label: "Photo",
+    value: box.ind_tapes.filter((tape) => tape.media_type === "photo").length,
+    icon: ImageIcon,
+    color: "text-dashboard-red",
+    background: "bg-dashboard-red-soft",
+    card: ""
+  },
+  {
+    label: "Document",
+    value: box.ind_tapes.filter((tape) => tape.media_type === "document")
+      .length,
+    icon: FileText,
+    color: "text-dashboard-orange",
+    background: "bg-dashboard-orange-soft",
+    card: ""
+  }
+];
 
   return (
     <section dir="ltr" className="min-w-0 space-y-6 text-dashboard-text">
@@ -455,83 +512,90 @@ export default function IndividualBoxDetailsContainer({ boxId }: Props) {
           </span>
         </div>
 
-        <div className="mt-5 flex flex-wrap gap-3">
-          <button
-            type="button"
-            disabled={saving || refreshing}
-            onClick={retryLoadBox}
-            className="dashboard-btn-secondary"
-          >
-            <RefreshCw
-              size={16}
-              aria-hidden="true"
-              className={refreshing ? "animate-spin" : ""}
-            />
-            {refreshing ? "Refreshing…" : "Refresh"}
-          </button>
-
-          {isAdmin && boxOpen && (
-            <>
-              <button
-                type="button"
-                disabled={blocked}
-                onClick={() => {
-                  setSaveError(null);
-                  setShowAddTape(true);
-                }}
-                className="dashboard-btn-primary"
-              >
-                <Plus size={16} aria-hidden="true" />
-                Add tape
-              </button>
-
-              <button
-                type="button"
-                disabled={blocked}
-                onClick={() => openAction("close")}
-                className="dashboard-btn-secondary"
-              >
-                <LockKeyhole size={16} aria-hidden="true" />
-                Close box
-              </button>
-
-              {materialCount === 0 && (
+        <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-wrap items-center gap-2">
+            {isAdmin && boxOpen && (
+              <>
                 <button
                   type="button"
                   disabled={blocked}
-                  onClick={() => openAction("delete")}
-                  className="dashboard-btn-secondary text-dashboard-red"
+                  onClick={() => {
+                    setSaveError(null);
+                    setShowAddTape(true);
+                  }}
+                  className={PRIMARY_BUTTON}
                 >
-                  <Trash2 size={16} aria-hidden="true" />
-                  Delete box
+                  <Plus size={15} aria-hidden="true" />
+                  Add tape
                 </button>
-              )}
-            </>
-          )}
 
-          {isAdmin && box.closed && !shipped && (
-            <>
+                <button
+                  type="button"
+                  disabled={blocked}
+                  onClick={() => openAction("close")}
+                  className={SECONDARY_BUTTON}
+                >
+                  <LockKeyhole size={15} aria-hidden="true" />
+                  Close box
+                </button>
+              </>
+            )}
+
+            {isAdmin && box.closed && !shipped && (
+              <>
+                <button
+                  type="button"
+                  disabled={blocked || !canShip}
+                  onClick={() => openAction("ship")}
+                  className={PRIMARY_BUTTON}
+                >
+                  <Truck size={15} aria-hidden="true" />
+                  Ship box
+                </button>
+
+                <button
+                  type="button"
+                  disabled={blocked}
+                  onClick={() => openAction("reopen")}
+                  className={SECONDARY_BUTTON}
+                >
+                  <UnlockKeyhole size={15} aria-hidden="true" />
+                  Reopen box
+                </button>
+              </>
+            )}
+          </div>
+
+          <div className="ml-auto flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              disabled={saving || refreshing}
+              onClick={retryLoadBox}
+              aria-busy={refreshing}
+              className={SECONDARY_BUTTON}
+            >
+              <RefreshCw
+                size={15}
+                aria-hidden="true"
+                className={
+                  refreshing ? "animate-spin motion-reduce:animate-none" : ""
+                }
+              />
+              {refreshing ? "Refreshing…" : "Refresh"}
+            </button>
+
+            {isAdmin && boxOpen && materialCount === 0 && (
               <button
                 type="button"
                 disabled={blocked}
-                onClick={() => openAction("reopen")}
-                className="dashboard-btn-secondary"
+                onClick={() => openAction("delete")}
+                className={DELETE_BUTTON}
               >
-                <UnlockKeyhole size={16} aria-hidden="true" />
-                Reopen box
+                <Trash2 size={15} aria-hidden="true" />
+                Delete box
               </button>
-
-              <button
-                type="button"
-                disabled={blocked || !canShip}
-                onClick={() => openAction("ship")}
-                className="dashboard-btn-primary"
-              >
-                <Truck size={16} aria-hidden="true" />
-                Ship box
-              </button>
-            </>
-          )}
+            )}
+          </div>
         </div>
       </header>
 
@@ -544,16 +608,40 @@ export default function IndividualBoxDetailsContainer({ boxId }: Props) {
         </p>
       )}
 
-      <dl className="grid grid-cols-2 gap-4 lg:grid-cols-5">
-        {totals.map((item) => (
-          <div key={item.label} className="dashboard-card p-4">
-            <dt className="text-xs text-dashboard-muted">{item.label}</dt>
+      <dl className="grid grid-cols-2 gap-1 lg:grid-cols-5">
+        {totals.map((item) => {
+          const Icon = item.icon;
+          const highlighted = item.card !== "";
 
-            <dd className={`mt-3 text-2xl font-semibold ${item.style}`}>
-              {item.value}
-            </dd>
-          </div>
-        ))}
+          return (
+            <div key={item.label} className={`dashboard-card p-4 ${item.card}`}>
+              <dt className="flex items-center gap-2.5">
+                <span
+                  aria-hidden="true"
+                  className={`
+              flex size-8 shrink-0 items-center justify-center
+              rounded-lg ${item.background} ${item.color}
+              ${highlighted ? "ring-1 ring-inset ring-dashboard-border" : ""}
+            `}
+                >
+                  <Icon size={16} strokeWidth={1.8} />
+                </span>
+
+                <span className="text-xs text-dashboard-muted">
+                  {item.label}
+                </span>
+              </dt>
+
+              <dd
+                className={`
+            mt-3 text-2xl font-semibold tabular-nums ${item.color}
+          `}
+              >
+                {item.value}
+              </dd>
+            </div>
+          );
+        })}
       </dl>
 
       <section className="dashboard-card space-y-3 p-4">
@@ -601,6 +689,10 @@ export default function IndividualBoxDetailsContainer({ boxId }: Props) {
           onAssigned={refresh}
         />
       </div>
+      <BoxActivity
+        events={box.activity ?? []}
+        hasMore={box.activity_has_more}
+      />
 
       <CreateTapeModal
         open={showAddTape && isAdmin && boxOpen}

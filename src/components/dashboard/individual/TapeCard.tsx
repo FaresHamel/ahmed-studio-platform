@@ -13,7 +13,7 @@ import { useEffect, useId, useRef, useState } from "react";
 
 import type { TapeSummary } from "@/types/production-api";
 import { avatarColor } from "@/lib/users/account-display";
-
+import { supportsProduction } from "@/lib/individual/tape-workflow";
 interface Props {
   tape: TapeSummary;
   color: string;
@@ -232,11 +232,11 @@ export default function TapeCard({
     tape.id
   )}`;
 
-  const canChangeStage =
-    editable &&
-    ["audio", "video"].includes(tape.media_type) &&
-    tape.status !== "shipped" &&
-    tape.current_station !== "shipped";
+const canChangeStage =
+  editable &&
+  supportsProduction(tape.media_type) &&
+  tape.status !== "shipped" &&
+  tape.current_station !== "shipped";
 
   const operators = new Map<
     string,

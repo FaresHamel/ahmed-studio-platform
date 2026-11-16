@@ -51,6 +51,7 @@ export interface IndividualJob extends IndividualJobSummary {
   client_id: string | null;
   phone: string;
   email: string | null;
+  boxes_closed: boolean;
 }
 export interface BoxSummary {
   id: string;
@@ -304,11 +305,14 @@ export interface IndividualJobListItem extends IndividualJob {
 }
 export interface IndividualJobBox extends BoxSummary {
   ind_tapes: TapeSummary[];
+  shipping: BoxShippingSummary;
 }
 
 export interface IndividualJobDetails extends IndividualJob {
   clients: Customer | null;
   ind_boxes: IndividualJobBox[];
+  registration_activity: RegistrationActivityEntry[];
+  registration_activity_has_more: boolean;
 }
 
 export interface IndividualBoxDetails extends BoxSummary {
@@ -316,6 +320,8 @@ export interface IndividualBoxDetails extends BoxSummary {
   drive_url: string | null;
   ind_clients: IndividualJob;
   ind_tapes: TapeSummary[];
+  activity: BoxActivityEntry[];
+  activity_has_more: boolean;
 }
 
 export type AssignableStage =
@@ -418,4 +424,26 @@ export interface FinishTapeTimerInput {
 // Schedule edits use the separate schedule endpoint.
 export type TapeUpdateInput = Partial<
   Omit<TapeInput, "planned_start_at" | "due_at">
->;
+  >;
+export interface BoxShippingSummary {
+  eligible: boolean;
+  blocked_reason: string | null;
+  total_materials: number;
+  ready_materials: number;
+  shipped_materials: number;
+  has_active_work: boolean;
+}
+export interface BoxActivityEntry {
+  id: string;
+  action: string;
+  at: string;
+  author_name: string;
+  reason: string | null;
+}
+export interface RegistrationActivityEntry {
+  id: string;
+  action: string;
+  at: string;
+  author_name: string;
+  reason: string | null;
+}

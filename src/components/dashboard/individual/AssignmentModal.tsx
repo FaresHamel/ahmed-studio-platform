@@ -14,7 +14,7 @@ import {
   specialtyLabel,
   stageLabel
 } from "@/lib/individual/tape-workflow";
-
+import { supportsProduction } from "@/lib/individual/tape-workflow";
 interface Props {
   tape: TapeSummary;
   onClose: () => void;
@@ -177,10 +177,10 @@ export default function AssignmentModal({ tape, onClose, onAssigned }: Props) {
       currentAssignment.operator.email
     : null;
 
-  const unavailable =
-    !["audio", "video"].includes(tape.media_type) ||
-    tape.status === "shipped" ||
-    tape.current_station === "shipped";
+const unavailable =
+  !supportsProduction(tape.media_type) ||
+  tape.status === "shipped" ||
+  tape.current_station === "shipped";
 
   function close() {
     if (!lock.current) {

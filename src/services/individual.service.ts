@@ -285,4 +285,23 @@ export const individualService = {
 
     return data;
   },
+  async closeIntake(jobId: string): Promise<IndividualJob> {
+    const { data } = await api.patch<IndividualJob>(
+      `/individual/clients/${id(jobId)}/intake/close`
+    );
+
+    return data;
+  },
+
+  async reopenIntake(
+    jobId: string,
+    reason: string
+  ): Promise<IndividualJob> {
+    const { data } = await api.patch<IndividualJob>(
+      `/individual/clients/${id(jobId)}/intake/reopen`,
+      { reason }
+    );
+
+    return data;
+  },
 };

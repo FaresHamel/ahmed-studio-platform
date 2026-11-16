@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import type { TapeSummary } from "@/types/production-api";
 import TapeCard from "./TapeCard";
+import { supportsProduction } from "@/lib/individual/tape-workflow";
 
 export interface TapeStage {
   key: string;
@@ -50,9 +51,9 @@ interface Props {
   onDelete: (tape: TapeSummary) => void;
 }
 
-function assignmentAllowed(tape: TapeSummary) {
+function assignmentAllowed(tape: TapeSummary): boolean {
   return (
-    ["audio", "video"].includes(tape.media_type) &&
+    supportsProduction(tape.media_type) &&
     tape.status !== "shipped" &&
     tape.current_station !== "shipped"
   );
