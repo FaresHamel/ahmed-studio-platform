@@ -37,7 +37,7 @@ export const audioTapesData: TapeItem[] = [
   {
     id: 3,
     src: "/images/tape-vinyl.png",
-    alt: "Vinyl Record"
+    alt: "Vinyl Materials"
   }
 ];
 

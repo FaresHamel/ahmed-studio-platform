@@ -184,11 +184,27 @@ export interface ProjectSummary {
   client_id: string | null;
   po_invoice_number: string | null;
   phone: string;
+
   start_date: string;
   duration_days: number;
   extra_days: number;
+
   paused: boolean;
+  paused_at: string | null;
+  accumulated_pause_seconds: number;
+
   finished: boolean;
+  finished_at: string | null;
+
+  created_at: string;
+  updated_at: string;
+  created_by: string;
+
+  pov_contacts: PovContact[];
+
+  _count: {
+    pov_records: number;
+  };
 }
 export interface ProjectInput {
   client_name: string;
@@ -199,75 +215,10 @@ export interface ProjectInput {
   duration_days: number;
   contact_user_ids: string[];
 }
-// Update DTO intentionally excludes client_id/contact_user_ids: the supplied
-// UpdatePovProjectDto does not accept ownership or membership changes.
-export type ProjectUpdate = Partial<
-  Pick<
-    ProjectInput,
-    | "client_name"
-    | "po_invoice_number"
-    | "phone"
-    | "start_date"
-    | "duration_days"
-  >
->;
-export interface ProjectDetails {
-  project: ProjectSummary;
-  timer: {
-    deadline: string;
-    is_paused: boolean;
-    is_finished: boolean;
-    is_overdue: boolean;
-    remaining_seconds: number;
-    overdue_seconds: number;
-  };
-  progress: {
-    total: number;
-    digitized: number;
-    remaining: number;
-    percentage: number;
-  };
-  formats: {
-    format: string;
-    quantity: number;
-    digitized: number;
-    remaining: number;
-  }[];
-}
 export interface PovContact {
   id: string;
   project_id: string;
   user_id: string;
-}
-export interface RecordInput {
-  format: string;
-  label?: string;
-  internal_ref?: string;
-  capacity?: number;
-  duration?: number;
-  color_system?: string;
-  frame_rate?: string;
-  resolution?: string;
-  aspect_ratio?: string;
-  trim?: boolean;
-  restoration?: boolean;
-  master_file?: boolean;
-  access_copy?: boolean;
-  file_size?: number;
-  note?: string;
-  photo_url?: string;
-}
-export type RecordStatus = "on_shelf" | "in_progress" | "done";
-export interface PovRecord {
-  id: string;
-  project_id: string;
-  record_no: string;
-  barcode: string;
-  format: string;
-  label: string | null;
-  status: RecordStatus;
-  // Prisma Decimal is commonly serialized as a string. Do not assume a JS number.
-  file_size: string | number | null;
 }
 export interface CustomerListItem extends Customer {
   client_users: Array<
@@ -446,4 +397,188 @@ export interface RegistrationActivityEntry {
   at: string;
   author_name: string;
   reason: string | null;
+}
+export interface PovContact {
+  id: string;
+  project_id: string;
+  user_id: string;
+  created_at: string;
+  users: {
+    id: string;
+    email: string;
+    profiles?: {
+      display_name: string | null;
+      phone?: string | null;
+    } | null;
+  };
+}
+
+export interface PovProjectData {
+  id: string;
+  client_name: string;
+  client_id: string | null;
+  po_invoice_number: string | null;
+  phone: string;
+
+  start_date: string;
+  duration_days: number;
+  extra_days: number;
+
+  paused: boolean;
+  paused_at: string | null;
+  accumulated_pause_seconds: number;
+
+  finished: boolean;
+  finished_at: string | null;
+
+  created_at: string;
+  updated_at: string;
+  created_by: string;
+}
+
+export interface ProjectSummary extends PovProjectData {
+  pov_contacts: PovContact[];
+
+  _count: {
+    pov_records: number;
+  };
+}
+
+export interface ProjectInput {
+  client_name: string;
+  client_id?: string;
+  po_invoice_number?: string;
+  phone: string;
+  start_date: string;
+  duration_days: number;
+  contact_user_ids: string[];
+}
+
+export type ProjectUpdate = Partial<
+  Pick<
+    ProjectInput,
+    | "client_name"
+    | "po_invoice_number"
+    | "phone"
+    | "start_date"
+    | "duration_days"
+  >
+>;
+
+export interface ProjectDetails {
+  project: PovProjectData & {
+    pov_contacts: PovContact[];
+  };
+
+  timer: {
+    deadline: string;
+    is_paused: boolean;
+    is_finished: boolean;
+    is_overdue: boolean;
+    remaining_seconds: number;
+    overdue_seconds: number;
+  };
+
+  progress: {
+    total: number;
+    digitized: number;
+    remaining: number;
+    percentage: number;
+  };
+
+  formats: {
+    format: string;
+    quantity: number;
+    digitized: number;
+    remaining: number;
+  }[];
+}
+
+export interface RecordInput {
+  tape_code: string;
+  media_type: TapeMediaType;
+  format: string;
+  label?: string;
+  internal_ref?: string;
+  capacity?: number;
+  duration?: number;
+  color_system?: string;
+  frame_rate?: string;
+  resolution?: string;
+  aspect_ratio?: string;
+  trim?: boolean;
+  restoration?: boolean;
+  master_file?: boolean;
+  access_copy?: boolean;
+  file_size?: number;
+  note?: string;
+  photo_url?: string;
+}
+
+export type RecordStatus =
+  | "on_shelf"
+  | "in_progress"
+  | "done";
+
+export interface PovRecord {
+  id: string;
+  project_id: string;
+  record_no: string;
+  barcode: string;
+  tape_code?: string | null;
+  media_type: TapeMediaType | null;
+  format: string;
+  label: string | null;
+  internal_ref: string | null;
+  capacity: number | null;
+  duration: number | null;
+  color_system: string | null;
+  frame_rate: string | null;
+  resolution: string | null;
+  aspect_ratio: string | null;
+  trim: boolean;
+  restoration: boolean;
+  master_file: boolean;
+  access_copy: boolean;
+  file_size: string | number | null;
+  note: string | null;
+  photo_url: string | null;
+  status: RecordStatus;
+  created_by: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export type PovLifecycleAction =
+  | "pause"
+  | "resume"
+  | "extend"
+  | "finish"
+  | "reopen";
+
+export interface PovProjectActivityEntry {
+  id: string;
+  action: string;
+  at: string;
+  author_name: string;
+  reason: string | null;
+  pause_started_at: string | null;
+  pause_ended_at: string | null;
+  pause_seconds: number | null;
+  added_days: number | null;
+  excluded_finished_seconds: number | null;
+}
+
+export interface PovProjectActivityResponse {
+  data: PovProjectActivityEntry[];
+  has_more: boolean;
+}
+
+export interface PovProjectComment {
+  id: string;
+  project_id: string;
+  text: string;
+  created_at: string;
+  author_id: string | null;
+  author_name: string;
 }

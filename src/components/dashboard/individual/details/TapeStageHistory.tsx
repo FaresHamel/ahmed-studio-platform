@@ -113,7 +113,7 @@ function WorkSessionCard({
     <article className="rounded-lg border border-dashboard-border bg-dashboard-surface p-4">
       <header className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <h4 className="text-sm font-medium text-dashboard-text">
-          {manual ? "Manual record" : "Work attempt"} {index + 1}
+          {manual ? "Manual Material" : "Work attempt"} {index + 1}
         </h4>
 
         <div className="flex flex-wrap items-center gap-2">
@@ -153,7 +153,7 @@ function WorkSessionCard({
         <DetailField title="Actual end" value={dateTime(session.ended_at)} />
 
         <DetailField
-          title="Record created"
+          title="Material created"
           value={dateTime(session.created_at)}
         />
 
@@ -260,7 +260,7 @@ export default function TapeStageHistory({ tape, now }: Props) {
 
                   <Badge>
                     {sessions.length} timing{" "}
-                    {sessions.length === 1 ? "record" : "records"}
+                    {sessions.length === 1 ? "Material" : "Materials"}
                   </Badge>
                 </div>
               </header>

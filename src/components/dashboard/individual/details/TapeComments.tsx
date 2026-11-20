@@ -85,7 +85,7 @@ function CommentCard({ comment }: { comment: TapeComment }) {
           {dateTime(comment.created_at)}
         </time>
 
-        {comment.timing_id && " · Linked to a work record"}
+        {comment.timing_id && " · Linked to a work Material"}
       </p>
 
       <p className="mt-4 whitespace-pre-wrap break-words text-sm leading-6 text-dashboard-text">
@@ -189,7 +189,7 @@ export default function TapeComments({ tape, disabled, run }: Props) {
 
           <div className="min-w-0">
             <label htmlFor={`${id}-record`} className={LABEL_CLASS}>
-              Work record (optional)
+              Work Material (optional)
             </label>
 
             <CommentSelect
@@ -202,7 +202,7 @@ export default function TapeComments({ tape, disabled, run }: Props) {
 
               {attempts.map((attempt, index) => (
                 <option key={attempt.id} value={attempt.id}>
-                  Record {index + 1}
+                  Material {index + 1}
                   {" · "}
                   {dateTime(attempt.started_at ?? attempt.created_at)}
                 </option>

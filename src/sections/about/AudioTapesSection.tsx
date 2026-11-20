@@ -47,7 +47,7 @@ const colB = [
   {
     id: 4,
     src: "/images/disc01.png",
-    alt: "Vinyl Record",
+    alt: "Vinyl Materials",
     w: 180,
     h: 180,
     center: CENTER - COL_B_GAP / 2 // 115

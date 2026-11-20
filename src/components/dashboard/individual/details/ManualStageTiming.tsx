@@ -203,7 +203,7 @@ export default function ManualStageTiming({ tape, disabled, run }: Props) {
 
             <div className="min-w-0">
               <label htmlFor={`${id}-record`} className={labelClass}>
-                Manual record
+                Manual Material
               </label>
 
               <div className="relative">
@@ -214,7 +214,7 @@ export default function ManualStageTiming({ tape, disabled, run }: Props) {
                   onChange={(event) => setTimingId(event.target.value)}
                   className={selectClass}
                 >
-                  <option value="">Create new manual record</option>
+                  <option value="">Create new manual Material</option>
 
                   {records.map((item) => (
                     <option key={item.id} value={item.id}>

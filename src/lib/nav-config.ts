@@ -66,8 +66,7 @@ export const NAV_BY_ROLE: Record<UserRole, NavItem[]> = {
         {
             id: "admin-pov",
             label: "POV Projects",
-            href: adminHome,
-            plannedHref: `${adminHome}/pov`,
+            href: `${adminHome}/pov`,
             icon: "pov",
             group: "Production",
         },

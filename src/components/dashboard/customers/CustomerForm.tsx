@@ -324,8 +324,8 @@ export function CustomerForm({
 
           <p className="mt-6 border-t border-dashboard-border pt-4 text-xs leading-5 text-dashboard-muted">
             {customer
-              ? "Saving updates this customer record. Account memberships remain unchanged."
-              : "This creates a customer record only. No login account, Individual job, or POV project will be created."}
+              ? "Saving updates this customer Materials. Account memberships remain unchanged."
+              : "This creates a customer Materials only. No login account, Individual job, or POV project will be created."}
           </p>
         </section>
       )}
